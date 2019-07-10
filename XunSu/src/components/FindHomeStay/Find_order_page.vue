@@ -9,7 +9,7 @@
         <div class="order1">
             <img src="../../assets/Orderimage/order_background_image.jpg" alt="">
             <h4 style="color:gray">您还没有订单哦!!</h4>
-            <mt-button size="large">客观这边请</mt-button>
+            <mt-button size="large">客官这边请</mt-button>
         </div>
     
     </div>
