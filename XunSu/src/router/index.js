@@ -9,8 +9,8 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path:'/Find_order_page',component:Find_order_page},
     {path: '/',name: 'HelloWorld',component: HelloWorld},
+    {path:'/Find_order_page',component:Find_order_page},
     {path: '/detail',name: 'Detail',component: Detail}
   ]
 })

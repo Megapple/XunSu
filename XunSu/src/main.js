@@ -4,9 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from './axios'
+
 import MintUI from '../node_modules/mint-ui'
 import'mint-ui/lib/style.css'
 Vue.use(MintUI)
+
+import './font/iconfont.css'
 
 Vue.config.productionTip = false
 
