@@ -3,14 +3,17 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Detail from '../components/Detail.vue'
 //引入Find_order_page组件
-import Find_order_page from "../components/FindHomeStay/Find_order_page.vue"
+import Order from "../components/Order/Order.vue"
+//引入Pay 组件
+import Pay from "../components/Order/Pay.vue"
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {path: '/',name: 'HelloWorld',component: HelloWorld},
-    {path:'/Find_order_page',component:Find_order_page},
-    {path: '/detail',name: 'Detail',component: Detail}
+    {path:'/Order',component:Order},
+    {path: '/detail',name: 'Detail',component: Detail},
+    {path:'/Pay',component:Pay}
   ]
 })
