@@ -1,9 +1,11 @@
 <template>
   <div style="background-color:tomato">
+    <!-- mintui Header栏start -->
     <mt-header id="header" class="opa-light" fixed>
       <router-link to="/" slot="left">
         <mt-button class="iconfont icon-fanhuijiantou"></mt-button>
       </router-link>
+      <!-- text-hidden:属性默认文本隐藏 cool:属性控制显示/隐藏 -->
       <mt-button class="iconfont text-hidden cool" slot="left" @click="house">房型</mt-button>
       <mt-button class="iconfont text-hidden cool" slot="left" @click="com">评论</mt-button>
       <mt-button class="iconfont text-hidden cool" slot="left" @click="fac">设施</mt-button>
@@ -11,11 +13,14 @@
       <mt-button class="iconfont icon-fenxiang" slot="right"></mt-button>
       <mt-button class="iconfont icon-gengduo" slot="right"></mt-button>
     </mt-header>
+    <!-- mintui Header栏end -->
+    <!-- mintui 轮播图start -->
     <mt-swipe :show-indicators="false">
       <mt-swipe-item><img src="../assets/img/1.jpg"></mt-swipe-item>
       <mt-swipe-item><img src="../assets/img/2.jpg"></mt-swipe-item>
       <mt-swipe-item><img src="../assets/img/3.jpg"></mt-swipe-item>
     </mt-swipe>
+    <!-- mintui 轮播图end -->
     <div id="house">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum tenetur officia voluptatibus praesentium consequatur ab vel temporibus aut quae dicta, cupiditate vero nihil eligendi iure, possimus cumque saepe quasi? Praesentium maxime eius dolorum, non tempore laborum exercitationem aut optio repellat veritatis nemo eaque veniam perferendis eos libero. Deserunt adipisci dolore saepe reprehenderit alias recusandae ipsa, quos earum corrupti sed mollitia nemo, tempora ipsam. Sed facere placeat aliquam impedit similique vero iure dolorum eos excepturi. Saepe, repellat. Consequuntur incidunt saepe qui, nesciunt fugit ea nostrum aperiam cum dignissimos laborum illo libero accusantium iusto, repellat et temporibus, modi similique commodi obcaecati. Rem soluta pariatur aliquam fugiat iure, perferendis ducimus? Sint repellat repudiandae numquam ad consectetur voluptatibus maiores? Debitis quidem, accusantium odit sapiente est aliquam, esse repudiandae expedita cupiditate amet voluptatibus aut voluptate error nesciunt atque sunt, eveniet magni. Mollitia repudiandae voluptatibus reiciendis porro. Nemo, accusantium dolore necessitatibus tenetur maxime labore mollitia omnis asperiores quidem molestiae maiores excepturi inventore accusamus error sed dolor quas eaque voluptatibus consectetur ut suscipit laboriosam! Est, et dolorum ea excepturi reiciendis eaque quaerat hic optio nam sequi. Excepturi voluptates sed natus veniam cumque magni velit, minima laboriosam, odit libero adipisci architecto ducimus, nam ea ad quaerat. Necessitatibus, numquam?
     </div>
