@@ -9,7 +9,7 @@ import MintUI from '../node_modules/mint-ui'
 import'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
-import './font/iconfont.css'
+import './font/detail_iconfont_style/iconfont.css'
 
 Vue.config.productionTip = false
 

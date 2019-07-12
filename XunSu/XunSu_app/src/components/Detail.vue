@@ -71,6 +71,7 @@ export default {
       document.querySelector("#fac").scrollIntoView(true)
     }
   },
+  //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
   mounted() {
     window.addEventListener("scroll",this.navChange);
   },
