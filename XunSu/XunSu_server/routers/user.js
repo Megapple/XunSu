@@ -4,48 +4,53 @@ const pool=require("../pool");
 
   //登录
   router.get('/login',function(req,res){
-    var $uname=req.query.uname;
+    var $phone=req.query.phone;
     var $upwd=req.query.upwd;
-    var str="SELECT * FROM xz_user WHERE uname=? and upwd= ?";
-    if (!obj.uname)
-    {
-      res.send({code:401,msg:'uname required'});
-      return;
-    }
-      if (!obj.upwd)
-    {
-      res.send({code:402,msg:'upwd required'});
-      return;
-    }
-      pool.query(str,[$uname,$upwd],function(err,result){	 
+    var str="SELECT * FROM users WHERE phone=? and upwd= ?";
+      pool.query(str,[$phone,$upwd],function(err,result){	 
         if (err) throw err;
-        if (result.length>0)
+        if (result.length==0)
         {
-          res.send({code:200,msg:'login success'});
+          res.send({code:-1,msg:"用户名或密码有误"});
         }else{
-          res.send({code:301,msg:'login false'}) ;
+        req.session.uid=result[0].id;
+         res.send({code:1,msg:"login success"});
         }
       })
     })
     //注册
     router.get('/signin',function(req,res){
-      var obj=req.query,i=400;
-      var str="INSERT INTO xz_index_product set ?";
-      for(var key in obj){
-        i++;
-        if (!obj[key])
-        { res.send({code:400,msg:key+' required'});
-        return;
-        }
-      }
-      pool.query(str,[obj],function(err,result){
-        if(err) throw err;
-        if (result.affectedRows>0)
-        {
-          res.send({code:200,msg:'insert success'})
+      var $phone=req.query.phone;
+      var str="SELECT * FROM users WHERE phone=?";
+      pool.query(str,[$phone],function(err,result){
+        if (err) throw err;
+        if(result.length>0){
+          res.send({code:0,msg:'hased phone'})
         }else{
-          res.send({code:301,msg:'insert false'})
-          }
+          var obj=req.query;
+          var str="INSERT INTO users set ?";
+          pool.query(str,[obj],function(err,result){
+            if(err) throw err;
+            if (result.affectedRows>0)
+            {
+              res.send({code:200,msg:'signin success'})
+            }else{
+              res.send({code:301,msg:'signin false'})
+              }
+          })
+        }
+      })
+    })
+    router.get('/signinSelect',function(req,res){
+      var $phone=req.query.phone;
+      var str="SELECT * FROM users WHERE phone=?";
+      pool.query(str,[$phone],function(err,result){
+        if (err) throw err;
+        if(result.length>0){
+          res.send({code:0,msg:'hased phone'})
+        }else{
+          res.send({code:1,msg:'phone true'})
+        }
       })
     })
   // //3.用户更改

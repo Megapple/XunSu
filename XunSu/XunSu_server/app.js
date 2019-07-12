@@ -1,12 +1,11 @@
 //引入第三方模块
 const express = require("express");
-const mysql = require("mysql");
 const cors = require("cors");
 const session = require("express-session");
-const bodyParser = require('body-parser');
 
 //引入路由模块
-const index=require("./routes/index");
+const index=require("./routers/index");
+const user=require("./routers/user");
 
  //跨域
  var server = express();
@@ -21,11 +20,10 @@ const index=require("./routes/index");
    resave:true,
    saveUninitialized:true
  }))
- //body-parser中间件
- app.use(bodyParser.urlencoded({extended:false}));
  //静态目录
  server.use(express.static("public"))
  server.listen(3000);
  
  //路由器管理路由
-app.use("/index",index)
+server.use("/index",index)
+server.use("/user",user)

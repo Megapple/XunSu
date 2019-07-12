@@ -1,17 +1,20 @@
 <template>
  <div>
     <h2>寻宿网注册</h2>
-    <mt-field :state="phoneNumState" type="number" v-model="phoneNum" placeholder="请输入您的手机号"></mt-field>
+    <mt-field :state="phoneNumState" label="手机号" type="phone" v-model="phoneNum" placeholder="请输入您的手机号" class="mtInput"></mt-field>
 
-    <mt-field :state="codeState" type="number" v-model="code"  placeholder="验证码">
+    <mt-field label="验证码" type="captcha" v-model="captcha"  placeholder="输入验证码">
+    
 
-    <span @click.stop = "sendCode">{{ codeStr }}</span>
-
+    <!-- <span @click.stop = "sendCode">{{ codeStr }}</span>-->
+    <mt-button class="rgin" size="small" @click.stop = "sendCode">{{codemsg}}</mt-button>
     </mt-field>
+    
 
-    <mt-field :state="passwordState" type="password" v-model="password" placeholder="密码:不能少于6位"></mt-field>
+    <mt-field label="密 码" type="password" v-model="password" placeholder="密码不能少于6位"></mt-field>
 
-    <div class="signinBtn" @click = "register">注&nbsp;&nbsp;册</div>
+    <mt-button @click = "register" size="large" class="rig">注&nbsp;&nbsp;册</mt-button>
+    <router-link  :to="{path:'/login'}" >跳转登陆界面</router-link>
  </div>
 </template>
 <script>
@@ -19,54 +22,117 @@
   data () {
     return {
       phoneNumState:"",
-      codeState:""
+      codeState:"",
+      phoneNum:"",
+      captcha:"",
+      password:"",
+      codemsg:"发送验证码"
     }
   },
   methods: {
+    verify(){
+      
+    },
     sendCode(){
-     var url="login";
-     var obj= {phoneNum:phone,password:upwd};
-     axios.get(url,{params:obj})
-      .then((res) => {
-        console.log(res.data)
-        // if (res.data.state == 0) {
-        //   this.phoneNumState = 'warning'
-        //   Toast('该手机号已经注册，请直接登录')
-        // } else {
-        //   this.admincode = res.data.code
-        //   if (this.flag) {
-        //   this.startTime(20)
-        //   }
-        // }
+      var phone=this.phoneNum;
+      var reg=/^1[3456789]\d{9}$/i;
+      if(phone.length==0){
+        this.$toast("请输入手机号",1000);
+        return;
+      }else if(!reg.test(phone)){
+        this.$toast("手机格式不正确",1000);
+        return;
+      }
+      var url="user/signinSelect";
+      var obj= {phone:phone};
+      this.axios.get(url,{params:obj})
+        .then((result) => { 
+          if (result.data.code == 0) {
+            this.$toast('该手机号已经注册，请直接登录',1000);
+            return;
+          } else {
+            this.codemsg="发送成功，请等待..";
+            console.log(result.data);
+            // this.admincode = res.data.code
+            // if (this.flag) {
+            // this.startTime(20)
+          }
+        })
+      .catch((err) => {
+      console.log(err)
       })
+    },
+    register(){
+      var phone=this.phoneNum;
+      var password=this.password;
+      var captcha=this.captcha;
+      var reg=/^1[3456789]\d{9}$/i;
+      var pass=/^[a-zA-Z0-9_]{6,18}$/i;
+      if(phone.length==0){
+        this.$toast("请输入手机号",1000);
+        return;
+      }else if(password.length==0){
+        this.$toast("请输入密码",1000);
+        return;
+      }else if(captcha.length==0){
+        this.$toast("请输入验证码",1000);
+        return;
+      }else if(!reg.test(phone)){
+        this.$toast("手机格式不正确",1000);
+        return;
+      }else if(!pass.test(password)){
+        this.$toast("密码格式不正确",1000);
+        return;
+      }
+      var url="user/signin";
+      var obj= {phone:phone,upwd:password};
+      this.axios.get(url,{params:obj})
+        .then((result) => { 
+          if (result.data.code == 0) {
+            this.$toast('该手机号已经注册，请直接登录',1000);
+            return;
+          } else {
+            console.log(result.data)
+            
+            return;
+            // this.admincode = res.data.code
+            // if (this.flag) {
+            // this.startTime(20)
+          }
+        })
       .catch((err) => {
       console.log(err)
       })
     }
-  },
-  watch:{
-    phoneNum(newVal,oldVal){
-      if(tools.isPoneAvailable(newVal)){
-        this.phoneNumState='success';
-      }else{
-        this.passwordState='error';
-      }
-      if(newVue==""){
-        this.passwordState="";
-      }
-    },
-    code(newVal,oldVal){
-      if(newVue.length==4 && newVal==this.admincode){
-        this.codeState='success';
-      }else{
-        this.codeState='error';
-      }
-      if(newVue==""){
-        this.codeState="";
-      }
-    }
   }
+  // watch:{
+  //   phoneNum(newVal,oldVal){
+  //     if(tools.isPoneAvailable(newVal)){
+  //       this.phoneNumState='success';
+  //     }else{
+  //       this.passwordState='error';
+  //     }
+  //     if(newVue==""){
+  //       this.passwordState="";
+  //     }
+  //   },
+  //   code(newVal,oldVal){
+  //     if(newVue.length==4 && newVal==this.admincode){
+  //       this.codeState='success';
+  //     }else{
+  //       this.codeState='error';
+  //     }
+  //     if(newVue==""){
+  //       this.codeState="";
+  //     }
+  //   }
+  // }
  }
 </script>
 <style scoped>
+.rig{
+  width:300px;
+  margin:auto;
+  margin-top:50px;
+}
 </style>
