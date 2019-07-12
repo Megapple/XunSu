@@ -3,12 +3,12 @@
  <mt-swipe :auto="2000">
   <mt-swipe-item v-for="(item,i) of items" :key="i">
     <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/ad.png')" class="img"/>
+       <img :src="require('../assets/img/1.jpg')" class="img"/>
     </a>
   </mt-swipe-item>
     <mt-swipe-item v-for="(item,i) of items" :key="i">
     <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/mm.png')" class="img"/>
+       <img :src="require('../assets/img/2.jpg')" class="img"/>
     </a>
   </mt-swipe-item>
  </mt-swipe>
@@ -23,23 +23,53 @@
  </div>
  <div class="index">
     <div class="city">
-        <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i">{{item}}</mt-button>
+        <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i">{{item}}
+        </mt-button>
     </div>
+    <div>
     <mt-tab-container v-model="active">
         <mt-tab-container-item id="tab1">
-            <container></container>
+            <container :img_dali1="require('../assets/img/dlgc.jpg')" 
+            :img_dali2="require('../assets/img/dlyc.jpg')" 
+            :img_dali3="require('../assets/img/dljz.jpg')"
+            :img_dali4="require('../assets/img/dljr.jpg')" ></container>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="tab2">
+            <container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+            :img_hz2="require('../assets/img/hzmj.jpg')"
+            :img_hz3="require('../assets/img/hzys.jpg')"
+            :img_hz4="require('../assets/img/hzxh.jpg')"></container2>
+        </mt-tab-container-item>        
+        <mt-tab-container-item id="tab3">
+            <container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
+            :img_cd2="require('../assets/img/cdsx1.jpg')"
+            :img_cd3="require('../assets/img/cdsx2.jpg')"
+            :img_cd4="require('../assets/img/cdcz.jpg')"></container3>
+        </mt-tab-container-item>        
+        <mt-tab-container-item id="tab4">
+            <container4 :img_gl1="require('../assets/img/yszj.jpg')" 
+            :img_gl2="require('../assets/img/ysgs.jpg')"
+            :img_gl3="require('../assets/img/yswb.jpg')"
+            :img_gl4="require('../assets/img/ysxs.jpg')"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
-    
+    </div>
+    <div>123</div>
  </div>
  </div>
 </template>
 <script>
 // 导入城市子组件
 import Container from "./common/Container.vue"
+import Container2 from "./common/Container2.vue"
+import Container3 from "./common/Container3.vue"
+import Container4 from "./common/Container4.vue"
 export default {
    components: {
-       container:"Container"
+       "container":Container,
+       "container2":Container2,
+       "container3":Container3,
+       "container4":Container4,
    },
    data(){
        return{
@@ -58,10 +88,11 @@ export default {
        }
    },
    methods:{
-       setActive(e){
-           var idx=parseInt(e.target.dataset.idx);
-           this.active="tab"+(idx+1);
-       }
+        setActive(e){
+            var idx=parseInt(e.target.dataset.idx);
+            console.log(idx,typeof idx)
+            this.active="tab"+(idx+1)
+        }
    }
  }
 </script>
@@ -75,7 +106,7 @@ body{
  .img {width: 100%;}
  /* 轮播下标 */
 .mint-swipe-indicator{margin:23px 3px ;}
-.mint-swipe-indicator.is-active{background:rgba(255, 145, 0,0.9);}
+.mint-swipe-indicator.is-active{background:rgb(255, 145, 0);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
     width:85%;   

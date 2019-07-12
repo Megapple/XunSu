@@ -9,6 +9,9 @@ import Pay from "../components/Order/Pay.vue"
 // 引入Home及子组件
 import Home from "../components/Home.vue"
 import Container from "../components/common/Container.vue"
+import Container2 from "../components/common/Container2.vue"
+import Container3 from "../components/common/Container3.vue"
+import Container4 from "../components/common/Container4.vue"
 
 Vue.use(Router)
 
@@ -20,5 +23,8 @@ export default new Router({
     {path:'/Pay',component:Pay},
     {path:'/Home',component:Home},
     {path:'/Container',component:Container},
+    {path:'/Container2',component:Container2},
+    {path:'/Container3',component:Container3},
+    {path:'/Container4',component:Container4},
   ]
 })
