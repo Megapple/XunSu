@@ -78,6 +78,10 @@
                     
                 </div>
             </div>
+            <!-- 升级钻石会员 -->
+            <div class="orderMessage">
+                
+            </div>
        </div>
        
     </div>
