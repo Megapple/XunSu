@@ -1,5 +1,6 @@
 <template>
  <div>
+    <!-- 顶部轮播 -->
  <mt-swipe :auto="2000">
   <mt-swipe-item v-for="(item,i) of items" :key="i">
     <a :href="item.href" rel="external nofollow">
@@ -12,16 +13,19 @@
     </a>
   </mt-swipe-item>
  </mt-swipe>
+ <!-- 搜索框 -->
  <div class="searchdiv clearfix">
     <input placeholder="搜索目的地/酒店" class="search"/>
-    <img :src="require('../assets/img/ye.png')"  class="searchImg "/>
+    <img :src="require('../assets/img/glass.png')"  class="searchImg "/>
     <span>|</span>
     <div class="location">
-      <img :src="require('../assets/img/ye.png')"  class="locationImg"/>
-      <span class="locationtxt">搜附近</span>
+      <a href="#">
+        <img :src="require('../assets/img/option.png')"  class="locationImg"/>
+        <span class="locationtxt">搜附近</span>
+      </a>
     </div>
  </div>
- <div class="index">
+ <div class="index clearfix">
     <div class="city">
         <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i">{{item}}
         </mt-button>
@@ -54,9 +58,38 @@
         </mt-tab-container-item>
     </mt-tab-container>
     </div>
-    <div>123</div>
- </div>
- </div>
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ullam optio tenetur labore ex enim dolorem ea blanditiis veniam ipsam. Ipsa maiores voluptates dolorum cumque iusto accusantium magni officiis eaque.
+    Debitis pariatur explicabo odit obcaecati architecto alias nisi commodi laudantium molestiae ex eos suscipit quod, adipisci iure, delectus natus dicta rerum illum modi ullam iste autem dignissimos! Architecto, cum voluptatum?
+    Quam ipsum reiciendis libero laboriosam aliquam facilis tempora qui ratione maxime voluptates natus laborum quaerat molestiae distinctio dolorem dolore commodi magnam blanditiis laudantium alias, consequuntur veritatis. Placeat molestiae voluptatum ea.
+    Iusto temporibus ipsa cupiditate laudantium laboriosam natus hic, aperiam quo. Eum totam deserunt fuga veritatis, asperiores sapiente, ab dicta optio nemo ipsum mollitia veniam voluptas delectus, ipsa perferendis voluptatem nihil.
+    Ullam maiores obcaecati explicabo velit officia beatae! Fuga ipsa cum consequuntur cupiditate nam, sit eaque nostrum distinctio dolorem quibusdam sequi magni? Vero sed, mollitia maiores fuga maxime suscipit ratione quibusdam!
+    Consectetur quia quam reprehenderit officia explicabo fugit ipsam quas ipsum doloremque! Magni distinctio dolorem officiis est similique, saepe eveniet deserunt perspiciatis. Laborum porro debitis reprehenderit suscipit iusto libero veniam quae?
+    Distinctio error enim porro cupiditate esse expedita doloremque similique itaque modi voluptas. Quos cupiditate distinctio sequi sunt consectetur hic saepe veniam nostrum maxime minima officiis, eveniet accusamus, facilis aliquam delectus!
+    Cumque, labore. Maiores nobis molestiae iusto, quasi unde distinctio? Sint, aliquid. Delectus, aliquam molestias expedita voluptatem dignissimos quasi modi libero sit, cum corporis unde repellat, omnis facere exercitationem accusamus eius.
+    Quis, fugiat laudantium aut neque beatae doloremque eos, repudiandae similique iusto est, tempore aliquam labore aliquid libero? Aliquid quasi eveniet sunt natus, commodi laudantium facilis a et, explicabo vero nihil!
+    Eum qui totam voluptas eveniet. Impedit magni cumque a quia veritatis nemo dolorum, dolor numquam nostrum ipsam rerum. Labore magni magnam eligendi, voluptates iste cumque minus necessitatibus incidunt soluta aut.
+    </div>
+  </div>
+ <!--底部导航栏-->
+ <mt-tabbar v-model="selected" fixed>
+     <mt-tab-item id="hotel">
+        <img src="../assets/img/hotel.png" alt="">
+        <span>酒店</span>
+     </mt-tab-item>
+     <mt-tab-item id="trip">
+        <img src="../assets/img/trip1.png" alt="">
+         旅途
+     </mt-tab-item>
+     <mt-tab-item id="order">
+        <img src="../assets/img/order1.png" alt="">
+         订单
+     </mt-tab-item>
+     <mt-tab-item id="me">
+        <img src="../assets/img/me1.png" alt="">
+         会员
+     </mt-tab-item>
+ </mt-tabbar>
+</div>
 </template>
 <script>
 // 导入城市子组件
@@ -75,6 +108,7 @@ export default {
        return{
            lists:["大理","杭州","成都","桂林"],
            active:"tab1",
+           selected:"hotel",
            items: [
             {title: '你的名字',
             href: 'http://google.com',   
@@ -167,7 +201,5 @@ body{
 .mint-button{
     border-radius: 9px;
 }
-/* .mint-button .mint-button--default .mint-button--small{
-    padding:0 21px;
-} */
+
 </style>
