@@ -10,6 +10,8 @@ import'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
 import './font/detail_iconfont_style/iconfont.css'
+import './font/order_iconfont_style/iconfont.css'
+
 
 Vue.config.productionTip = false
 
