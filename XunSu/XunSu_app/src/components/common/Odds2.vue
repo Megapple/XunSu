@@ -38,7 +38,6 @@
         </div>
         </div>  
     </div>
-    <mt-button><a href="#">查看更多杭州酒店 ></a></mt-button>
 </div>
 </template>
 <script>

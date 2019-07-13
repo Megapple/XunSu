@@ -76,13 +76,13 @@ export default {
     padding: 4px 10px;
 }
 .gl{
-    width:160px;height:160px;
+    width:160px;height:170px;
     display: flex;
     flex-flow: column;
     background-color:#f5f5f5;
     box-shadow: 0 0 10px #b8bbbf;
     border-radius: 10px;
-    margin:0 10px;
+    margin:3px 9px;
 }
 .gl>div span:first-child{
     font-size:13px;
@@ -92,19 +92,19 @@ export default {
 .gl>div span:nth-child(2){
     color:rgb(255, 145, 0);
     float:left; 
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left:9px;
 }
-.gl i{font-size:10px;color:rgb(255, 145, 0);float:right; margin-top: 10px;margin-right:9px;}
+.gl i{font-size:10px;color:rgb(255, 145, 0);float:right; margin-top: 15px;margin-right:9px;}
 .gl>div{ 
     margin-top:5px;
-    padding:5px 0;
+    padding:5px 10px;
 } 
 .mint-button--normal{
-    margin-top:10px;
+    margin:18px 95px;
     width:50%;height:25px;
     border-radius: 50px;
+    background-color:rgba(221, 221, 221, 0.534);
 }
-.mint-button--normal{background-color:rgba(221, 221, 221, 0.534);}
 .mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}  
 </style>

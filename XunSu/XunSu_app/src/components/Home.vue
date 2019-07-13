@@ -1,5 +1,7 @@
 <template>
  <div>
+<mt-tab-container v-model="selected">
+    <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
  <mt-swipe :auto="2000">
   <mt-swipe-item v-for="(item,i) of items" :key="i">
@@ -26,6 +28,8 @@
     </div>
  </div>
  <div class="index clearfix">
+     <!-- 一楼 -->
+    <div>
     <div class="city">
         <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i">{{item}}
         </mt-button>
@@ -57,36 +61,118 @@
             :img_gl4="require('../assets/img/ysxs.jpg')"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
+    <!-- <mt-button><a href="#">查看更多酒店 ></a></mt-button> -->
     </div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ullam optio tenetur labore ex enim dolorem ea blanditiis veniam ipsam. Ipsa maiores voluptates dolorum cumque iusto accusantium magni officiis eaque.
-    Debitis pariatur explicabo odit obcaecati architecto alias nisi commodi laudantium molestiae ex eos suscipit quod, adipisci iure, delectus natus dicta rerum illum modi ullam iste autem dignissimos! Architecto, cum voluptatum?
-    Quam ipsum reiciendis libero laboriosam aliquam facilis tempora qui ratione maxime voluptates natus laborum quaerat molestiae distinctio dolorem dolore commodi magnam blanditiis laudantium alias, consequuntur veritatis. Placeat molestiae voluptatum ea.
-    Iusto temporibus ipsa cupiditate laudantium laboriosam natus hic, aperiam quo. Eum totam deserunt fuga veritatis, asperiores sapiente, ab dicta optio nemo ipsum mollitia veniam voluptas delectus, ipsa perferendis voluptatem nihil.
-    Ullam maiores obcaecati explicabo velit officia beatae! Fuga ipsa cum consequuntur cupiditate nam, sit eaque nostrum distinctio dolorem quibusdam sequi magni? Vero sed, mollitia maiores fuga maxime suscipit ratione quibusdam!
-    Consectetur quia quam reprehenderit officia explicabo fugit ipsam quas ipsum doloremque! Magni distinctio dolorem officiis est similique, saepe eveniet deserunt perspiciatis. Laborum porro debitis reprehenderit suscipit iusto libero veniam quae?
-    Distinctio error enim porro cupiditate esse expedita doloremque similique itaque modi voluptas. Quos cupiditate distinctio sequi sunt consectetur hic saepe veniam nostrum maxime minima officiis, eveniet accusamus, facilis aliquam delectus!
-    Cumque, labore. Maiores nobis molestiae iusto, quasi unde distinctio? Sint, aliquid. Delectus, aliquam molestias expedita voluptatem dignissimos quasi modi libero sit, cum corporis unde repellat, omnis facere exercitationem accusamus eius.
-    Quis, fugiat laudantium aut neque beatae doloremque eos, repudiandae similique iusto est, tempore aliquam labore aliquid libero? Aliquid quasi eveniet sunt natus, commodi laudantium facilis a et, explicabo vero nihil!
-    Eum qui totam voluptas eveniet. Impedit magni cumque a quia veritatis nemo dolorum, dolor numquam nostrum ipsam rerum. Labore magni magnam eligendi, voluptates iste cumque minus necessitatibus incidunt soluta aut.
+    </div>
+    <!-- 中间过渡 -->
+    <div class="middle">
+        <img src="../assets/img/picture/dnkss.png" alt="" >
+    </div>
+    <!-- 二楼 -->
+ <mt-swipe :auto="2000">
+  <mt-swipe-item v-for="(item,i) of items" :key="i">
+    <a :href="item.href" rel="external nofollow">
+       <img :src="require('../assets/img/1.jpg')" class="img"/>
+    </a>
+  </mt-swipe-item>
+    <mt-swipe-item v-for="(item,i) of items" :key="i">
+    <a :href="item.href" rel="external nofollow">
+       <img :src="require('../assets/img/2.jpg')" class="img"/>
+    </a>
+  </mt-swipe-item>
+ </mt-swipe>
+   <div class="tb">
+       <div class="tb_bar">
+           <i class="iconfont icon-gongwenbao"></i>
+           <span>商旅合作</span>
+        </div>
+       <div class="tb_bar">
+           <i class="iconfont icon-jinqian"></i>
+           <span>免押入住</span>
+        </div>
+       <div class="tb_bar">
+           <i class="iconfont icon-huabeizhangdan"></i>
+           <span>蚂蚁花呗</span>
+        </div>
+       <div class="tb_bar">
+           <i class="iconfont icon-ziyuan"></i>
+           <span>金融保险</span>
+        </div>
+   </div>
+
+
+    <div class="odds">
+        <div class="odd_first">
+        <h3>超值特惠酒店</h3>
+        <p>限时折扣 专享冰点价</p>
+        </div>
+        <div class="oddstitle">
+            <div class="oddbtns">
+            <mt-button v-for="(odd,idx) of odds" :key="idx"  @click.prevent="setActive2" :data-id="idx" class="oddbtn "> 
+                <span>{{odd.title}}</span>
+                <span>{{odd.subtitle}}</span>
+            </mt-button>
+            </div>
+        </div>
+        <mt-tab-container v-model="active2">
+            <mt-tab-container-item id="odd1">
+                <odds :img_dali1="require('../assets/img/dlgc.jpg')" 
+                :img_dali2="require('../assets/img/dlyc.jpg')" 
+                :img_dali3="require('../assets/img/dljz.jpg')"
+                :img_dali4="require('../assets/img/dljr.jpg')"></odds>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="odd2">
+                <odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+                :img_hz2="require('../assets/img/hzmj.jpg')"
+                :img_hz3="require('../assets/img/hzys.jpg')"
+                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="odd3">
+                <odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
+                :img_gl2="require('../assets/img/ysgs.jpg')"
+                :img_gl3="require('../assets/img/yswb.jpg')"
+                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3>
+            </mt-tab-container-item>
+        </mt-tab-container>
+        <mt-button><a href="#">查看更多超值特惠酒店 ></a></mt-button>
     </div>
   </div>
+  </mt-tab-container-item>
+  <mt-tab-container-item id="collect">
+      <collect></collect>
+  </mt-tab-container-item>
+  <mt-tab-container-item id="order">
+      <order></order>
+  </mt-tab-container-item>
+  <mt-tab-container-item id="me">
+      我
+  </mt-tab-container-item>
+</mt-tab-container>
  <!--底部导航栏-->
  <mt-tabbar v-model="selected" fixed>
      <mt-tab-item id="hotel">
-        <img src="../assets/img/hotel.png" alt="">
+        <div class="bar">
+        <i class="iconfont icon-fangzi"></i>
         <span>酒店</span>
+        </div>
      </mt-tab-item>
-     <mt-tab-item id="trip">
-        <img src="../assets/img/trip1.png" alt="">
-         旅途
+     <mt-tab-item id="collect">
+        <div class="bar">
+        <i class="iconfont icon-shoucang5"></i>
+        <span>收藏</span>  
+        </div>  
      </mt-tab-item>
      <mt-tab-item id="order">
-        <img src="../assets/img/order1.png" alt="">
-         订单
+        <div class="bar">
+        <i class="iconfont icon-dingdan"></i>
+        <span>订单</span>
+        </div> 
      </mt-tab-item>
      <mt-tab-item id="me">
-        <img src="../assets/img/me1.png" alt="">
-         会员
+        <div class="bar">
+        <i class="iconfont icon-huiyuan-1"></i>
+        <span>我的</span> 
+        </div>
      </mt-tab-item>
  </mt-tabbar>
 </div>
@@ -97,17 +183,36 @@ import Container from "./common/Container.vue"
 import Container2 from "./common/Container2.vue"
 import Container3 from "./common/Container3.vue"
 import Container4 from "./common/Container4.vue"
+import Odds from "./common/Odds.vue"
+import Odds2 from "./common/Odds2.vue"
+import Odds3 from "./common/Odds3.vue"
+// 引入底部导航栏其他子组件
+import Collect from "./common/Collect.vue"
+import Order from "./Order/Order.vue"
+// 引入底部导航栏图标
+import "../font/font_tabbar/iconfont.css"
 export default {
    components: {
        "container":Container,
        "container2":Container2,
        "container3":Container3,
        "container4":Container4,
+       "collect":Collect,
+       "order":Order,
+       "odds":Odds,
+       "odds2":Odds2,
+       "odds3":Odds3,
    },
    data(){
        return{
            lists:["大理","杭州","成都","桂林"],
+           odds:[
+               {title:"今夜甩卖",subtitle:"海量特惠6折起"},
+               {title:"天天特价",subtitle:"惊喜价天天有"},
+               {title:"连住优惠",subtitle:"连住惊爆价"},
+           ],
            active:"tab1",
+           active2:"odd1",
            selected:"hotel",
            items: [
             {title: '你的名字',
@@ -126,6 +231,10 @@ export default {
             var idx=parseInt(e.target.dataset.idx);
             console.log(idx,typeof idx)
             this.active="tab"+(idx+1)
+        },
+        setActive2(e){
+            var id=parseInt(e.target.dataset.id);
+            this.active2="odd"+(id+1);
         }
    }
  }
@@ -140,7 +249,7 @@ body{
  .img {width: 100%;}
  /* 轮播下标 */
 .mint-swipe-indicator{margin:23px 3px ;}
-.mint-swipe-indicator.is-active{background:rgb(255, 145, 0);opacity:0.6;}
+.mint-swipe-indicator.is-active{background-color:rgb(245, 156, 26);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
     width:85%;   
@@ -166,6 +275,7 @@ body{
     padding:0 30px;
     border-radius: 30px;
     color:#ccc;
+    outline: none;
 }
 .searchImg{
     width:20px;height:20px;
@@ -192,6 +302,7 @@ body{
 .index{
     margin-top:40px;
 }
+.city{margin:0 19px;}
 .mint-button--small{
     height:22px;
     margin:0 15px;
@@ -201,5 +312,77 @@ body{
 .mint-button{
     border-radius: 9px;
 }
+/* 中间过渡 */
+.middle{text-align:center; margin:20px 40px;}
+/* 二楼 */
+.tb{
+    display:flex;
+    justify-content: space-around;
+    margin-top:15px;
+}
+.tb .tb_bar{
+    display: flex;
+    flex-flow: column;
+    color:pink;
+}
+.tb_bar i{font-size:27px;text-align: center; }
+.tb_bar span{font-size:14px;text-align: center;margin-top:5px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.odd_first{margin-left:20px;margin-top:25px;}
+.odd_first p{font-size:13px;color:#979696;margin:6px 0;}
+.oddbtns{
+    width:375px;height:120px;
+    display:flex;
+    align-items: center;
+    }
+.oddbtn{
+    width:120px !important;
+    height:100px !important;
+    margin:0 10px !important;
+    background-color:rgb(246, 248, 250);
+    /* color:#f5f5f5; */
+}
+.oddbtn span:first-child{font-size:17px;}
+.oddbtn span:nth-child(2){font-size:12px;}
+
+
+
+
+
+
+
+
+
+/* 底部导航栏 */
+/* .page-wrap{height:35px;} */
+.bar{
+    display:flex;
+    flex-flow:column;
+    align-items: center;
+    padding:5px 0; 
+    margin-top:-8px;
+}
+.bar span{font-size:10px;margin-top:5px;margin-bottom:-11px; }
+.icon-fangzi,.icon-shoucang5,.icon-huiyuan-1,.icon-dingdan{font-size:23px;}
+/* 修改tabbar 默认文字颜色 */
+.mint-tabbar>.mint-tab-item{color:#ccc;}
+/* 修改tabbar 选中时图标颜色及背景 */
+.mint-tabbar>.mint-tab-item.is-selected{
+    background-color:#fafafa;
+    color:rgb(245, 156, 26);
+}
+.mint-tabbar>.mint-tab-item.is-selected span{color:rgb(131, 129, 129);}
 
 </style>
