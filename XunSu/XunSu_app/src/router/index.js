@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Detail from '../components/Detail.vue'
+import Detail from '../components/detail/Detail.vue'
 //引入Find_order_page组件
 import Order from "../components/Order/Order.vue"
 //引入Pay 组件
