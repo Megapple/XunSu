@@ -39,7 +39,7 @@ export default {
     width: 100%;
     padding: 12px;
 
-    background-color:#3BD86C;
+    background-color:rgb(245, 156, 26);
 }
 .mint-header-title{
     font-size:20px;
@@ -50,7 +50,7 @@ export default {
      
 }
 .mint-button--large{
-    background-color:#3BD86C;
+    background-color:rgb(245, 156, 26);
     color:bisque;
     
 }

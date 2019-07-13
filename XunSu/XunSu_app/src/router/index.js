@@ -8,10 +8,6 @@ import Order from "../components/Order/Order.vue"
 import Pay from "../components/Order/Pay.vue"
 // 引入Home及子组件
 import Home from "../components/Home.vue"
-import Container from "../components/common/Container.vue"
-import Container2 from "../components/common/Container2.vue"
-import Container3 from "../components/common/Container3.vue"
-import Container4 from "../components/common/Container4.vue"
 
 import Signin from "../components/common/signin.vue"
 import Login from "../components/common/login.vue"
@@ -31,9 +27,5 @@ export default new Router({
     {path:'/Housting',component:Housting},
     {path:'/Houstlocation',component:HoustLocation},
     {path:'/Home',component:Home},
-    {path:'/Container',component:Container},
-    {path:'/Container2',component:Container2},
-    {path:'/Container3',component:Container3},
-    {path:'/Container4',component:Container4}
   ]
 })
