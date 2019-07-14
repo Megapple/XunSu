@@ -76,29 +76,46 @@
       <div id="comment">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quam eaque facere consectetur   itaque, voluptate totam aperiam odit expedita libero rerum illum modi architecto quos vitae   tempore perferendis est natus nulla magnam error culpa! Nostrum explicabo aspernatur  blanditiis veritatis amet. Eaque facere, maxime nam repellat sunt et at voluptatum recusandae  labore dolorum error cum delectus minima vitae odio quo in quisquam consequatur fuga eos!  Perferendis, recusandae nemo inventore eligendi provident mollitia rerum exercitationem eaque  dolores beatae voluptate odio sint dignissimos! Ratione officia repellat accusantium natus   iusto repudiandae nobis a, voluptatem culpa. Deleniti ipsam vero laborum vel magnam voluptatum  fuga! Officiis, fugiat quo. Consequuntur impedit laboriosam, inventore facere modi quis maxime   vitae vel, sapiente placeat fuga ad cumque veritatis tenetur accusantium qui cupiditate autem   ipsa optio iure saepe magnam officia possimus! Earum consectetur cumque doloribus mollitia,   alias porro enim consequatur, cum veritatis odit perferendis ab harum. Earum neque est soluta   saepe error recusandae, corrupti maiores sequi numquam aperiam nostrum ex pariatur, porro   mollitia quasi! Aspernatur autem ad soluta est suscipit itaque accusamus, voluptates repellat   ut ullam, vero iusto odit mollitia consequuntur odio laborum nisi tempore nam? Quas   consequuntur id quod error! Odit numquam dolor esse recusandae maiores in obcaecati qui   tenetur.
       </div>
-      <div id="fac">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident architecto ducimus, vitae rem dolor, perferendis similique odit eum voluptatum rerum atque modi? Aperiam commodi, consequuntur odit ad provident ullam nisi enim odio laborum veritatis ex ipsa magnam voluptatibus deserunt explicabo eius amet temporibus fugiat similique sint aut labore numquam totam. Consequatur quasi inventore nostrum maiores debitis amet eum accusamus dicta cupiditate facere quaerat harum voluptate vero eligendi quis, natus, quam magni sit aliquid? Voluptatem ab praesentium impedit, blanditiis obcaecati aspernatur ipsa deserunt? Delectus quae assumenda cumque ducimus impedit quis, quidem veniam illo voluptatum unde corporis iusto veritatis magnam id, itaque atque fugiat vitae, nemo sed esse enim maiores corrupti earum. Ex magni provident ea voluptates! Ab, aperiam illo! Accusamus beatae odio aperiam exercitationem doloremque, laborum numquam autem, rerum impedit nulla cumque animi placeat nam similique, perspiciatis at commodi asperiores! Quasi esse, iure odio animi ad error adipisci quos, veniam voluptates assumenda voluptatem omnis, commodi tempore quae placeat a quisquam ex. Minima, error tenetur. Dolores asperiores maxime error natus labore voluptatem, nesciunt suscipit ea mollitia magni commodi quia libero voluptatum numquam optio vero dicta id aliquam iure minima? Quae, iure rerum? Perspiciatis officiis illo quibusdam, similique magnam eum reiciendis voluptate quaerat nesciunt alias optio iure repellendus animi officia nam sint expedita vero tempora libero! Necessitatibus, suscipit tempore. Praesentium veritatis autem eos tempore, aliquam error rerum! Magni dicta doloremque labore sit ad sint dolorum eos placeat explicabo alias beatae modi officiis corrupti enim vero et perspiciatis neque quidem, dolore, error asperiores voluptas nulla minus! Vero repellat recusandae autem, tempore et inventore voluptatibus voluptas deleniti? Veniam asperiores nesciunt ad, corporis nulla necessitatibus dolorum placeat unde quam tenetur doloribus ut consectetur recusandae incidunt est quibusdam quod quos ab iusto reiciendis fugit consequuntur quae itaque expedita. Modi repudiandae non, minima nemo voluptates doloribus deserunt est.
-      </div>
-      
+      <!-- 配套服务模块 -->
+      <mt-navbar id="fac" v-model="selected">
+        <mt-tab-item id="fac1">设施服务</mt-tab-item>
+        <mt-tab-item id="fac2">入住政策</mt-tab-item>
+        <mt-tab-item id="fac3">位置周边</mt-tab-item>
+      </mt-navbar>
+      <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="fac1">
+          <div>
+            <div>
+              <span>123</span>
+              <div>123</div>
+            </div>
+            <div>
+              <span>321</span>
+              <div>321</div>
+            </div>
+          </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="fac2">
+            456
+        </mt-tab-container-item>
+        <mt-tab-container-item id="fac3">
+            789
+        </mt-tab-container-item>
+      </mt-tab-container>
+      <!-- 配套服务模块 -->
     </div>
     <!-- 详情页主界面 end -->
     <!-- 页尾广告 start -->
     <div id="footer">
       <div>
-        <div>
-          <span class="iconfont icon-dunpaibaoxianrenzheng_o"></span>
-          <p>123</p>
-        </div>
-        <div>
-          <span></span>
-          <p>123</p>
-        </div>
-        <div>
-          <span></span>
-          <p>123</p>
+        <div v-for="(item,i) of footers" :key=i>
+          <span :class=item.c></span>
+          <p v-text="item.t"></p>
         </div>
       </div>
-      <div v-text="tel"></div>
+      <div>
+        <span v-text="tel"></span>
+      </div>
     </div>
     <!-- 页尾广告 end -->
   </div>
@@ -118,8 +135,15 @@ export default {
       goldVip:"您是金卡会员 本人预订本人入住可享",
       goldVipRight:["预订95折","免押金","欢迎卡片","13点退房"],
       pickerVisible:"",
+      //配套服务tabbar
+      selected:"fac1",
       //页尾广告
-      tel:"会员专属热线:400-400-4000"
+      tel:"会员专属热线:400-400-4000",
+      footers:[
+        {c:"iconfont icon-dunpaibaoxianrenzheng_o",t:"官网预订享低价保证"},
+        {c:"iconfont icon-manager",t:"入住享金牌服务保障"},
+        {c:"iconfont icon-kefu",t:"贴心服务7*24小时"}
+      ]
     }
   },
   methods:{
@@ -315,10 +339,50 @@ export default {
   }
   #footer{
     width:100%;
-    height:100px;
+    height:120px;
     background:#cccccc;
     padding:0;
     position:absolute;
+  }
+  #footer>div{
+    display:flex;
+  }
+  #footer>div>div{
+    padding:10px 0;
+    justify-content: space-between;
+    width:125px;
+    color:rgba(0,0,0, 0.5);
+    text-align:center;
+    box-sizing: border-box;
+  }
+  #footer>div>div>span{
+    display:block;
+    margin:0;
+    font-size:25px;
+    text-align:center;
+  }
+  #footer>div>div>p{
+    margin:0 27.5px;
+    font-size:12px;
+    width:70px;
+  }
+  #footer>div+div{
+    font-size:12px;
+    display:block;
+    text-align:center;
+    color:rgba(0,0,0, 0.5);
+  }
+  .mint-navbar .mint-tab-item.is-selected {
+    border-bottom: 3px solid rgba(245,156,26,1);
+    color:rgba(245,156,26,1);
+    margin-bottom: -3px;
+    font-weight: bolder;
+  }
+  .mint-navbar .mint-tab-item{
+    color:rgba(245,156,26,0.8);
+  }
+  .mint-tab-container-item>div>div{
+    display:flex;
   }
 </style>
 
