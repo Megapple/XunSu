@@ -2,12 +2,13 @@
     
       <div class="pay-container">
         <!-- 页面标题 -->
-        <mt-header title="订单详情">
+        <mt-header title="订单详情" fixed>
             <router-link to="/Order" slot="left">
                 <mt-button class="iconfont icon-return">返回</mt-button>
             </router-link>
         </mt-header>
-       
+        <!-- 防止溢出 -->
+       <div style="margin-top:60px;"></div>
        <div class="order-box">
            <!-- 预定房型 -->
             <div class="orderMessage">
@@ -50,15 +51,16 @@
                 </div>
             </div>
             <!-- 保险信息-->
-            <div class="insurance mflex">
-                <div class="icon">
-                    <img style="width:30px; text-align:center;" src="../../assets/Orderimage/san.png" alt="">
-                </div>
-                <div class="insurance_content">
-                    <p>住民宿免费赠送(意外保险)</p>
-                    <span style="color:gray;font-size:10px;">迅速为您的人身安全保驾护航</span>
-                </div>
-                
+            <div class="insurance mflex" style="padding:0 3%;">
+                <div class="insurance_icon mflex">
+                    <div class="icon">
+                        <img style="width:30px; text-align:center;" src="../../assets/Orderimage/san.png" alt="">
+                    </div>
+                    <div class="insurance_content" style="margin-left:10px;">
+                        <p>住民宿免费赠送(意外保险)</p>
+                        <span style="color:gray;font-size:10px;">迅速为您的人身安全保驾护航</span>
+                    </div>
+                </div> 
                 <div class="insurance">
                   <mt-switch v-model="value"></mt-switch>
                 </div>
@@ -88,16 +90,17 @@
            
        </div>
        <!-- 底部支付明细和提交按钮 -->
-       <div class="oederPay mflex">
+       <div class="orderPay">
            <div class="price">
             <p style="color:#FDC822;font-size:18px;" v-html="`¥${price}`"></p>
             <p>全网最低价</p>
            </div>
            <div class="submit">
-               <mt-button size="large" v-model="sbumitPay">去支付</mt-button>
+               <mt-button  size="large" v-model="sbumitPay" @click="goPay" fixed>去支付</mt-button>
            </div>
 
        </div>
+       <div style="margin-bottom:70px;"></div>
        
     </div>
     
@@ -121,9 +124,9 @@ export default {
      
     }, 
       methods:{
-            backDetail(){
-                this.MessageBox.confirm("客观您您慢走,欢迎您再来", "返回详情页");
-            },
+           goPay(){
+               this.$router.push('/Orderpay')
+           },
             go(){
                 this.$router.push('/Add');
             }
@@ -174,6 +177,7 @@ button{
 .order-box{
     padding:10px 3%;
     background-color:#f7f7f7;
+    overflow: scroll;
 }
 .orderMessage{
     background-color:#fff;
@@ -239,22 +243,35 @@ button{
 .orderPact{
     background-color: #eee;
     margin-top: 10px;
+    padding: 13px;
+}
+li{
+    color:gray;
 }
 ul>li p{
     color:gray;
     font-size: 15px;
     padding: 7px;
 }
-.oederPay{
-    
-    margin:10px;
-    position: relative;
+.orderPay{
+    display:flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    background-color: #fff;
+    width: 100%;
+   line-height: 1.3;
+   padding: 10px;
+
+   
 
 }
 .submit{
     background-color: #FDC822;
     width: 160px;
     border-radius: 25px;
+    margin-right: 23px;
     
 }
 </style>

@@ -25,7 +25,7 @@ export default new Router({
     {path: '/',name: 'HelloWorld',component: HelloWorld},
     {path:'/Order',component:Order},
     {path: '/Detail',name: 'Detail',component: Detail},
-    {path:'/Orderdetail',component:orderdetail},
+    {path:'/Orderdetail',component:Orderdetail},
     {path:'/Signin',component:Signin},
     {path:'/Login',component:Login},
     {path:'/Housting',component:Housting},
