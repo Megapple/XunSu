@@ -2,7 +2,7 @@
     
       <div class="pay-container">
         <!-- 页面标题 -->
-        <mt-header title="订单支付">
+        <mt-header title="订单详情">
             <router-link to="/Order" slot="left">
                 <mt-button class="iconfont icon-return">返回</mt-button>
             </router-link>
@@ -16,35 +16,6 @@
             </div>
             <!-- 入住信息 -->
             <div class="orderMessage">
-                <!-- <div class="roomMsg">
-                    <p class="dec iconfont icon-huo">仅剩一间,请尽快预定以免别人抢了去哦!!</p>
-                    <div class="roomMount">
-                        <p>房间数</p>
-                        <div class="roomNum">
-                            <mt-button>-</mt-button>
-                            <span>1</span>
-                            <mt-button>+</mt-button>
-                        </div>
-                    </div>
-                    
-                    <h3 class="pMsg">入住人信息:
-                        <button class="iconfont icon-wenhao"></button>
-                    </h3>
-                        <mt-field label="入住人姓名:" placeholder="请输入姓名" type="text" v-model="username"></mt-field>
-                        <mt-field label="联系方式(+86):" placeholder="请输入手机号码" type="phone" v-model=phone></mt-field>
-                        <div class="idcard">                  
-                            <span class="namecard">证件类型:</span>
-                            <select class="cardType">
-                                <option value ="volvo">证件类型</option>
-                                <option value ="saab">身份证</option>
-                                <option value="opel">护照</option>
-                                <option value="audi">港澳通行证</option>
-                            </select>
-                        </div>
-                        
-                        
-                        <mt-field label="证件号码" placeholder="请输入证件号码" v-model="card"></mt-field>
-                </div> -->
                 <p class="warning iconfont icon-huo">仅剩<span>1</span>间,请尽快预定以免被人抢订</p>
                 <!-- 房间数 -->
                 <div class="roomMount mflex">
@@ -62,7 +33,7 @@
                         <p>客房1(需填一个人入住)</p>
                         <div class="mflex">
                             <mt-field placeholder="入住人姓名" type="text" v-model="uname"></mt-field>
-                            <button class="iconfont icon-tianjiayonghu"></button>
+                            <button class="iconfont icon-tianjiayonghu" @click="go"></button>
                         </div>
                         
                     </div>
@@ -78,10 +49,54 @@
                     
                 </div>
             </div>
-            <!-- 升级钻石会员 -->
-            <div class="orderMessage">
+            <!-- 保险信息-->
+            <div class="insurance mflex">
+                <div class="icon">
+                    <img style="width:30px; text-align:center;" src="../../assets/Orderimage/san.png" alt="">
+                </div>
+                <div class="insurance_content">
+                    <p>住民宿免费赠送(意外保险)</p>
+                    <span style="color:gray;font-size:10px;">迅速为您的人身安全保驾护航</span>
+                </div>
                 
+                <div class="insurance">
+                  <mt-switch v-model="value"></mt-switch>
+                </div>
             </div>
+            <!-- 发票事宜 -->
+            <div class="invoice">
+                <p style="padding-left: 10px;color:gray">发票事宜请与房东协商</p>
+            </div>
+            <!-- 预定须知 -->
+            <div class="orderPact">
+                <h4>预定须知</h4>
+                <ul style="padding-left:17px">
+                    <li><p>酒店于入住当天14:00办理入住,如提前到达酒店,酒店视客房情况是否给予提前入住</p></li>
+                    <li><p>官网预定入住保留时间为入住次日12:00,所有会员可延迟至14:00(视客房情况而定);</p></li>
+                </ul>
+                <h4>退订政策</h4>
+                <ul style="padding-left:17px">
+                    <li>
+                        <p>预定且未入住的订单可在入住日前72小时通过App进行取消</p>
+                    </li>
+                    <li>
+                        <p>超过取消时限,已支付的房费不予以退还
+                        </p>
+                    </li>
+                </ul>
+            </div>
+           
+       </div>
+       <!-- 底部支付明细和提交按钮 -->
+       <div class="oederPay mflex">
+           <div class="price">
+            <p style="color:#FDC822;font-size:18px;" v-html="`¥${price}`"></p>
+            <p>全网最低价</p>
+           </div>
+           <div class="submit">
+               <mt-button size="large" v-model="sbumitPay">去支付</mt-button>
+           </div>
+
        </div>
        
     </div>
@@ -93,15 +108,25 @@ export default {
         return {
              houseType:"修水大床房"   ,
              houseData:"07-11-07-12 共1晚",
-             username:"",
+             uname:"",
              phone:"",
-             card:""
+             card:"",
+             price:"1000",
+             value:"",
+             sbumitPay:"",
+
+             
 
         }
      
     }, 
       methods:{
-            
+            backDetail(){
+                this.MessageBox.confirm("客观您您慢走,欢迎您再来", "返回详情页");
+            },
+            go(){
+                this.$router.push('/Add');
+            }
         }
 }
 </script>
@@ -122,6 +147,7 @@ button{
     border:0;
     background-color: transparent;
     box-shadow: transparent;
+    box-shadow: 0 0 1px #fff;
 }
 .mint-button::after{
     background-color:transparent;
@@ -140,56 +166,11 @@ button{
     background:transparent;
     border-bottom:1px solid #eee;
 }
-    /* .mint-header{
-        height:50px;
-    }
-.mint-header-title {
-    font-size:23px;
-    color:bisque;
-}
-.orderMessage{
-    
-    border:1px solid #FEFEFE;
-    border-radius: 25px;
-    padding: 4px;
-    background:#F7F7F7;
-    width:96%;
-    margin-left: 4px;
-    margin-top: 10px;
-}
-.houseMsg{
-    height: 15%;
-    text-align: left;
-}
-.dec{
-    text-align: left;
-    font-size: 11px;
-    color: red;
-    margin-left: 10px;
-}
-.roomMount{
-    display: flex;
-    justify-content: space-between;
-    border-bottom:solid #eeeeee;
-    margin:10px;
-}
-.pMsg{
-    text-align: left;
-    margin: 5px;
-}
-.idcard{
-    display: flex;
-    justify-content: space-between;
-}
-.cardType{
-    width:255px;
-    height:35px;
-    margin-top:8px;
-}
-.namecard{
-    text-align: center;
-    line-height: 50px;
-} */
+.mint-header{
+      background-color: #FDC822;
+      height:55px;
+      font-size:16px;
+  }
 .order-box{
     padding:10px 3%;
     background-color:#f7f7f7;
@@ -236,6 +217,45 @@ button{
 .icon-tianjiayonghu,.icon-tongxunlu{
     font-size:23px;
     color:#aaa;
+   
+}
+.insurance{
+    background-color: #fff;
+    height: 70px;
+    align-items: center;
+    border-radius: 10px;
+}
+.insurance .mint-switch{
+    top: 30%;
+    right: 10%;
+}
+.invoice{
+    background-color: #fff;
+    margin-top: 10px;
+    height: 40px;
+    line-height: 2.5;
+    border-radius: 10px;
+}
+.orderPact{
+    background-color: #eee;
+    margin-top: 10px;
+}
+ul>li p{
+    color:gray;
+    font-size: 15px;
+    padding: 7px;
+}
+.oederPay{
+    
+    margin:10px;
+    position: relative;
+
+}
+.submit{
+    background-color: #FDC822;
+    width: 160px;
+    border-radius: 25px;
+    
 }
 </style>
 

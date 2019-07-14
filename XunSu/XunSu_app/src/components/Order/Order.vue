@@ -1,8 +1,8 @@
 <template>
     <div class="order-container">
         <mt-header title="订单">
-            <router-link to="/" slot="left">
-                <mt-button icon="back">返回</mt-button>
+            <router-link to="Detail" slot="left">
+                <mt-button icon="back" >返回</mt-button>
             </router-link>
                 <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
@@ -22,7 +22,9 @@ export default {
         }//return 结束
     },//data 结束
     methods:{
-       
+            backIndex(){
+                this.MessageBox.confirm("取消预定","客观您不再想想吗");
+            },
            go() {
                this.$router.push('/');
 
@@ -47,7 +49,7 @@ export default {
 }
 .order1{
     margin-top:75px;
-     
+     text-align: center;
 }
 .mint-button--large{
     background-color:rgb(245, 156, 26);
