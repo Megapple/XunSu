@@ -69,12 +69,8 @@
         <img src="../assets/img/picture/dnkss.png" alt="" >
     </div>
     <!-- 二楼 -->
-<<<<<<< HEAD
- <mt-swipe :auto="2000">
-=======
     <div class="mdswipe">
  <mt-swipe :auto="2000" >
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
   <mt-swipe-item v-for="(item,i) of items" :key="i">
     <a :href="item.href" rel="external nofollow">
        <img :src="require('../assets/img/1.jpg')" class="img"/>
@@ -86,10 +82,7 @@
     </a>
   </mt-swipe-item>
  </mt-swipe>
-<<<<<<< HEAD
-=======
  </div>
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
    <div class="tb">
        <div class="tb_bar">
            <i class="iconfont icon-gongwenbao"></i>
@@ -324,12 +317,6 @@ body{
 /* 中间过渡 */
 .middle{text-align:center; margin:20px 40px;}
 /* 二楼 */
-<<<<<<< HEAD
-.tb{
-    display:flex;
-    justify-content: space-around;
-    margin-top:15px;
-=======
 .mdswipe {
     width:350px;height:300px;
     border-radius:8px;
@@ -340,7 +327,6 @@ body{
     display:flex;
     justify-content: space-around;
     margin-top:-55px;
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
 }
 .tb .tb_bar{
     display: flex;
@@ -378,21 +364,7 @@ body{
 }
 .oddbtn span:first-child{font-size:17px;}
 .oddbtn span:nth-child(2){font-size:12px;}
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
 /* 底部导航栏 */
-/* .page-wrap{height:35px;} */
-=======
-/* 底部导航栏 */
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
 .bar{
     display:flex;
     flex-flow:column;
@@ -407,11 +379,7 @@ body{
 /* 修改tabbar 选中时图标颜色及背景 */
 .mint-tabbar>.mint-tab-item.is-selected{
     background-color:#fafafa;
-<<<<<<< HEAD
-    color:rgb(245, 156, 26);
-=======
     color:#ff8f9f;
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
 }
 .mint-tabbar>.mint-tab-item.is-selected span{color:rgb(131, 129, 129);}
 

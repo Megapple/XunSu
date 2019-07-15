@@ -29,7 +29,6 @@
       var reg=/^[a-z0-9_]{3,12}$/i; 
       if(!reg.test(phone)){
         this.$toast("手机号格式不正确",1000);
-        console.log(phone);
         return;
       }
       if(!reg.test(upwd)){
@@ -39,11 +38,14 @@
       var url="user/login";
       var obj= {phone:phone,upwd:upwd};
       this.axios.get(url,{params:obj}).then(result=>{
-          console.log(result);
-          if(result.data.code>0){
-             this.$router.push("login")
+          if(result.data.code>0){  
+            console.log(result);
+            sessionStorage.setItem("phone",result.config.params.phone);
+            var lastname = sessionStorage.getItem("phone");
+            console.log(lastname);
+           this.$router.push("./housting");
           }else{
-             this.$messagebox("提示","手机号或密码有误")
+             this.$messagebox("提示","手机号或密码有误");
            }
       }) 
     }
