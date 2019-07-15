@@ -324,7 +324,6 @@ body{
 /* 中间过渡 */
 .middle{text-align:center; margin:20px 40px;}
 /* 二楼 */
-<<<<<<< HEAD
 .tb{
     display:flex;
     justify-content: space-around;
