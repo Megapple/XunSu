@@ -1,18 +1,28 @@
 <template>
  <div>
-<mt-tab-container v-model="selected">
+<mt-tab-container v-model="selected" class="mt">
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
  <mt-swipe :auto="2000">
-  <mt-swipe-item v-for="(item,i) of items" :key="i">
-    <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/1.jpg')" class="img"/>
-    </a>
+  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
+    <!-- <a :href="item.href" rel="external nofollow"> -->
+       <img :src="require('../assets/img/big7.jpeg')" class="img"/>
+    <!-- </a> -->
   </mt-swipe-item>
-    <mt-swipe-item v-for="(item,i) of items" :key="i">
-    <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/2.jpg')" class="img"/>
-    </a>
+  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
+    <!-- <a :href="item.href" rel="external nofollow"> -->
+       <img :src="require('../assets/img/big.jpg')" class="img"/>
+    <!-- </a> -->
+  </mt-swipe-item>
+  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
+    <!-- <a :href="item.href" rel="external nofollow"> -->
+       <img :src="require('../assets/img/big2.jpeg')" class="img"/>
+    <!-- </a> -->
+  </mt-swipe-item>
+  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
+    <!-- <a :href="item.href" rel="external nofollow"> -->
+       <img :src="require('../assets/img/lb.jpg')" class="img"/>
+    <!-- </a> -->
   </mt-swipe-item>
  </mt-swipe>
  <!-- 搜索框 -->
@@ -27,7 +37,7 @@
       </a>
     </div>
  </div>
- <div class="index clearfix">
+  <div class="index clearfix">
      <!-- 一楼 -->
     <div>
     <div class="city">
@@ -37,79 +47,74 @@
     <div>
     <mt-tab-container v-model="active">
         <mt-tab-container-item id="tab1">
-            <container :img_dali1="require('../assets/img/dlgc.jpg')" 
+            <a href="#"><container :img_dali1="require('../assets/img/dlgc.jpg')" 
             :img_dali2="require('../assets/img/dlyc.jpg')" 
             :img_dali3="require('../assets/img/dljz.jpg')"
-            :img_dali4="require('../assets/img/dljr.jpg')" ></container>
+            :img_dali4="require('../assets/img/dljr.jpg')" ></container></a>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
-            <container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+            <a href="#"><container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
             :img_hz2="require('../assets/img/hzmj.jpg')"
             :img_hz3="require('../assets/img/hzys.jpg')"
-            :img_hz4="require('../assets/img/hzxh.jpg')"></container2>
+            :img_hz4="require('../assets/img/hzxh.jpg')"></container2></a>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab3">
-            <container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
+            <a href="#"><container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
             :img_cd2="require('../assets/img/cdsx1.jpg')"
             :img_cd3="require('../assets/img/cdsx2.jpg')"
-            :img_cd4="require('../assets/img/cdcz.jpg')"></container3>
+            :img_cd4="require('../assets/img/cdcz.jpg')"></container3></a>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab4">
-            <container4 :img_gl1="require('../assets/img/yszj.jpg')" 
+            <a href="#"><container4 :img_gl1="require('../assets/img/yszj.jpg')" 
             :img_gl2="require('../assets/img/ysgs.jpg')"
             :img_gl3="require('../assets/img/yswb.jpg')"
-            :img_gl4="require('../assets/img/ysxs.jpg')"></container4>
+            :img_gl4="require('../assets/img/ysxs.jpg')"></container4></a>
         </mt-tab-container-item>
     </mt-tab-container>
-    <!-- <mt-button><a href="#">查看更多酒店 ></a></mt-button> -->
     </div>
     </div>
     <!-- 中间过渡 -->
     <div class="middle">
-        <img src="../assets/img/picture/dnkss.png" alt="" >
+        <img src="../assets/img/lb1.jpg" alt="" >
     </div>
     <!-- 二楼 -->
-<<<<<<< HEAD
- <mt-swipe :auto="2000">
-=======
-    <div class="mdswipe">
- <mt-swipe :auto="2000" >
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
-  <mt-swipe-item v-for="(item,i) of items" :key="i">
-    <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/1.jpg')" class="img"/>
-    </a>
-  </mt-swipe-item>
-    <mt-swipe-item v-for="(item,i) of items" :key="i">
-    <a :href="item.href" rel="external nofollow">
-       <img :src="require('../assets/img/2.jpg')" class="img"/>
-    </a>
-  </mt-swipe-item>
- </mt-swipe>
-<<<<<<< HEAD
-=======
- </div>
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
-   <div class="tb">
-       <div class="tb_bar">
-           <i class="iconfont icon-gongwenbao"></i>
-           <span>商旅合作</span>
+    <div class="theme">
+        <div class="theme_first">
+            <h3>主题酒店大搜索</h3>
+            <p>一店一生活,发现最独特的入住体验</p>
         </div>
-       <div class="tb_bar">
-           <i class="iconfont icon-jinqian"></i>
-           <span>免押入住</span>
+        <div class="theme_second">
+            <div class="theme1">
+                <div class="theme1_one">
+                    <a href="#"><img src="../assets/img/big7.jpeg" alt=""></a>
+                    <div class="theme_p">
+                    <p>旅拍圣地</p>
+                    </div>
+                </div>
+                <div class="theme1_two">
+                    <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+                    <div class="theme_p">
+                    <p>逛吃天堂</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme1">
+                <div class="theme2_one">
+                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                    <div class="theme_p"><p>古镇风情</p></div>                   
+                </div>
+                <div class="theme2_one">
+                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                    <div class="theme_p"><p>蜜月圣地</p></div>
+                </div>
+                <div class="theme2_one">
+                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                    <div class="theme_p"><p>亲自乐园</p></div>
+                </div>
+            </div>
         </div>
-       <div class="tb_bar">
-           <i class="iconfont icon-huabeizhangdan"></i>
-           <span>蚂蚁花呗</span>
-        </div>
-       <div class="tb_bar">
-           <i class="iconfont icon-ziyuan"></i>
-           <span>金融保险</span>
-        </div>
-   </div>
-
-
+        <mt-button><a href="#">查看更多主题酒店 ></a></mt-button>
+    </div>
     <div class="odds">
         <div class="odd_first">
         <h3>超值特惠酒店</h3>
@@ -117,33 +122,52 @@
         </div>
         <div class="oddstitle">
             <div class="oddbtns">
-            <mt-button v-for="(odd,idx) of odds" :key="idx"  @click.prevent="setActive2" :data-id="idx" class="oddbtn "> 
+            <mt-button v-for="(odd,i) of odds" :key="i" @click.prevent="setActive2" :data-id="i"  class="oddbtn"> 
                 <span>{{odd.title}}</span>
                 <span>{{odd.subtitle}}</span>
             </mt-button>
-            </div>
+         </div>   
         </div>
         <mt-tab-container v-model="active2">
             <mt-tab-container-item id="odd1">
-                <odds :img_dali1="require('../assets/img/dlgc.jpg')" 
+                <a href="#"><odds :img_dali1="require('../assets/img/dlgc.jpg')" 
                 :img_dali2="require('../assets/img/dlyc.jpg')" 
                 :img_dali3="require('../assets/img/dljz.jpg')"
-                :img_dali4="require('../assets/img/dljr.jpg')"></odds>
+                :img_dali4="require('../assets/img/dljr.jpg')"></odds></a>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
-                <odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+                <a href="#"><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
                 :img_hz2="require('../assets/img/hzmj.jpg')"
                 :img_hz3="require('../assets/img/hzys.jpg')"
-                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2>
+                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2></a>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd3">
-                <odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
+                <a href="#"><odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
                 :img_gl2="require('../assets/img/ysgs.jpg')"
                 :img_gl3="require('../assets/img/yswb.jpg')"
-                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3>
+                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3></a>
             </mt-tab-container-item>
         </mt-tab-container>
         <mt-button><a href="#">查看更多超值特惠酒店 ></a></mt-button>
+    </div>
+    <div class="story_bottom ">
+        <h3>我们の故事</h3>
+        <mt-swipe :auto="2000">
+            <mt-swipe-item>
+                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+            </mt-swipe-item>
+            <mt-swipe-item>
+                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+            </mt-swipe-item>
+            <mt-swipe-item>
+                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+            </mt-swipe-item>
+            <mt-swipe-item>
+                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+            </mt-swipe-item>
+        </mt-swipe>
+        <a href="#"> ღ 快戳我</a>
+        <!-- <a href="#"><img src="../assets/img/big9.jpg" alt=""></a> -->  
     </div>
   </div>
   </mt-tab-container-item>
@@ -232,7 +256,6 @@ export default {
             href: 'http://baidu.com',   
             url: 'http://127.0.0.1:3000/img/'
             }],
-
        }
    },
    methods:{
@@ -244,7 +267,7 @@ export default {
         setActive2(e){
             var id=parseInt(e.target.dataset.id);
             this.active2="odd"+(id+1);
-        }
+        },
    }
  }
 </script>
@@ -253,6 +276,7 @@ export default {
 body{
     background-color:#f5f5f56e;
 }
+a{text-decoration: none;}
 /* 轮播 */
  .mint-swipe { height: 218px;}
  .img {width: 100%;}
@@ -310,6 +334,7 @@ body{
 /* 城市 */ 
 .index{
     margin-top:40px;
+    margin-bottom: 70px;
 }
 .city{margin:0 19px;}
 .mint-button--small{
@@ -322,82 +347,100 @@ body{
     border-radius: 9px;
 }
 /* 中间过渡 */
-.middle{text-align:center; margin:20px 40px;}
+.middle{width:340px;height:80px;margin:30px auto;box-shadow: 0 0 20px #b8bbbf;}
+.middle img{width:100%;height:80px;}
 /* 二楼 */
-.tb{
-    display:flex;
-    justify-content: space-around;
-    margin-top:15px;
-=======
-.mdswipe {
-    width:350px;height:300px;
-    border-radius:8px;
-    margin-left:10px;
+.theme{margin-top:60px;}
+.theme_first{
+    margin-left:15px;
 }
-.mdswipe img{height:300px;border-radius:8px;}
-.tb{
+.theme_first p{font-size:13px;color:#979696;margin:6px 0;}
+.theme_second{
     display:flex;
-    justify-content: space-around;
-    margin-top:-55px;
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
-}
-.tb .tb_bar{
-    display: flex;
     flex-flow: column;
-    color:pink;
+    margin-top:15px;
 }
-.tb_bar i{font-size:27px;text-align: center; }
-.tb_bar span{font-size:14px;text-align: center;margin-top:5px;}
-
-
-
-
-
-
-
-
-
-
-
-
-
+.theme1{
+    display:flex;
+    padding:5px 5px;
+}
+.theme1_one,.theme1_two,.theme2_one{
+    width:250px;height:200px;
+    position: relative;
+    padding:0 5px;
+}
+.theme2_one{height:150px;margin-top:-50px;margin-bottom:-20px;}
+.theme1_one img,.theme1_two img,.theme2_one img{width:100%;height:150px;border-radius: 8px;}
+.theme2_one img{height:130px;}
+.theme_p{
+    width:65px;height:22px;
+    line-height: 25px;
+    text-align: center;
+    position: absolute;
+    top:0;left:5px;
+    font-size:10px;
+    color:#f5f5f5;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding:0 5px;
+    background:linear-gradient(to right,rgb(255, 166, 0) 0%,rgb(252, 205, 78) 100%);
+}
+.theme1 .theme2_one:first-child .theme_p,.theme1 .theme2_one:nth-child(3) .theme_p{
+    background:linear-gradient(to right,rgb(248, 155, 139) 0%,rgb(245, 115, 76) 100%);}
+.theme1 .theme2_one:nth-child(2) .theme_p{
+    background:linear-gradient(to right,rgb(136, 230, 217) 0%,rgb(105, 192, 243) 100%);}
 .odd_first{margin-left:20px;margin-top:25px;}
-.odd_first p{font-size:13px;color:#979696;margin:6px 0;}
+.odd_first p{font-size:13px;color:#979696;margin:5px 0;}
 .oddbtns{
     width:375px;height:120px;
     display:flex;
     align-items: center;
+    margin-bottom:-20px;  
+    margin-top:-10px;
     }
 .oddbtn{
     width:120px !important;
-    height:100px !important;
+    height:80px !important;
     margin:0 10px !important;
-    background-color:rgb(246, 248, 250);
+    /* background-color:rgb(245, 115, 76); */
+    border-radius: 8px !important;
+    outline: none;
     /* color:#f5f5f5; */
 }
 .oddbtn span:first-child{font-size:17px;}
 .oddbtn span:nth-child(2){font-size:12px;}
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
+.story_bottom{
+    height:455px;
+    text-align: center;
+    margin-top:10px;
+    padding:5px 0;
+    box-shadow: 0 0 10px #ccc;
+    position: relative;
+    }
+.story_bottom .mint-swipe {
+   height:455px;
+}
+.story_bottom .mint-swipe-indicators{
+    position: static;
+}
+.story_bottom img{
+    width:320px;
+    height: 400px;
+    margin-top:10px;
+    margin-bottom:0;
+    box-shadow: 0 0 10px #ccc;
+}
+.story_bottom a{margin-top:-10px;z-index: 10; color:#656b79;}
 /* 底部导航栏 */
-/* .page-wrap{height:35px;} */
-=======
-/* 底部导航栏 */
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
+.mt{margin-bottom: 35px;}
 .bar{
+    height:40px;
     display:flex;
     flex-flow:column;
     align-items: center;
-    padding:5px 0; 
-    margin-top:-8px;
+    /* padding:5px 0;  */
+    /* margin-top:-8px; */
+    margin-bottom:-5px;   
 }
 .bar span{font-size:10px;margin-top:5px;margin-bottom:-11px; }
 .icon-fangzi,.icon-shoucang5,.icon-huiyuan-1,.icon-dingdan{font-size:23px;}
@@ -406,12 +449,8 @@ body{
 /* 修改tabbar 选中时图标颜色及背景 */
 .mint-tabbar>.mint-tab-item.is-selected{
     background-color:#fafafa;
-<<<<<<< HEAD
     color:rgb(245, 156, 26);
-=======
-    color:#ff8f9f;
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
 }
-.mint-tabbar>.mint-tab-item.is-selected span{color:rgb(131, 129, 129);}
+.mint-tabbar>.mint-tab-item.is-selected span{color:rgb(245, 156, 26);}
 
 </style>

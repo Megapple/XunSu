@@ -5,17 +5,12 @@ import Detail from '../components/detail/Detail.vue'
 //引入Find_order_page组件
 import Order from "../components/Order/Order.vue"
 //引入Pay 组件
-<<<<<<< HEAD
-import Pay from "../components/Order/Pay.vue"
-// 引入Home组件
-=======
 import Orderdetail from "../components/Order/Orderdetail.vue"
 //引入添加入住人Add组件
 import Add from "../components/Order/Add.vue"
 //引入Orderpay组件
 import Orderpay from "../components/Order/Orderpay.vue"
 // 引入Home及子组件
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
 import Home from "../components/Home.vue"
 
 import Signin from "../components/common/signin.vue"
@@ -36,10 +31,7 @@ export default new Router({
     {path:'/Housting',component:Housting},
     {path:'/Houstlocation',component:HoustLocation},
     {path:'/Home',component:Home},
-<<<<<<< HEAD
-=======
     {path:'/Add',component:Add},
     {path:'/Orderpay',component:Orderpay}
->>>>>>> d17a36463f255597412e81471a4516a4b678bb08
   ]
 })

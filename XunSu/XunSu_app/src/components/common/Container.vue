@@ -3,7 +3,7 @@
     <div class="citys">
         <div class="first">
         <div class="dali">
-            <img :src="img_dali1">
+            <a href="#"><img :src="img_dali1"></a>
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
@@ -29,7 +29,7 @@
             </div>
         </div>        
         <div class="dali">
-            <img :src="img_dali4" >
+            <a href="#"><img :src="img_dali4" ></a>
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
