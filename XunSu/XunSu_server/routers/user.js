@@ -86,26 +86,21 @@ const pool=require("../pool");
   //         }
   //       })
   // })
-  // //4.用户检索
-  // router.get('/detail',function(req,res){
-  //   var obj=req.query;
-  //   if (!obj.uid)
-  //   {
-  //     res.send({code:401,msg:'uid ruquired'});
-  //     return;
-  //   }
-  //   //执行sql语句
-  //   pool.query('SELECT * FROM xz_user WHERE uid=?',[obj.uid],function(err,result){
-  //     if(err) throw err;
-  //   if (result.length>0)
-  //   {
-  //        res.send({code:200,msg:result})
-  //   }else{
-  //      res.send({code:301,msg:'detai err'})
-  //      }
+  //4.用户检索
+  router.get('/detail',function(req,res){
+    var phone=req.query[0];
+    //执行sql语句
+    pool.query('SELECT * FROM users WHERE phone=?',[phone],function(err,result){
+      if(err) throw err;
+    if (result.length>0)
+    {
+     res.send({code:200,msg:result})
+    }else{
+       res.send({code:301,msg:'detai err'})
+    }
     
-  //   });
-  // })
+    });
+  })
   // //5.设置用户列表
   // router.get('/list',function(req,res){
   //   var obj=req.query;

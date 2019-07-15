@@ -15,6 +15,7 @@ CREATE TABLE `users` (
   `avatar` VARCHAR(128) default NULL,        #头像图片路径
   `gender` INT default NULL,                 #性别  0-女  1-男
   `remark` VARCHAR(100) default NULL         #介绍
+  `ID_number` VARCHAR(20) default NULL       #证件号
 );
 
 /**插入数据**/
