@@ -1,7 +1,7 @@
 <template>
  <div>
      <mt-header title="寻宿网登陆">
-      <router-link to="/housting" slot="left">
+      <router-link to="/Home" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
