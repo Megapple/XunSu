@@ -23,7 +23,7 @@
         </div>
         <!-- 入住人员和 -->
         <div class="orderContent" >
-            <div class="backDetail" @click="go">
+            <div class="backDetail" @click="goDetail">
                 <p class="iconfont icon-return" slot="right" v-text="title_Pname"></p>
             </div>
             <div class="backDetail">
@@ -106,10 +106,18 @@ export default {
             price:1000,
             agio_price:"9.5",
             first_price:15,
+            sbumitPay:""
+
 
         }//return 结束
     },//data 结束
     methods:{
+        goPay(){
+              console.log(123);
+        },
+        goDetail(){
+             console.log(123);
+        },
         go(){
             this.$router.push('/Orderdetail')
         },
@@ -121,19 +129,25 @@ export default {
 }
 </script>
 <style scoped>
+
 .orderPay{
     background-color: #eee;
+   
+    
+    
 }
     .mint-header{
       background-color: #FDC822;
       height:55px;
       font-size:16px;
+      
   }
   .orderMsg{
     background-color:#FDC822;
     padding: 8px;
     margin: 10px;
     border-radius: 10px;
+    width:90%;
   }
   .orderNo{
       display: flex;
@@ -193,6 +207,10 @@ export default {
     background-color: #eee;
     margin-top: 10px;
     padding: 13px;
+}
+.orderPrice{
+    display: flex;
+    justify-content: space-between;
 }
 li{
     color:gray;
