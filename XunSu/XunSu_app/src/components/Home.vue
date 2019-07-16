@@ -178,7 +178,7 @@
       <order></order>
   </mt-tab-container-item>
   <mt-tab-container-item id="me">
-      我
+      <login></login>
   </mt-tab-container-item>
 </mt-tab-container>
  <!--底部导航栏-->
@@ -222,6 +222,7 @@ import Odds3 from "./common/Odds3.vue"
 // 引入底部导航栏其他子组件
 import Collect from "./common/Collect.vue"
 import Order from "./Order/Order.vue"
+import login from "./common/login.vue"
 // 引入底部导航栏图标
 import "../font/font_tabbar/iconfont.css"
 export default {
@@ -231,6 +232,7 @@ export default {
        "container3":Container3,
        "container4":Container4,
        "collect":Collect,
+       "login":login,
        "order":Order,
        "odds":Odds,
        "odds2":Odds2,
