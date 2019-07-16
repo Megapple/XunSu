@@ -14,7 +14,7 @@ const pool=require("../pool");
           res.send({code:-1,msg:"用户名或密码有误"});
         }else{
         req.session.uid=result[0].id;
-         res.send({code:1,msg:"login success"});
+         res.send({code:1,msg:result});
         }
       })
     })
@@ -53,44 +53,29 @@ const pool=require("../pool");
         }
       })
     })
-  // //3.用户更改
-  // router.get('/update',function(req,res){
-  //     var obj=req.query;
-  //     var i=400;
-  //     var sql='UPDATE xz_user SET phone=?,email=?,user_name=?,gender=? WHERE uid=?';
-  //     //遍历对象属性，获取所有的属性
-  //     for (var key in obj)
-  //     {
-  //       i++;
-  //       //console.log(key,obj[key]);
-  //       //判断属性值是否为空
-  //       if (!obj[key])
-  //       {
-  //         res.send({code:i,msg:key+' required'});
-  //         return;
-  //       }
-  //     }
-  //     pool.query(sql,[
-  //       obj.phone,
-  //       obj.email,
-  //       obj.user_name,
-  //       obj.gender,
-  //       obj.uid
-  //       ],function(err,result){
-  //       if (err) throw err;
-  //       if (result.affectedRows>0)
-  //       {
-  //         res.send({code:200,msg:'更改成功'});
-  //       }else{
-  //         res.send({code:301,msg:'更改失败'});
-  //         }
-  //       })
-  // })
+  //3.用户更改
+  router.get('/update',function(req,res){
+      var obj=req.query;
+      var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE users . uid= ?";
+      pool.query(sql,[
+        obj.user_name,
+        obj.ID_number,
+        obj.uid
+        ],function(err,result){
+        if (err) throw err;
+        if (result.affectedRows>0)
+        {
+          res.send({code:200,msg:'更改成功'});
+        }else{
+          res.send({code:301,msg:'更改失败'});
+          }
+        })
+  })
   //4.用户检索
   router.get('/detail',function(req,res){
-    var phone=req.query[0];
+    var uid=req.query[0];
     //执行sql语句
-    pool.query('SELECT * FROM users WHERE phone=?',[phone],function(err,result){
+    pool.query('SELECT * FROM users WHERE uid=?',[uid],function(err,result){
       if(err) throw err;
     if (result.length>0)
     {
