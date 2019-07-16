@@ -56,7 +56,7 @@
   }
  }
 </script>
-<style >
+<style scoped>
 .mint-header{
    background-color:#fafafa;
    color:#000;
