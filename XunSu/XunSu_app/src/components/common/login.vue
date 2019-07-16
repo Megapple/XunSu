@@ -43,10 +43,8 @@
       var obj= {phone:phone,upwd:upwd};
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code>0){  
-            console.log(result);
             sessionStorage.setItem("uid",result.data.msg[0].uid);
             var uid = sessionStorage.getItem("uid");
-            console.log(uid);
            this.$router.push("./housting");
           }else{
              this.$messagebox("提示","手机号或密码有误");
