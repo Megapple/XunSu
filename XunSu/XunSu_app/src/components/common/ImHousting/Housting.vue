@@ -23,14 +23,9 @@
         <div class="contenmsg">
           <i class="usermsg">真实头像 ></i>
           <span :class="{msg:true,msgfalse:a}">{{yourimage}}</span>
-          <!-- <router-link :to="{path:'/userimage'}" :class="{istrue:true,isfalse:b}">{{isCompleted}}</router-link>-->
            <span class="upload">上传图像</span>
-          <input type="file"  name="file" onchange="fileup(event)" class="upfile">
-          <!--  <span :class="{istrue:true,isfalse:a}" @click="actionSheet">{{isCompleted}}</span>
-        <mt-actionsheet
-             :actions= "action"
-             v-model="sheetVisible">234234
-           </mt-actionsheet> -->
+           <!--上传图像-->
+          <input type="file"  name="file" accept='image/*' class="upfile" @click="upload" id="userimage">
         </div> 
       </div> 
       <div class="content">
@@ -55,8 +50,7 @@ export default {
       isCompleted:"> >",
       a:true,
       b:true
-      // action:[{name:"拍照",method:this.getCamera},{name:"从相册中选择",method:this.getLibrary}],
-      // sheetVisible:false
+
     } 
   },
   methods:{
@@ -66,7 +60,6 @@ export default {
       this.axios.get(url,{params:uid}).then(result=>{
           this.phone=result.data.msg[0].phone;
           if(result.data.code==200){  
-            console.log(result);
             if(result.data.msg[0].avatar==null){
               this.yourimage="请上传图像";
               this.isCompleted="> >";
@@ -95,22 +88,18 @@ export default {
         this.$router.push({ path:'/usermsg' });
       }
     },
-    fileup(event){
-      　var formData = new FormData();
-　　    formData.append('file', e.target.files[0]);
-       var index = layer.load(0, {shade: false});
+    upload(){
+      //获取file域里的图片信息
+      // 获取file域里的图片信息
+     var formData = new FormData()
+     var userimage=document.getElementById('userimage');
+     //创建formdata对象
+    formData.append("test",userimage.files[0])  
+      // var formData=new formData();
+      
+      console.log(userimage.files);
     }
-//     //拍照
-//     actionSheet: function(){
-//     	// 打开action sheet
-//       this.sheetVisible = true;
-//     },
-//     getCamera: function(){
-//       console.log("打开照相机")
-//     },
-//     getLibrary: function(){
-//       console.log("打开相册")
-//     }
+
   },
 }
 </script>
