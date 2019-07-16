@@ -1,5 +1,10 @@
 <template>
  <div>
+  <mt-header title="寻宿网注册">
+      <router-link to="/housting" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </mt-header>
     <h2>寻宿网注册</h2>
     <mt-field :state="phoneNumState" label="手机号" type="phone" v-model="phoneNum" placeholder="请输入您的手机号" class="mtInput"></mt-field>
 
@@ -130,6 +135,14 @@
  }
 </script>
 <style scoped>
+.mint-header{
+   background-color:#fafafa;
+   color:#000;
+   letter-spacing:1px;
+   box-shadow:0px 0.5px 1px #b2b2b2;
+   font-weight:900;
+   height:40px;
+ }
 .rig{
   width:300px;
   margin:auto;

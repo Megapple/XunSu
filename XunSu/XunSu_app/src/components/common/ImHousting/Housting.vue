@@ -38,9 +38,9 @@
         <div class="contenmsg">
           <i class="usermsg">证件号码 ></i>
           <span :class="{msg:true,msgfalse:b}">{{yourmsg}}</span>
-          <router-link :to="{path:'/usermsg'}" :class="{istrue:true,isfalse:b}">{{isCompleted}}</router-link>
+          <span @click="tomsg" :class="{istrue:true,isfalse:b}">{{isCompleted}}</span>
         </div> 
-      </div>  
+      </div>
     </div>
     <mt-button type="primary" size="large" class="buttonPosition">开始发布房源</mt-button>
   </div>
@@ -61,10 +61,10 @@ export default {
   },
   methods:{
     details:function(){
-      var lastname = sessionStorage.getItem("phone");
-      this.phone=lastname;
-      var url="/user/detail"
-      this.axios.get(url,{params:lastname}).then(result=>{
+      var uid = sessionStorage.getItem("uid");
+      var url="/user/detail";
+      this.axios.get(url,{params:uid}).then(result=>{
+          this.phone=result.data.msg[0].phone;
           if(result.data.code==200){  
             console.log(result);
             if(result.data.msg[0].avatar==null){
@@ -79,16 +79,21 @@ export default {
              if(result.data.msg[0].user_name==null || result.data.msg[0].ID_number==null){
               this.yourmsg="请完善个人信息";
               this.isCompleted="> >";
-              this.b="true";
+              this.b=true;
             }else{
               this.yourmsg="已完善";
               this.isCompleted="已完成";
-              this.b="false";
+              this.b=false;
             }
           }else{
              this.$messagebox("提示","您还未登录，请登录");
            }
       }) 
+    },
+    tomsg(){
+      if(this.b==true){
+        this.$router.push({ path:'/usermsg' });
+      }
     },
     fileup(event){
       　var formData = new FormData();
