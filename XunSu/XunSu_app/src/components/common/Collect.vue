@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .collect{
     width:100%;height:55px;
     line-height: 55px;

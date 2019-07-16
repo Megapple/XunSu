@@ -12,6 +12,7 @@ import Add from "../components/Order/Add.vue"
 import Orderpay from "../components/Order/Orderpay.vue"
 // 引入Home及子组件
 import Home from "../components/Home.vue"
+import Collect from "../components/common/Collect.vue"
 
 import Signin from "../components/common/signin.vue"
 import Login from "../components/common/login.vue"
@@ -33,6 +34,7 @@ export default new Router({
     {path:'/Housting',component:Housting},
     {path:'/Houstlocation',component:HoustLocation},
     {path:'/Home',component:Home},
+    {path:'/Collect',component:Collect},
     {path:'/Add',component:Add},
     {path:'/Orderpay',component:Orderpay},
     {path:'/Usermsg',component:UserMsg},
