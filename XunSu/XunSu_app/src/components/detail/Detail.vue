@@ -86,17 +86,43 @@
         <mt-tab-container-item id="fac1">
           <div>
             <div>
-              <span>123</span>
-              <div>123</div>
+              <div>
+              <span class="iconfont icon-jiudian"></span>
+              <span>综合设施</span>
+              </div>
+              <div>
+                <span class="iconfont icon-right-1" v-for="(sup,i) of sups" :key=i v-text="sup"></span>
+              </div>
             </div>
             <div>
-              <span>321</span>
-              <div>321</div>
+              <div>
+              <span class="iconfont icon-manager"></span>
+              <span>服务项目</span>
+              </div>
+              <div>
+                <span class="iconfont icon-right-1" v-for="(ser,i) of sers" :key=i v-text="ser"></span>
+              </div>
             </div>
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item id="fac2">
-            456
+          <div class="policy">
+            <ul>
+              <li class="ptitle">入离时间</li>
+              <li>
+                <span class="iconfont icon-shijianzhongbiao"></span>
+                <span>入住:&nbsp;14:00以后</span>
+                <span class="iconfont icon-shijianzhongbiao"></span>
+                <span>退房:&nbsp;12:00之前</span>
+              </li>
+            </ul>
+            <ul>
+              <li class="ptitle">入住政策</li>
+              <li>·&nbsp;酒店于入住当天14:00办理入住,如提前到达酒店,视酒店客房情况决定是否给予提前入住</li>
+              <li>·&nbsp;官网预订入住保留时间为入住时间第二天中午12:00</li>
+              <li>·&nbsp;金卡,白金,钻石,黑金会员本人入住最晚退房时间分别为下午13:00,14:00,15:00,15:00(视客房供应情况而定)</li>
+            </ul>
+          </div>
         </mt-tab-container-item>
         <mt-tab-container-item id="fac3">
             789
@@ -143,7 +169,11 @@ export default {
         {c:"iconfont icon-dunpaibaoxianrenzheng_o",t:"官网预订享低价保证"},
         {c:"iconfont icon-manager",t:"入住享金牌服务保障"},
         {c:"iconfont icon-kefu",t:"贴心服务7*24小时"}
-      ]
+      ],
+      //配套设施数组
+      sups:["停车场","免费WIFI","餐厅","庭院","洗衣房","会议厅","咖啡厅","公共厨房"],
+      //配套服务数组
+      sers:["接机服务","行李寄存","叫醒服务","中文服务","影印服务","叫餐服务","旅游咨询","洗衣服务"]
     }
   },
   methods:{
@@ -238,7 +268,8 @@ export default {
   }
   #main{
     background: white;
-    border-radius:10px;
+    border-top-left-radius :10px;
+    border-top-right-radius :10px;
     position:relative;
     top:-25px;
     padding:0 10px;
@@ -381,8 +412,64 @@ export default {
   .mint-navbar .mint-tab-item{
     color:rgba(245,156,26,0.8);
   }
-  .mint-tab-container-item>div>div{
-    display:flex;
+  .mint-tab-container-item>div{
+    margin-top:3px;
+    padding:10px;
+    background:#f5f5f5;
+    box-sizing: border-box;
   }
+  /* 设施服务CSS样式 start */
+    .mint-tab-container-item>div>div{
+      display:flex;
+    }
+    .mint-tab-container-item>div>div:first-child{
+      border-bottom:1px solid rgba(0,0,0, 0.3);
+    }
+    .mint-tab-container-item>div>div>div{
+      width:20%;
+      text-align:center;
+      box-sizing:border-box;
+      padding:3px;
+    }
+    .mint-tab-container-item>div>div>div:first-child>span:first-child{
+      display:block;
+      width:20px;
+      margin:0 16px 0 16px;
+      font-size:30px;
+      text-align:center;
+    }
+    .mint-tab-container-item>div>div>div>span+span{
+      display:block;
+      font-size:12px;
+    }
+    .mint-tab-container-item>div>div>div+div{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      width:80%;
+    }
+    .mint-tab-container-item>div>div>div+div>span{
+      font-size:12px;
+      margin:2px 1px 2px 10px;
+      width:120px;
+      height:14px;
+      text-align:start;
+    }
+  /* 设施服务CSS样式 end */
+  /* 入住政策CSS样式 start */
+    .policy>ul{
+      list-style:none;
+      font-size:12px;
+      padding:0;
+      margin:0;
+    }
+    .policy>ul>li{
+      margin:8px 5px;
+    }
+    .ptitle{
+      font-size:14px;
+      font-weight: bolder;
+    }
+  /* 入住政策CSS样式 end */
 </style>
 
