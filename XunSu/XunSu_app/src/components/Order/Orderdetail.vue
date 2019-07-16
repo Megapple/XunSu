@@ -157,7 +157,7 @@ button{
     background-color:transparent;
 }
 .mint-button--default{
-    color:#1DA261;
+    color:#fff;
 }
 .mint-cell-wrapper{
     background:transparent;
@@ -178,6 +178,8 @@ button{
   .mint-button-text{
       color:#fff
   }
+
+ 
 .order-box{
     padding:10px 3%;
     background-color:#f7f7f7;
@@ -277,6 +279,9 @@ ul>li p{
     border-radius: 25px;
     margin-right: 23px;
     
+}
+.pay-container .mint-button{
+    box-shadow: none;
 }
 </style>
 
