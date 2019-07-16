@@ -273,7 +273,7 @@ export default {
    }
  }
 </script>
-<style>
+<style scoped>
 *{margin:0;padding:0px;}
 body{
     background-color:#f5f5f56e;
