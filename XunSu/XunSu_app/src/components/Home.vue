@@ -481,5 +481,4 @@ a{text-decoration: none;}
     color:rgb(245, 156, 26);
 }
 .mint-tabbar>.mint-tab-item.is-selected span{color:rgb(245, 156, 26);}
-
 </style>
