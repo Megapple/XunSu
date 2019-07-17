@@ -58,7 +58,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .citys{
     width:100%;
     display: flex;
@@ -73,7 +73,7 @@ export default {
 .first{
     width:400px;
     display: flex;
-    padding: 4px 10px;
+    padding: 8px 10px;
 }
 .hz{
     width:160px;height:170px;
@@ -99,9 +99,9 @@ export default {
     margin-top:5px;
     padding:5px 10px;
 }  
-.mint-button--normal{
-    margin:18px 95px;
-    /* width:50%;height:25px; */
+/deep/.mint-button--normal{
+    margin:10px 110px;
+    height:25px; 
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }

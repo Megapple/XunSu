@@ -57,7 +57,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .citys{
     width:100%;
     display: flex;
@@ -99,11 +99,4 @@ export default {
     margin-top:5px;
     padding:5px 10px;
 }
-.mint-button--normal{
-    margin:18px 95px;
-    /* width:100px; */
-    border-radius: 50px;
-    background-color:rgba(221, 221, 221, 0.534);
-}
-.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
 </style>

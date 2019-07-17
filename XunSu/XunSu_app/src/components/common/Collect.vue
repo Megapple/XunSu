@@ -1,11 +1,13 @@
 <template>
-<div>
    <div class="collect">
-       <button>收藏</button>
-       <button>分组管理</button>
+       <mt-header title="收藏">
+           <router-link to="/Home" slot="left">      
+              <mt-button icon="back"></mt-button>
+           </router-link>
+       </mt-header>   
+       <img src="../../assets/img/shijiehenda.png" alt="" class="collect_img">
+       <a href="#" class="collect_a">快去添加你喜欢的民宿吧</a>
    </div>
-   <!-- <div class="collect_img"><img src="../../assets/img/picture/dnkss.png" alt="" ></div> -->
-</div>
 </template>
 <script>
 export default {
@@ -16,23 +18,15 @@ export default {
 </script>
 
 <style scoped>
-.collect{
-    width:100%;height:55px;
-    line-height: 55px;
-    background-color: rgb(245, 156, 26);
-    text-align: center;
-}
-.collect button{
-    font:18px 楷体;color:#f5f5f5;
-    background-color: rgb(245, 156, 26); 
-    border:0;
-    margin:0 10px;
-    }
 .collect_img{
-    width:200px; height:200px;
-    background:#ff0;
-	position:absolute;
-	top:50%;left:50%;
-	transform:translate(-100px,-100px);
-}
+    width:250px; 
+    height:400px;
+    margin-top:50px;
+    margin-bottom:10px;
+    margin-left:60px;
+    box-shadow: 0 0 10px #b8bbbf;
+} 
+.collect_a{
+    margin-left:180px;color:#ccc;
+    }
 </style>
