@@ -7,12 +7,7 @@
             </router-link>            
         </mt-header>   
     <div class="header_title">
-        <p @click="location">| 上海 |</p>
-        <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题">
-    </div>      
-    </div>
-    <div class="content">12333333</div>
-                    <div class="birth">
+        <div class="birth">
           <div @click="openPicker">入:{{stay}}</div>
         </div>
         <div class="datePicker">
@@ -26,7 +21,13 @@
                 @confirm="handleConfirm"
                 :startDate="startDate">
         </mt-datetime-picker>
-        </div>   
+        </div>  
+        <p>| 上海 |</p>
+        <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题">
+    </div>      
+    </div>
+    <div class="content">12333333</div>
+ 
 </div>
 </template>
 <script>
