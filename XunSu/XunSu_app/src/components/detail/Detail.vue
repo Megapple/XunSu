@@ -125,7 +125,23 @@
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item id="fac3">
-            789
+          <div id="ambitus">
+            <div>
+              <div>最近机场</div>
+              <span>西安咸阳国际机场</span>
+              <span>距离42.6km</span>
+            </div>
+            <div>
+              <div>最近火车站</div>
+              <span>西安火车站</span>
+              <span>距离12.3kn</span>
+            </div>
+            <div>
+              <div>最近汽车站</div>
+              <span>西安城南客运站</span>
+              <span>距离7.7km</span>
+            </div>
+          </div>
         </mt-tab-container-item>
       </mt-tab-container>
       <!-- 配套服务模块 -->
@@ -471,5 +487,35 @@ export default {
       font-weight: bolder;
     }
   /* 入住政策CSS样式 end */
+  /* 位置周边CSS样式 start */
+  #ambitus{
+    margin-bottom:10px;
+    box-sizing:border-box;
+  }
+  #ambitus>div{
+    display:block;
+    border:0;
+  }
+  #ambitus>div:not(:first-child){
+    border-top:1px solid rgba(0,0,0, 0.3);
+  }
+  #ambitus>div>div{
+    width:100%;
+    display:block;
+    text-align: start;
+    font-size:14px;
+    font-weight:bolder;
+    padding:2px;
+  }
+  #ambitus>div>span{
+    display:inline-block;
+    font-size:12px;
+    padding:2px;
+    width:48%;
+  }
+  #ambitus>div>span+span{
+    text-align:end;
+  }
+  /* 位置周边CSS样式 end */
 </style>
 
