@@ -3,7 +3,7 @@
 <mt-tab-container v-model="selected" class="mt">
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
- <mt-swipe :auto="2000">
+ <mt-swipe :auto="2000" class="top_swipe">
   <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
     <!-- <a :href="item.href" rel="external nofollow"> -->
        <img :src="require('../assets/img/big7.jpeg')" class="img"/>
@@ -172,7 +172,7 @@
     </div>
     <div class="story_bottom ">
         <h3>我们の故事</h3>
-        <mt-swipe :auto="2000">
+        <mt-swipe :auto="2000" class="story_swipe">
             <mt-swipe-item>
                 <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
             </mt-swipe-item>
@@ -259,12 +259,6 @@ export default {
    },
    data(){
        return{
-        //    lists:["大理","杭州","成都","桂林"],
-        //    odds:[
-        //        {title:"今夜甩卖",subtitle:"海量特惠6折起"},
-        //        {title:"天天特价",subtitle:"惊喜价天天有"},
-        //        {title:"连住优惠",subtitle:"连住惊爆价"},
-        //    ],
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
@@ -290,10 +284,10 @@ body{
 }
 a{text-decoration: none;}
 /* 轮播 */
- .mint-swipe { height: 218px;}
+ .mint-swipe.top_swipe { height: 218px;}
  .img {width: 100%;}
  /* 轮播下标 */
-.mint-swipe-indicator{margin:23px 3px ;}
+.mint-swipe-indicator{margin:26px 3px ;}
 .mint-swipe-indicator.is-active{background-color:rgb(245, 156, 26);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
@@ -449,9 +443,8 @@ a{text-decoration: none;}
     box-shadow: 0 0 10px #ccc;
     position: relative;
     }
-.story_bottom .mint-swipe {
-   height:455px;
-}
+.story_bottom  .mint-swipe-indicators{bottom:20px;}
+.story_bottom  .mint-swipe-indicators.is-active{background-color:rgb(245, 156, 26);}
 .story_bottom img{
     width:320px;
     height: 400px;
