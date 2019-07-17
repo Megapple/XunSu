@@ -2,7 +2,7 @@
 <div>
     <div class="citys">
         <div class="first">
-        <div class="dali">
+        <div class="dali" @click="add">
             <a href="#"><img :src="img_dali1"></a>
             <div>
             <span>{{subtitle}}</span>
@@ -38,7 +38,7 @@
         </div>
         </div>  
     </div>
-    <mt-button><a href="#">查看更多大理酒店 ></a></mt-button>
+    <mt-button @click="cityadd"><a href="#">查看更多大理酒店 ></a></mt-button>
 </div>
 </template>
 <script>
@@ -55,6 +55,8 @@ export default {
         img_dali2:{default:""},
         img_dali3:{default:""},
         img_dali4:{default:""},
+        add:{type:Function},
+        cityadd:{type:Function}
     }
 }
 </script>

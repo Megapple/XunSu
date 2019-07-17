@@ -27,7 +27,7 @@
  </mt-swipe>
  <!-- 搜索框 -->
  <div class="searchdiv clearfix">
-    <input placeholder="搜索目的地/酒店" class="search"/>
+    <input placeholder="搜索目的地/酒店" class="search" @click="search" />
     <img :src="require('../assets/img/glass.png')"  class="searchImg "/>
     <span>|</span>
     <div class="location">
@@ -54,7 +54,10 @@
             <a href="#"><container :img_dali1="require('../assets/img/dlgc.jpg')" 
             :img_dali2="require('../assets/img/dlyc.jpg')" 
             :img_dali3="require('../assets/img/dljz.jpg')"
-            :img_dali4="require('../assets/img/dljr.jpg')" ></container></a>
+            :img_dali4="require('../assets/img/dljr.jpg')" 
+            :add="myadd"
+            :cityadd="myadd"
+            ></container></a>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
             <a href="#"><container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
@@ -89,13 +92,13 @@
         </div>
         <div class="theme_second">
             <div class="theme1">
-                <div class="theme1_one">
+                <div class="theme1_one" @click="myadd">
                     <a href="#"><img src="../assets/img/big7.jpeg" alt=""></a>
                     <div class="theme_p">
                     <p>旅拍圣地</p>
                     </div>
                 </div>
-                <div class="theme1_two">
+                <div class="theme1_two"  @click="myadd">
                     <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
                     <div class="theme_p">
                     <p>逛吃天堂</p>
@@ -153,7 +156,9 @@
                 <a href="#"><odds :img_dali1="require('../assets/img/dlgc.jpg')" 
                 :img_dali2="require('../assets/img/dlyc.jpg')" 
                 :img_dali3="require('../assets/img/dljz.jpg')"
-                :img_dali4="require('../assets/img/dljr.jpg')"></odds></a>
+                :img_dali4="require('../assets/img/dljr.jpg')"
+                :add="myadd"
+                ></odds></a>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
                 <a href="#"><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
@@ -168,7 +173,7 @@
                 :img_gl4="require('../assets/img/ysxs.jpg')"></odds3></a>
             </mt-tab-container-item>
         </mt-tab-container>
-        <mt-button class="oddsbom"><a href="#">查看更多超值特惠酒店 ></a></mt-button>
+        <mt-button class="oddsbom" @click="myadd"><a href="#">查看更多超值特惠酒店 ></a></mt-button>
     </div>
     <div class="story_bottom ">
         <h3>我们の故事</h3>
@@ -274,6 +279,12 @@ export default {
        }
    },
    methods:{
+        myadd(){
+           this.$router.push("./Detail")
+       },
+       search(){
+           this.$router.push("./Home2")
+       }
    }
  }
 </script>

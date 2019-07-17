@@ -2,7 +2,7 @@
 <div>
     <div class="citys">
         <div class="first">
-        <div class="dali">
+        <div class="dali" @click="add">
             <img :src="img_dali1">
             <div>
             <span>{{subtitle}}</span>
@@ -54,6 +54,7 @@ export default {
         img_dali2:{default:""},
         img_dali3:{default:""},
         img_dali4:{default:""},
+        add:{type:Function}
     }
 }
 </script>
