@@ -33,7 +33,7 @@
                     <div class="msg">
                         <p>客房1(需填一个人入住)</p>
                         <div class="mflex">
-                            <mt-field placeholder="入住人姓名" type="text" v-model="uname"></mt-field>
+                            <mt-field placeholder="入住人姓名" type="text" v-model="uname" @blur.native.capture="checkInputName"></mt-field>
                             <button class="iconfont icon-tianjiayonghu" @click="go"></button>
                         </div>
                         
@@ -44,7 +44,7 @@
                     <p>联系电话</p>
                     <p>+86</p>
                     <div class="mflex">
-                        <mt-field  type="phone" v-model="phone"></mt-field>
+                        <mt-field  type="tel" v-model="phone" @blur.native.capture="checkInputPhone"></mt-field>
                         <button class="iconfont icon-tongxunlu"></button>
                     </div>
                     
@@ -96,7 +96,7 @@
             <p>全网最低价</p>
            </div>
            <div class="submit">
-               <mt-button  size="large" v-model="sbumitPay" @click="goPay" fixed>提交订单
+               <mt-button  size="large" @click="goPay" fixed>提交订单
                </mt-button>
            </div>
 
@@ -125,9 +125,37 @@ export default {
      
     }, 
       methods:{
-           goPay(){
-               this.$router.push('/Orderpay')
-           },
+         
+          checkInputName(){
+              var name=this.uname;
+              var Rege=/^[\u4E00-\u9FA5]+$/;
+              if(!Rege.test(name)){
+                  this.$toast("入住人姓名格式不正确,入住人姓名必须和身份证一致")
+              }
+             
+          },
+           checkInputPhone(){
+              var u_phone=this.phone;
+              var Regx= /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+              if(!Regx.test(u_phone)){
+                  this.$toast("无效的手机号码!请重新输入");
+              }
+              },
+               goPay(){
+               var u=this.uname;
+               var p=this.phone;
+            // 如果应户名为空 提示用户
+            if(u.trim()==""){
+                this.$toast("入住人不能为空");
+                return;
+            }else if(p.trim()==""){
+                this.$toast("入住人联系方式不能为空");
+                 
+            }else{
+                this.$router.push('/Orderpay')
+            }
+          },
+        
             go(){
                 this.$router.push('/Add');
             }
