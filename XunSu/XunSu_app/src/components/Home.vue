@@ -41,14 +41,12 @@
      <!-- 一楼 -->
     <div>
     <div class="city">
-        <mt-navbar v-model="active">
+        <mt-navbar v-model="active" class="city_navbar">
             <mt-tab-item id="tab1">大理</mt-tab-item>
             <mt-tab-item id="tab2">杭州</mt-tab-item>
             <mt-tab-item id="tab3">成都</mt-tab-item>
             <mt-tab-item id="tab4">桂林</mt-tab-item>
         </mt-navbar>
-        <!-- <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i" class="citybtn">{{item}}
-        </mt-button> -->
     </div>
     <div>
     <mt-tab-container v-model="active">
@@ -128,24 +126,26 @@
         </div>
         <div class="oddstitle">
             <div class="oddbtns">
-                <mt-navbar v-model="active2" class="navbar_odd">
+                <mt-navbar v-model="active2" class="odd_navbar">
                     <mt-tab-item  class="oddbtn" id="odd1">
-                       <p>今夜甩卖</p>
-                       <p>海量特惠6折起</p>
+                        <div class="oddbtn">
+                            <span>今夜甩卖</span>
+                            <span>海量特惠6折起</span>
+                        </div>
                     </mt-tab-item>
                     <mt-tab-item  class="oddbtn" id="odd2">
-                       <p>天天特价</p>
-                       <p>惊喜价天天有</p>
+                        <div class="oddbtn">
+                            <span>天天特价</span>
+                            <span>惊喜价天天有</span>
+                        </div>
                     </mt-tab-item>
                     <mt-tab-item  class="oddbtn" id="odd3">
-                       <p>连住优惠</p>
-                       <p>连住惊爆价</p>
+                        <div class="oddbtn">
+                            <span>连住优惠</span>
+                            <span>连住惊爆价</span>
+                        </div>
                     </mt-tab-item>
                 </mt-navbar>
-            <!-- <mt-button v-for="(odd,idx) of odds" :key="idx" @click="setActive2" :data-idx="idx"  class="oddbtn"> 
-                <span>{{odd.title}}</span>
-                <span>{{odd.subtitle}}</span>
-            </mt-button> -->
             </div>   
         </div>
         <mt-tab-container v-model="active2">
@@ -280,16 +280,6 @@ export default {
        }
    },
    methods:{
-        // setActive(e){
-        //     var idx=parseInt(e.target.dataset.idx);
-        //     console.log(idx,typeof idx)
-        //     this.active="tab"+(idx+1)
-        // },
-        // setActive2(e){
-        //     var idx=parseInt(e.target.dataset.idx);
-        //     console.log(e.target.dataset.idx)
-        //     this.active2="odd"+(idx+1);
-        // },
    }
  }
 </script>
@@ -359,7 +349,7 @@ a{text-decoration: none;}
     margin-bottom: 70px;
 }
 .city{margin:0 25px;}
-.mint-navbar .mint-tab-item{
+.mint-navbar.city_navbar .mint-tab-item{
     height:18px;
     margin:-2px 10px;
     padding:6px 10px;
@@ -368,7 +358,7 @@ a{text-decoration: none;}
     color:rgb(129, 128, 128);
     background-color:#f5f5f5;
 }
-.mint-navbar .mint-tab-item.is-selected{
+.mint-navbar.city_navbar .mint-tab-item.is-selected{
     background-color:rgb(252, 157, 128);
     color:#f5f5f5;
 }
@@ -425,18 +415,25 @@ a{text-decoration: none;}
     margin-bottom:-20px;  
     margin-top:-10px;
     }
-.mint-navbar.navbar_odd .mint-tab-item.oddbtn{
-    width:80px;
+.mint-navbar.odd_navbar .mint-tab-item .oddbtn{
+    width:90px;
     height:80px;
-    /* line-height: 80px; */
-    /* margin:0 10px ; */
-    padding:0px 12px;
+    line-height: 40px;
+    margin-left:14px ;
+    padding:0px 8px;
     background-color:#f5f5f5;
     border-radius: 8px;
     color:#707274;
+    display: flex;
+    flex-flow:column;
 }
-.mint-tab-item.oddbtn  p:first-child{font-size:17px;}
-.mint-tab-item.oddbtn  p:nth-child(2){font-size:12px;}
+.mint-navbar.odd_navbar .mint-tab-item.is-selected{border:0;}
+.mint-navbar.odd_navbar .mint-tab-item.is-selected .oddbtn{
+    background-color:rgb(252, 157, 128);
+    color:#f5f5f5;
+}
+.oddbtn  span:first-child{font-size:17px;margin-top:10px;margin-bottom:-15px;}
+.oddbtn  span:nth-child(2){font-size:12px;}
 .oddsbom{
     height:25px;
     margin:12px 110px;
@@ -444,10 +441,6 @@ a{text-decoration: none;}
     font-size:13px;
 }
 .oddsbom a{color:#707274;}
-.mint-navbar .mint-tab-item.oddbtn.is-selected{
-    background-color:rgb(252, 157, 128);
-    color:#f5f5f5;
-}
 .story_bottom{
     height:455px;
     text-align: center;
