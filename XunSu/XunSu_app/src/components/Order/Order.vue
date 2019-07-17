@@ -34,7 +34,7 @@ export default {
     
 }
 </script>
-<style scrop>
+<style scoped>
 
 .mint-header{
     height: 55px;

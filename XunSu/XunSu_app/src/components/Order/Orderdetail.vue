@@ -96,7 +96,8 @@
             <p>全网最低价</p>
            </div>
            <div class="submit">
-               <mt-button  size="large" v-model="sbumitPay" @click="goPay" fixed>去支付</mt-button>
+               <mt-button  size="large" v-model="sbumitPay" @click="goPay" fixed>提交订单
+               </mt-button>
            </div>
 
        </div>
@@ -133,7 +134,7 @@ export default {
         }
 }
 </script>
-<style scope>
+<style scoped>
 *{
     padding:0;
     margin:0;
@@ -156,7 +157,7 @@ button{
     background-color:transparent;
 }
 .mint-button--default{
-    color:#1DA261;
+    color:#fff;
 }
 .mint-cell-wrapper{
     background:transparent;
@@ -174,6 +175,11 @@ button{
       height:55px;
       font-size:16px;
   }
+  .mint-button-text{
+      color:#fff
+  }
+
+ 
 .order-box{
     padding:10px 3%;
     background-color:#f7f7f7;
@@ -273,6 +279,9 @@ ul>li p{
     border-radius: 25px;
     margin-right: 23px;
     
+}
+.pay-container .mint-button{
+    box-shadow: none;
 }
 </style>
 
