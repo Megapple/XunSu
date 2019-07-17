@@ -23,9 +23,9 @@
         <div class="contenmsg">
           <i class="usermsg">真实头像 ></i>
           <span :class="{msg:true,msgfalse:a}">{{yourimage}}</span>
-           <span class="upload">上传图像</span>
+           <span :class="{upload:true,trueupload:!a}">{{istogo}}</span>
            <!--上传图像-->
-          <input type="file"  name="file" accept='image/*' class="upfile" @click="upload" id="userimage">
+          <input type="file"  name="file" accept='image/*' :class="{upfile:true,isdisplay:!a}" @change="upload($event)" id="userimage">
         </div> 
       </div> 
       <div class="content">
@@ -37,7 +37,7 @@
         </div> 
       </div>
     </div>
-    <mt-button type="primary" size="large" class="buttonPosition">开始发布房源</mt-button>
+    <mt-button type="primary" size="large" class="buttonPosition" @click="issue">开始发布房源</mt-button>
   </div>
 </template>
 <script>
@@ -49,7 +49,8 @@ export default {
       yourmsg:"请完善您的信息",
       isCompleted:"> >",
       a:true,
-      b:true
+      b:true,
+      istogo:"上传图像"
 
     } 
   },
@@ -62,12 +63,12 @@ export default {
           if(result.data.code==200){  
             if(result.data.msg[0].avatar==null){
               this.yourimage="请上传图像";
-              this.isCompleted="> >";
-              this.a="true";
+              this.istogo="上传图像";
+              this.a=true;
             }else{
+              this.a=false;
+              this.istogo="已完成";
               this.yourimage="已上传";
-              this.isCompleted="已完成";
-              this.a="false";
             }
              if(result.data.msg[0].user_name==null || result.data.msg[0].ID_number==null){
               this.yourmsg="请完善个人信息";
@@ -88,18 +89,36 @@ export default {
         this.$router.push({ path:'/usermsg' });
       }
     },
-    upload(){
-      //获取file域里的图片信息
-      // 获取file域里的图片信息
-     var formData = new FormData()
-     var userimage=document.getElementById('userimage');
-     //创建formdata对象
-    formData.append("test",userimage.files[0])  
-      // var formData=new formData();
-      
-      console.log(userimage.files);
+    upload(el){
+     var file=el.target.files[0];
+     var type=file.type.split('/');
+    //  console.log(file);
+    var uid = sessionStorage.getItem("uid");
+     if(type[0]==='image'){
+      var formData = new FormData();
+        formData.append("test",file,file.name);
+        // formData.append('test',112);
+        formData.append('test',uid);
+        // console.log(formData.get('test'));
+        return this.axios.post("http://127.0.0.1:3000/upload/img",formData,{header:{"content-type":"multipart/form-data"}}).then((result)=>{
+          if(result.data.code==200){
+            this.$toast("上传成功",1000);
+            this.details();
+          }else{
+            this.$toast("上传失败",1000);
+          }
+        })
+     }else{
+       alert('上传图片为非法图片');
+     }
+    },
+    issue(){
+      if (this.a==false && this.b==false){
+        this.$router.push("./HoustLocation");
+      }else{
+        this.$toast("请完善信息");
+      }
     }
-
   },
 }
 </script>
@@ -194,6 +213,10 @@ export default {
   background:#ff9c1a;
   margin-top:-3px;
 }
+.upload.trueupload{
+  background-color:#ccc;
+  margin-right:8px;
+}
 .upfile{
   position:absolute;
   top:0;
@@ -203,5 +226,8 @@ export default {
   width:70px;
   padding:1px 0;
   opacity:0;
+}
+.isdisplay{
+  display:none;
 }
 </style>
