@@ -212,7 +212,7 @@ export default {
     },
     //页头地图模块
     mapModel(){
-      this.$toast("正在跳转地图模块..1%")
+      this.$router.push("/DetailMap")
     },
     //vip权益页面
     vipPage(){
