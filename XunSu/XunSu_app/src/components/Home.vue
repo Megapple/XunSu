@@ -3,7 +3,7 @@
 <mt-tab-container v-model="selected" class="mt">
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
- <mt-swipe :auto="2000">
+ <mt-swipe :auto="2000" class="top_swipe">
   <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
     <!-- <a :href="item.href" rel="external nofollow"> -->
        <img :src="require('../assets/img/big7.jpeg')" class="img"/>
@@ -27,7 +27,7 @@
  </mt-swipe>
  <!-- 搜索框 -->
  <div class="searchdiv clearfix">
-    <input placeholder="搜索目的地/酒店" class="search"/>
+    <input placeholder="搜索目的地/酒店" class="search" @click="search" />
     <img :src="require('../assets/img/glass.png')"  class="searchImg "/>
     <span>|</span>
     <div class="location">
@@ -41,8 +41,12 @@
      <!-- 一楼 -->
     <div>
     <div class="city">
-        <mt-button size="small" v-for="(item,i) of lists" :key="i" @click="setActive" :data-idx="i">{{item}}
-        </mt-button>
+        <mt-navbar v-model="active" class="city_navbar">
+            <mt-tab-item id="tab1">大理</mt-tab-item>
+            <mt-tab-item id="tab2">杭州</mt-tab-item>
+            <mt-tab-item id="tab3">成都</mt-tab-item>
+            <mt-tab-item id="tab4">桂林</mt-tab-item>
+        </mt-navbar>
     </div>
     <div>
     <mt-tab-container v-model="active">
@@ -50,7 +54,10 @@
             <a href="#"><container :img_dali1="require('../assets/img/dlgc.jpg')" 
             :img_dali2="require('../assets/img/dlyc.jpg')" 
             :img_dali3="require('../assets/img/dljz.jpg')"
-            :img_dali4="require('../assets/img/dljr.jpg')" ></container></a>
+            :img_dali4="require('../assets/img/dljr.jpg')" 
+            :add="myadd"
+            :cityadd="myadd"
+            ></container></a>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
             <a href="#"><container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
@@ -85,13 +92,13 @@
         </div>
         <div class="theme_second">
             <div class="theme1">
-                <div class="theme1_one">
+                <div class="theme1_one" @click="myadd">
                     <a href="#"><img src="../assets/img/big7.jpeg" alt=""></a>
                     <div class="theme_p">
                     <p>旅拍圣地</p>
                     </div>
                 </div>
-                <div class="theme1_two">
+                <div class="theme1_two"  @click="myadd">
                     <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
                     <div class="theme_p">
                     <p>逛吃天堂</p>
@@ -113,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <mt-button><a href="#">查看更多主题酒店 ></a></mt-button>
+        <mt-button class="oddsbom"><a href="#">查看更多主题酒店 ></a></mt-button>
     </div>
     <div class="odds">
         <div class="odd_first">
@@ -122,18 +129,36 @@
         </div>
         <div class="oddstitle">
             <div class="oddbtns">
-            <mt-button v-for="(odd,i) of odds" :key="i" @click.prevent="setActive2" :data-id="i"  class="oddbtn"> 
-                <span>{{odd.title}}</span>
-                <span>{{odd.subtitle}}</span>
-            </mt-button>
-         </div>   
+                <mt-navbar v-model="active2" class="odd_navbar">
+                    <mt-tab-item  class="oddbtn" id="odd1">
+                        <div class="oddbtn">
+                            <span>今夜甩卖</span>
+                            <span>海量特惠6折起</span>
+                        </div>
+                    </mt-tab-item>
+                    <mt-tab-item  class="oddbtn" id="odd2">
+                        <div class="oddbtn">
+                            <span>天天特价</span>
+                            <span>惊喜价天天有</span>
+                        </div>
+                    </mt-tab-item>
+                    <mt-tab-item  class="oddbtn" id="odd3">
+                        <div class="oddbtn">
+                            <span>连住优惠</span>
+                            <span>连住惊爆价</span>
+                        </div>
+                    </mt-tab-item>
+                </mt-navbar>
+            </div>   
         </div>
         <mt-tab-container v-model="active2">
             <mt-tab-container-item id="odd1">
                 <a href="#"><odds :img_dali1="require('../assets/img/dlgc.jpg')" 
                 :img_dali2="require('../assets/img/dlyc.jpg')" 
                 :img_dali3="require('../assets/img/dljz.jpg')"
-                :img_dali4="require('../assets/img/dljr.jpg')"></odds></a>
+                :img_dali4="require('../assets/img/dljr.jpg')"
+                :add="myadd"
+                ></odds></a>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
                 <a href="#"><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
@@ -148,11 +173,11 @@
                 :img_gl4="require('../assets/img/ysxs.jpg')"></odds3></a>
             </mt-tab-container-item>
         </mt-tab-container>
-        <mt-button><a href="#">查看更多超值特惠酒店 ></a></mt-button>
+        <mt-button class="oddsbom" @click="myadd"><a href="#">查看更多超值特惠酒店 ></a></mt-button>
     </div>
     <div class="story_bottom ">
         <h3>我们の故事</h3>
-        <mt-swipe :auto="2000">
+        <mt-swipe :auto="2000" class="story_swipe">
             <mt-swipe-item>
                 <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
             </mt-swipe-item>
@@ -167,7 +192,6 @@
             </mt-swipe-item>
         </mt-swipe>
         <a href="#"> ღ 快戳我</a>
-        <!-- <a href="#"><img src="../assets/img/big9.jpg" alt=""></a> -->  
     </div>
   </div>
   </mt-tab-container-item>
@@ -240,12 +264,6 @@ export default {
    },
    data(){
        return{
-           lists:["大理","杭州","成都","桂林"],
-           odds:[
-               {title:"今夜甩卖",subtitle:"海量特惠6折起"},
-               {title:"天天特价",subtitle:"惊喜价天天有"},
-               {title:"连住优惠",subtitle:"连住惊爆价"},
-           ],
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
@@ -261,29 +279,26 @@ export default {
        }
    },
    methods:{
-        setActive(e){
-            var idx=parseInt(e.target.dataset.idx);
-            console.log(idx,typeof idx)
-            this.active="tab"+(idx+1)
-        },
-        setActive2(e){
-            var id=parseInt(e.target.dataset.id);
-            this.active2="odd"+(id+1);
-        },
+        myadd(){
+           this.$router.push("./Detail")
+       },
+       search(){
+           this.$router.push("./Home2")
+       }
    }
  }
 </script>
 <style scoped>
 *{margin:0;padding:0px;}
 body{
-    background-color:#f5f5f56e;
+    background-color:#ccc;
 }
 a{text-decoration: none;}
 /* 轮播 */
- .mint-swipe { height: 218px;}
+ .mint-swipe.top_swipe { height: 218px;}
  .img {width: 100%;}
  /* 轮播下标 */
-.mint-swipe-indicator{margin:23px 3px ;}
+.mint-swipe-indicator{margin:26px 3px ;}
 .mint-swipe-indicator.is-active{background-color:rgb(245, 156, 26);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
@@ -338,33 +353,38 @@ a{text-decoration: none;}
     margin-top:40px;
     margin-bottom: 70px;
 }
-.city{margin:0 19px;}
-.mint-button--small{
-    height:22px;
-    margin:0 15px;
-    padding:0 15px;
-    font-size:12px;
+.city{margin:0 25px;}
+.mint-navbar.city_navbar .mint-tab-item{
+    height:18px;
+    margin:-2px 10px;
+    padding:6px 10px;
+    border-radius: 10px;
+    border:0;
+    color:rgb(129, 128, 128);
+    background-color:#f5f5f5;
 }
-.mint-button{
-    border-radius: 9px;
+.mint-navbar.city_navbar .mint-tab-item.is-selected{
+    background-color:rgb(252, 157, 128);
+    color:#f5f5f5;
 }
+/* .citybtn {background-color:rgb(252, 157, 128); color:#f5f5f5; } */
 /* 中间过渡 */
 .middle{width:340px;height:80px;margin:30px auto;box-shadow: 0 0 20px #b8bbbf;}
 .middle img{width:100%;height:80px;}
 /* 二楼 */
-.theme{margin-top:60px;}
+.theme{margin-top:50px;}
 .theme_first{
     margin-left:15px;
 }
-.theme_first p{font-size:13px;color:#979696;margin:6px 0;}
+.theme_first p{font-size:13px;color:#979696;margin:5px 0;}
 .theme_second{
     display:flex;
     flex-flow: column;
-    margin-top:15px;
+    margin-top:12px;
 }
 .theme1{
     display:flex;
-    padding:5px 5px;
+    padding:5px 8px;
 }
 .theme1_one,.theme1_two,.theme2_one{
     width:250px;height:200px;
@@ -372,7 +392,7 @@ a{text-decoration: none;}
     padding:0 5px;
 }
 .theme2_one{height:150px;margin-top:-50px;margin-bottom:-20px;}
-.theme1_one img,.theme1_two img,.theme2_one img{width:100%;height:150px;border-radius: 8px;}
+.theme1_one img,.theme1_two img,.theme2_one img{width:100%;height:150px;border-radius: 8px;box-shadow: 0 0 10px #b8bbbf;}
 .theme2_one img{height:130px;}
 .theme_p{
     width:65px;height:22px;
@@ -400,31 +420,42 @@ a{text-decoration: none;}
     margin-bottom:-20px;  
     margin-top:-10px;
     }
-.oddbtn{
-    width:120px !important;
-    height:80px !important;
-    margin:0 10px !important;
-    /* background-color:rgb(245, 115, 76); */
-    border-radius: 8px !important;
-    outline: none;
-    /* color:#f5f5f5; */
+.mint-navbar.odd_navbar .mint-tab-item .oddbtn{
+    width:90px;
+    height:80px;
+    line-height: 40px;
+    margin-left:14px ;
+    padding:0px 8px;
+    background-color:#f5f5f5;
+    border-radius: 8px;
+    color:#707274;
+    display: flex;
+    flex-flow:column;
 }
-.oddbtn span:first-child{font-size:17px;}
-.oddbtn span:nth-child(2){font-size:12px;}
+.mint-navbar.odd_navbar .mint-tab-item.is-selected{border:0;}
+.mint-navbar.odd_navbar .mint-tab-item.is-selected .oddbtn{
+    background-color:rgb(252, 157, 128);
+    color:#f5f5f5;
+}
+.oddbtn  span:first-child{font-size:17px;margin-top:10px;margin-bottom:-15px;}
+.oddbtn  span:nth-child(2){font-size:12px;}
+.oddsbom{
+    height:25px;
+    margin:12px 110px;
+    padding:5px 5px;
+    font-size:13px;
+}
+.oddsbom a{color:#707274;}
 .story_bottom{
     height:455px;
     text-align: center;
-    margin-top:10px;
+    margin-top:15px;
     padding:5px 0;
     box-shadow: 0 0 10px #ccc;
     position: relative;
     }
-.story_bottom .mint-swipe {
-   height:455px;
-}
-.story_bottom .mint-swipe-indicators{
-    position: static;
-}
+.story_bottom  .mint-swipe-indicators{bottom:20px;}
+.story_bottom  .mint-swipe-indicators.is-active{background-color:rgb(245, 156, 26);}
 .story_bottom img{
     width:320px;
     height: 400px;
@@ -436,13 +467,13 @@ a{text-decoration: none;}
 /* 底部导航栏 */
 .mt{margin-bottom: 35px;}
 .bar{
-    height:40px;
+    height:55px;
     display:flex;
     flex-flow:column;
     align-items: center;
-    /* padding:5px 0;  */
+    padding:5px 0; 
     /* margin-top:-8px; */
-    margin-bottom:-5px;   
+    margin-bottom:-17px;   
 }
 .bar span{font-size:10px;margin-top:5px;margin-bottom:-11px; }
 .icon-fangzi,.icon-shoucang5,.icon-huiyuan-1,.icon-dingdan{font-size:23px;}
@@ -454,5 +485,4 @@ a{text-decoration: none;}
     color:rgb(245, 156, 26);
 }
 .mint-tabbar>.mint-tab-item.is-selected span{color:rgb(245, 156, 26);}
-
 </style>

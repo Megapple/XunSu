@@ -2,7 +2,7 @@
 <div>
     <div class="citys">
         <div class="first">
-        <div class="dali">
+        <div class="dali" @click="add">
             <a href="#"><img :src="img_dali1"></a>
             <div>
             <span>{{subtitle}}</span>
@@ -38,7 +38,7 @@
         </div>
         </div>  
     </div>
-    <mt-button><a href="#">查看更多大理酒店 ></a></mt-button>
+    <mt-button @click="cityadd"><a href="#">查看更多大理酒店 ></a></mt-button>
 </div>
 </template>
 <script>
@@ -55,10 +55,12 @@ export default {
         img_dali2:{default:""},
         img_dali3:{default:""},
         img_dali4:{default:""},
+        add:{type:Function},
+        cityadd:{type:Function}
     }
 }
 </script>
-<style>
+<style scoped>
 .citys{
     width:100%;
     display: flex;
@@ -100,11 +102,11 @@ export default {
     margin-top:5px;
     padding:5px 10px;
 }
-.mint-button--normal{
-    margin:18px 95px;
-    /* width:100px; */
+/deep/ .mint-button--normal{
+    margin:10px 110px;
+    height:25px;
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }
-.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
+/deep/ .mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
 </style>

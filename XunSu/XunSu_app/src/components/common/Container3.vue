@@ -58,7 +58,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 .citys{
     width:100%;
     display: flex;
@@ -73,7 +73,7 @@ export default {
 .first{
     width:400px;
     display: flex;
-    padding: 4px 10px;
+    padding: 8px 10px;
 }
 .cd{
     width:160px;height:170px;
@@ -92,19 +92,19 @@ export default {
 .cd>div span:nth-child(2){
     color:rgb(255, 145, 0);
     float:left; 
-    margin-top: 18px;
-    margin-left:9px;
+    margin-top: 22px;
+    margin-left:5px;
 }
-.cd i{font-size:10px;color:rgb(255, 145, 0);float:right; margin-top: 18px;margin-right:9px;}
+.cd i{font-size:10px;color:rgb(255, 145, 0);float:right; margin-top: 5px;margin-right:5px;}
 .cd>div{ 
     margin-top:5px;
-    padding:5px 3px;
+    padding:5px 10px;
 }
-.mint-button--normal{
-    margin:18px 95px;
-    width:50%;height:25px;
+/deep/ .mint-button--normal{
+    margin:10px 110px;
+    height:25px;
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }
-.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
+/deep/ .mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
 </style>
