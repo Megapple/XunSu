@@ -31,13 +31,6 @@ CREATE TABLE `city` (
   `ciid` INT(11) PRIMARY KEY NOT NULL auto_increment,
   `ciname` VARCHAR(20) NOT NULL
 );
-/**县**/
-DROP TABLE IF EXISTS `contry`;
-CREATE TABLE `contry` (
-  `coid` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `coname` VARCHAR(20) NOT NULL
-);
-
 /**区.县信息**/
 DROP TABLE IF EXISTS `houseDistrict`;
 CREATE TABLE `houseDistrict` (

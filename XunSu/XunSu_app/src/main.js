@@ -13,6 +13,11 @@ Vue.use(MintUI)
 import './font/detail_iconfont_style/iconfont.css'
 import './font/order_iconfont_style/iconfont.css'
 import './font/housting_iconfont_style/iconfont.css'
+import { Popup } from 'vant';
+import { Area } from 'vant';
+
+Vue.use(Popup);
+Vue.use(Area);
 
 
 Vue.config.productionTip = false
