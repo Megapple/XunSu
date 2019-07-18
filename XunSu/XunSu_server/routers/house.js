@@ -1,27 +1,36 @@
-const express=require("express")
+const express=require("express");
 const router=express.Router();
 const pool=require("../pool");
 
-// //1.添加商品
-// router.get('/reg',function(req,res){
-// 	var obj=req.query,i=400;
-// 	for(var key in obj){
-// 	  i++;
-// 	  if (!obj[key])
-// 	  { res.send({code:400,msg:key+' required'});
-// 	  return;
-// 	  }
-// 	}
-// 	pool.query('INSERT INTO xz_index_product set ?',[obj],function(err,result){
-// 		if(err) throw err;
-// 		if (result.affectedRows>0)
-// 		{
-// 			res.send({code:200,msg:'insert success'})
-// 		}else{
-// 			res.send({code:401,msg:'insert false'})
-// 			}
-// 	})
-		
+
+//1.插入房源
+router.get('/reg',function(req,res){
+  var area=req.query. area; //面积
+  var bedroom=req.query.bedroom; //几室
+  var bed=req.query.bed;   //几床
+  var toilet=req.query.toilet;  //卫生间
+  var htType=req.query.htType;  //整套出租
+  var tenant=req.query.tenant;  //几人
+  var uid=req.query.uid;
+  var str="INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`, `toilet`, `area`) VALUES (NULL, ?, NULL, '', NULL, NULL, '', '', ?, ?, ?, ?, ?, ?)";
+  pool.query(str,[uid,htType,tenant,bedroom,bed,toilet,area],function(err,result){
+        if(err)throw err;
+       
+    		if (result.affectedRows>0)
+    		{
+         
+          pool.query("SELECT LAST_INSERT_ID()",function(err,result){
+            if (err) throw err;
+            console.log(result);
+          })
+           res.send({code:200,msg:result});
+          // req.session.lid=result[0].id;
+    		}else{
+    			res.send({code:401,msg:'false'});
+    		}
+    	})
+})		
+
 // });
 // //2.删除商品
 // router.get('/delete',function(req,res){

@@ -15,7 +15,19 @@ import './font/order_iconfont_style/iconfont.css'
 import './font/housting_iconfont_style/iconfont.css'
 import { Popup } from 'vant';
 import { Area } from 'vant';
+import { Cell, CellGroup } from 'vant';
+import { Icon } from 'vant';
+import { RadioGroup, Radio } from 'vant';
+import { Picker } from 'vant';
+import { Stepper } from 'vant';
 
+Vue.use(Stepper);
+
+Vue.use(Picker);
+Vue.use(RadioGroup);
+Vue.use(Radio);
+Vue.use(Icon);
+Vue.use(Cell).use(CellGroup);
 Vue.use(Popup);
 Vue.use(Area);
 
