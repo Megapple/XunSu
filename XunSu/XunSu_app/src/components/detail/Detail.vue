@@ -1,4 +1,4 @@
-tr<template>
+<template>
   <div id="container" style="background-color:tomato">
     <!-- mintui Header栏start -->
     <mt-header id="header" class="opa-light" fixed>
