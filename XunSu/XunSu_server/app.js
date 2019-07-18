@@ -11,6 +11,7 @@ const bodyParser=require('body-parser');
 //引入路由模块
 const index=require("./routers/index");
 const user=require("./routers/user");
+const house=require("./routers/house");
 
  //跨域
  var server = express();
@@ -37,6 +38,7 @@ server.use(bodyParser.json())
  //路由器管理路由
 server.use("/index",index)
 server.use("/user",user)
+server.use("/house",house)
 // //图片保存
 const upload=require('./routers/upload');
 server.use('/upload',upload);

@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="body">
     <mt-header title="房源位置">
       <router-link to="/housting" slot="left">
@@ -11,17 +12,18 @@
         <ul>
           <li>
             <span>城市区域</span>
-            <van-button type="primary" @click="showPopup" class="select">
+            <span>{{addrInfo}}</span>
+            <mt-button type="primary" @click="showPopup" class="select">
              选择 >
-           </van-button>
+           </mt-button>
           </li>
           <li>
             <span>街道地址</span>
-            <mt-field placeholder="请输入" type="text" v-model="active"></mt-field>
+            <mt-field placeholder="请输入" type="text"></mt-field>
           </li>
           <li>
             <span>小区名称</span>
-            <mt-field type="text" v-model="ID_number" placeholder="请输入"></mt-field>
+            <mt-field type="text" placeholder="请输入"></mt-field>
           </li>
           <li>
             <span>楼、单元、门牌号</span>
@@ -29,26 +31,65 @@
           </li>
         </ul>
       </div>
+      <h4>地图位置</h4>
+      <span @click="togo">dinwo </span>
     </div>
     <van-popup v-model="show" position="bottom" :style="{ height: '40%' }" loading round>
-      <van-area :area-list="areaList" value="110101" title="标题"  />
+      <van-area :area-list="areaList" value="110101" title="" @confirm="onAddConfirm" @cancel="onAddrCancel" />
     </van-popup>
+    
   </div>
+  <mt-button size="large" type="primary" class="tonext" @click="tonext">确定信息</mt-button>
+  </div> 
 </template>
 
 <script>
 import area from '../../../../static/area.js';
 export default {
-  components:{area},
   data(){
     return {
        show:false,
        areaList:area,
+       addrInfo:"",
+       lat:34,
+       lng:108,
+       titleName:"woshi表情",
+       content:"你好啊",
+       prname:"",
+       ciname:"",
+       dname:""
     }
   },
   methods:{
     showPopup() {
       this.show = true;
+    },
+    onAddConfirm(val){
+      this.show=false
+      this.prname=val[0].name;
+      this.ciname=val[1].name;
+      this.dname=val[2].name;
+      this.addrInfo=this.prname+" "+this.ciname+" "+this.dname;
+    },
+    onAddrCancel(){
+      this.show=false;
+    },
+    togo(){
+     window.location.href = "http://api.map.baidu.com/marker?location=" + this.lat + "," + this.lng + "&title=" + this.titleName + "&content=" +this.content+ "&output=html";
+    },
+    tonext(){
+      var url="house/reg";
+      var uid = sessionStorage.getItem("uid");
+      var obj= {prname:this.prname,ciname:this.ciname,dname:this.dname};
+      this.axios.get(url,{params:obj}).then(result=>{
+          if(result.data.code>0){  
+            this.$toast('房源地址添加成功',1000);
+           this.$router.push("./houstingmsg");
+          }else{
+             this.$messagebox("提示","提交错误，请重新提交");
+           }
+      }) 
+      
     }
   }
 }
@@ -63,7 +104,6 @@ export default {
  }
  .body{
     width: 100%;
-    height:800px;
     background-color: #f5f5f5;
  }
  .msgWidth{
@@ -73,7 +113,6 @@ export default {
  }
  .content{
    width:100%;
-   height:400px;
    background-color:#fff;
    border-radius:10px;
  }
@@ -94,5 +133,11 @@ export default {
  }
  .select{
    float:right;
+ }
+ .tonext{
+   position:absolute;
+   bottom:10px;
+   margin:0 auto;
+   padding:0 20px;
  }
 </style>

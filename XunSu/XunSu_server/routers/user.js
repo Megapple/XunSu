@@ -13,8 +13,8 @@ const pool=require("../pool");
         {
           res.send({code:-1,msg:"用户名或密码有误"});
         }else{
-        req.session.uid=result[0].id;
-         res.send({code:1,msg:result});
+          req.session.uid=result[0].id;
+          res.send({code:1,msg:result});
         }
       })
     })
@@ -71,6 +71,8 @@ const pool=require("../pool");
           }
         })
   })
+  //插入省市县
+
   //4.用户检索
   router.get('/detail',function(req,res){
     var uid=req.query[0];
