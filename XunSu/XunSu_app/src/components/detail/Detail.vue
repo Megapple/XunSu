@@ -1,4 +1,4 @@
-<template>
+tr<template>
   <div id="container" style="background-color:tomato">
     <!-- mintui Header栏start -->
     <mt-header id="header" class="opa-light" fixed>
@@ -49,12 +49,42 @@
       </div>
       <!-- 地图模块 end -->
       <!-- VIP礼遇 start -->
-      <div id="vip">
+      <div id="vip"  @click="vipPage()">
         <div class="iconfont icon-huiyuan-"></div>
         <div>
           <span v-text="goldVip"></span>
           <br>
-          <span v-for="(gvr,i) of goldVipRight" v-text="gvr" :key=i @click="vipPage()"></span>
+          <span v-for="(gvr,i) of goldVipRight" v-text="gvr" :key=i ></span>
+          <mt-popup  v-model="popupVisible" position="right" closeOnClickModal>
+            <div id="vipPage">
+              <div>
+                <span id="vipTitle">您当前是金卡会员</span>
+              </div>
+              <div>
+                <span id="vipsTitle">入住酒店可以享受以下权益</span>
+              </div>
+              <div>
+                <ul id="vipTable">
+                  <li class="iconfont icon-iconfontzhizuobiaozhunbduan16"></li>
+                  <li>预订95折</li>
+                  <li class="iconfont icon-jinyongyajin"></li>
+                  <li>免押金</li>
+                  <li class="iconfont icon-icon-test"></li>
+                  <li>欢迎卡片</li>
+                  <li class="iconfont icon-shijianzhongbiao"></li>
+                  <li>13点退房</li>
+                  <li class="iconfont icon-huiyuan-"></li>
+                  <li>生日礼遇</li>
+                  <li class="iconfont icon-right-1"></li>
+                  <li>预订保留</li>
+                  <li class="iconfont icon-hservice"></li>
+                  <li>会员百宝箱</li>
+                  <li class="iconfont icon--yinliao"></li>
+                  <li>饮品/果盘</li>
+                </ul>
+              </div>
+            </div>
+          </mt-popup>
         </div>
       </div>
       <!-- VIP礼遇 end -->
@@ -176,6 +206,7 @@ export default {
       mapTexts:["距高新国际1.0KM","达内山风景区外 | 达内山","高新区科技路168号"],
       goldVip:"您是金卡会员 本人预订本人入住可享",
       goldVipRight:["预订95折","免押金","欢迎卡片","13点退房"],
+      popupVisible:false,
       pickerVisible:"",
       //配套服务tabbar
       selected:"fac1",
@@ -232,7 +263,11 @@ export default {
     },
     //vip权益页面
     vipPage(){
-      this.$toast("跳转vip权益页面..1%,用mint-ui popup")
+      if(!this.popupVisible){
+        this.popupVisible=true;
+      }else{
+        this.popupVisible=false;
+      }
     },
     //日期选择器
     openPicker(){
@@ -368,22 +403,61 @@ export default {
     margin-top:10px;
     background:beige;
   }
-  #vip>div{
-    display:inline-block;
-    font-size:12px;
-  }
-  #vip>div:first-child{
-    width:20%;
-    font-size:40px;
-    color:antiquewhite;
-    margin-left:10px;
-  }
-  #vip>div:last-child{
-    width:75%;
-  }
-  #vip>div:last-child>span:not(:first-child){
-    margin-right:4px;
-  }
+  /* vip模块CSS start */
+    #vip>div{
+      display:inline-block;
+      font-size:12px;
+    }
+    #vip>div:first-child{
+      width:20%;
+      font-size:40px;
+      color:antiquewhite;
+      margin-left:10px;
+    }
+    #vip>div:last-child{
+      width:75%;
+    }
+    #vip>div:last-child>span:not(:first-child){
+      margin-right:4px;
+    }
+    #vipPage{
+      height:100%;
+      width:100%;
+      background:beige;
+    }
+    .mint-popup{
+      background:#f6f6f6;
+      height:100%;
+      width:100;
+    }
+    div.v-modal{
+      opacity:0;
+    }
+    #vipTitle,
+    #vipsTitle{
+      display:block;
+      text-align:center;
+      font-size:16px;
+      padding:10px;
+      box-sizing:border-box;
+      color:rgba(245,156,26,0.6);
+    }
+    #vipsTitle{
+      font-size:12px;
+    }
+    #vipTable{
+      margin-top:20px;
+    }
+    #vipTable>li{
+      margin:10px 0;
+      text-align:center;
+      font-size:20px;
+      color:rgba(245,156,26,0.6);
+    }
+    #vipTable>li:nth-child(){
+      font-size:12px;
+    }
+  /* vip模块CSS end */
   #footer{
     width:100%;
     height:120px;
@@ -488,34 +562,34 @@ export default {
     }
   /* 入住政策CSS样式 end */
   /* 位置周边CSS样式 start */
-  #ambitus{
-    margin-bottom:10px;
-    box-sizing:border-box;
-  }
-  #ambitus>div{
-    display:block;
-    border:0;
-  }
-  #ambitus>div:not(:first-child){
-    border-top:1px solid rgba(0,0,0, 0.3);
-  }
-  #ambitus>div>div{
-    width:100%;
-    display:block;
-    text-align: start;
-    font-size:14px;
-    font-weight:bolder;
-    padding:2px;
-  }
-  #ambitus>div>span{
-    display:inline-block;
-    font-size:12px;
-    padding:2px;
-    width:48%;
-  }
-  #ambitus>div>span+span{
-    text-align:end;
-  }
+    #ambitus{
+      margin-bottom:10px;
+      box-sizing:border-box;
+    }
+    #ambitus>div{
+      display:block;
+      border:0;
+    }
+    #ambitus>div:not(:first-child){
+      border-top:1px solid rgba(0,0,0, 0.3);
+    }
+    #ambitus>div>div{
+      width:100%;
+      display:block;
+      text-align: start;
+      font-size:14px;
+      font-weight:bolder;
+      padding:2px;
+    }
+    #ambitus>div>span{
+      display:inline-block;
+      font-size:12px;
+      padding:2px;
+      width:48%;
+    }
+    #ambitus>div>span+span{
+      text-align:end;
+    }
   /* 位置周边CSS样式 end */
 </style>
 
