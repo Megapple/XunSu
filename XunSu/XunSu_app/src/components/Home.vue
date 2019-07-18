@@ -326,6 +326,7 @@ a{text-decoration: none;}
     border-radius: 30px;
     color:#ccc;
     outline: none;
+    font-size:13px;
 }
 .searchImg{
     width:20px;height:20px;
