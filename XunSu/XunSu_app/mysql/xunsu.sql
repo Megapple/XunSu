@@ -14,65 +14,62 @@ CREATE TABLE `users` (
   `user_name` VARCHAR(32) default NULL,      #用户姓名，如王小明
   `avatar` VARCHAR(128) default NULL,        #头像图片路径
   `gender` INT default NULL,                 #性别  0-女  1-男
-  `remark` VARCHAR(100) default NULL         #介绍
+  `remark` VARCHAR(100) default NULL,         #介绍
   `ID_number` VARCHAR(20) default NULL       #证件号
 );
 
 /**插入数据**/
-/**省**/
-DROP TABLE IF EXISTS `province`;
-CREATE TABLE `province` (
-  `prid` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `prname` VARCHAR(20) NOT NULL
-);
-/**市**/
-DROP TABLE IF EXISTS `city`;
-CREATE TABLE `city` (
-  `ciid` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `ciname` VARCHAR(20) NOT NULL
-);
-/**区.县信息**/
-DROP TABLE IF EXISTS `houseDistrict`;
-CREATE TABLE `houseDistrict` (
-  `did` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `dname` VARCHAR(20) NOT NULL
-);
 
-/**街道信息表**/
-DROP TABLE IF EXISTS `houseStreet`;
-CREATE TABLE `houseStreet` (
-  `streetId` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `sname` VARCHAR(20) NOT NULL,
-  `sdid` INT(11), 
-  FOREIGN KEY(`sdid`) REFERENCES `houseDistrict`(`did`)
-);
 
-/**房屋类型**/
-DROP TABLE IF EXISTS `houseType`;
-CREATE TABLE `houseType` (
-  `htId` INT(11) PRIMARY KEY NOT NULL auto_increment,
-  `htType` INT NOT NULL     #租房类型（1-整套出租，2-单间出租，3-合住房间）              
-);
 
 /**房源信息**/
 DROP TABLE IF EXISTS `leaseroom`;
 CREATE TABLE `leaseroom` (
-  `lid` INT(11) PRIMARY KEY NOT NULL auto_increment, 
+  `lid` INT(11) PRIMARY KEY auto_increment, 
   `uid` INT(11) default NULL,            #客户编号   
-  `streetId` INT(11) NOT NULL,               #街道编号   
-  `htid` INT(11) NOT NULL,                   #房屋类型编号
   `time` DATETIME default NULL,          #发布时间
   `title` VARCHAR(30) default '',        #标题
   `describe` VARCHAR(500) default NULL,  #房源描述
   `price` FLOAT default NULL,            #价格
   `img` VARCHAR(500) default '',         #图片
   `address` VARCHAR(100) default '',     #位置
-  `tenant` INT(3) NOT NULL,            #房客人数（宜住几人）
-  `bedroom` INT(3) NOT NULL,           #房源户型（卧室个数）
-  `bed` INT(3) NOT NULL,                #床个数（共几张）
-  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`),
-  CONSTRAINT `streetId` FOREIGN KEY (`streetId`) REFERENCES `houseStreet` (`streetId`),
-  CONSTRAINT `htid` FOREIGN KEY (`htid`) REFERENCES `houseType` (`htid`)
+  `htType` VARCHAR(10) default NULL,   #租房类型（1-整套出租，2-单间出租，3-合住房间）  
+  `tenant` INT(3) default NULL,            #房客人数（宜住几人）
+  `bedroom` INT(3) default NULL,           #房源户型（卧室个数）
+  `bed` INT(3) default NULL,                #床个数（共几张）
+  `toilet`  VARCHAR(10) default NULL,              #true-独卫 false-公卫
+  `area` VARCHAR(10) default NULL,   #房屋面积
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
+);
+/**省**/
+DROP TABLE IF EXISTS `province`;
+CREATE TABLE `province` (
+  `prid` INT(11) NOT NULL,
+  `prname` VARCHAR(20) NOT NULL,
+  CONSTRAINT `plid` FOREIGN KEY (`prid`) REFERENCES `leaseroom` (`lid`)
+);
+/**市**/
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE `city` (
+  `ciid` INT(11) NOT NULL,
+  `ciname` VARCHAR(20) NOT NULL,
+  CONSTRAINT `clid` FOREIGN KEY (`ciid`) REFERENCES `leaseroom` (`lid`)
+);
+/**区.县信息**/
+DROP TABLE IF EXISTS `houseDistrict`;
+CREATE TABLE `houseDistrict` (
+  `did` INT(11) NOT NULL,
+  `dname` VARCHAR(20) NOT NULL,
+  CONSTRAINT `dlid` FOREIGN KEY (`did`) REFERENCES `leaseroom` (`lid`)
+);
+
+/**街道信息表**/
+DROP TABLE IF EXISTS `houseStreet`;
+CREATE TABLE `houseStreet` (
+  `streetId` INT(11) NOT NULL,
+  `sname` VARCHAR(20) NOT NULL,
+  `sdid` INT(11), 
+  FOREIGN KEY(`sdid`) REFERENCES `leaseroom` (`lid`)
 );
 
 /**插入数据**/
@@ -100,7 +97,7 @@ CREATE TABLE `facility`(
   `water dispenser` BOOLEAN, #饮水机
   `bathtub` BOOLEAN,       #浴缸
   `centralHeating` BOOLEAN, #暖气
-   CONSTRAINT `fhtId` FOREIGN KEY (`fhtid`) REFERENCES `houseType` (`htid`)
+   CONSTRAINT `fhtId` FOREIGN KEY (`fhtid`) REFERENCES `leaseroom` (`lid`)
 );
 
 /**预定须知**/
@@ -198,7 +195,3 @@ CREATE TABLE `comment`(
 /*******************/
 
 /**房源类型**/
-INSERT INTO houseType VALUES
-(NULL,1),
-(NULL,2),
-(NULL,3);

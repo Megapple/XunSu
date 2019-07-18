@@ -114,7 +114,7 @@ export default {
     },
     issue(){
       if (this.a==false && this.b==false){
-        this.$router.push("./HoustLocation");
+        this.$router.push("./Houstingmsg");
       }else{
         this.$toast("请完善信息");
       }
