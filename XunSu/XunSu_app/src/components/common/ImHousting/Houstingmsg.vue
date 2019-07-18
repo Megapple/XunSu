@@ -101,7 +101,7 @@ export default {
       radiomsg:'整套出租',
       selected:"",
       columns: ['1', '2', '3', '4', '5','6','7','8','9','10'],
-      columns2: ['1', '2', '3', '4', '5', '6','7','8','9','10'],
+      columns2: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12','13','14','15','16','17','18'],
       showPicker: false,
       showPicker2: false,
       value:"",
@@ -112,8 +112,8 @@ export default {
     }
   },
   methods:{
-    tosave(){
-      var area=this.housearea; //面积
+    tonext(){
+       var area=this.housearea; //面积
       var bedroom=this.bedroomvalue; //几室
       var bed=this.bedvalue;   //几床
       var toilet=this.toilet;  //卫生间
@@ -125,15 +125,12 @@ export default {
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code>0){  
              this.$toast("上传成功",1000);
+             console.log(result.data.msg.insertId);
            this.$router.push("./housting");
           }else{
              this.$toast("上传失败，请重新填写",1000);
            }
       }) 
-
-    },
-    tonext(){
-
     },
     showPopup() {
       this.show = true;
@@ -212,6 +209,6 @@ export default {
 }
 .float-r{
   float:right;
-  margin:0 8px;
+  margin:0 6px;
 }
 </style>

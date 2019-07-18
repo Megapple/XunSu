@@ -18,11 +18,6 @@ router.get('/reg',function(req,res){
        
     		if (result.affectedRows>0)
     		{
-         
-          pool.query("SELECT LAST_INSERT_ID()",function(err,result){
-            if (err) throw err;
-            console.log(result);
-          })
            res.send({code:200,msg:result});
           // req.session.lid=result[0].id;
     		}else{
