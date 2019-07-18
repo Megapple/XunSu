@@ -15,7 +15,17 @@ import './font/order_iconfont_style/iconfont.css'
 import './font/housting_iconfont_style/iconfont.css'
 import { Popup } from 'vant';
 import { Area } from 'vant';
+import { DatetimePicker } from 'vant';
+import { DropdownMenu, DropdownItem } from 'vant';
+import { Button } from 'vant';
+import { TreeSelect } from 'vant';
+import { Slider } from 'vant';
 
+Vue.use(Slider);
+Vue.use(TreeSelect);
+Vue.use(Button);
+Vue.use(DropdownMenu).use(DropdownItem);
+Vue.use(DatetimePicker);
 Vue.use(Popup);
 Vue.use(Area);
 
