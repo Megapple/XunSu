@@ -100,8 +100,31 @@
         </mt-datetime-picker>
       </div>
       <!-- 日历 end -->
-      <div id="house">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum tenetur officia voluptatibus  praesentium consequatur ab vel temporibus aut quae dicta, cupiditate vero nihil eligendi iure,   possimus cumque saepe quasi? Praesentium maxime eius dolorum, non tempore laborum   exercitationem aut optio repellat veritatis nemo eaque veniam perferendis eos libero. Deserunt  adipisci dolore saepe reprehenderit alias recusandae ipsa, quos earum corrupti sed mollitia  nemo, tempora ipsam. Sed facere placeat aliquam impedit similique vero iure dolorum eos  excepturi. Saepe, repellat. Consequuntur incidunt saepe qui, nesciunt fugit ea nostrum aperiam   cum dignissimos laborum illo libero accusantium iusto, repellat et temporibus, modi similique   commodi obcaecati. Rem soluta pariatur aliquam fugiat iure, perferendis ducimus? Sint repellat  repudiandae numquam ad consectetur voluptatibus maiores? Debitis quidem, accusantium odit  sapiente est aliquam, esse repudiandae expedita cupiditate amet voluptatibus aut voluptate   error nesciunt atque sunt, eveniet magni. Mollitia repudiandae voluptatibus reiciendis porro.   Nemo, accusantium dolore necessitatibus tenetur maxime labore mollitia omnis asperiores quidem  molestiae maiores excepturi inventore accusamus error sed dolor quas eaque voluptatibus  consectetur ut suscipit laboriosam! Est, et dolorum ea excepturi reiciendis eaque quaerat hic  optio nam sequi. Excepturi voluptates sed natus veniam cumque magni velit, minima laboriosam,  odit libero adipisci architecto ducimus, nam ea ad quaerat. Necessitatibus, numquam?
+      <div id="house" >
+        <div class="house_module" v-for="(r,i) of room" :key=i>
+          <div class="house_img">
+            <img src="../../assets/img/shijiehenda.png" alt="">
+          </div>
+          <div class="house_detail">
+            <div>
+              <span id="room_title" v-text="r.title"></span>
+            </div>
+            <div>
+              <span id="room_bed" v-text="r.bed"></span>
+              <span id="room_area" v-text="r.area"></span>
+              <span id="room_peo" v-text="`可住${r.peo}人`"></span>
+            </div>
+            <div>
+              <span class="room_tag" v-text="r.tag1"></span>
+              <span class="room_tag" v-text="r.tag2"></span>
+            </div>
+          </div>
+          <div class="house_price">
+            <span>￥</span>
+            <span v-text="r.price"></span>
+            <span>起</span>
+          </div>
+        </div>
       </div>
       <div id="comment">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quam eaque facere consectetur   itaque, voluptate totam aperiam odit expedita libero rerum illum modi architecto quos vitae   tempore perferendis est natus nulla magnam error culpa! Nostrum explicabo aspernatur  blanditiis veritatis amet. Eaque facere, maxime nam repellat sunt et at voluptatum recusandae  labore dolorum error cum delectus minima vitae odio quo in quisquam consequatur fuga eos!  Perferendis, recusandae nemo inventore eligendi provident mollitia rerum exercitationem eaque  dolores beatae voluptate odio sint dignissimos! Ratione officia repellat accusantium natus   iusto repudiandae nobis a, voluptatem culpa. Deleniti ipsam vero laborum vel magnam voluptatum  fuga! Officiis, fugiat quo. Consequuntur impedit laboriosam, inventore facere modi quis maxime   vitae vel, sapiente placeat fuga ad cumque veritatis tenetur accusantium qui cupiditate autem   ipsa optio iure saepe magnam officia possimus! Earum consectetur cumque doloribus mollitia,   alias porro enim consequatur, cum veritatis odit perferendis ab harum. Earum neque est soluta   saepe error recusandae, corrupti maiores sequi numquam aperiam nostrum ex pariatur, porro   mollitia quasi! Aspernatur autem ad soluta est suscipit itaque accusamus, voluptates repellat   ut ullam, vero iusto odit mollitia consequuntur odio laborum nisi tempore nam? Quas   consequuntur id quod error! Odit numquam dolor esse recusandae maiores in obcaecati qui   tenetur.
@@ -208,6 +231,14 @@ export default {
       goldVipRight:["预订95折","免押金","欢迎卡片","13点退房"],
       popupVisible:false,
       pickerVisible:"",
+      //房型数据
+      room:[
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699}
+      ],
       //配套服务tabbar
       selected:"fac1",
       //页尾广告
@@ -270,9 +301,10 @@ export default {
       }
     },
     //日期选择器
-    openPicker(){
+    openPicker(e){
+      e.stopPropagation;
       this.$refs.picker.open();
-    }
+    },
   },
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
   mounted() {
@@ -362,7 +394,8 @@ export default {
     box-sizing: border-box;
     display:inline-block;
     font-size:12px;
-    color:rgba(0,0,0, 0.3);
+    font-weight:100;
+    color:rgba(0,0,0, 0.7);
     margin:10px 0 10px 5px;
     padding:2px;
     border:1px solid rgba(0,0,0, 0.3);
@@ -493,21 +526,91 @@ export default {
     text-align:center;
     color:rgba(0,0,0, 0.5);
   }
-  .mint-navbar .mint-tab-item.is-selected {
-    border-bottom: 3px solid rgba(245,156,26,1);
-    color:rgba(245,156,26,1);
-    margin-bottom: -3px;
-    font-weight: bolder;
-  }
-  .mint-navbar .mint-tab-item{
-    color:rgba(245,156,26,0.8);
-  }
-  .mint-tab-container-item>div{
-    margin-top:3px;
-    padding:10px;
+  /* 房型CSS样式 start */
+  #house{
+    margin-top:10px;
     background:#f5f5f5;
-    box-sizing: border-box;
   }
+  .house_module{
+    display:flex;
+    padding:10px;
+  }
+  .house_img{
+    width:25%;
+    height:110px;
+  }
+  .house_img>img{
+    height:110px;
+    border-radius:10px;
+  }
+  .house_detail{
+    width:50%;
+    margin-left:10px;
+  }
+  #room_title{
+    display:block;
+    font-size:16px;
+    font-weight:bolder;
+    margin-bottom:5%;
+  }
+  #room_bed,
+  #room_area,
+  #room_peo{
+    display:inline-block;
+    font-size:14px;
+    margin-bottom:5%;
+  }
+  .room_tag{
+    display:inline-block;
+    font-size:12px;
+    font-weight:100;
+    color:rgba(245,156,26);
+    width:40%;
+    margin-top:23%;
+    border:1px solid rgba(0,0,0, 0.5);
+    text-align:center;
+    border-radius:10%;
+  }
+  .house_price{
+    width:25%;
+    margin-left:10px;
+    text-align:end;
+    display:flex;
+    justify-content:end;
+    align-items:flex-end;
+  }
+  .house_price>span{
+    width:100%;
+    text-align:center;
+    font-size:14px;
+    color:rgba(245,156,26,1);
+  }
+  .house_price>span:nth-child(2){
+    font-size:20px;
+    line-height:20px;
+  }
+  .house_price>span:last-child{
+    color:#cccccc;
+    font-weight:100;
+  }
+  /* 房型CSS样式 end */
+  /* 底部展示栏CSS start */
+    .mint-navbar .mint-tab-item.is-selected {
+      border-bottom: 3px solid rgba(245,156,26,1);
+      color:rgba(245,156,26,1);
+      margin-bottom: -3px;
+      font-weight: bolder;
+    }
+    .mint-navbar .mint-tab-item{
+      color:rgba(245,156,26,0.8);
+    }
+    .mint-tab-container-item>div{
+      margin-top:3px;
+      padding:10px;
+      background:#f5f5f5;
+      box-sizing: border-box;
+    }
+  /* 底部展示栏CSS end */
   /* 设施服务CSS样式 start */
     .mint-tab-container-item>div>div{
       display:flex;
