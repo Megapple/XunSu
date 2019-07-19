@@ -14,12 +14,10 @@ router.get('/reg',function(req,res){
   var uid=req.query.uid;
   var str="INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`, `toilet`, `area`) VALUES (NULL, ?, NULL, '', NULL, NULL, '', '', ?, ?, ?, ?, ?, ?)";
   pool.query(str,[uid,htType,tenant,bedroom,bed,toilet,area],function(err,result){
-        if(err)throw err;
-       
+        if (err) throw err;
     		if (result.affectedRows>0)
     		{
-           res.send({code:200,msg:result});
-          // req.session.lid=result[0].id;
+          res.send({code:200,msg:result});
     		}else{
     			res.send({code:401,msg:'false'});
     		}
