@@ -317,125 +317,129 @@ export default {
   img{
     width:100%;
   }
-  .opa-light{
-    background:rgba(255,255,255, 0);
-    color:#ffffff;
-  }
-  .opa-dark{
-    background:rgba(255,255,255,1);
-    color:#000000;
-  }
-  .iconfont{
-    font-size:16px;
-    margin-left: 10px;
-  }
-  .text-hidden{
-    color:rgba(255,255,255,0);
-  }
+  /* 导航栏CSS start */
+    .opa-light{
+      background:rgba(255,255,255, 0);
+      color:#ffffff;
+    }
+    .opa-dark{
+      background:rgba(255,255,255,1);
+      color:#000000;
+    }
+    .iconfont{
+      font-size:16px;
+      margin-left: 10px;
+    }
+    .text-hidden{
+      color:rgba(255,255,255,0);
+    }
+  /* 导航栏CSS end */
   .mint-swipe{
     height:211px;
   }
-  #carImg{
-    width:10%;
-    height:20px;
-    display: block;
-    position: absolute;
-    top:160px;
-    z-index: 1;
-    color:white;
-    font-size:14px;
-    text-align: center;
-    line-height:20px;
-    background-color: rgba(0,0,0, 0.5);
-    border-radius: 3px;
-  }
-  #main{
-    background: white;
-    border-top-left-radius :10px;
-    border-top-right-radius :10px;
-    position:relative;
-    top:-25px;
-    padding:0 10px;
-  }
-  #viewCom{
-    position:absolute;
-    top:-5px;
-    left:80%;
-    color:white;
-    text-align: center;
-    background:linear-gradient(to bottom,white 0%,rgba(245,156,26,0.8) 10%,rgba(245,156,26,1) 100%);
-    width:50px;
-    height:72px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-left-radius:40%;
-    border-bottom-right-radius:40%;
-    padding:0 3px;
-    box-sizing: border-box;
-  }
-  #vc1{
-    display:block;
-    padding-top:5px;
-    font-size:20px;
-  }
-  #vc2{
-    font-size:12px;
-  }
-  #f1,#map{
-    margin:10px 0;
-    border-bottom: 1px solid rgba(0,0,0, 0.3);
-  }
-  #title{
-    font:20px bolder;
-    margin-left:5px;
-    box-sizing: border-box;
-  }
-  #tag{
-    box-sizing: border-box;
-    display:inline-block;
-    font-size:12px;
-    font-weight:100;
-    color:rgba(0,0,0, 0.7);
-    margin:10px 0 10px 5px;
-    padding:2px;
-    border:1px solid rgba(0,0,0, 0.3);
-    border-radius: 5px;
-  }
-  #map>div{
-    margin:0;
-    display: inline-block;
-  }
-  #map>div>span:not(:first-child),
-  #vip>div>span:not(:first-child){
-    color:rgba(0,0,0, 0.5);
-  }
-  #map>div>span{
-    display:block;
-    font-size:14px;
-  }
-  #mapText{
-    width:75%;
-  }
-  #mapIcon{
-    width:20%;
-    font-size:40px;
-    color:rgba(245,156,26,1);
-    text-align: center;
-    padding-left:18px;
-    box-sizing:border-box;
-    height:57px;
-  }
-  #vip,#date{
-    width:100%;
-    height:50px;
-    background:rgba(245,156,26,0.7);
-    border-radius:8px;
-    /* line-height:70px; */
-  }
-  #date{
-    margin-top:10px;
-    background:beige;
-  }
+  /* 标题地图会员CSS start */
+    #carImg{
+      width:10%;
+      height:20px;
+      display: block;
+      position: absolute;
+      top:160px;
+      z-index: 1;
+      color:white;
+      font-size:14px;
+      text-align: center;
+      line-height:20px;
+      background-color: rgba(0,0,0, 0.5);
+      border-radius: 3px;
+    }
+    #main{
+      background: white;
+      border-top-left-radius :10px;
+      border-top-right-radius :10px;
+      position:relative;
+      top:-25px;
+      padding:0 10px;
+    }
+    #viewCom{
+      position:absolute;
+      top:-5px;
+      left:80%;
+      color:white;
+      text-align: center;
+      background:linear-gradient(to bottom,white 0%,rgba(245,156,26,0.8) 10%,rgba(245,156,26,1) 100%);
+      width:50px;
+      height:72px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom-left-radius:40%;
+      border-bottom-right-radius:40%;
+      padding:0 3px;
+      box-sizing: border-box;
+    }
+    #vc1{
+      display:block;
+      padding-top:5px;
+      font-size:20px;
+    }
+    #vc2{
+      font-size:12px;
+    }
+    #f1,#map{
+      margin:10px 0;
+      border-bottom: 1px solid rgba(0,0,0, 0.3);
+    }
+    #title{
+      font:20px bolder;
+      margin-left:5px;
+      box-sizing: border-box;
+    }
+    #tag{
+      box-sizing: border-box;
+      display:inline-block;
+      font-size:12px;
+      font-weight:100;
+      color:rgba(0,0,0, 0.7);
+      margin:10px 0 10px 5px;
+      padding:2px;
+      border:1px solid rgba(0,0,0, 0.3);
+      border-radius: 5px;
+    }
+    #map>div{
+      margin:0;
+      display: inline-block;
+    }
+    #map>div>span:not(:first-child),
+    #vip>div>span:not(:first-child){
+      color:rgba(0,0,0, 0.5);
+    }
+    #map>div>span{
+      display:block;
+      font-size:14px;
+    }
+    #mapText{
+      width:75%;
+    }
+    #mapIcon{
+      width:20%;
+      font-size:40px;
+      color:rgba(245,156,26,1);
+      text-align: center;
+      padding-left:18px;
+      box-sizing:border-box;
+      height:57px;
+    }
+    #vip,#date{
+      width:100%;
+      height:50px;
+      background:rgba(245,156,26,0.7);
+      border-radius:8px;
+      /* line-height:70px; */
+    }
+    #date{
+      margin-top:10px;
+      background:beige;
+    }
+  /* 标题地图会员CSS end */
   /* vip模块CSS start */
     #vip>div{
       display:inline-block;
@@ -491,108 +495,110 @@ export default {
       font-size:12px;
     }
   /* vip模块CSS end */
-  #footer{
-    width:100%;
-    height:120px;
-    background:#cccccc;
-    padding:0;
-    position:absolute;
-  }
-  #footer>div{
-    display:flex;
-  }
-  #footer>div>div{
-    padding:10px 0;
-    justify-content: space-between;
-    width:125px;
-    color:rgba(0,0,0, 0.5);
-    text-align:center;
-    box-sizing: border-box;
-  }
-  #footer>div>div>span{
-    display:block;
-    margin:0;
-    font-size:25px;
-    text-align:center;
-  }
-  #footer>div>div>p{
-    margin:0 27.5px;
-    font-size:12px;
-    width:70px;
-  }
-  #footer>div+div{
-    font-size:12px;
-    display:block;
-    text-align:center;
-    color:rgba(0,0,0, 0.5);
-  }
+  /* 页尾广告CSS start */
+    #footer{
+      width:100%;
+      height:120px;
+      background:#cccccc;
+      padding:0;
+      position:absolute;
+    }
+    #footer>div{
+      display:flex;
+    }
+    #footer>div>div{
+      padding:10px 0;
+      justify-content: space-between;
+      width:125px;
+      color:rgba(0,0,0, 0.5);
+      text-align:center;
+      box-sizing: border-box;
+    }
+    #footer>div>div>span{
+      display:block;
+      margin:0;
+      font-size:25px;
+      text-align:center;
+    }
+    #footer>div>div>p{
+      margin:0 27.5px;
+      font-size:12px;
+      width:70px;
+    }
+    #footer>div+div{
+      font-size:12px;
+      display:block;
+      text-align:center;
+      color:rgba(0,0,0, 0.5);
+    }
+  /* 页尾广告CSS end */
   /* 房型CSS样式 start */
-  #house{
-    margin-top:10px;
-    background:#f5f5f5;
-  }
-  .house_module{
-    display:flex;
-    padding:10px;
-  }
-  .house_img{
-    width:25%;
-    height:110px;
-  }
-  .house_img>img{
-    height:110px;
-    border-radius:10px;
-  }
-  .house_detail{
-    width:50%;
-    margin-left:10px;
-  }
-  #room_title{
-    display:block;
-    font-size:16px;
-    font-weight:bolder;
-    margin-bottom:5%;
-  }
-  #room_bed,
-  #room_area,
-  #room_peo{
-    display:inline-block;
-    font-size:14px;
-    margin-bottom:5%;
-  }
-  .room_tag{
-    display:inline-block;
-    font-size:12px;
-    font-weight:100;
-    color:rgba(245,156,26);
-    width:40%;
-    margin-top:23%;
-    border:1px solid rgba(0,0,0, 0.5);
-    text-align:center;
-    border-radius:10%;
-  }
-  .house_price{
-    width:25%;
-    margin-left:10px;
-    text-align:end;
-    display:flex;
-    justify-content:end;
-    align-items:flex-end;
-  }
-  .house_price>span{
-    width:100%;
-    text-align:center;
-    font-size:14px;
-    color:rgba(245,156,26,1);
-  }
-  .house_price>span:nth-child(2){
-    font-size:20px;
-    line-height:20px;
-  }
-  .house_price>span:last-child{
-    color:#cccccc;
-    font-weight:100;
-  }
+    #house{
+      margin-top:10px;
+      background:#f5f5f5;
+    }
+    .house_module{
+      display:flex;
+      padding:10px;
+    }
+    .house_img{
+      width:25%;
+      height:110px;
+    }
+    .house_img>img{
+      height:110px;
+      border-radius:10px;
+    }
+    .house_detail{
+      width:50%;
+      margin-left:10px;
+    }
+    #room_title{
+      display:block;
+      font-size:16px;
+      font-weight:bolder;
+      margin-bottom:5%;
+    }
+    #room_bed,
+    #room_area,
+    #room_peo{
+      display:inline-block;
+      font-size:14px;
+      margin-bottom:5%;
+    }
+    .room_tag{
+      display:inline-block;
+      font-size:12px;
+      font-weight:100;
+      color:rgba(245,156,26);
+      width:40%;
+      margin-top:23%;
+      border:1px solid rgba(0,0,0, 0.5);
+      text-align:center;
+      border-radius:10%;
+    }
+    .house_price{
+      width:25%;
+      margin-left:10px;
+      text-align:end;
+      display:flex;
+      justify-content:end;
+      align-items:flex-end;
+    }
+    .house_price>span{
+      width:100%;
+      text-align:center;
+      font-size:14px;
+      color:rgba(245,156,26,1);
+    }
+    .house_price>span:nth-child(2){
+      font-size:20px;
+      line-height:20px;
+    }
+    .house_price>span:last-child{
+      color:#cccccc;
+      font-weight:100;
+    }
   /* 房型CSS样式 end */
   /* 底部展示栏CSS start */
     .mint-navbar .mint-tab-item.is-selected {
