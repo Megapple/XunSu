@@ -30,6 +30,7 @@ import HoustLocation from "../components/common/ImHousting/HoustLocation.vue"
 import UserMsg from "../components/common/ImHousting/usermsg.vue"
 import UserImage from "../components/common/ImHousting/userimage.vue"
 import Houstingmsg from "../components/common/ImHousting/Houstingmsg.vue"
+import HoustingFacility from "../components/common/ImHousting/HoustingFacility.vue"
 
 Vue.use(Router)
 
@@ -58,6 +59,7 @@ export default new Router({
     {path:'/Orderpay',component:Orderpay},
     {path:'/Usermsg',component:UserMsg},
     {path:'/Userimage',component:UserImage},
-    {path:'/Houstingmsg',component:Houstingmsg}
+    {path:'/Houstingmsg',component:Houstingmsg},
+    {path:'/HoustingFacility',component:HoustingFacility}
   ]
 })

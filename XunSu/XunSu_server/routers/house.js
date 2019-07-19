@@ -14,18 +14,68 @@ router.get('/reg',function(req,res){
   var uid=req.query.uid;
   var str="INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`, `toilet`, `area`) VALUES (NULL, ?, NULL, '', NULL, NULL, '', '', ?, ?, ?, ?, ?, ?)";
   pool.query(str,[uid,htType,tenant,bedroom,bed,toilet,area],function(err,result){
-        if(err)throw err;
-       
+        if (err) throw err;
     		if (result.affectedRows>0)
     		{
-           res.send({code:200,msg:result});
-          // req.session.lid=result[0].id;
+          res.send({code:200,msg:result});
     		}else{
     			res.send({code:401,msg:'false'});
     		}
     	})
-})		
-
+})	
+//修改房源
+router.get('/update',function(req,res){
+      var str="UPDATE leaseroom SET province=?,city=?,houseDistrict=?,houseStreet=?,address=? WHERE lid=?"; 
+      pool.query(str,[req.query.prname,req.query.ciname,req.query.dname,req.query.sname,req.query.address,req.query.lid],function(err,result){
+        if (err) throw err;
+        if (result.affectedRows>0)
+        {
+          res.send({code:200,msg:'true'});
+        }else{
+          res.send({code:401,msg:'false'});
+        }
+      })
+})	
+//插入设施
+router.get('/facility',function(req,res){
+  var sum="";
+  var lid=req.query.lid;
+  var m=req.query.sum;
+  for(var key in m){
+    sum+=m[key]+',';
+  }
+  pool.query('SELECT * FROM facility WHERE fhtid=?',[lid],function(err,result){
+    if(err) throw err;
+    console.log(result);
+    if (result.length>0)
+    		{
+          var obj=m[0]+","+m[1]+","+m[2]+","+m[3]+","+m[4]+","+m[5]+","+m[6]+","+m[7]+","+m[8]+","+m[9]+","+m[10]+","+m[11]+","+m[12]+","+m[13]+","+m[14]+","+m[15]+","+m[16]+","+m[17]+","+m[18]+","+m[19]+","+m[20]+","+m[21]+","+m[22]+","+lid;
+          console.log(obj);
+          pool.query("UPDATE `facility` SET `wifi` = '?', `hotShower` = '?', `airCondition` = '?', `television` = '?', `elevator` = '?', `entranceGuard` = '?', `washer` = '?', `freezer` = '?', `parkingSpace` = '?', `wiredNetwork` = '?', `slipper` = '?', `toiletThings` = '?', `washcloth` = '?', `bathProduct` = '?', `waterDispenser` = '?', `bathtub` = '?', `centralHeating` = '?', `airport` = '?', `baggage` = '?', `wakeup` = '?', `monotype` = '?', `orderfood` = '?', `wash` = '?' WHERE `facility`.`fhtid` = ?",[obj],function(err,result){
+            if (err) throw err;
+            if (result.affectedRows>0)
+            {
+              res.send({code:200,msg:result});
+            }else{
+              res.send({code:401,msg:'false'});
+            }
+      })
+    		}else{
+    			var str="INSERT INTO `facility` VALUES (NULL,?, ?)";
+          console.log(req.query);
+          pool.query(str,[lid,req.query.sum],function(err,result){
+                if (err) throw err;
+                if (result.affectedRows>0)
+                {
+                  res.send({code:200,msg:result});
+                }else{
+                  res.send({code:401,msg:'false'});
+                }
+          })
+    		}
+  })
+  
+})	
 // });
 // //2.删除商品
 // router.get('/delete',function(req,res){

@@ -10,31 +10,32 @@
       <h4>房屋</h4>
         <van-cell-group>
           <van-cell title="出租形式" @click="showPopup" is-link>
-            <span>{{radiomsg}}</span>
+            <span>{{radiomsg}}1</span>
           </van-cell>
           <van-cell title="房间个数" @click="showPicker = true" is-link>
             <span>{{bedroomvalue}}室</span>
           </van-cell>
           <van-cell title="房间面积">
-            <!-- 房间面积 -->
+           
             <mt-field placeholder="填写房间面积" v-model="housearea">㎡</mt-field>
           </van-cell>
         </van-cell-group>   
       <h4>其他</h4>
+     
       <div class="housemsg">
-           <!-- 床数 -->
+          
          <van-cell-group>
           <van-cell title="床数" @click="showPicker2 = true" is-link>
             <span>{{bedvalue}}张床</span>
           </van-cell>  
-          <!-- 卫生间数 -->
+        
           <van-cell title="卫生间">
             <van-radio-group v-model="radio" @change="totoilet">
             <van-radio name="1" class="float-r">独卫</van-radio>
             <van-radio name="2" class="float-r">公卫</van-radio>
           </van-radio-group>
           </van-cell>
-          <!-- 可住人数 -->
+         
           <van-cell title="可住人数">
             <van-stepper v-model="value1" />
           </van-cell>
@@ -44,13 +45,11 @@
     </div>
   </div> 
   <mt-tabbar v-model="selected">
-    <!-- <mt-tab-item id="tab1">
-      <mt-button class="nex" @click="tosave">保存</mt-button>
-    </mt-tab-item> -->
-    <mt-tab-item id="tab2">
+     
+     <mt-tab-item id="tab2">
       <mt-button class="nex" @click="tonext">存储并前往下一页</mt-button>
     </mt-tab-item>
-  </mt-tabbar>
+  </mt-tabbar> 
      <!-- 整套出租 -->
     <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
       <div class="content">
@@ -71,7 +70,7 @@
         </van-radio-group>
       </div>
     </van-popup>
-    <van-popup v-model="showPicker" position="bottom">
+     <van-popup v-model="showPicker" position="bottom">
       <van-picker
         show-toolbar
         :columns="columns"
@@ -96,7 +95,7 @@ export default {
   data(){
     return {
       show:false,
-      housearea:"",
+      housearea:"15",
       radio: '1',
       radiomsg:'整套出租',
       selected:"",
@@ -105,10 +104,10 @@ export default {
       showPicker: false,
       showPicker2: false,
       value:"",
-      value1:"",
+      value1:"1",
       bedroomvalue:"1",
       bedvalue:"1",
-      toilet:""
+      toilet:"1"
     }
   },
   methods:{
@@ -126,7 +125,7 @@ export default {
           if(result.data.code>0){  
              this.$toast("上传成功",1000);
              console.log(result.data.msg.insertId);
-           this.$router.push("./housting");
+           this.$router.push(`./HoustLocation?lid=${result.data.msg.insertId}`);
           }else{
              this.$toast("上传失败，请重新填写",1000);
            }
