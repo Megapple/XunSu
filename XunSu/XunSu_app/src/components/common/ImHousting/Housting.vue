@@ -209,7 +209,7 @@ export default {
   border:0;
   border-radius:10px;
   padding:4px 10px;
-  /* float:right; */
+  float:right;
   background:#ff9c1a;
   margin-top:-3px;
 }
