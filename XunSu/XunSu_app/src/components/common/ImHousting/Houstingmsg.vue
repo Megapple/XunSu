@@ -125,7 +125,7 @@ export default {
           if(result.data.code>0){  
              this.$toast("上传成功",1000);
              console.log(result.data.msg.insertId);
-           this.$router.push("./housting");
+           this.$router.push(`./HoustLocation?lid=${result.data.msg.insertId}`);
           }else{
              this.$toast("上传失败，请重新填写",1000);
            }
