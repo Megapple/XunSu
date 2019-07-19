@@ -28,7 +28,7 @@ CREATE TABLE `leaseroom` (
   `lid` INT(11) PRIMARY KEY auto_increment, 
   `uid` INT(11) default NULL,            #客户编号   
   `time` DATETIME default NULL,          #发布时间
-  `title` VARCHAR(30) default '',        #标题
+  `title` VARCHAR(50) default '',        #标题
   `describe` VARCHAR(500) default NULL,  #房源描述
   `price` FLOAT default NULL,            #价格
   `img` VARCHAR(500) default '',         #图片
@@ -169,8 +169,11 @@ CREATE TABLE `roomOrder`(
 /**房源图片路径**/
 CREATE TABLE homePic(
   pid INT PRIMARY KEY AUTO_INCREMENT,
-  homeid INT,                 #房源编号
-  imgUrl VARCHAR(128)             #图片路径
+  homeuserid INT,                 #房源编号
+  homeid INT,                 #用户编号
+  imgUrl VARCHAR(128),             #图片路径
+  FOREIGN KEY (`homeid`) REFERENCES `leaseroom` (`lid`),
+  FOREIGN KEY (`homeuserid`) REFERENCES `users` (`uid`)
 );
 /**评论表**/
 DROP TABLE IF EXISTS `comment`;
@@ -193,5 +196,36 @@ CREATE TABLE `comment`(
 /*******************/
 /******数据导入******/
 /*******************/
+INSERT INTO `users` (`uid`, `uname`, `upwd`, `phone`, `email`, `user_name`, `avatar`, `gender`, `remark`, `ID_number`) VALUES (NULL, '1', '111111', '3123131313', NULL, '1233', NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`uid`, `uname`, `upwd`, `phone`, `email`, `user_name`, `avatar`, `gender`, `remark`, `ID_number`) VALUES (NULL, '17622222222', '111111', '17622222222', NULL, '小红帽', '/images/avatar/1563471178300.jpeg', NULL, NULL, '610423199803061974');
+INSERT INTO `users` (`uid`, `uname`, `upwd`, `phone`, `email`, `user_name`, `avatar`, `gender`, `remark`, `ID_number`) VALUES (NULL, '17622222222', '111111', '17622222222', NULL, '小红帽', '/images/avatar/1563471178300.jpeg', NULL, NULL, '610423199803061974');
 
-/**房源类型**/
+
+INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`, `toilet`, `area`) VALUES (NULL, '1', '2019-07-04 00:00:00', 'Stey 共享居住空间｢胡同里的设计酒店Studio｣步行可达故宫&王府井,适合差旅､年轻旅行者', '你好,欢迎回家!-王府井不仅是一个由先锋设计师打造的精品酒店,更是你旅途中的家,一个充满多元与活力的社区｡', '780', '', '王府井', '单间出租', '2', '1', '1', '独卫', '15');
+-- 省份
+INSERT INTO `province` (`prid`, `prname`) VALUES ('1', '陕西省');
+-- 城市
+INSERT INTO `city` (`ciid`, `ciname`) VALUES ('1', '咸阳市');
+-- 淳化县
+INSERT INTO `housedistrict` (`did`, `dname`) VALUES ('1', '淳化县');
+-- 设施
+INSERT INTO `facility` (`fid`, `fhtid`, `wifi`, `hotShower`, `airCondition`, `television`, `elevator`, `entranceGuard`, `washer`, `freezer`, `parkingSpace`, `wiredNetwork`, `slipper`, `toiletThings`, `washcloth`, `bathProduct`, `water dispenser`, `bathtub`, `centralHeating`) VALUES (NULL, '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '1', '1', '1');
+-- 房东要求
+-- INSERT INTO `landlordrequire` (`luid`, `lfid`, `pets`, `cooking`, `meeting`, `smoke`, `oldMan`, `children`, `infant`) VALUES ('1', '1', '1', '1', '0', '1', '1', '0', '0');
+
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/1a8cad81-5292-4d41-bb3d-68c67c32483b.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/1efdaad6-dbe5-4ed9-94ef-1ce95214b3ec.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/7d179cec-d038-40a5-ad42-c7cac8dd51f5.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/4d5fd8ae-9622-440e-86cf-e774d7334363.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/55ee0693-10c2-4f7b-b087-552119be4a80.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/56cf291b-2f0a-4e84-b626-42f9c2bae321.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/065d6932-54d6-4b41-b890-972061636d3c.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/86fcf2e6-f0e5-41d6-ad23-3090d71af137.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/769070ea-99f0-4ec0-a916-b444ef2ebcce.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/b9a5feae-b7ce-4aee-b4bb-7416bd7a8521.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/a76d63a1-d98e-4fff-9b94-e19f99efb3e6.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/b159d3bf-7afc-4076-a7f9-dbd31cfc9a37.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/c42e5398-0117-46fa-8436-33533b178763.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/d5794be2-decd-4441-925b-57f98ed5af0f.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/e57be7fb-dd2b-4a23-81b9-717b9b4764f1.jpg');
+INSERT INTO `homepic` (`pid`, `homeuserid`, `homeid`, `imgUrl`) VALUES (NULL, '1', '1', '/images/house/e69acad3-482f-4d82-bf9c-cc63a00ba0eb.jpg');

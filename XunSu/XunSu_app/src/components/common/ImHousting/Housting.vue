@@ -6,7 +6,7 @@
       </router-link>
     </mt-header>
     <div>
-      <img src="../../../assets/housting/housting1.jpg" class="imgstyle"></img>
+      <img src="../../../assets/housting/housting1.jpg" class="imgstyle"/>
     </div>
     <div class="middle">
       <div class="content">
@@ -209,7 +209,7 @@ export default {
   border:0;
   border-radius:10px;
   padding:4px 10px;
-  float:right;
+  /* float:right; */
   background:#ff9c1a;
   margin-top:-3px;
 }
