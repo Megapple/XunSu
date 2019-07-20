@@ -55,7 +55,7 @@
                     <van-slider v-model="value3"  bar-height="4px" bar-width="300px" active-color="#f44" :step="10"/>
                     <h4>出租类型</h4>
                     <div class="rent_type">
-                        <div class="type">
+                        <div class="type" @click="onSelect">
                             <h5>整套出租</h5>
                             <span>独享整个房源</span>
                         </div>
@@ -159,6 +159,12 @@ export default {
         // 选择人数 房源信息改变
         onbtn(){
             console.log(1111)
+        },
+        // 筛选选择 背景色改变
+        onSelect(){
+            var select=document.getElementsByClassName("type");
+            select.className="type typecolor"
+            console.log(11111111)
         }
     }
 }
@@ -226,6 +232,9 @@ export default {
     padding:5px 5px;
     margin:5px 5px;
     font-size: 15px; color:rgb(116, 115, 115);
+}
+.typecolor{
+    background-color: rgb(245, 156, 26);
 }
 </style>
 

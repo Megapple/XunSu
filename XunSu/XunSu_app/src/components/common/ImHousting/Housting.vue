@@ -6,11 +6,7 @@
       </router-link>
     </mt-header>
     <div>
-<<<<<<< HEAD
-      <img src="../../../assets/housting/housting1.jpg" class="imgstyle" />
-=======
       <img src="../../../assets/housting/housting1.jpg" class="imgstyle"/>
->>>>>>> 80836c40fcd2e452b697aca0f86e270fae2e905f
     </div>
     <div class="middle">
       <div class="content">
