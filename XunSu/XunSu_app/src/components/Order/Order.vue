@@ -26,7 +26,7 @@ export default {
                 this.MessageBox.confirm("取消预定","客观您不再想想吗");
             },
            go() {
-               this.$router.push('/');
+               this.$router.push('/Home');
 
            }
         }

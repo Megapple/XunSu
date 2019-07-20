@@ -19,15 +19,15 @@
           </li>
           <li>
             <span>街道地址</span>
-            <mt-field placeholder="请输入" type="text"></mt-field>
+            <mt-field placeholder="请输入" type="text" v-model="sname"></mt-field>
           </li>
           <li>
             <span>小区名称</span>
-            <mt-field type="text" placeholder="请输入"></mt-field>
+            <mt-field type="text" placeholder="请输入" v-model="plot"></mt-field>
           </li>
           <li>
             <span>楼、单元、门牌号</span>
-            <mt-field class="de_address" placeholder="请填写详细的楼、单元、门牌号"></mt-field>
+            <mt-field class="de_address" placeholder="请填写详细的楼、单元、门牌号" v-model="specific"></mt-field>
           </li>
         </ul>
       </div>
@@ -55,9 +55,13 @@ export default {
        lng:108,
        titleName:"woshi表情",
        content:"你好啊",
-       prname:"",
-       ciname:"",
-       dname:""
+       prname:"", //省
+       ciname:"",  //室
+       dname:"", //区
+       sname:"", //街道
+       plot:"", //小区
+       specific:"" //门牌号等
+
     }
   },
   methods:{
@@ -78,13 +82,14 @@ export default {
      window.location.href = "http://api.map.baidu.com/marker?location=" + this.lat + "," + this.lng + "&title=" + this.titleName + "&content=" +this.content+ "&output=html";
     },
     tonext(){
-      var url="house/reg";
-      var uid = sessionStorage.getItem("uid");
-      var obj= {prname:this.prname,ciname:this.ciname,dname:this.dname};
+      var url="house/update";
+      var lid=this.$route.query.lid;
+      var address=this.plot+this.specific;
+      var obj= {prname:this.prname,ciname:this.ciname,dname:this.dname,sname:this.sname,address:address,lid:lid};
       this.axios.get(url,{params:obj}).then(result=>{
-          if(result.data.code>0){  
+          if(result.data.code==200){  
             this.$toast('房源地址添加成功',1000);
-           this.$router.push("./houstingmsg");
+           this.$router.push(`./HoustingFacility?lid=${lid}`);
           }else{
              this.$messagebox("提示","提交错误，请重新提交");
            }

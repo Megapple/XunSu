@@ -60,7 +60,11 @@
             </div>
         
             <div class="submit">
-               <mt-button  size="large" v-model="sbumitPay" @click="goPay" fixed>去支付</mt-button>
+               <mt-button  size="large" v-model="submitPay" @click="submitPay=true" fixed>去支付</mt-button>
+               <mt-popup v-model="submitPay" position="bottom">
+                    <mt-radio title="请选择支付方式" v-model="value" :options="list" @change="selectPay">
+                    </mt-radio>
+                </mt-popup>
             </div>
         </div>
         <div class="reimburse">
@@ -106,14 +110,46 @@ export default {
             price:1000,
             agio_price:"9.5",
             first_price:15,
-            sbumitPay:""
+            submitPay:false,
+            value:"",
+            timer:'',
+            
+            list:['微信支付', '支付宝扫支付', '银联卡支付']
 
 
         }//return 结束
     },//data 结束
+   
     methods:{
-        goPay(){
-              console.log(123);
+         
+        selectPay(){
+            var list=this.list
+            var val=this.value
+            for(var i of list){
+                console.log(111)
+                if(i==val){
+                    this.$toast({
+                        message:`${i}支付成功`,
+                        iconClass: 'icon icon-tanhao'  
+                     });                      
+                      this.$router.push('/Home')   
+                }
+            }
+          
+                           
+                            
+                         
+            //console.log(this.value)
+            // if(this.value="微信支付"){
+            //     this.$toast("正在打开微信")
+            // }
+            // var list=this.list;
+            // console.log(list)
+            // for(var i of list ){
+            //     if(list[i]=value){
+            //         console.log(123);
+            //     }
+            // }
         },
         goDetail(){
              console.log(123);
@@ -137,35 +173,55 @@ export default {
     
 }
     .mint-header{
-      background-color: #FDC822;
+      background-color: rgb(245, 156, 26);
       height:55px;
       font-size:16px;
       
   }
   .orderMsg{
-    background-color:#FDC822;
+    background-color:rgb(245, 156, 26);
     padding: 8px;
     margin: 10px;
     border-radius: 10px;
-    width:90%;
+   
   }
   .orderNo{
       display: flex;
       justify-content:space-between;
   }
   .mint-button--normal{
-    background-color: #FDC822;
+    background-color: rgb(245, 156, 26);
+      height:55px;
     color: #ffff;
     font-size: 15px;
     line-height: 3;
   }
   .mint-button::after{
       background-color: transparent;
+      border: none;
   }
   .mint-button--large{
-    background-color: #FDC822;
+    background-color: rgb(245, 156, 26);
+      height:55px;
     border-radius: 10px;
     margin-right: 10px;
+}
+.mint-button--default{
+    box-shadow:none;
+    -webkit-box-shadow:none;
+    color: #fff;
+}
+.mint-popup-bottom{
+   /* background-color:rgb(245, 156, 26); */
+    width: 100%;
+    color:rgb(245, 156, 26);
+}
+.mint-radiolist-title {
+    font-size: 20px;
+    margin: 8px;
+    display: block;
+    color: rgb(245, 156, 26);
+    height: 50px;
 }
   .orderContent{
     margin: 10px;
