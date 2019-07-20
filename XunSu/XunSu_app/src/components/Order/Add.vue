@@ -2,7 +2,7 @@
     <div class="addMsg">
         <div class="headers">
             <mt-header title="添加常用入住人">
-                <router-link to="Pay" slot="left">
+                <router-link to="/Orderdetail" slot="left">
                     <mt-button icon="back">返回</mt-button>
                 </router-link>
                     <mt-button  slot="right" @click="addData">保存</mt-button>
@@ -111,7 +111,7 @@ export default {
 
   /* header style */
   .mint-header{
-      background-color: #FDC822;
+      background-color: rgb(245, 156, 26);
       height:55px;
       font-size:16px;
   }

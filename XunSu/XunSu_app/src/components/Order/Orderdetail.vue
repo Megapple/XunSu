@@ -22,9 +22,9 @@
                 <div class="roomMount mflex">
                     <p>房间数</p>
                     <div class="roomButton">
-                        <mt-button>-</mt-button>
+                        <mt-button style="color:rgb(245, 156, 26)">-</mt-button>
                         <span>1</span>
-                        <mt-button>+</mt-button>
+                        <mt-button style="color:rgb(245, 156, 26)">+</mt-button>
                     </div>
                 </div>
                 <!-- 入住人 -->
@@ -199,7 +199,7 @@ button{
     border-bottom:1px solid #eee;
 }
 .mint-header{
-      background-color: #FDC822;
+      background-color: rgb(245, 156, 26);
       height:55px;
       font-size:16px;
   }
@@ -302,7 +302,7 @@ ul>li p{
 
 }
 .submit{
-    background-color: #FDC822;
+    background-color: rgb(245, 156, 26);
     width: 160px;
     border-radius: 25px;
     margin-right: 23px;

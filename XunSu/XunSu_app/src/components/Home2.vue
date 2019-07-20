@@ -37,26 +37,47 @@
         <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题">
     </div>      
     </div>
+    <!-- 下拉列表 -->
     <div class="pull_down">
         <van-dropdown-menu>
-            <van-dropdown-item title="人数" ref="item">
-                1人 2人
-            </van-dropdown-item>
+            <van-dropdown-item title="人数" ref="item" :options="option1" v-model="value1"></van-dropdown-item>
             <van-dropdown-item title="位置" ref="item">
                 <van-tree-select 
                 :items="items" :main-active-index="mainActiveIndex" :active-id="activeId" 
                 @navclick="onNavClick"  @itemclick="onItemClick"/>
-                <van-button block type="info" @click="onTree">确认</van-button>
             </van-dropdown-item>
             <van-dropdown-item title="筛选" ref="item">
-                <van-slider v-model="value2"  bar-height="4px" active-color="#f44" :step="10"/>
-                <van-button block type="info" @click="onConfirm">确认</van-button>
+                <div class="drop_select">
+                    <h4>价格区间</h4>
+                    <div class="prices">
+                        <span v-for="(item,i) of prices" :key="i">{{"¥"+item}}</span>
+                    </div>
+                    <van-slider v-model="value3"  bar-height="4px" bar-width="300px" active-color="#f44" :step="10"/>
+                    <h4>出租类型</h4>
+                    <div class="rent_type">
+                        <div class="type">
+                            <h5>整套出租</h5>
+                            <span>独享整个房源</span>
+                        </div>
+                        <div class="type">
+                            <h5>独立单间</h5>
+                            <span>有自己的独立空间</span>
+                        </div>
+                        <div class="type">
+                            <h5>合住房间</h5>
+                            <span>分享整个入住空间</span>
+                        </div>
+                    </div>
+                    <h4>配套设施</h4>
+                    <div class="facility" >       
+                        <span v-for="(item,i) of facilities" :key="i">{{item}}</span>
+                    </div>
+                </div>
+                <van-button block type="warning" @click="onConfirm">确认</van-button>
             </van-dropdown-item>
-            <van-dropdown-item v-model="value1" :options="option1"></van-dropdown-item>
+            <van-dropdown-item v-model="value2" :options="option2" title="推荐"></van-dropdown-item>
         </van-dropdown-menu>
     </div>
-
-
 </div>
 </template>
 <script>
@@ -68,15 +89,30 @@ export default {
             visible:false,
             startDate:new Date(),
             value1:0,
-            value2:10,
+            value2:0,  //推荐选择
+            value3:0, //筛选中的价格
+            // 人数
             option1:[
+                {text:"1~2人",value:0},
+                {text:"3~4人",value:1},
+                {text:"5~6人",value:2},
+                {text:"10人以上",value:3}],
+            // 推荐
+            option2:[
                 {text:"推荐排序",value:0},
                 {text:"好评优先",value:1},
                 {text:"高价优先",value:2},
                 {text:"距离优先",value:3}],
+            // 位置
             activeId: "",
             mainActiveIndex: 0,
             items:[
+                 {text: '热门景区',
+                  // 该导航下所有的可选项
+                   children: [
+                    {text:'钟楼回民街',id:1}
+                   ]
+                  },
                   {text: '行政区',
                   // 该导航下所有的可选项
                    children: [
@@ -91,10 +127,14 @@ export default {
                     children:[{text:"钟鼓楼回民街(城中心)",id:1},{text:"南门(城中心)",id:2},
                     {text:"长安区大学城",id:3},{text:"行政中心",id:4},{text:"西稍门机场大巴站",id:5}]
                   }
-            ]
+            ],
+            // 筛选
+            prices:[0,200,300,400,500,600],
+            facilities:["wifi","空调","电视","电梯","冰箱","停车位","洗浴","洗衣机","热水壶"],
         }
     },
     methods: {
+        // 入离时间
         openPicker () {
             this.$refs.picker.open();
         },
@@ -105,17 +145,20 @@ export default {
             // this.stay=getDate(data)
             console.log(this.stay,this.leave);
         },
-        onConfirm(){
-            this.$refs.item.toggle();      
+        onConfirm(e){
+            this.$refs.item.toggle();    
+            e.stopPropagation();  
         },
+        // 位置
         onNavClick(index) {
             this.mainActiveIndex = index;
         },
         onItemClick(data) {
             this.activeId = data.id;
         },
-        onTree(){
-            this.$refs.item.toggle();    
+        // 选择人数 房源信息改变
+        onbtn(){
+            console.log(1111)
         }
     }
 }
@@ -123,8 +166,9 @@ export default {
 <style scoped>
 .mint-header{
     height:50px;
-    background-color:#e6e6e6;
+    background-color:#faf9f9; 
 }
+.mint-header .mint-button{color:rgb(116, 116, 116);}
 .header_title{
     width: 85%;
     display: flex;
@@ -133,17 +177,55 @@ export default {
     position: absolute;
     top:0;left:36px;
     border-radius: 15px;
-    background-color: #f5f5f5;
+    background-color: #efeeee;
     padding:5px 8px;
 }
 .header_title .time{font-size:12px;}
 .header_search{
-    background-color: #f5f5f5;
+    background-color: #efeeee;
     border-radius: 15px;
     border: 0;
     outline: none;
     font-size:12px;
 }
 .clearflex::after{content:"";display:block;clear: both;}
+.pull_down .van-dropdown-menu{
+    background-color: #faf9f9;
+}
+.drop_select{margin-left:10px;padding:0 10px;}
+.drop_select h4{margin-top:40px;}
+.drop_select h4:first-child{margin-top:20px;}
+.drop_select .prices span{
+    display:inline-block;
+    padding:0 10px;
+    margin-bottom: 20px;
+}
+.rent_type{display: flex; margin-top:-5px;margin-left:-5px;margin-right:5px;margin-bottom:-15px;}
+.type{
+    width:120px;
+    height:80px;
+    line-height: 1.8;
+    text-align: center;
+    border:1px solid #ddd;
+    margin:10px 5px;
+}
+.type h5{margin-bottom:1px;margin-top:10px; }
+.type span{font-size: 11px; color:rgb(143, 140, 140);}
+.facility{
+    width:88%;
+    text-align: center;
+    margin-top:-10px;
+}
+.facility span{
+    display:inline-block;
+    width:55px;
+    height:30px;
+    text-align: center;
+    line-height: 1.8;
+    border:1px solid #ddd;
+    padding:5px 5px;
+    margin:5px 5px;
+    font-size: 15px; color:rgb(116, 115, 115);
+}
 </style>
 

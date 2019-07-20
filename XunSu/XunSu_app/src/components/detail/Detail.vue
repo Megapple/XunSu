@@ -1,5 +1,5 @@
 <template>
-  <div id="container" style="background-color:tomato">
+  <div id="container">
     <!-- mintui Header栏start -->
     <mt-header id="header" class="opa-light" fixed>
       <router-link to="/" slot="left">
@@ -90,14 +90,14 @@
       <!-- VIP礼遇 end -->
       <!-- 日历 start -->
       <div id="date" @click="openPicker">
-        <mt-datetime-picker
+        <!-- <mt-datetime-picker
           v-model="pickerVisible"
           type="date"
           ref="picker"
           year-format="{value} 年"
           month-format="{value} 月"
           date-format="{value} 日">
-        </mt-datetime-picker>
+        </mt-datetime-picker> -->
       </div>
       <!-- 日历 end -->
       <div id="house" >
@@ -126,9 +126,7 @@
           </div>
         </div>
       </div>
-      <div id="comment">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quam eaque facere consectetur   itaque, voluptate totam aperiam odit expedita libero rerum illum modi architecto quos vitae   tempore perferendis est natus nulla magnam error culpa! Nostrum explicabo aspernatur  blanditiis veritatis amet. Eaque facere, maxime nam repellat sunt et at voluptatum recusandae  labore dolorum error cum delectus minima vitae odio quo in quisquam consequatur fuga eos!  Perferendis, recusandae nemo inventore eligendi provident mollitia rerum exercitationem eaque  dolores beatae voluptate odio sint dignissimos! Ratione officia repellat accusantium natus   iusto repudiandae nobis a, voluptatem culpa. Deleniti ipsam vero laborum vel magnam voluptatum  fuga! Officiis, fugiat quo. Consequuntur impedit laboriosam, inventore facere modi quis maxime   vitae vel, sapiente placeat fuga ad cumque veritatis tenetur accusantium qui cupiditate autem   ipsa optio iure saepe magnam officia possimus! Earum consectetur cumque doloribus mollitia,   alias porro enim consequatur, cum veritatis odit perferendis ab harum. Earum neque est soluta   saepe error recusandae, corrupti maiores sequi numquam aperiam nostrum ex pariatur, porro   mollitia quasi! Aspernatur autem ad soluta est suscipit itaque accusamus, voluptates repellat   ut ullam, vero iusto odit mollitia consequuntur odio laborum nisi tempore nam? Quas   consequuntur id quod error! Odit numquam dolor esse recusandae maiores in obcaecati qui   tenetur.
-      </div>
+      <div id="comment"></div>
       <!-- 配套服务模块 -->
       <mt-navbar id="fac" v-model="selected">
         <mt-tab-item id="fac1">设施服务</mt-tab-item>
@@ -302,8 +300,9 @@ export default {
     },
     //日期选择器
     openPicker(e){
-      e.stopPropagation;
-      this.$refs.picker.open();
+      // e.stopPropagation;
+      // this.$refs.picker.open();
+      this.$toast("日期模块施工升级中...")
     },
   },
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值

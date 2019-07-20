@@ -27,12 +27,12 @@
  </mt-swipe>
  <!-- 搜索框 -->
  <div class="searchdiv clearfix">
-    <input placeholder="搜索目的地/酒店" class="search" @click="search" />
+    <input placeholder="搜索目的地/酒店" class="search"/>
     <img :src="require('../assets/img/glass.png')"  class="searchImg "/>
     <span>|</span>
-    <div class="location">
+    <div class="location" @click="location">
       <a href="#">
-        <img :src="require('../assets/img/option.png')"  class="locationImg"/>
+        <img :src="require('../assets/img/option.png')"  class="locationImg" />
         <span class="locationtxt">搜附近</span>
       </a>
     </div>
@@ -282,7 +282,7 @@ export default {
         myadd(){
            this.$router.push("./Detail")
        },
-       search(){
+       location(){
            this.$router.push("./Home2")
        }
    }
