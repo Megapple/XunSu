@@ -55,28 +55,51 @@
                     <van-slider v-model="value3"  bar-height="4px" bar-width="300px" active-color="#f44" :step="10"/>
                     <h4>出租类型</h4>
                     <div class="rent_type">
-                        <div class="type" @click="onSelect">
-                            <h5>整套出租</h5>
-                            <span>独享整个房源</span>
-                        </div>
-                        <div class="type">
-                            <h5>独立单间</h5>
-                            <span>有自己的独立空间</span>
-                        </div>
-                        <div class="type">
-                            <h5>合住房间</h5>
-                            <span>分享整个入住空间</span>
-                        </div>
+                        <mt-navbar v-model="active1">
+                            <mt-tab-item id="rent1">
+                                <div class="type">
+                                    <h5>整套出租</h5>
+                                    <span>独享整个房源</span>
+                                </div>
+                            </mt-tab-item>
+                            <mt-tab-item id="rent2">
+                                <div class="type">
+                                    <h5>独立单间</h5>
+                                    <span>有自己的独立空间</span>
+                                </div>
+                            </mt-tab-item>
+                            <mt-tab-item id="rent3">
+                                <div class="type">
+                                   <h5>合住房间</h5>
+                                   <span>分享整个入住空间</span>
+                                </div>
+                            </mt-tab-item>
+                        </mt-navbar>
                     </div>
                     <h4>配套设施</h4>
-                    <div class="facility" >       
-                        <span v-for="(item,i) of facilities" :key="i">{{item}}</span>
+                    <div class="facility clearflex">
+                        <van-checkbox-group v-model="result">
+                            <van-checkbox  
+                            v-for="(item,i) of facilities" :key="i"  :name="item" class="facility_check"  checked-color="#ff9c1a">
+                            {{item}}
+                            </van-checkbox> 
+                        </van-checkbox-group>
                     </div>
                 </div>
                 <van-button block type="warning" @click="onConfirm">确认</van-button>
             </van-dropdown-item>
             <van-dropdown-item v-model="value2" :options="option2" title="推荐"></van-dropdown-item>
         </van-dropdown-menu>
+    </div>
+    <!-- 中间内容 -->
+    <div class="content">
+        <div class="tent">
+            <div class="tent_img"><img src="../assets/img/house_3.jpg" alt=""></div>
+            <i iconfont></i>
+            <span>【海迪王国】</span><span>美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
+            <span>独立一间·1居室·可住2~3人·小寨</span>
+            <span>¥238</span>
+        </div>
     </div>
 </div>
 </template>
@@ -131,6 +154,8 @@ export default {
             // 筛选
             prices:[0,200,300,400,500,600],
             facilities:["wifi","空调","电视","电梯","冰箱","停车位","洗浴","洗衣机","热水壶"],
+            active1:"rent1",
+            result:[],
         }
     },
     methods: {
@@ -161,15 +186,14 @@ export default {
             console.log(1111)
         },
         // 筛选选择 背景色改变
-        onSelect(){
-            var select=document.getElementsByClassName("type");
-            select.className="type typecolor"
-            console.log(11111111)
-        }
+        onFacility(e){}, 
     }
 }
 </script>
 <style scoped>
+#app>div{
+    background-color:#f5f5f5;
+}
 .mint-header{
     height:50px;
     background-color:#faf9f9; 
@@ -198,7 +222,7 @@ export default {
 .pull_down .van-dropdown-menu{
     background-color: #faf9f9;
 }
-.drop_select{margin-left:10px;padding:0 10px;}
+.drop_select{margin-left:10px;padding:0 10px;overflow: hidden;}
 .drop_select h4{margin-top:40px;}
 .drop_select h4:first-child{margin-top:20px;}
 .drop_select .prices span{
@@ -206,35 +230,42 @@ export default {
     padding:0 10px;
     margin-bottom: 20px;
 }
-.rent_type{display: flex; margin-top:-5px;margin-left:-5px;margin-right:5px;margin-bottom:-15px;}
+.rent_type{display: flex; margin-top:-15px;margin-right:5px;margin-bottom:-40px;}
 .type{
-    width:120px;
+    width:100px;
     height:80px;
     line-height: 1.8;
     text-align: center;
     border:1px solid #ddd;
     margin:10px 5px;
 }
+.mint-navbar .mint-tab-item.is-selected .mint-tab-item-label .type{background-color: rgb(245, 156, 26);}
+.mint-navbar .mint-tab-item.is-selected{border:0;color:#faf9f9;   }
 .type h5{margin-bottom:1px;margin-top:10px; }
 .type span{font-size: 11px; color:rgb(143, 140, 140);}
-.facility{
-    width:88%;
-    text-align: center;
-    margin-top:-10px;
-}
-.facility span{
-    display:inline-block;
-    width:55px;
-    height:30px;
-    text-align: center;
-    line-height: 1.8;
-    border:1px solid #ddd;
-    padding:5px 5px;
-    margin:5px 5px;
+.facility_check.van-checkbox{
+    width:80px;height:30px;
     font-size: 15px; color:rgb(116, 115, 115);
 }
-.typecolor{
-    background-color: rgb(245, 156, 26);
+.facility{
+  width:100%;
+  display: flex;
+}
+.content{
+   margin:15px 10px;
+   /* text-align: center; */
+}
+.tent{
+    width:80%;
+    background-color: #faf9f9;
+    /* padding:5px 5px; */
+    overflow: hidden;
+    
+}
+.tent_img{
+    height:100px;
+    background-size:cover;
+    border-radius: 10px;
 }
 </style>
 
