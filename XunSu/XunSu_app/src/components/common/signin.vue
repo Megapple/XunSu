@@ -98,7 +98,7 @@
             return;
           } else {
             console.log(result.data)
-            
+            this.$router.push('./me')
             return;
             // this.admincode = res.data.code
             // if (this.flag) {
