@@ -90,14 +90,14 @@
       <!-- VIP礼遇 end -->
       <!-- 日历 start -->
       <div id="date" @click="openPicker">
-        <mt-datetime-picker
+        <!-- <mt-datetime-picker
           v-model="pickerVisible"
           type="date"
           ref="picker"
           year-format="{value} 年"
           month-format="{value} 月"
           date-format="{value} 日">
-        </mt-datetime-picker>
+        </mt-datetime-picker> -->
       </div>
       <!-- 日历 end -->
       <div id="house" >
@@ -300,8 +300,9 @@ export default {
     },
     //日期选择器
     openPicker(e){
-      e.stopPropagation;
-      this.$refs.picker.open();
+      // e.stopPropagation;
+      // this.$refs.picker.open();
+      this.$toast("日期模块施工升级中...")
     },
   },
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
