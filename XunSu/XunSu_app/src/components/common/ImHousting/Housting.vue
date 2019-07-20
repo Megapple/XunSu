@@ -6,7 +6,7 @@
       </router-link>
     </mt-header>
     <div>
-      <img src="../../../assets/housting/housting1.jpg" class="imgstyle"></img>
+      <img src="../../../assets/housting/housting1.jpg" class="imgstyle" />
     </div>
     <div class="middle">
       <div class="content">
