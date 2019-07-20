@@ -112,7 +112,7 @@ export default {
   },
   methods:{
     tonext(){
-       var area=this.housearea; //面积
+      var area=this.housearea; //面积
       var bedroom=this.bedroomvalue; //几室
       var bed=this.bedvalue;   //几床
       var toilet=this.toilet;  //卫生间

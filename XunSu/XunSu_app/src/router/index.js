@@ -32,6 +32,8 @@ import UserImage from "../components/common/ImHousting/userimage.vue"
 import Houstingmsg from "../components/common/ImHousting/Houstingmsg.vue"
 import HoustingFacility from "../components/common/ImHousting/HoustingFacility.vue"
 
+import Me from "../components/me//me.vue"
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,7 @@ export default new Router({
     {path:'/Usermsg',component:UserMsg},
     {path:'/Userimage',component:UserImage},
     {path:'/Houstingmsg',component:Houstingmsg},
-    {path:'/HoustingFacility',component:HoustingFacility}
+    {path:'/HoustingFacility',component:HoustingFacility},
+    {path:'/Me',component:Me},
   ]
 })
