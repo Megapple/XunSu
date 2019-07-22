@@ -26,7 +26,9 @@ import { Checkbox, CheckboxGroup } from 'vant';
 import { RadioGroup, Radio } from 'vant';
 import { Stepper } from 'vant';
 import { Picker } from 'vant';
+import { Field } from 'vant';
 
+Vue.use(Field);
 Vue.use(Picker);
 Vue.use(Stepper);
 Vue.use(RadioGroup);

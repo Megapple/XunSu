@@ -101,7 +101,7 @@ export default {
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code==200){  
             this.$toast('房源设施添加成功',1000);
-           this.$router.push(`./`);
+           this.$router.push(`/HoustIntroduce?lid=${lid}`);
           }else{
              this.$messagebox("提示","提交错误，请重新提交");
            }
