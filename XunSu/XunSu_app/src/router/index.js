@@ -22,6 +22,7 @@ import Container4 from "../components/common/Container4.vue"
 import Odds from "../components/common/Odds.vue"
 import Odds2 from "../components/common/Odds2.vue"
 import Odds3 from "../components/common/Odds3.vue"
+import Search from "../components/common/Search.vue"
 
 import Signin from "../components/common/signin.vue"
 import Login from "../components/common/login.vue"
@@ -59,6 +60,7 @@ export default new Router({
     {path:'/Odds',component:Odds},
     {path:'/Odds2',component:Odds2},
     {path:'/Odds3',component:Odds3},
+    {path:'/Search',component:Search},
     {path:'/Add',component:Add},
     {path:'/Orderpay',component:Orderpay},
     {path:'/Usermsg',component:UserMsg},
