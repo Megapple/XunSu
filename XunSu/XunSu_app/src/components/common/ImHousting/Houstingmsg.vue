@@ -21,19 +21,19 @@
           </van-cell>
         </van-cell-group>   
       <h4>其他</h4>
-     
+      
       <div class="housemsg">
           
          <van-cell-group>
           <van-cell title="床数" @click="showPicker2 = true" is-link>
-            <span>{{bedvalue}}张床</span>
+            <span>{{bedvalue[1]}}张{{bedvalue[0]}}</span>
           </van-cell>  
-        
+
           <van-cell title="卫生间">
             <van-radio-group v-model="radio" @change="totoilet">
-            <van-radio name="1" class="float-r">独卫</van-radio>
-            <van-radio name="2" class="float-r">公卫</van-radio>
-          </van-radio-group>
+              <van-radio name="1" class="float-r">独卫</van-radio>
+              <van-radio name="2" class="float-r">公卫</van-radio>
+           </van-radio-group>
           </van-cell>
          
           <van-cell title="可住人数">
@@ -78,12 +78,14 @@
         @confirm="onConfirm1"
       />
     </van-popup>
+     <!-- <van-picker :columns="columns2" @change="onChange" /> -->
     <van-popup v-model="showPicker2" position="bottom">
       <van-picker
         show-toolbar
         :columns="columns2"
         @cancel="showPicker2 = false"
         @confirm="onConfirm2"
+        @change="onChange" 
       />
     </van-popup>
       
@@ -91,6 +93,10 @@
 </template>
 
 <script>
+const beds = {
+  '双人床': ['1','2','3','4','5','6','7','8','9','10'],
+  '单人床': ['1','2','3','4','5','6','7','8','9','10']
+};
 export default {
   data(){
     return {
@@ -100,27 +106,41 @@ export default {
       radiomsg:'整套出租',
       selected:"",
       columns: ['1', '2', '3', '4', '5','6','7','8','9','10'],
-      columns2: ['1', '2', '3', '4', '5', '6','7','8','9','10','11','12','13','14','15','16','17','18'],
+      columns2: [
+        {
+          values: Object.keys(beds),
+          className: 'column1'
+        },
+        {
+          values: beds['双人床'],
+          className: 'column2',
+          defaultIndex: 2
+        }
+      ],
       showPicker: false,
       showPicker2: false,
       value:"",
       value1:"1",
       bedroomvalue:"1",
-      bedvalue:"1",
+      bedvalue:["单人床","1"],
       toilet:"1"
     }
   },
   methods:{
+    onChange(picker, values) {
+      picker.setColumnValues(1, beds[values[0]]);
+    },
     tonext(){
       var area=this.housearea; //面积
       var bedroom=this.bedroomvalue; //几室
-      var bed=this.bedvalue;   //几床
+      var bed=this.bedvalue[1];   //几床
+      var bedSize=this.bedvalue[0]; //双人or单人
       var toilet=this.toilet;  //卫生间
       var htType=this.radiomsg;  //整套出租
       var tenant=this.value1;  //几人
       var url="house/reg";
       var uid = sessionStorage.getItem("uid");
-      var obj= {area,bedroom,bed,toilet,htType,tenant,uid};
+      var obj= {area,bedroom,bed,bedSize,toilet,htType,tenant,uid};
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code>0){  
              this.$toast("上传成功",1000);

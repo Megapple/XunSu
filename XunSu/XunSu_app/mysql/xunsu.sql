@@ -26,23 +26,25 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `leaseroom`;
 CREATE TABLE `leaseroom` (
   `lid` INT(11) PRIMARY KEY auto_increment, 
-  `uid` INT(11) default NULL,            #客户编号   
-  `time` DATETIME default NULL,          #发布时间
-  `title` VARCHAR(50) default '',        #标题
-  `describe` VARCHAR(500) default NULL,  #房源描述
-  `price` FLOAT default NULL,            #价格
-  `img` VARCHAR(500) default '',         #图片
-  `province` VARCHAR(20) default NULL,     #省
-  `city` VARCHAR(20) default NULL,         #市
+  `uid` INT(11) default NULL,               #客户编号   
+  `time` DATETIME default NULL,             #发布时间
+  `title` VARCHAR(50) default '',           #标题
+  `describe` VARCHAR(500) default NULL,     #房源描述
+  `price` FLOAT default NULL,               #价格
+  `holidayPrice` FLOAT default NULL,        #节假日价格
+  `img` VARCHAR(500) default '',            #图片
+  `province` VARCHAR(20) default NULL,      #省
+  `city` VARCHAR(20) default NULL,          #市
   `houseDistrict` VARCHAR(20) default NULL, #县
   `houseStreet` VARCHAR(20) default NULL,   #街道
-  `address` VARCHAR(100) default '',     #位置
-  `htType` VARCHAR(10) default NULL,   #租房类型（1-整套出租，2-单间出租，3-合住房间）  
-  `tenant` INT(3) default NULL,            #房客人数（宜住几人）
-  `bedroom` INT(3) default NULL,           #房源户型（卧室个数）
+  `address` VARCHAR(100) default '',        #位置
+  `htType` VARCHAR(10) default NULL,        #租房类型（1-整套出租，2-单间出租，3-合住房间）  
+  `tenant` INT(3) default NULL,             #房客人数（宜住几人）
+  `bedroom` INT(3) default NULL,            #房源户型（卧室个数）
   `bed` INT(3) default NULL,                #床个数（共几张）
-  `toilet`  VARCHAR(10) default NULL,              #true-独卫 false-公卫
-  `area` VARCHAR(10) default NULL,   #房屋面积
+  `bedSize` VARCHAR(10) default NULL,       #床大小（大床，小床）
+  `toilet`  VARCHAR(10) default NULL,       #true-独卫 false-公卫
+  `area` VARCHAR(10) default NULL,          #房屋面积
   CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
 );
 
@@ -85,15 +87,8 @@ DROP TABLE IF EXISTS `needKnow`;
 CREATE TABLE `needKnow`(
   `nid` INT(11) PRIMARY KEY auto_increment, 
   `fid` int(11) NOT NULL,
-  `checkTime1` INT NOT NULL,     #入住前几天可以100%退款
-  `checkTime2` INT NOT NULL,     #入住前几天可以50%退款
-  CONSTRAINT `fid` FOREIGN KEY (`fid`) REFERENCES `leaseroom` (`lid`)
-);
-/**房东要求**/
-DROP TABLE IF EXISTS `landlordRequire`;
-CREATE TABLE `landlordRequire`(
-  `ldid` INT(11) PRIMARY KEY auto_increment, 
-  `lfid` INT(11) NOT NULL,
+  `checkTime` INT NOT NULL,     #退订时是否宽松  1--宽松  2--适中  3--严格
+  `minimumDay` INT NOT NULL,    #最少入住时间
   `pets` BOOLEAN,           #允许（不允许）携带宠物
   `cooking` BOOLEAN,        #允许（不允许）做饭
   `meeting`BOOLEAN,         #允许（不允许）聚会
@@ -101,7 +96,7 @@ CREATE TABLE `landlordRequire`(
   `oldMan` BOOLEAN,         #适合（不适合）老人
   `children` BOOLEAN,       #适合（不适合）儿童
   `infant` BOOLEAN,         #适合（不适合）婴幼儿
-  CONSTRAINT `lfid` FOREIGN KEY (`lfid`) REFERENCES `leaseroom` (`lid`)
+  CONSTRAINT `fid` FOREIGN KEY (`fid`) REFERENCES `leaseroom` (`lid`)
 );
 
 
@@ -133,12 +128,12 @@ DROP TABLE IF EXISTS `roomOrder`;
 CREATE TABLE `roomOrder`(
   `roid` INT PRIMARY KEY AUTO_INCREMENT,
   `rouid` INT(11),
-  `status` INT,             #订单状态  1-等待付款  2-等待入住  3-已入住  4-已取消
-  `homeCount` INT,              #订单数量
+  `status` INT,              #订单状态  1-等待付款  2-等待入住  3-已入住  4-已取消
+  `homeCount` INT,           #订单数量
   `orderTime` datetime,      #下单时间
   `payTime` datetime,        #付款时间
   `joinTime` datetime,       #入住时间
-  `leaveTime` datetime,       #离开时间
+  `leaveTime` datetime,      #离开时间
   CONSTRAINT `rouid` FOREIGN KEY (`rouid`) REFERENCES `users` (`uid`)
 )AUTO_INCREMENT=10000000;
 
@@ -176,12 +171,11 @@ INSERT INTO `users` (`uid`, `uname`, `upwd`, `phone`, `email`, `user_name`, `ava
 
 
 
-INSERT INTO `leaseroom`  VALUES (NULL, '1', '2019-07-04 00:00:00', 'Stey 共享居住空间｢胡同里的设计酒店Studio｣步行可达故宫&王府井,适合差旅､年轻旅行者', '你好,欢迎回家!-王府井不仅是一个由先锋设计师打造的精品酒店,更是你旅途中的家,一个充满多元与活力的社区｡', '780', '', '北京市','北京市','海淀区','王府井','王府井', '单间出租', '2', '1', '1', '独卫', '15');
-INSERT INTO `leaseroom`VALUES (NULL, '1', '2019-02-03 00:00:00', '【桃可了Cola】茶室主题民宿 地铁口200米投影仪独立小院,地铁一站直达五四广场及各大景点', '这间房子的前身是一个茶室,位于一个幽静巷深的老房子一楼一室一厅带一个小院(房客享用整个房源)木板小院与四周的草木林给您呼唤出内心最深处的惬意平和,茶室现在升级搬去别的地方,于是就有了“茶居”｡房子的主题围绕茶文化所铺设,落地玻璃房的院子,在阳台晒着太阳,喝着茶再惬意不过了｡', '650', '', '北京市','北京市','海淀区','王府井','王府井', '单间出租', '3', '1', '1', '独卫', '15');
+INSERT INTO `leaseroom`  VALUES (NULL, '1', '2019-07-04 00:00:00', 'Stey 共享居住空间｢胡同里的设计酒店Studio｣步行可达故宫&王府井,适合差旅､年轻旅行者', '你好,欢迎回家!-王府井不仅是一个由先锋设计师打造的精品酒店,更是你旅途中的家,一个充满多元与活力的社区｡', '780', '780', '', '北京市','北京市','海淀区','王府井','王府井', '单间出租', '2', '1', '1','双人床', '独卫', '15');
+INSERT INTO `leaseroom`VALUES (NULL, '1', '2019-02-03 00:00:00', '【桃可了Cola】茶室主题民宿 地铁口200米投影仪独立小院,地铁一站直达五四广场及各大景点', '这间房子的前身是一个茶室,位于一个幽静巷深的老房子一楼一室一厅带一个小院(房客享用整个房源)木板小院与四周的草木林给您呼唤出内心最深处的惬意平和,茶室现在升级搬去别的地方,于是就有了“茶居”｡房子的主题围绕茶文化所铺设,落地玻璃房的院子,在阳台晒着太阳,喝着茶再惬意不过了｡', '650', '650', '', '北京市','北京市','海淀区','王府井','王府井', '单间出租', '3', '1', '1', '双人床','独卫', '15');
 INSERT INTO `leaseroom` VALUES 
-(NULL, '3', '2019-02-03 00:00:00', '【奕25】地铁房,万达,五四广场,栈桥,八大关,啤酒博物馆,小鱼山,海底世界,奥帆中心,送旅行攻略', '距地铁站500米,可乘地铁游览青岛所有景点:五四广场,灯光秀,奥帆中心,海水浴场,极地海洋世界,八大关风景区,海底世界,崂山风景区,小鱼山,栈桥,啤酒博物馆,海军博物馆,火车站,火车北站等｡', '234', '', '山东省','青岛市','市北区','新疆路','敦化路街道', '整套公寓', '3', '1', '1', '独卫', '60');
-INSERT INTO `leaseroom` VALUES 
-(NULL, '3', '2019-02-19 00:00:00', '留白 清新北欧风 靠近地铁站 地铁3､4号线市二医院站可到达 走路可到太古里 春熙路哦', '精致少女的房间 楼下就是地铁三号线､四号线､温馨北欧风 走路10分钟可到达太古里 春熙路 房间内设有独立的卫生间 厨房 床品 生活用品都是一客一换 希望你像爱护你的家一样爱护它', '199', '', '山东省','青岛市','市北区','新疆路','9号', '整套公寓', '3', '1', '1', '独卫', '34');
+(NULL, '3', '2019-02-03 00:00:00', '【奕25】地铁房,万达,五四广场,栈桥,八大关,啤酒博物馆,小鱼山,海底世界,奥帆中心,送旅行攻略', '距地铁站500米,可乘地铁游览青岛所有景点:五四广场,灯光秀,奥帆中心,海水浴场,极地海洋世界,八大关风景区,海底世界,崂山风景区,小鱼山,栈桥,啤酒博物馆,海军博物馆,火车站,火车北站等｡', '234', '234', '', '山东省','青岛市','市北区','新疆路','敦化路街道', '整套公寓', '3', '1', '1', '单人床','独卫', '60');
+
 
 
 -- 设施
@@ -191,10 +185,10 @@ INSERT INTO `facility` VALUES (NULL,'1', '2', '1', '1', '1', '1', '1', '1', '1',
 INSERT INTO `facility` VALUES (NULL,'3', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '1', '1', '1', '1','1','0','0','1','1','1');
 -- 房东要求
 
-INSERT INTO `landlordrequire` VALUES (NULL,'1', '1', '1', '0', '1', '1', '0', '0');
-INSERT INTO `landlordrequire` VALUES (NULL,'2', '1', '1', '0', '1', '1', '0', '0');
-INSERT INTO `landlordrequire` VALUES (NULL,'3', '1', '1', '1', '1', '1', '0', '0');
-INSERT INTO `landlordrequire` VALUES (NULL,'4', '1', '1', '1', '1', '1', '0', '0');
+INSERT INTO `needKnow` VALUES (NULL,'1','2','1', '1', '1', '0', '1', '1', '0', '0');
+INSERT INTO `needKnow` VALUES (NULL,'2','2','2', '1', '1', '0', '1', '1', '0', '0');
+INSERT INTO `needKnow` VALUES (NULL,'2','2','3', '1', '1', '1', '1', '1', '0', '0');
+INSERT INTO `needKnow` VALUES (NULL,'2','2','4', '1', '1', '1', '1', '1', '0', '0');
 
 
 INSERT INTO `homepic` VALUES (NULL, '1', '/images/house/1a8cad81-5292-4d41-bb3d-68c67c32483b.jpg');
