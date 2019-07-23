@@ -34,7 +34,7 @@
                 >
         </mt-datetime-picker>
         </div>  
-        <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题">
+        <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题" @click="search">
     </div>      
     </div>
     <!-- 下拉列表 -->
@@ -94,11 +94,19 @@
     <!-- 中间内容 -->
     <div class="content">
         <div class="tent">
-            <div class="tent_img"><img src="../assets/img/house_3.jpg" alt=""></div>
-            <i iconfont></i>
-            <span>【海迪王国】</span><span>美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
-            <span>独立一间·1居室·可住2~3人·小寨</span>
-            <span>¥238</span>
+                <div class="tent_info">
+                    <img class="tent_img" src="../assets/img/big9.jpg" alt="">
+                    <i class="iconfont icon-shoucang5" @click="tent_collect"></i>
+                    <div class="tent_detail">
+                        <span>【海迪王国】 美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
+                        <span>整套·1居室·可住2~3人·小寨</span>
+                        <div>
+                        <span>¥238</span>
+                        <span>新人首单优惠</span>
+                        </div>
+                        <i class="iconfont icon-shoucang2"></i>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
@@ -187,6 +195,14 @@ export default {
         },
         // 筛选选择 背景色改变
         onFacility(e){}, 
+        // 点击进入收藏
+        tent_collect(){
+            this.$router.push("./Collect")
+        },
+        // 切换搜索
+        search(){
+           this.$router.push("./Search")
+        },
     }
 }
 </script>
@@ -253,19 +269,49 @@ export default {
 }
 .content{
    margin:15px 10px;
-   /* text-align: center; */
 }
 .tent{
-    width:80%;
+    width:98%;height: 320px;
     background-color: #faf9f9;
-    /* padding:5px 5px; */
+    padding:5px 5px;
     overflow: hidden;
-    
+}
+.tent_info{
+    padding:10px;
+    position: relative;
 }
 .tent_img{
-    height:100px;
-    background-size:cover;
-    border-radius: 10px;
+    width:100%;height:200px;
+    box-shadow: 0 0 5px #000;
+    border-radius: 5px;
+}
+.iconfont.icon-shoucang5{
+    font-size:25px;
+    position: absolute;
+    top:10px;left:310px;
+    color: #faf9f9;;
+}
+.tent_detail{
+    display: flex;
+    flex-flow: column;
+    padding:5px;
+}
+.tent_detail span:nth-child(2){
+    font-size: 13px;
+    color:#b3b3b3;
+    margin:10px 0;
+}
+.tent_detail>div span:nth-child(1),.tent_detail>div span:nth-child(2){
+    color: rgb(245, 156, 26);
+}
+.tent_detail>div span:nth-child(2){font-size:10px; margin-left:5px;}
+.iconfont.icon-shoucang2{
+    font-size: 35px;
+    position: absolute;
+    top:80%;left:290px;
+    border:1px solid rgb(245, 156, 26);
+    border-radius: 80%;
+    background-color: rgb(245, 156, 26);
 }
 </style>
 
