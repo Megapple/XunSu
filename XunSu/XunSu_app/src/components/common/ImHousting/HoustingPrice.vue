@@ -25,7 +25,7 @@
       <h4>预定规则</h4>
         <van-cell-group>
           <van-cell title="最少入住时间">
-             <van-stepper v-model="value" />
+             <van-stepper v-model="value" />天
           </van-cell>
           <van-cell title="对房客要求" @click="showPicker" is-link>
           </van-cell>
@@ -45,13 +45,13 @@
           
           <van-cell-group>
             
-            <van-cell title="宽松" clickable @click="radio = '1'" label="入住前1天12:00前提前退订，可获得100%退款。之后退订不退款">
+            <van-cell title="宽松" clickable @click="radio = '1';show=false" label="入住前1天12:00前提前退订，可获得100%退款。之后退订不退款">
               <van-radio slot="right-icon" name="1" />
             </van-cell>
-            <van-cell title="适中" clickable @click="radio = '2'" label="入住前5天12:00前提前退订，可获得100%退款。之后退订不退款">
+            <van-cell title="适中" clickable @click="radio = '2';show=false" label="入住前5天12:00前提前退订，可获得100%退款。之后退订不退款">
               <van-radio slot="right-icon" name="2" />
             </van-cell>
-            <van-cell title="严格" clickable @click="radio = '3'" label="入住前7天12:00前提前退订，可获得100%退款。之后退订不退款">
+            <van-cell title="严格" clickable @click="radio = '3';show=false" label="入住前7天12:00前提前退订，可获得100%退款。之后退订不退款">
               <van-radio slot="right-icon" name="3" />
             </van-cell>
           </van-cell-group>
@@ -71,11 +71,11 @@
               v-for="(item, index) in list"
               clickable
               :key="item"
-              :title="`复选框 ${item}`"
+              :title="`${item}`"
               @click="toggle(index)"
             >
               <van-checkbox
-                :name="item"
+                :name="index"
                 ref="checkboxes"
                 slot="right-icon"
               />
@@ -105,12 +105,38 @@ export default {
       value:"",
       radio:"1",
       result:[],
-      list:['允许携带宠物','允许做饭','允许聚会','允许吸烟','适合老人','适合儿童','适合婴幼儿']
+      list:['允许携带宠物','允许做饭','允许聚会','允许吸烟','适合老人','适合儿童','适合婴幼儿'],
+      l:[0,0,0,0,0,0,0]
     }
   },
   methods:{
     tonext(){
-
+      var r=this.result;
+      for(var key in r){
+        var num=r[key];
+        this.l[num]=1;
+      }
+      console.log(this.price1);
+      console.log(this.price2);
+      console.log(this.value);
+      console.log(this.radio);
+      console.log(this.l);
+      var url="house/needKnow";
+      var lid=this.$route.query.lid;
+      var price1=this.price1;      //平常价格
+      var price2=this.price2;     //节假日价格
+      var minimumDay=this.value;  //最少入住天数
+      var checkTime=this.radio;   //入住时是否宽松
+      var needknow=this.l;
+      var obj= {lid,price1,price2,minimumDay,checkTime,needknow};
+      this.axios.get(url,{params:obj}).then(result=>{
+          if(result.data.code==200){  
+            this.$toast('房源设施添加成功',1000);
+           this.$router.push(`/HoustIntroduce?lid=${lid}`);
+          }else{
+             this.$messagebox("提示","提交错误，请重新提交");
+           }
+      }) 
     },
     showPicker(){
        this.show2=true;

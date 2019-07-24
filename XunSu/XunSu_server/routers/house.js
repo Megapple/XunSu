@@ -13,7 +13,7 @@ router.get('/reg',function(req,res){
   var htType=req.query.htType;  //整套出租
   var tenant=req.query.tenant;  //几人
   var uid=req.query.uid;
-  var str="INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`,`bedSize`, `toilet`, `area`) VALUES (NULL, ?, NULL, '', NULL, NULL, '', '', ?, ?, ?, ?, ?, ?)";
+  var str="INSERT INTO `leaseroom` (`lid`, `uid`, `time`, `title`, `describe`, `price`, `img`, `address`, `htType`, `tenant`, `bedroom`, `bed`,`bedSize`, `toilet`, `area`) VALUES (NULL, ?, NULL, '', NULL, NULL, '', '', ?, ?, ?,?, ?, ?, ?)";
   pool.query(str,[uid,htType,tenant,bedroom,bed,bedSize,toilet,area],function(err,result){
         if (err) throw err;
     		if (result.affectedRows>0)

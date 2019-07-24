@@ -60,7 +60,7 @@ export default {
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code>0){  
              this.$toast("上传成功",1000);
-           this.$router.push(`./`);
+           this.$router.push(`/HoustingPrice?lid=${lid}`);
           }else{
              this.$toast("上传失败，请重新填写",1000);
            }

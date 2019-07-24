@@ -96,7 +96,7 @@ export default {
        var lid=this.$route.query.lid;
       var url="house/facility";
       var lid=this.$route.query.lid;
-      var address=this.plot+this.specific;
+      // var address=this.plot+this.specific;
       var obj= {lid,sum};
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code==200){  
