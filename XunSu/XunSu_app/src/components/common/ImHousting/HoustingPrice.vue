@@ -116,11 +116,6 @@ export default {
         var num=r[key];
         this.l[num]=1;
       }
-      console.log(this.price1);
-      console.log(this.price2);
-      console.log(this.value);
-      console.log(this.radio);
-      console.log(this.l);
       var url="house/needKnow";
       var lid=this.$route.query.lid;
       var price1=this.price1;      //平常价格

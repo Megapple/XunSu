@@ -82,6 +82,36 @@ router.get('/title',function(req,res){
     }
   })
 })	
+//插入价格
+router.get('/needKnow',function(req,res){
+  var lid=req.query.lid; 
+  var price1=req.query.price1;
+  var price2=req.query.price2;
+  var needknow=req.query.needknow;  //入住须知
+  var minimumDay=req.query.minimumDay; //最少入住天数
+  var checkTime=req.query.checkTime; //入住时是否宽松1-宽松2-适中3-严格
+  // var num=[lid,checkTime,minimumDay];
+  var num=[lid,checkTime,minimumDay].concat(needknow);
+  var str="INSERT INTO needKnow VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  var str2="UPDATE leaseroom SET `price`=?,`holidayPrice`=? WHERE `lid`=?"; 
+  pool.query(str2,[price1,price2,lid],function(err,result){
+    if (err) throw err;
+    if (result.affectedRows>0)
+    {
+      pool.query(str,num,function(err,result){
+        if (err) throw err;
+    		if (result.affectedRows>0)
+    		{
+          res.send({code:200,msg:result});
+    		}else{
+    			res.send({code:401,msg:'false'});
+    		}
+    	})
+    }else{
+      res.send({code:401,msg:'false'});
+    }
+  })
+})
 // });
 // //2.删除商品
 // router.get('/delete',function(req,res){

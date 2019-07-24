@@ -27,7 +27,9 @@ import { RadioGroup, Radio } from 'vant';
 import { Stepper } from 'vant';
 import { Picker } from 'vant';
 import { Field } from 'vant';
+import { Uploader } from 'vant';
 
+Vue.use(Uploader);
 Vue.use(Field);
 Vue.use(Picker);
 Vue.use(Stepper);
@@ -51,6 +53,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  components: { App},
+  template: '<App/>',
 })
+

@@ -141,7 +141,7 @@ CREATE TABLE `roomOrder`(
 CREATE TABLE homePic(
   `hid` INT(11) PRIMARY KEY auto_increment, 
   `homeid` INT,                 #房源编号
-  `imgUrl` VARCHAR(128),             #图片路径
+  `imgurl` VARCHAR(128),             #图片
   FOREIGN KEY (`homeid`) REFERENCES `leaseroom` (`lid`)
 );
 /**评论表**/

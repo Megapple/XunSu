@@ -92,7 +92,7 @@ export default {
     upload(el){
      var file=el.target.files[0];
      var type=file.type.split('/');
-    //  console.log(file);
+     console.log(file);
     var uid = sessionStorage.getItem("uid");
      if(type[0]==='image'){
       var formData = new FormData();

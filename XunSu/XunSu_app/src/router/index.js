@@ -34,7 +34,8 @@ import Houstingmsg from "../components/common/ImHousting/Houstingmsg.vue"
 import HoustingFacility from "../components/common/ImHousting/HoustingFacility.vue"
 import HoustIntroduc from "../components/common/ImHousting/HoustIntroduc.vue"
 import HoustingPrice from "../components/common/ImHousting/HoustingPrice.vue"
-import Me from "../components/me//me.vue"
+import HoustingImage from "../components/common/ImHousting/HoustingImage"
+import Me from "../components/me/me.vue"
 
 
 Vue.use(Router)
@@ -69,7 +70,8 @@ export default new Router({
     {path:'/HoustingFacility',component:HoustingFacility},
     {path:'/Me',component:Me},
     {path:'/HoustIntroduce',component:HoustIntroduc},
-    {path:'/HoustingPrice',component:HoustingPrice}
+    {path:'/HoustingPrice',component:HoustingPrice},
+    {path:'/HoustingImage',component:HoustingImage}
     
   ]
 })
