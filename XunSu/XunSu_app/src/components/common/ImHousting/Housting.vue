@@ -54,6 +54,12 @@ export default {
 
     } 
   },
+  created:function(){
+   if(!sessionStorage.getItem("uid")){
+      this.$messagebox("提示","您还未登录，请登录");
+      this.$router.push('./login')
+   }
+  },
   methods:{
     details:function(){
       var uid = sessionStorage.getItem("uid");
@@ -79,9 +85,7 @@ export default {
               this.isCompleted="已完成";
               this.b=false;
             }
-          }else{
-             this.$messagebox("提示","您还未登录，请登录");
-           }
+          }
       }) 
     },
     tomsg(){
@@ -118,6 +122,11 @@ export default {
       }else{
         this.$toast("请完善信息");
       }
+    }
+  },
+    updated:function(){
+    if(this.a==false && this.b==false){
+      this.$router.push('./house')
     }
   },
 }
