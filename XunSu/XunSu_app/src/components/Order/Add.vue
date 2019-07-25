@@ -57,7 +57,14 @@ export default {
     },//data结束
     methods:{
         addData(){
-            console.log(11);
+            var url="/AddMsg";
+            var obj={username:username,phone:phone,idCard:idCard};
+            this.axios.post(url,{params:obj}).then(res=>{
+                console.log(res);
+                this.$toast("保存成功");
+                this.$router.push('/Orderdetail')
+            })
+            
         }
     }
 }

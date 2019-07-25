@@ -162,6 +162,15 @@ CREATE TABLE `comment`(
   `content` VARCHAR(255),   #回复内容
   `fromUid` INT             #回复用户id
 );
+/** 入住人信息表***/
+DROP TABLE IF EXISTS `add_guest_msg`;
+CREATE TABLE `add_guest_msg`(
+  `id`  INT PRIMARY KEY AUTO_INCREMENT,   #入住人信息编号
+  `name` VARCHAR(32),           # 入住人姓名
+  `phone` VARCHAR(22),          #入住人联系方式
+  `credentials` VARCHAR(12),    #入住人证件类型
+  `cardid`    VARCHAR(32)         #入住人证件号码 
+);
 
 /*******************/
 /******数据导入******/
