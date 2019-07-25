@@ -34,9 +34,9 @@ export default {
         return{
             remen:["小寨","钟楼回民街","永兴坊","城墙","大雁塔","大唐不夜城","龙首原","西安火车站"],
             pinpai:["梵谷","一木一宿","南舍","拾柒","步止","设计师民宿","理想国","inhome在家"],
-            history:["小寨"]
-        }
-    }
+            history:["小寨"],
+      }
+}
 }
 </script>
 <style scoped>
