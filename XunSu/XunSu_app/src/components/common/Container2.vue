@@ -99,7 +99,7 @@ export default {
     margin-top:5px;
     padding:5px 10px;
 }  
-/deep/.mint-button--normal{
+.mint-button--normal{
     margin:10px 110px;
     height:25px; 
     border-radius: 50px;
