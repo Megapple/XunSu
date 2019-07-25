@@ -31,10 +31,8 @@
     <img :src="require('../assets/img/glass.png')"  class="searchImg "/>
     <span>|</span>
     <div class="location" @click="location">
-      <a href="#">
         <img :src="require('../assets/img/option.png')"  class="locationImg" />
         <span class="locationtxt">搜附近</span>
-      </a>
     </div>
  </div>
   <div class="index clearfix">
@@ -51,31 +49,31 @@
     <div>
     <mt-tab-container v-model="active">
         <mt-tab-container-item id="tab1">
-            <a href="#"><container :img_dali1="require('../assets/img/dlgc.jpg')" 
+            <container :img_dali1="require('../assets/img/dlgc.jpg')" 
             :img_dali2="require('../assets/img/dlyc.jpg')" 
             :img_dali3="require('../assets/img/dljz.jpg')"
             :img_dali4="require('../assets/img/dljr.jpg')" 
             :add="myadd"
             :cityadd="myadd"
-            ></container></a>
+            ></container>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
-            <a href="#"><container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+            <container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
             :img_hz2="require('../assets/img/hzmj.jpg')"
             :img_hz3="require('../assets/img/hzys.jpg')"
-            :img_hz4="require('../assets/img/hzxh.jpg')"></container2></a>
+            :img_hz4="require('../assets/img/hzxh.jpg')"></container2>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab3">
-            <a href="#"><container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
+            <container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
             :img_cd2="require('../assets/img/cdsx1.jpg')"
             :img_cd3="require('../assets/img/cdsx2.jpg')"
-            :img_cd4="require('../assets/img/cdcz.jpg')"></container3></a>
+            :img_cd4="require('../assets/img/cdcz.jpg')"></container3>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab4">
-            <a href="#"><container4 :img_gl1="require('../assets/img/yszj.jpg')" 
+            <container4 :img_gl1="require('../assets/img/yszj.jpg')" 
             :img_gl2="require('../assets/img/ysgs.jpg')"
             :img_gl3="require('../assets/img/yswb.jpg')"
-            :img_gl4="require('../assets/img/ysxs.jpg')"></container4></a>
+            :img_gl4="require('../assets/img/ysxs.jpg')"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
     </div>
@@ -93,13 +91,13 @@
         <div class="theme_second">
             <div class="theme1">
                 <div class="theme1_one" @click="myadd">
-                    <a href="#"><img src="../assets/img/big7.jpeg" alt=""></a>
+                    <img src="../assets/img/big7.jpeg" alt="">
                     <div class="theme_p">
                     <p>旅拍圣地</p>
                     </div>
                 </div>
                 <div class="theme1_two"  @click="myadd">
-                    <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+                    <img src="../assets/img/big9.jpg" alt="">
                     <div class="theme_p">
                     <p>逛吃天堂</p>
                     </div>
@@ -107,20 +105,20 @@
             </div>
             <div class="theme1">
                 <div class="theme2_one">
-                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                    <img src="../assets/img/big4.jpeg" alt="">
                     <div class="theme_p"><p>古镇风情</p></div>                   
                 </div>
                 <div class="theme2_one">
-                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                    <img src="../assets/img/big4.jpeg" alt="">
                     <div class="theme_p"><p>蜜月圣地</p></div>
                 </div>
                 <div class="theme2_one">
-                    <a href="#"><img src="../assets/img/big4.jpeg" alt=""></a>
+                   <img src="../assets/img/big4.jpeg" alt="">
                     <div class="theme_p"><p>亲自乐园</p></div>
                 </div>
             </div>
         </div>
-        <mt-button class="oddsbom"><a href="#">查看更多主题酒店 ></a></mt-button>
+        <mt-button class="oddsbom">查看更多主题酒店 ></mt-button>
     </div>
     <div class="odds">
         <div class="odd_first">
@@ -153,27 +151,27 @@
         </div>
         <mt-tab-container v-model="active2">
             <mt-tab-container-item id="odd1">
-                <a href="#"><odds :img_dali1="require('../assets/img/dlgc.jpg')" 
+                <odds :img_dali1="require('../assets/img/dlgc.jpg')" 
                 :img_dali2="require('../assets/img/dlyc.jpg')" 
                 :img_dali3="require('../assets/img/dljz.jpg')"
                 :img_dali4="require('../assets/img/dljr.jpg')"
                 :add="myadd"
-                ></odds></a>
+                ></odds>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
-                <a href="#"><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+                ><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
                 :img_hz2="require('../assets/img/hzmj.jpg')"
                 :img_hz3="require('../assets/img/hzys.jpg')"
-                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2></a>
+                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd3">
-                <a href="#"><odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
+                <odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
                 :img_gl2="require('../assets/img/ysgs.jpg')"
                 :img_gl3="require('../assets/img/yswb.jpg')"
-                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3></a>
+                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3>
             </mt-tab-container-item>
         </mt-tab-container>
-        <mt-button class="oddsbom" @click="myadd"><a href="#">查看更多超值特惠酒店 ></a></mt-button>
+        <mt-button class="oddsbom" @click="myadd">查看更多超值特惠酒店</mt-button>
     </div>
     <div class="story_bottom ">
         <h3>我们の故事</h3>
@@ -280,7 +278,7 @@ export default {
    },
    methods:{
         myadd(){
-           this.$router.push("./Detail")
+           this.$router.push("./Detail?lid=2")
        },
        location(){
            this.$router.push("./Home2")
@@ -449,7 +447,6 @@ a{text-decoration: none;}
     padding:5px 5px;
     font-size:13px;
 }
-.oddsbom a{color:#707274;}
 .story_bottom{
     height:455px;
     text-align: center;

@@ -96,7 +96,7 @@
         <div class="tent">
                 <div class="tent_info">
                     <img class="tent_img" src="../assets/img/big9.jpg" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect"></i>
+                    <i class="iconfont icon-shoucang5" @click="tent_collect" id="icon"></i>
                     <div class="tent_detail">
                         <span>【海迪王国】 美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
                         <span>整套·1居室·可住2~3人·小寨</span>
@@ -197,7 +197,13 @@ export default {
         onFacility(e){}, 
         // 点击进入收藏
         tent_collect(){
-            this.$router.push("./Collect")
+            var i=document.getElementById("icon")
+            if(i.className=="iconfont icon-shoucang5"){
+                i.className="iconfont icon-shoucang5 is-select"
+            }else{
+                i.className="iconfont icon-shoucang5"
+            }
+            // this.$router.push("./Collect")
         },
         // 切换搜索
         search(){
@@ -269,6 +275,7 @@ export default {
 }
 .content{
    margin:15px 10px;
+   height:100%;
 }
 .tent{
     width:98%;height: 320px;
@@ -291,6 +298,7 @@ export default {
     top:10px;left:310px;
     color: #faf9f9;;
 }
+.iconfont.icon-shoucang5.is-select{color:rgb(245, 156, 26);}
 .tent_detail{
     display: flex;
     flex-flow: column;
@@ -313,5 +321,6 @@ export default {
     border-radius: 80%;
     background-color: rgb(245, 156, 26);
 }
+
 </style>
 

@@ -73,7 +73,7 @@ export default {
     outline: none;
     font-size:13px;
 }
-.content{height:100%;margin-left:10px;}
+.content{height:595px;margin-left:10px;}
 .content h4{margin-bottom:8px;}
 .history-p,.remen-p,.pinpai-p{
     display: inline-block;

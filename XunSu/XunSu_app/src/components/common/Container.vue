@@ -3,7 +3,7 @@
     <div class="citys">
         <div class="first">
         <div class="dali" @click="add">
-            <a href="#"><img :src="img_dali1"></a>
+            <img :src="img_dali1">
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
@@ -102,11 +102,11 @@ export default {
     margin-top:5px;
     padding:5px 10px;
 }
-/deep/ .mint-button--normal{
+.mint-button--normal{
     margin:10px 110px;
     height:25px;
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }
-/deep/ .mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
+.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
 </style>

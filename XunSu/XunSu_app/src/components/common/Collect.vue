@@ -19,10 +19,9 @@ export default {
    },
    methods:{
        collect(){
-           this.$router.push("./Detail")
+           this.$router.push("./login")
        }
-   }
-   
+   } 
 }
 </script>
 
