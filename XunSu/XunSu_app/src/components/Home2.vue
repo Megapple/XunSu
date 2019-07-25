@@ -22,7 +22,7 @@
                 :startDate="startDate"
                 >
         </mt-datetime-picker >
-        <mt-datetime-picker
+        <!-- <mt-datetime-picker
                 v-model="leave"
                 type="date"
                 ref="picker"
@@ -32,7 +32,7 @@
                 @confirm="handleConfirm"
                 :startDate="startDate"
                 >
-        </mt-datetime-picker>
+        </mt-datetime-picker> -->
         </div>  
         <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题" @click="search">
     </div>      
@@ -180,7 +180,10 @@ export default {
         },
         onConfirm(e){
             this.$refs.item.toggle();    
-            e.stopPropagation();  
+        },
+        // 切换搜索
+        search(){
+           this.$router.push("./Search")
         },
         // 位置
         onNavClick(index) {
@@ -190,11 +193,9 @@ export default {
             this.activeId = data.id;
         },
         // 选择人数 房源信息改变
-        onbtn(){
-            console.log(1111)
-        },
-        // 筛选选择 背景色改变
-        onFacility(e){}, 
+        // onbtn(){
+        //     console.log(1111)
+        // },
         // 点击进入收藏
         tent_collect(){
             var i=document.getElementById("icon")
@@ -205,10 +206,14 @@ export default {
             }
             // this.$router.push("./Collect")
         },
-        // 切换搜索
-        search(){
-           this.$router.push("./Search")
-        },
+        // 房源信息加载
+        loadMore(){
+           var url="select";
+           
+        }
+    },
+    created(){
+        this.loadMore();
     }
 }
 </script>
