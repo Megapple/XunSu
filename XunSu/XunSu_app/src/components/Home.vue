@@ -159,7 +159,7 @@
                 ></odds>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
-                ><odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
+                <odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
                 :img_hz2="require('../assets/img/hzmj.jpg')"
                 :img_hz3="require('../assets/img/hzys.jpg')"
                 :img_hz4="require('../assets/img/hzxh.jpg')"></odds2>
@@ -265,19 +265,10 @@ export default {
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
-           items: [
-            {title: '你的名字',
-            href: 'http://google.com',   
-            url: 'http://127.0.0.1:3000/img/'
-            }, 
-            {title: '我的名字',
-            href: 'http://baidu.com',   
-            url: 'http://127.0.0.1:3000/img/'
-            }],
        }
    },
    methods:{
-        myadd(){
+       myadd(){
            this.$router.push("./Detail?lid=2")
        },
        location(){

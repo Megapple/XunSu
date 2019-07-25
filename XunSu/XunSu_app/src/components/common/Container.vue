@@ -29,7 +29,7 @@
             </div>
         </div>        
         <div class="dali">
-            <a href="#"><img :src="img_dali4" ></a>
+           <img :src="img_dali4" >
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
@@ -38,7 +38,7 @@
         </div>
         </div>  
     </div>
-    <mt-button @click="cityadd"><a href="#">查看更多大理酒店 ></a></mt-button>
+    <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
 </div>
 </template>
 <script>
@@ -108,5 +108,5 @@ export default {
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }
-.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
+.mint-button-text{font-size:13px;text-decoration: none;color:#707274;}
 </style>

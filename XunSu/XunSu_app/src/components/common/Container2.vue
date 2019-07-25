@@ -38,7 +38,7 @@
         </div>
         </div>  
     </div>
-    <mt-button><a href="#">查看更多杭州酒店 ></a></mt-button>
+    <mt-button>查看更多杭州酒店 ></mt-button>
 </div>
 </template>
 <script>
@@ -105,5 +105,5 @@ export default {
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
 }
-.mint-button-text>a{font-size:14px;text-decoration: none;color:#707274;}
+.mint-button-text{font-size:14px;text-decoration: none;color:#707274;}
 </style>
