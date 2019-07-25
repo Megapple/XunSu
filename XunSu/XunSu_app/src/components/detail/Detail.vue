@@ -101,7 +101,7 @@
       </div>
       <!-- 日历 end -->
       <div id="house" >
-        <div class="house_module" v-for="(r,i) of room" :key=i>
+        <div class="house_module" v-for="(r,i) of room" :key=i @click="openDetail()">
           <div class="house_img">
             <img src="../../assets/img/shijiehenda.png" alt="">
           </div>
@@ -124,6 +124,36 @@
             <span v-text="r.price"></span>
             <span>起</span>
           </div>
+          <mt-popup  v-model="housePopupVisible" position="bottom" style="width:100%;height:90%">
+            <div id="houseDetail">
+              <div id="hdTitle"> <!--house Detail Title-->
+                <span v-text="title"></span>
+              </div>
+              <div id="houseDetail2">
+                
+                <div id="hdPic">
+                  <img id="housePic" src="../../assets/img/big7.jpeg" alt="">
+                </div>
+                <div id="hdsTitle"> <!--house Detail small Title-->
+                  <span>房型信息</span>
+                </div>
+                <div id="hdMsg">
+                  <div>
+                    <span class="iconfont icon-jiudian"></span>
+                    <span v-text="r.area"></span>
+                  </div>
+                  <div>
+                    <span class="iconfont icon-ren3"></span>
+                    <span v-text="`可住${r.peo}人`"></span>
+                  </div>
+                  <div>
+                    <span class="iconfont icon-chuang"></span>
+                    <span v-text="r.bed"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mt-popup>
         </div>
       </div>
       <div id="comment"></div>
@@ -227,11 +257,12 @@ export default {
       mapTexts:["距高新国际1.0KM","达内山风景区外 | 达内山","高新区科技路168号"],
       goldVip:"您是金卡会员 本人预订本人入住可享",
       goldVipRight:["预订95折","免押金","欢迎卡片","13点退房"],
-      popupVisible:false,
       pickerVisible:"",
+      popupVisible:false,
+      housePopupVisible:false,
       //房型数据
       room:[
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
+        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699,},
         {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
         {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
         {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
@@ -298,6 +329,14 @@ export default {
         this.popupVisible=false;
       }
     },
+    //房型详情
+    openDetail(){
+      if(!this.housePopupVisible){
+        this.housePopupVisible=true;
+      }else{
+        this.housePopupVisible=false;
+      }
+    },
     //日期选择器
     openPicker(e){
       // e.stopPropagation;
@@ -308,6 +347,9 @@ export default {
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
   mounted() {
     window.addEventListener("scroll",this.navChange);
+  },
+  destroyed(){
+    window.removeEventListener("scroll",this.navChange);
   },
 }
 </script>
@@ -324,6 +366,7 @@ export default {
     .opa-dark{
       background:rgba(255,255,255,1);
       color:#000000;
+      z-index:222;
     }
     .iconfont{
       font-size:16px;
@@ -459,12 +502,7 @@ export default {
     #vipPage{
       height:100%;
       width:100%;
-      background:beige;
-    }
-    .mint-popup{
-      background:#f6f6f6;
-      height:100%;
-      width:100;
+      background: #cccccc;
     }
     div.v-modal{
       opacity:0;
@@ -476,7 +514,7 @@ export default {
       font-size:16px;
       padding:10px;
       box-sizing:border-box;
-      color:rgba(245,156,26,0.6);
+      color:rgba(245,156,26);
     }
     #vipsTitle{
       font-size:12px;
@@ -488,7 +526,7 @@ export default {
       margin:10px 0;
       text-align:center;
       font-size:20px;
-      color:rgba(245,156,26,0.6);
+      color:rgba(245,156,26);
     }
     #vipTable>li:nth-child(){
       font-size:12px;
@@ -599,6 +637,56 @@ export default {
       font-weight:100;
     }
   /* 房型CSS样式 end */
+  /* 房型详情CSS start */
+  #houseDetail{
+    height:100%;
+    width:100%;
+    background:#fff;
+    z-index:9999;
+  }
+  #houseDetail2{
+    padding:0 2%;
+  }
+  #hdTitle{
+    font-size:20px;
+    font-weight: bolder;
+    text-align:center;
+    border-bottom:1px solid rgba(0,0,0, 0.3);
+    padding:2% 0;
+    margin-bottom:2%;
+  }
+  #hdPic{
+    width:96%;
+    height:40%;
+    padding:0 2%;
+  }
+  #housePic{
+    border-radius:5%;
+  }
+  #hdsTitle{
+    font-size:16px;
+    font-weight:bolder;
+    margin:2% 0 2% 2%;
+  }
+  #hdMsg{
+    display:flex;
+    background:rgba(0,0,0, 0.1);
+    border-radius:2%;
+  }
+  #hdMsg>div{
+    width:33%;
+    text-align: center;
+    margin: 3% 0;
+  }
+  #hdMsg>div>span{
+    margin-left:0;
+    display:block;
+    font-size:14px;
+  }
+  #hdMsg>div>span:first-child{
+    font-size:30px;
+  }
+  /* 房型详情CSS end */
   /* 底部展示栏CSS start */
     .mint-navbar .mint-tab-item.is-selected {
       border-bottom: 3px solid rgba(245,156,26,1);

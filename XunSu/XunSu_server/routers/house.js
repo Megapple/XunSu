@@ -190,7 +190,34 @@ router.get('/needKnow',function(req,res){
     }else{
       res.send(output);
     }
-	});
+  });
+  //检索uid里面的Lid
+  	router.get('/myhouse',function(req,res){
+    var uid=req.query.uid;
+    var output={
+      leaseroom:[],
+      homePic:[]
+    }
+    if(uid!==undefined){
+      var sql1=`select * from leaseroom where uid=?`;
+      pool.query(sql1,[uid],(err,result)=>{
+        if(err) console.log(err);
+        var obj=output.leaseroom=result;
+        for(var key of obj){
+          var sql2=`select * from homePic where homeid=?`;
+          pool.query(sql2,[key.lid],(err,result)=>{
+            if(err) console.log(err);
+            output.homePic=result;
+            res.send({code:200,msg:output}); 
+            console.log(output);
+          })
+        }
+      })
+    }else{
+      res.send(output);
+    }
+  });
+
 // //5.检索商品
 // 	router.get('/list',function(req,res){
 // 		var obj=req.query;
