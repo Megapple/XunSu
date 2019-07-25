@@ -34,18 +34,19 @@ export default {
   components: {
     [Image.name]:Image
   },
-  // created:function(){
-  //   var uid = sessionStorage.getItem("uid");
-  //   var url="house/hashouse";
-  //    var obj= {uid};
-  //     this.axios.get(url,{params:obj}).then(result=>{
-  //         if(result.data.code==200){  
-  //           console.log(123);
-  //         }else{
-  //          console.log(456);
-  //          }
-  //     }) 
-  // },
+  created:function(){
+    var uid = sessionStorage.getItem("uid");
+    console.log(uid)
+    var url="house/myhouse";
+      this.axios.get(url,{params:uid}).then(result=>{
+        console.log(result.data);
+          if(result.data.code==200){  
+            console.log(result.data.msg);
+          }else{
+           console.log(456);
+           }
+      }) 
+  },
   methods:{
     issue(){
       
