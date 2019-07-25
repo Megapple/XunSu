@@ -138,7 +138,8 @@ CREATE TABLE `roomOrder`(
 )AUTO_INCREMENT=10000000;
 
 /**房源图片路径**/
-CREATE TABLE homePic(
+DROP TABLE IF EXISTS `homePic`;
+CREATE TABLE `homePic`(
   `hid` INT(11) PRIMARY KEY auto_increment, 
   `homeid` INT,                 #房源编号
   `imgurl` VARCHAR(128),             #图片

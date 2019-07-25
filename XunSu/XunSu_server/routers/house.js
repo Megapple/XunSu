@@ -152,25 +152,45 @@ router.get('/needKnow',function(req,res){
 // 		}
 // 	}
 // })
-// //4.查找商品
-// 	router.get('/select',function(req,res){
-// 		var obj=req.query;
-// 		if (!obj.pid)
-// 		{
-// 			res.send({code:400,msg:'pid required'});
-// 			return;
-// 		}
-// 		pool.query('SELECT * FROM xz_index_product WHERE ?',[obj.pid],function(err,result){
-// 			if(err) throw err;
-// 			if (result.length>0)
-// 			{
-// 				res.send(result);
-				
-// 			}else{
-// 				res.send({code:400,msg:'select false'});
-// 			}
-// 		})
-// 	});
+//查找房源信息
+	router.get('/select',function(req,res){
+    var lid=req.query.lid;
+    console.log(lid);
+    var output={
+      leaseroom:{},
+      facility:[],
+      needKnow:[],
+      homePic:[]
+    }
+    if(lid!==undefined){
+      var sql1=`select * from leaseroom where lid=?`;
+      pool.query(sql1,[lid],(err,result)=>{
+        if(err) console.log(err);
+        output.leaseroom=result[0];
+        console.log(output.leaseroom);
+         var uid=output.leaseroom.uid;
+         console.log(lid);
+        var sql2=`select * from facility where fhtid=?`;
+        pool.query(sql2,[lid],(err,result)=>{
+          if(err) console.log(err);
+          output.facility=result;
+          var sql3=`select * from needKnow where fid=?`
+          pool.query(sql3,[lid],(err,result)=>{
+            if(err) console.log(err);
+            output.needKnow=result;
+            var sql4=`select * from homePic where homeid=?`
+          pool.query(sql4,[lid],(err,result)=>{
+            if(err) console.log(err);
+            output.homePic=result;
+            res.send(output);
+          })
+          })
+        })
+      })
+    }else{
+      res.send(output);
+    }
+	});
 // //5.检索商品
 // 	router.get('/list',function(req,res){
 // 		var obj=req.query;
