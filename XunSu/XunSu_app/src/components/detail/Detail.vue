@@ -218,7 +218,7 @@
 export default {
   data() {
     return {
-      scroll:"",
+      scroll:0,
       carImg:3,
       title:"寻宿·达内山客栈",
       tags:["珠海环绕","雅致庭院","怀旧风格"],
@@ -255,8 +255,8 @@ export default {
   methods:{
     //Header样式
     navChange(){
-      var header=document.getElementById("header")
-      var htext=document.getElementsByClassName("cool");
+      let header=document.getElementById("header")
+      let htext=document.getElementsByClassName("cool");
       this.scroll=window.scrollY;
       if(this.scroll>100){
         header.className="mint-header opa-dark is-fixed";
@@ -308,6 +308,9 @@ export default {
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
   mounted() {
     window.addEventListener("scroll",this.navChange);
+  },
+  destroyed() {
+     window.removeEventListener("scroll",this.navChange);
   },
 }
 </script>
