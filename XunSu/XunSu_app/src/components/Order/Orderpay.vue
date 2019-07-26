@@ -130,9 +130,10 @@ export default {
                 if(i==val){
                     this.$toast({
                         message:`${i}支付成功`,
+                        
                         iconClass: 'icon icon-tanhao'  
                      });                      
-                      this.$router.push('/Home')   
+                      this.$router.push('/Order')   
                 }
             }
           
