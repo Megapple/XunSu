@@ -96,7 +96,7 @@
         <div class="tent">
                 <div class="tent_info" v-for="(item,i) of list" :key='i'>
                     <img class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect(item.uid,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)" id="icon"></i>
+                    <i class="iconfont icon-shoucang5" @click="tent_collect($event,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)" id="icon"></i>
                     <div class="tent_detail">
                         <span >{{item.title}}</span>
                         <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
@@ -205,13 +205,28 @@ export default {
         //     console.log(1111)
         // },
         // 点击进入收藏
-        tent_collect(uid,lid,title,img,htType,tenant,bedroom){
-            var i=document.getElementById("icon")
+        tent_collect(e,lid,title,img,htType,tenant,bedroom){
+            // var i=document.getElementById("icon")
+            var i=e.target;
+            var uid=sessionStorage.getItem("uid");
             if(i.className=="iconfont icon-shoucang5"){
-                console.log(uid,lid,title)
-                i.className="iconfont icon-shoucang5 is-select"
+                i.className="iconfont icon-shoucang5 is-select";
+                var obj={uid:uid,lid:lid,title:title,img:img,htType:htType,tenant:tenant,bedroom:bedroom};
+                this.axios.get("collect/insert", { params: obj }).then(result => {
+                    if (result.data.code == 200) {
+                         this.$toast("收藏成功",1000);
+                         console.log("chenggogn ")
+                    } 
+                });
             }else{
-                i.className="iconfont icon-shoucang5"
+                i.className="iconfont icon-shoucang5";
+                var obj={lid:lid};
+                this.axios.get("collect/delete", { params: obj }).then(result => {
+                    if (result.data.code == 200) {
+                         this.$toast("取消收藏",1000);
+                         console.log("取消 ")
+                    } 
+                });
             }
             // this.$router.push("./Collect")
         },

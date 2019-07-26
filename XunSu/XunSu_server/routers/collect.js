@@ -8,7 +8,7 @@ router.get("/insert",(req,res)=>{
           if(err) throw(err);
             // res.send({code:0});
             console.log(1)
-              res.send(result);
+              res.send({code:200,msg:"result"});
         })
  })
  router.get("/select",(req,res)=>{
@@ -16,13 +16,18 @@ router.get("/insert",(req,res)=>{
         var sql="SELECT * FROM collected WHERE couid=?";
         pool.query(sql,[obj.uid],(err,result)=>{
           if(err) throw(err);
+          if(result.length>0){
+            res.send({code:200,msg:result});
+          }else{
+              res.send({code:300,msg:"没有找到"})
+          }
             // res.send({code:0});
-            res.send(result);
+            
         })
  })
  router.get("/delete",(req,res)=>{
     var obj=req.query;
-    console.log(obj.uid)
+    console.log(obj.lid)
         var sql="DELETE FROM collected WHERE colid=?";
         pool.query(sql,[obj.lid],(err,result)=>{
           if(err) throw(err);

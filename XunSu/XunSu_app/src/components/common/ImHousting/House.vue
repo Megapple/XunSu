@@ -8,6 +8,9 @@
         <span>发布的房源</span>
       </div>
     <div class="content">
+      <div v-if="this.list.length==0">
+          <img src="../../../assets/img/4188bb0b93fc3d2d58af022818ad15ff.png" alt="" class="img-style">
+      </div>
       <div class="house-item"  v-for="(item,index) in list" :key="index">
         <van-image
           width="10rem"
@@ -25,7 +28,7 @@
         </div>
       </div>
     </div>
-    <mt-button type="primary" size="large" class="buttonPosition" @click="issue">继续发布房源</mt-button>
+    <mt-button type="primary" size="large" class="buttonPosition" @click="issue">{{house}}</mt-button>
   </div>
 </template>
 <script>
@@ -35,7 +38,8 @@ export default {
     return {
       list:[],
       imgurl:[],
-      uid:""
+      uid:"",
+      house:"发布房源"
     };
   },
   components: {
@@ -48,6 +52,10 @@ export default {
       this.$messagebox("提示","您还未登录，请登录");
       this.$router.push('./login')
    }else{
+     console.log(this.list)
+     if(this.list.length==0){
+       this.$messagebox("提示","您还未发布房源");
+     }
     var obj = { uid };
     var url = "house/myhouse";
     this.axios.get(url, { params: obj }).then(result => {
@@ -55,7 +63,6 @@ export default {
         this.list=result.data.msg.leaseroom;
         this.imgurl=result.data.msg.homePic;
         var length=this.imgurl.length-1;
-        console.log(this.list);
       } else {
         console.log("错误");
       }
@@ -173,5 +180,9 @@ p {
   position:absolute;
   top:5px;
   left:20px;
+}
+.img-style{
+  width:100%;position:absolute;
+  top:20%;
 }
 </style>
