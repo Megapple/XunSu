@@ -6,11 +6,32 @@
             </router-link>
                 <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
-        <div class="order1">
-            <img src="../../assets/Orderimage/order_background_image.jpg" alt="">
-            <h4 style="color:gray">您还没有订单哦!!</h4>
-            <mt-button size="large" @click="go">客官这边请</mt-button>
+        <div class="order-box">
+            <div class="order-detail" v-if="lid">
+                <div class="title">
+                    <p>酒店住宿</p>
+                    <p>已完成</p>
+                </div>
+                <div class="content">
+                    <p>酒店名称:希尔顿酒店</p>
+                    <p>预定房型:大床房 共1间</p>
+                    <p>入离日期:07.14至07.15 共1晚</p>
+                </div>
+                <div class="foot">
+                    <p>支付金额</p>
+                    <p>$496.00</p>
+                </div>
+                <p style="text-align:right;">
+                    <mt-button @click="againReserve" type="primary">再次预定</mt-button>
+                </p>
+            </div>
+            <div class="order1" v-else>
+                <img src="../../assets/Orderimage/order_background_image.jpg" alt="">
+                <h4 style="color:gray">您还没有订单哦!!</h4>
+                <mt-button size="large" @click="go">客官这边请</mt-button>
+            </div>
         </div>
+        
     
     </div>
 </template>
@@ -18,7 +39,7 @@
 export default {
     data(){
         return{
-
+            lid:2
         }//return 结束
     },//data 结束
     methods:{
@@ -28,7 +49,11 @@ export default {
            go() {
                this.$router.push('/Home');
 
+           },
+           againReserve(){
+               this.$router.push('/Orderdetail');
            }
+           
         }
 
     
@@ -60,6 +85,32 @@ export default {
     display: block;
     width: 83%;
     margin-left: 26px;
+}
+.order-detail{
+    padding:10px 3%;
+    margin:15px 3%;
+    background-color:#eee;
+    border-radius:5px;
+    color:#000;
+}
+.order-detail .title,.order-detail .foot{
+    display: flex;
+    justify-content: space-between;
+}
+.order-detail .content{
+    line-height:32px;
+}
+.order-box p{
+    margin:0;
+    padding:0;
+    line-height: 2;
+    
+}
+.mint-button--primary {
+    color: #fff;
+    background-color: rgb(245, 156, 26);
+    height: 32px;
+    width: 202px;
 }
 </style>
 

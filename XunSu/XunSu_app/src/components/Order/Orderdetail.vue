@@ -118,6 +118,7 @@ export default {
              price:"1000",
              value:"",
              sbumitPay:"",
+             lid:""
 
              
 
@@ -140,7 +141,7 @@ export default {
               if(!Regx.test(u_phone)){
                   this.$toast("无效的手机号码!请重新输入");
               }
-              },
+            },
                goPay(){
                var u=this.uname;
                var p=this.phone;
@@ -159,6 +160,10 @@ export default {
             go(){
                 this.$router.push('/Add');
             }
+        },
+        created(){
+            this.lid=this.$router.query.lid;
+            console.log(this.lid);
         }
 }
 </script>
