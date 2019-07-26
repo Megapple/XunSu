@@ -4,7 +4,7 @@
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
  <mt-swipe :auto="2000" class="top_swipe" >
-  <mt-swipe-item v-for="(item,i) of list.slice(0,3)"  :key="i">
+  <mt-swipe-item v-for="(item,i) of list.slice(0,4)"  :key="i">
        <img :src="'http://127.0.0.1:3000/'+item.img" class="img"/>
   </mt-swipe-item>
  </mt-swipe>
@@ -131,7 +131,7 @@
     <div class="story_bottom ">
         <h3>我们の故事</h3>
         <mt-swipe :auto="2000">
-            <mt-swipe-item v-for="(item,i) of list" :key="i">
+            <mt-swipe-item v-for="(item,i) of list.slice(0,4)" :key="i">
                 <img :src="'http://127.0.0.1:3000/'+item.img" alt="">
             </mt-swipe-item>
         </mt-swipe>
