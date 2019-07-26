@@ -100,6 +100,7 @@
         </mt-datetime-picker> -->
       </div>
       <!-- 日历 end -->
+      <!-- 房型 popup start -->
       <div id="house" >
         <div class="house_module" v-for="(r,i) of room" :key=i @click="openDetail()">
           <div class="house_img">
@@ -130,11 +131,10 @@
                 <span v-text="title"></span>
               </div>
               <div id="houseDetail2">
-                
                 <div id="hdPic">
                   <img id="housePic" src="../../assets/img/big7.jpeg" alt="">
                 </div>
-                <div id="hdsTitle"> <!--house Detail small Title-->
+                <div class="hdsTitle"> <!--house Detail small Title-->
                   <span>房型信息</span>
                 </div>
                 <div id="hdMsg">
@@ -151,11 +151,24 @@
                     <span v-text="r.bed"></span>
                   </div>
                 </div>
+                <div class="hdsTitle">
+                  <span>设施服务</span>
+                </div>
+                <div id="hdService">
+                  <div id="hdsModule" v-for="(r,i) of roomDetails" :key=i> <!--House Details Service Module-->
+                    <span :class="r.c"></span>
+                    <span v-text="r.msg"></span>
+                  </div>
+                </div>
+              </div>
+              <div id="hdBottom" @click="bookNow()">
+                <div id="bookNow">立即预订</div>
               </div>
             </div>
           </mt-popup>
         </div>
       </div>
+      <!-- 房型 popup end -->
       <div id="comment"></div>
       <!-- 配套服务模块 -->
       <mt-navbar id="fac" v-model="selected">
@@ -268,6 +281,16 @@ export default {
         {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
         {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699}
       ],
+      //房型详情页设施服务数组
+      roomDetails:[
+        {c:"iconfont icon-hservice",msg:"24H热水"},
+        {c:"iconfont icon-dianshi",msg:"液晶电视"},
+        {c:"iconfont icon-kongtiao-",msg:"空调"},
+        {c:"iconfont icon-yushiyongpin",msg:"独立浴室"},
+        {c:"iconfont icon-reshuihu",msg:"电热水壶"},
+        {c:"iconfont icon-chuifengji",msg:"吹风机"},
+        {c:"iconfont icon-xishuyongpin",msg:"洗漱用品"}
+      ],
       //配套服务tabbar
       selected:"fac1",
       //页尾广告
@@ -337,6 +360,10 @@ export default {
         this.housePopupVisible=false;
       }
     },
+    bookNow(){
+      // e.stopPropagation();
+      this.$router.push({path:"/Orderdetail",query:{lid:2}});
+    },
     //日期选择器
     openPicker(e){
       // e.stopPropagation;
@@ -355,9 +382,11 @@ export default {
 </script>
 
 <style scoped>
-  img{
-    width:100%;
-  }
+  /* 图片宽度 start */
+    img{
+      width:100%;
+    }
+  /* 图片宽度 end */
   /* 导航栏CSS start */
     .opa-light{
       background:rgba(255,255,255, 0);
@@ -376,9 +405,11 @@ export default {
       color:rgba(255,255,255,0);
     }
   /* 导航栏CSS end */
-  .mint-swipe{
-    height:211px;
-  }
+  /* 轮播高度 start */
+    .mint-swipe{
+      height:211px;
+    }
+  /* 轮播高度 end */
   /* 标题地图会员CSS start */
     #carImg{
       width:10%;
@@ -638,54 +669,90 @@ export default {
     }
   /* 房型CSS样式 end */
   /* 房型详情CSS start */
-  #houseDetail{
-    height:100%;
-    width:100%;
-    background:#fff;
-    z-index:9999;
-  }
-  #houseDetail2{
-    padding:0 2%;
-  }
-  #hdTitle{
-    font-size:20px;
-    font-weight: bolder;
-    text-align:center;
-    border-bottom:1px solid rgba(0,0,0, 0.3);
-    padding:2% 0;
-    margin-bottom:2%;
-  }
-  #hdPic{
-    width:96%;
-    height:40%;
-    padding:0 2%;
-  }
-  #housePic{
-    border-radius:5%;
-  }
-  #hdsTitle{
-    font-size:16px;
-    font-weight:bolder;
-    margin:2% 0 2% 2%;
-  }
-  #hdMsg{
-    display:flex;
-    background:rgba(0,0,0, 0.1);
-    border-radius:2%;
-  }
-  #hdMsg>div{
-    width:33%;
-    text-align: center;
-    margin: 3% 0;
-  }
-  #hdMsg>div>span{
-    margin-left:0;
-    display:block;
-    font-size:14px;
-  }
-  #hdMsg>div>span:first-child{
-    font-size:30px;
-  }
+    #houseDetail{
+      height:100%;
+      width:100%;
+      background:#fff;
+      z-index:9999;
+    }
+    #houseDetail2{
+      padding:0 2%;
+    }
+    #hdTitle{
+      font-size:20px;
+      font-weight: bolder;
+      text-align:center;
+      border-bottom:1px solid rgba(0,0,0, 0.3);
+      padding:2% 0;
+      margin-bottom:2%;
+    }
+    #hdPic{
+      width:96%;
+      height:40%;
+      padding:0 2%;
+    }
+    #housePic{
+      border-radius:5%;
+    }
+    .hdsTitle{
+      font-size:16px;
+      font-weight:bolder;
+      margin:2% 0 2% 2%;
+    }
+    #hdMsg{
+      display:flex;
+      background:rgba(0,0,0, 0.1);
+      border-radius:2%;
+    }
+    #hdMsg>div{
+      width:33%;
+      text-align: center;
+      margin: 3% 0;
+    }
+    #hdMsg>div>span{
+      margin-left:0;
+      display:block;
+      font-size:14px;
+    }
+    #hdMsg>div>span:first-child{
+      font-size:30px;
+    }
+    #hdService{
+      display:flex;
+      flex-wrap: wrap;
+      text-align:center;
+      padding:2%;
+      width:100%;
+    }
+    #hdsModule{
+      margin:0 2%;
+      width:20%;
+    }
+    #hdsModule>span{
+      font-size:14px;
+      display:block;
+      margin-left:0;
+    }
+    #hdsModule>span:first-child{
+      font-size:30px;
+    }
+    #hdBottom{
+      width:100%;
+      height:100%;
+      border-top: 1px solid rgba(0,0,0, 0.3);
+      box-sizing: border-box;
+      text-align:center;
+    }
+    #bookNow{
+      width:100%;
+      height:80%;
+      background:rgba(245,156,26,0.8);
+      position:fixed;
+      right:0;
+      font-size:30px;
+      color:#f5f5f5;
+      line-height:120%;
+    }
   /* 房型详情CSS end */
   /* 底部展示栏CSS start */
     .mint-navbar .mint-tab-item.is-selected {
