@@ -46,6 +46,7 @@
     </div>
 </template>
 <script>
+
 export default {
     data(){
         return{
@@ -57,12 +58,12 @@ export default {
     },//data结束
     methods:{
         addData(){
-            var url="/AddMsg";
-            var obj={username:username,phone:phone,idCard:idCard};
-            this.axios.post(url,{params:obj}).then(res=>{
+            var url="/add/AddMsg";
+            var obj={username:this.username,phone:this.phone,idCard:this.idCard};
+            this.axios.get(url, {params:obj}).then(res=>{
                 console.log(res);
                 this.$toast("保存成功");
-                this.$router.push('/Orderdetail')
+                this.$router.push('/Contacts')
             })
             
         }
