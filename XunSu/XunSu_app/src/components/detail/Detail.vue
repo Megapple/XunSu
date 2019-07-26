@@ -16,9 +16,9 @@
     <!-- mintui Header栏end -->
     <!-- mintui 轮播图start -->
     <mt-swipe :show-indicators="false">
-      <mt-swipe-item><img src="../../assets/img/1.jpg"></mt-swipe-item>
-      <mt-swipe-item><img src="../../assets/img/2.jpg"></mt-swipe-item>
-      <mt-swipe-item><img src="../../assets/img/3.jpg"></mt-swipe-item>
+      <mt-swipe-item  v-for="(img,i) of swipeImgs" :key=i>
+        <img :src="'http://127.0.0.1:3000/'+img">
+      </mt-swipe-item>
     </mt-swipe>
     <!-- mintui 轮播图end -->
     <!-- 轮播图小图标 start-->
@@ -104,7 +104,7 @@
       <div id="house" >
         <div class="house_module" v-for="(r,i) of room" :key=i @click="openDetail()">
           <div class="house_img">
-            <img src="../../assets/img/shijiehenda.png" alt="">
+            <img :src="'http://127.0.0.1:3000/'+houseImg">
           </div>
           <div class="house_detail">
             <div>
@@ -132,7 +132,7 @@
               </div>
               <div id="houseDetail2">
                 <div id="hdPic">
-                  <img id="housePic" src="../../assets/img/big7.jpeg" alt="">
+                  <img id="housePic" :src="'http://127.0.0.1:3000/'+houseImg">
                 </div>
                 <div class="hdsTitle"> <!--house Detail small Title-->
                   <span>房型信息</span>
@@ -261,13 +261,16 @@
 export default {
   data() {
     return {
+      lid:"",
       scroll:0,
       carImg:3,
-      title:"寻宿·达内山客栈",
+      swipeImgs:[],
+      title:"",
       tags:["珠海环绕","雅致庭院","怀旧风格"],
       grade:5.0,
       gradeText:"宿客说",
-      mapTexts:["距高新国际1.0KM","达内山风景区外 | 达内山","高新区科技路168号"],
+      mapTexts:[],
+      houseImg:[],
       goldVip:"您是金卡会员 本人预订本人入住可享",
       goldVipRight:["预订95折","免押金","欢迎卡片","13点退房"],
       pickerVisible:"",
@@ -275,11 +278,11 @@ export default {
       housePopupVisible:false,
       //房型数据
       room:[
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699,},
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699},
-        {title:"慧然大床房",bed:"两张床",area:"20m²",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:699}
+        {title:"",bed:"",area:"",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:""},
+        {title:"",bed:"",area:"",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:""},
+        {title:"",bed:"",area:"",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:""},
+        {title:"",bed:"",area:"",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:""},
+        {title:"",bed:"",area:"",peo:"2",tag1:"情侣优选",tag2:"蜜月推荐",price:""}
       ],
       //房型详情页设施服务数组
       roomDetails:[
@@ -342,7 +345,7 @@ export default {
     },
     //页头地图模块
     mapModel(){
-      this.$router.push("/DetailMap")
+      this.$router.push({path:"/DetailMap",query:{lid:this.lid,title:this.title}})
     },
     //vip权益页面
     vipPage(){
@@ -362,7 +365,7 @@ export default {
     },
     bookNow(){
       // e.stopPropagation();
-      this.$router.push({path:"/Orderdetail",query:{lid:2}});
+      this.$router.push({path:"/Orderdetail",query:{lid:this.lid}});
     },
     //日期选择器
     openPicker(e){
@@ -370,6 +373,42 @@ export default {
       // this.$refs.picker.open();
       this.$toast("日期模块施工升级中...")
     },
+    //axios请求(这步很关键)
+    init(){
+      var url="house/select";
+      this.axios.get(url,{
+        params:{lid:this.lid}
+      })
+      .then(result=>{
+        console.log(result.data);
+        //填充标题
+        this.title=result.data.leaseroom.title;
+        //填充轮播图
+        for(var i=1;i<4;i++){
+          this.swipeImgs.push(result.data.homePic[i].imgurl);
+        }
+        //填充地址
+        this.mapTexts.push(result.data.leaseroom.province);
+        this.mapTexts.push(`${result.data.leaseroom.city}|${result.data.leaseroom.houseDistrict}`);
+        this.mapTexts.push(result.data.leaseroom.address);
+        //填充room展示图
+        this.houseImg=result.data.leaseroom.img;
+        //填充room数组
+        for(var r of this.room){
+          r.title=result.data.leaseroom.htType;
+          r.bed=result.data.leaseroom.bedSize;
+          r.area=result.data.leaseroom.area+"m²";
+          r.price=result.data.leaseroom.price;
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    }
+  },
+  created(){
+    this.lid=this.$route.query.lid;
+    this.init();
   },
   //锚点跳转在挂载后添加事件受VUE管辖才可以获取scrollY属性的值
   mounted() {

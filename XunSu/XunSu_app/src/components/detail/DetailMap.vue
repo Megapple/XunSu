@@ -12,7 +12,8 @@
 export default {
   data() {
     return {
-      title:"寻宿·达内山客栈"
+      title:"",
+      lid:""
     }
   },
   methods:{
@@ -25,8 +26,12 @@ export default {
       });
     },
     back(){
-      this.$router.push("/Detail")
+      this.$router.push({path:"./Detail",query:{lid:this.lid}})
     }
+  },
+  created(){
+    this.lid=this.$route.query.lid;
+    this.title=this.$route.query.title;
   },
   mounted(){
     this.init()

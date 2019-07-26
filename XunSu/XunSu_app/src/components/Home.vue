@@ -216,7 +216,7 @@ export default {
    },
    methods:{
        myadd(){
-           this.$router.push("./Detail?lid=2")
+           this.$router.push({path:"./Detail",query:{lid:2}})
        },
        myadds(){
            this.$router.push("./Home2")

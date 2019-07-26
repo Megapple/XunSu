@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
 import Detail from '../components/detail/Detail.vue'
 import DetailMap from '../components/detail/DetailMap.vue'
 //引入Find_order_page组件
@@ -45,7 +45,7 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/',name: 'HelloWorld',component: HelloWorld},
+    {path: '/',name: 'Home',component: Home},
     {path:'/Order',component:Order},
     {path: '/Detail',name: 'Detail',component: Detail},
     {path: '/DetailMap',name: 'DetailMap',component: DetailMap},
