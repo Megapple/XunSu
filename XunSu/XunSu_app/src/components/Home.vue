@@ -277,8 +277,8 @@ export default {
        search(){
            this.$router.push("./Search")
        }
-   }
- }
+   },
+}
 </script>
 <style scoped>
 *{margin:0;padding:0px;}
