@@ -112,16 +112,30 @@ CREATE TABLE `chooseroom` (
   CONSTRAINT `cuid` FOREIGN KEY (`cuid`) REFERENCES `users` (`uid`)
 );
 
-
+-- 用户收藏
+DROP TABLE IF EXISTS `collected`;
+CREATE TABLE `collected`(
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `couid` INT(11),      #用户编号
+  `colid` INT(11),      #房间编号
+  `ctitle` VARCHAR(50), #标题
+  `cimg` VARCHAR(50),   #图片
+  `chtType` VARCHAR(50), #房源类型
+  `ctenant` INT,         #可住人数
+  `cbedroom` INT          #卧室个数
+);
 
 /**订单中心**/
 DROP TABLE IF EXISTS `roomItem`;
 CREATE TABLE `roomItem`(
-  `riid` INT PRIMARY KEY AUTO_INCREMENT,
-  `riuid` INT(11),      #用户编号
-  `count` INT,          #购买数量
-  `isChecked` BOOLEAN,  #是否已勾选，确定购买
-  CONSTRAINT `riuid` FOREIGN KEY (`riuid`) REFERENCES `users` (`uid`)
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `rouid` INT(11),       #用户编号
+  `rolid` INT(11),       #房间编号
+  `rtitle` VARCHAR(50),  #标题
+  `rimg` VARCHAR(50),    #图片
+  `rhtType` VARCHAR(50), #房源类型
+  `rtenant` INT,         #可住人数
+  `rbedroom` INT         #卧室个数
 );
 
 /**用户订单**/

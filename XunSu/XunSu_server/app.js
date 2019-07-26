@@ -13,7 +13,8 @@ const index=require("./routers/index");
 const user=require("./routers/user");
 const house=require("./routers/house");
 const home=require("./routers/home");
-
+const collect=require("./routers/collect");
+const order=require("./routers/order");
  //跨域
  var server = express();
  server.use(cors({
@@ -41,6 +42,8 @@ server.use("/index",index)
 server.use("/user",user)
 server.use("/house",house)
 server.use("/home",home)
+server.use("/collect",collect)
+server.use("/order",order)
 // //图片保存
 const upload=require('./routers/upload');
 server.use('/upload',upload);

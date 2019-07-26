@@ -64,6 +64,31 @@ CREATE TABLE `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
+-- 用户收藏
+DROP TABLE IF EXISTS `collected`;
+CREATE TABLE `collected`(
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `couid` INT(11),      #用户编号
+  `colid` INT(11),      #房间编号
+  `ctitle` VARCHAR(50), #标题
+  `cimg` VARCHAR(50),   #图片
+  `chtType` VARCHAR(50), #房源类型
+  `ctenant` INT,         #可住人数
+  `cbedroom` INT          #卧室个数
+);
+
+/**订单中心**/
+DROP TABLE IF EXISTS `roomItem`;
+CREATE TABLE `roomItem`(
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `rouid` INT(11),       #用户编号
+  `rolid` INT(11),       #房间编号
+  `rtitle` VARCHAR(50),  #标题
+  `rimg` VARCHAR(50),    #图片
+  `rhtType` VARCHAR(50), #房源类型
+  `rtenant` INT,         #可住人数
+  `rbedroom` INT         #卧室个数
+);
 
 --
 -- 表的结构 `facility`
