@@ -95,13 +95,13 @@
     <div class="content">
         <div class="tent">
                 <div class="tent_info" v-for="(item,i) of list" :key='i'>
-                    <img class="tent_img" src="../assets/img/big9.jpg" alt="">
+                    <img class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
                     <i class="iconfont icon-shoucang5" @click="tent_collect" id="icon"></i>
                     <div class="tent_detail">
                         <span >{{item.title}}</span>
                         <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
                         <div>
-                        <span>{{item.price}}</span>
+                        <span>{{"¥"+item.price}}</span>
                         <span>新人首单优惠</span>
                         </div>
                         <i class="iconfont icon-shoucang2"></i>
@@ -209,7 +209,7 @@ export default {
         },
         // 房源信息加载
         loadMore(){
-           var url="index";
+           var url="home";
            this.axios.get(url).then(result=>{
                console.log(result.data)
                var rows=this.list.concat(result.data);

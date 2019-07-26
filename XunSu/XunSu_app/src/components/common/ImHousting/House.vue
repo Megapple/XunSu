@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="已发布的房源">
-      <router-link to="/me" slot="left">
+      <router-link to="/home" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
@@ -56,8 +56,7 @@ export default {
         console.log("错误");
       }
     });
-   }
-    
+   } 
   },
   methods: {
     issue() {
