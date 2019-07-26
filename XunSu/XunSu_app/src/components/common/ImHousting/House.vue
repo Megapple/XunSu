@@ -1,10 +1,12 @@
 <template>
   <div>
-    <mt-header title="已发布的房源">
-      <router-link to="/home" slot="left">
+      <!-- <router-link to="/home" slot="left">
         <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header>
+      </router-link> -->
+      <div class="header">
+        <van-icon name="wap-home" @click="tohome" color="white" size="30px" class="tohome"/>
+        <span>发布的房源</span>
+      </div>
     <div class="content">
       <div class="house-item"  v-for="(item,index) in list" :key="index">
         <van-image
@@ -32,7 +34,8 @@ export default {
   data() {
     return {
       list:[],
-      imgurl:[]
+      imgurl:[],
+      uid:""
     };
   },
   components: {
@@ -40,7 +43,7 @@ export default {
   },
   created: function() {
     var uid = sessionStorage.getItem("uid");
-    console.log(uid);
+    this.uid=uid;
     if(!uid){
       this.$messagebox("提示","您还未登录，请登录");
       this.$router.push('./login')
@@ -51,7 +54,8 @@ export default {
       if (result.data.code == 200) {
         this.list=result.data.msg.leaseroom;
         this.imgurl=result.data.msg.homePic;
-        console.log(this.imgurl);
+        var length=this.imgurl.length-1;
+        console.log(this.list);
       } else {
         console.log("错误");
       }
@@ -70,12 +74,25 @@ export default {
         url="http://127.0.0.1:3000"+this.imgurl[index].imgurl;
       }
       return url;
+    },
+    tohome(){
+      var length=this.imgurl.length-1;
+      var obj={lid:this.list[length].lid,imgurl:this.imgurl[length].imgurl}
+      var url="house/img";
+      console.log(obj)
+       this.axios.get(url, { params: obj }).then(result => {
+      if (result.data.code == 200) {
+        this.$router.push('./home');
+      } else {
+        console.log("错误");
+      }
+    });
     }
   }
 };
 </script>
 <style scoped>
-.mint-header {
+/* .mint-header {
   background-color: rgba(255, 255, 255, 0);
   color: #ff9c1a;
   letter-spacing: 1px;
@@ -83,6 +100,13 @@ export default {
 }
 .mint-header .mint-header-title {
   font-weight: bold;
+} */
+.header{
+  height:40px;
+  background-color:#ff9c1a;
+  text-align: center;
+  line-height: 40px;
+  color:#fff;
 }
 .mint-button.back {
   color: #ff9c1a;
@@ -143,5 +167,11 @@ p {
   font-size: 16px;
   font-weight: 600;
   background-color: #ff9c1a;
+}
+.tohome{
+  float:left;
+  position:absolute;
+  top:5px;
+  left:20px;
 }
 </style>
