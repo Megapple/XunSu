@@ -28,7 +28,9 @@ import { Stepper } from 'vant';
 import { Picker } from 'vant';
 import { Field } from 'vant';
 import { Uploader } from 'vant';
+import { Image } from 'vant';
 
+Vue.use(Image);
 Vue.use(Uploader);
 Vue.use(Field);
 Vue.use(Picker);

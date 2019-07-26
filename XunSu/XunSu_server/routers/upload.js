@@ -41,16 +41,14 @@ var multer=require("multer");
   })
 
 
-  var houseimages=multer({dest:'../public/images/house'})
-  router.post('/imgs',houseimages.single('file'),(req,res)=>{
-    console.log(req.body.file);
-    var file=req.body.file;
+  var image=multer({dest:'../public/images/house'})
+  router.post('/imgs',image.single('files'),(req,res)=>{
+    // console.log(req.file.path);
+    // console.log(req.body.test[0]);
     var lid=req.body.lid;
-    for(var i=0;i<file.length;i++){
-      
-    }
+    console.log(req.file);
     fs.readFile(req.file.path,(err,data)=>{
-      if(err) {return res.send({code:0,msg:'上传失败'})}
+      if(err) {return res.send({code:0,msg:'上传失败'});}
       //声明图片名字为时间戳和随机数拼接成的，尽量保持唯一性
       let time=Date.now()+parseInt(Math.random()*999)+parseInt(Math.random()*2222);
       //扩展名
@@ -59,16 +57,17 @@ var multer=require("multer");
       let keepname=time+"."+extname;
       fs.writeFile(path.join(__dirname,'../public/images/house/'+keepname),data,(err)=>{
         if(err){return res.send('写入失败')}
-        // res.send({code:1,err:0,msg:'上传ok',data:'/images/avatar/'+keepname})
+        // res.send({code:1,err:0,msg:'上传ok',data:'/images/house/'+keepname})
         var data='/images/house/'+keepname;
-        var sql="INSERT INTO users VALUES (null,?,?)";
+        var sql="INSERT INTO `homepic` (`hid`, `homeid`, `imgurl`) VALUES (NULL, ?, ?);";
           pool.query(sql,[lid,data],function(err,result){
             if (err) throw err;
             if (result.affectedRows>0)
             {
-              res.send({code:200,msg:'更改成功'});
+              res.send({code:200,msg:'插入成功'});
+              return;
             }else{
-              res.send({code:301,msg:'更改失败'});
+              res.send({code:301,msg:'插入失败'});
               }
             })
       })

@@ -22,7 +22,7 @@
                 :startDate="startDate"
                 >
         </mt-datetime-picker >
-        <mt-datetime-picker
+        <!-- <mt-datetime-picker
                 v-model="leave"
                 type="date"
                 ref="picker"
@@ -32,7 +32,7 @@
                 @confirm="handleConfirm"
                 :startDate="startDate"
                 >
-        </mt-datetime-picker>
+        </mt-datetime-picker> -->
         </div>  
         <input type="text" class="header_search" placeholder="搜索位置、地标、房源标题" @click="search">
     </div>      
@@ -96,7 +96,7 @@
         <div class="tent">
                 <div class="tent_info">
                     <img class="tent_img" src="../assets/img/big9.jpg" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect"></i>
+                    <i class="iconfont icon-shoucang5" @click="tent_collect" id="icon"></i>
                     <div class="tent_detail">
                         <span>【海迪王国】 美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
                         <span>整套·1居室·可住2~3人·小寨</span>
@@ -180,7 +180,10 @@ export default {
         },
         onConfirm(e){
             this.$refs.item.toggle();    
-            e.stopPropagation();  
+        },
+        // 切换搜索
+        search(){
+           this.$router.push("./Search")
         },
         // 位置
         onNavClick(index) {
@@ -190,19 +193,27 @@ export default {
             this.activeId = data.id;
         },
         // 选择人数 房源信息改变
-        onbtn(){
-            console.log(1111)
-        },
-        // 筛选选择 背景色改变
-        onFacility(e){}, 
+        // onbtn(){
+        //     console.log(1111)
+        // },
         // 点击进入收藏
         tent_collect(){
-            this.$router.push("./Collect")
+            var i=document.getElementById("icon")
+            if(i.className=="iconfont icon-shoucang5"){
+                i.className="iconfont icon-shoucang5 is-select"
+            }else{
+                i.className="iconfont icon-shoucang5"
+            }
+            // this.$router.push("./Collect")
         },
-        // 切换搜索
-        search(){
-           this.$router.push("./Search")
-        },
+        // 房源信息加载
+        loadMore(){
+           var url="select";
+           
+        }
+    },
+    created(){
+        this.loadMore();
     }
 }
 </script>
@@ -269,6 +280,7 @@ export default {
 }
 .content{
    margin:15px 10px;
+   height:100%;
 }
 .tent{
     width:98%;height: 320px;
@@ -291,6 +303,7 @@ export default {
     top:10px;left:310px;
     color: #faf9f9;;
 }
+.iconfont.icon-shoucang5.is-select{color:rgb(245, 156, 26);}
 .tent_detail{
     display: flex;
     flex-flow: column;
@@ -313,5 +326,6 @@ export default {
     border-radius: 80%;
     background-color: rgb(245, 156, 26);
 }
+
 </style>
 

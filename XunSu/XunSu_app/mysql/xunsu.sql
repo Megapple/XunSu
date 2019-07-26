@@ -138,7 +138,8 @@ CREATE TABLE `roomOrder`(
 )AUTO_INCREMENT=10000000;
 
 /**房源图片路径**/
-CREATE TABLE homePic(
+DROP TABLE IF EXISTS `homePic`;
+CREATE TABLE `homePic`(
   `hid` INT(11) PRIMARY KEY auto_increment, 
   `homeid` INT,                 #房源编号
   `imgurl` VARCHAR(128),             #图片
@@ -160,6 +161,15 @@ CREATE TABLE `comment`(
   `replyId` INT,            #回复目标id
   `content` VARCHAR(255),   #回复内容
   `fromUid` INT             #回复用户id
+);
+/** 入住人信息表***/
+DROP TABLE IF EXISTS `add_guest_msg`;
+CREATE TABLE `add_guest_msg`(
+  `id`  INT PRIMARY KEY AUTO_INCREMENT,   #入住人信息编号
+  `name` VARCHAR(32),           # 入住人姓名
+  `phone` VARCHAR(22),          #入住人联系方式
+  `credentials` VARCHAR(12),    #入住人证件类型
+  `cardid`    VARCHAR(32)         #入住人证件号码 
 );
 
 /*******************/

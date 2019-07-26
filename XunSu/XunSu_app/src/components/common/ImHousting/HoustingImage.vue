@@ -11,7 +11,7 @@
             </div>
     <mt-tabbar v-model="selected" class="bottom">
          <mt-tab-item id="tab2">
-             <mt-button class="nex" @click="tonext">存储并前往下一页</mt-button>
+             <mt-button class="nex" @click="tonext">发布房源</mt-button>
         </mt-tab-item>
     </mt-tabbar> 
     </div>
@@ -28,28 +28,28 @@ export default {
     methods:{
         tonext(){
             var fileList=this.fileList;
-            var formData = new FormData();
+            // var file=fileList[0].file;
             var lid=this.$route.query.lid;
-            for(var i=0;i<fileList.length;i++){
-                formData.append("file",fileList[i].file);
-                console.log(fileList[i].file)
-            }
-             formData.append("lid",lid);
-             return this.axios.post("http://127.0.0.1:3000/upload/imgs",formData,{header:{"content-type":"multipart/form-data"}}).then((result)=>{
-            if(result.data.code==200){
-                this.$toast("上传成功",1000);
-                this.details();
-            }else{
-                this.$toast("上传失败",1000);
-            }
-             })
+            fileList.forEach((file)=>{
+                var formData = new FormData();
+                formData.append('files', file.file, file.file.name);
+                console.log(file);
+                formData.append("lid",lid);
+                return this.axios.post("http://127.0.0.1:3000/upload/imgs",formData,{header:{"content-type":"multipart/form-data"}}).then((result)=>{
+                if(result.data.code==200){
+                    this.$toast("房源发布成功",1000);
+                    console.log(11);
+                    this.$router.push(`/House?lid=${lid}`);
+                    // this.details();
+                }else{
+                    this.$toast("房源发布失败",1000);
+                }
+                })  
+            })
+             
         },
        afterRead(file) {
-      // 此时可以自行将文件上传至服务器
-      console.log(file)
-        console.log(this.fileList[1].file.name)
          this.i=this.fileList.length;
-
         },
         beforeRead(file) {
             if (file.type !== 'image/jpeg') {
@@ -113,4 +113,5 @@ export default {
 .van-uploader__upload{
     margin-left:10px;
 } 
+
 </style>
