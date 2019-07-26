@@ -241,4 +241,21 @@ router.get('/myhouse', function (req, res) {
 // 			res.send(result);
 // 		});
 // 	})
+router.get("/img",(req,res)=>{
+  var obj=req.query;
+      var sql="Update leaseroom Set img=? Where lid=?";
+      console.log(1)
+      pool.query(sql,[obj.imgurl,obj.lid],(err,result)=>{
+        if(err) throw(err);
+        console.log(result);
+          if (result.affectedRows>0)
+          {
+            res.send({code:200,msg:'更改成功'});
+            console.log(122222);
+          }else{
+            res.send({code:301,msg:'更改失败'});
+            }
+      })
+})
+
 module.exports = router;

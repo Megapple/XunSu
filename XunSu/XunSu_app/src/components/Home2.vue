@@ -96,7 +96,7 @@
         <div class="tent">
                 <div class="tent_info" v-for="(item,i) of list" :key='i'>
                     <img class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect" id="icon"></i>
+                    <i class="iconfont icon-shoucang5" @click="tent_collect(item.uid,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)" id="icon"></i>
                     <div class="tent_detail">
                         <span >{{item.title}}</span>
                         <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
@@ -104,7 +104,13 @@
                         <span>{{"¥"+item.price}}</span>
                         <span>新人首单优惠</span>
                         </div>
-                        <i class="iconfont icon-shoucang2"></i>
+                        <van-image
+                            round
+                            width="3rem"
+                            height="3rem"
+                            :src="geturl(item.uid)"
+                            class="user-img"
+                        />
                     </div>
                 </div>
         </div>
@@ -165,6 +171,7 @@ export default {
             active1:"rent1",
             result:[],
             list:[],
+            user:[]
         }
     },
     methods: {
@@ -198,9 +205,10 @@ export default {
         //     console.log(1111)
         // },
         // 点击进入收藏
-        tent_collect(){
+        tent_collect(uid,lid,title,img,htType,tenant,bedroom){
             var i=document.getElementById("icon")
             if(i.className=="iconfont icon-shoucang5"){
+                console.log(uid,lid,title)
                 i.className="iconfont icon-shoucang5 is-select"
             }else{
                 i.className="iconfont icon-shoucang5"
@@ -211,12 +219,27 @@ export default {
         loadMore(){
            var url="home";
            this.axios.get(url).then(result=>{
-               console.log(result.data)
-               var rows=this.list.concat(result.data);
+               var rows=this.list.concat(result.data.msg.leaseroom);
                this.list=rows;
+               this.user=result.data.msg.user;
+               console.log(this.user);
            })       
+        },
+        geturl(uid){
+        var url="";
+            var index=this.user;
+            for(var i of index){
+                if(i.uid==uid){
+                    if(!i.avatar || i.avatar==null){    
+                    url="http://127.0.0.1:3000/images/avatar/1564045657591.jpeg";
+                }else{
+                url="http://127.0.0.1:3000"+i.avatar;
+                }
+            }
         }
-    },
+        return url;
+        },
+     },
     created(){
         this.loadMore();
     }
@@ -323,14 +346,12 @@ export default {
     color: rgb(245, 156, 26);
 }
 .tent_detail>div span:nth-child(2){font-size:10px; margin-left:5px;}
-.iconfont.icon-shoucang2{
-    font-size: 35px;
-    position: absolute;
-    top:80%;left:290px;
-    border:1px solid rgb(245, 156, 26);
-    border-radius: 80%;
-    background-color: rgb(245, 156, 26);
+.user-img{
+position: absolute;
+top:70%;right:20px;
+  border-radius:50%;
+  overflow: hidden;
+  border:4px solid rgba(255,255,255,.8);
 }
-
 </style>
 

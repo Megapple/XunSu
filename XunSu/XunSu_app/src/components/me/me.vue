@@ -115,7 +115,7 @@ export default {
 .user-links{
   width: 100%;
   height: 15vw;
-  padding:40px 0 30px 0;
+  padding:20px 0 30px 0;
   font-size:14px;
   text-align:center;
   color:#474747;
@@ -133,7 +133,7 @@ img{
   width:100%;
 }
 .user-poster{
-height:150px;
+height:200px;
 filter: blur(10px);
 /* border-bottom-left-radius: 300px; */
 /* border-bottom-right-radius: 100px; */
