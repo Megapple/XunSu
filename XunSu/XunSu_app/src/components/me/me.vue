@@ -1,9 +1,13 @@
 <template>
-  <div class="content">
-    <div>
-    <img class="user-poster" :src="geturl()">
-    <span class="user-poster user-shade"></span>
-    <span class="user-name">小罗比</span>
+  <div >
+    <div class="me-header">
+      <img class="user-poster" :src="geturl()">
+     <span class="user-poster user-shade"></span>
+     <span class="user-name">{{title}}</span>
+     <span class="logout" v-if="showlogout" @click="logout">退出登录</span>
+     <span class="logout" v-show="showlogin" @click="logout">登录</span>
+    </div>
+    <div class="content">
     <van-image
         round
         width="5rem"
@@ -12,21 +16,17 @@
          class="user-img"
       />
     <van-row class="user-links">
-      <van-col span="6">
-        <van-icon name="pending-payment" />
-        待付款
+      <van-col span="8">
+        <van-icon name="envelop-o" class="icon-style"/>
+        系统消息
       </van-col>
-      <van-col span="6">
-        <van-icon name="records" />
-        待接单
+      <van-col span="8">
+        <van-icon name="phone-circle-o"  class="icon-style"/>
+        联系客服
       </van-col>
-      <van-col span="6">
-        <van-icon name="tosend" />
-        待发货
-      </van-col>
-      <van-col span="6">
-        <van-icon name="logistics" />
-        已发货
+      <van-col span="8">
+        <van-icon name="clock-o" class="icon-style" />
+         浏览历史
       </van-col>
     </van-row>
 
@@ -45,22 +45,58 @@ import { Row, Col} from 'vant';
 export default {
   data () {
     return {
-      phone:"",
-      upwd:""
+      imgurl:"",
+      title:"",
+      showlogout:true,
+      showlogin:false
     }
   },
+   created: function() {
+      var uid = sessionStorage.getItem("uid");
+      console.log(uid);
+      if(!uid){
+        this.title="未登录";
+        this.$messagebox("提示","您还未登录，请登录");
+        this.showlogout=false;
+        this.showlogin=true;
+        // this.$router.push('./home')
+    }else{
+      this.showlogout=true;
+      this.showlogin=false;
+      var obj = { uid };
+      var url = "house/myhouse";
+      this.axios.get(url, { params: obj }).then(result => {
+        if (result.data.code == 200) {
+          this.imgurl=result.data.msg.user.avatar;
+        } else {
+          console.log("错误");
+        }
+      });
+    } 
+    },
   methods:{
     imhouster(){
       this.$router.push("./housting");
     },
     geturl(){
       var url="";
-      if(!this.imgurl){
-        url="http://127.0.0.1:3000/images/house/1564066568617.jpeg";
+      if(!this.imgurl || this.imgurl==null){
+        url="http://127.0.0.1:3000/images/avatar/1564045657591.jpeg";
       }else{
-        url="http://127.0.0.1:3000"+this.imgurl[index].imgurl;
+        url="http://127.0.0.1:3000"+this.imgurl;
       }
       return url;
+    },
+    logout(){
+        if(this.showlogin==false){
+          this.$messagebox.confirm("提示","您确定要退出吗").then(action=>{
+          sessionStorage.removeItem("uid");
+          this.$toast("您已经退出",1000);
+          this.$router.go('/home');
+        }).catch(err=>{console.log(err)});
+      }else{
+        this.$router.push('./login');
+      }
     }
   },
   components: {
@@ -70,36 +106,35 @@ export default {
 }
 </script>
 <style scoped>
-.content{
-  padding-bottom:60px;
-}
 .imhouster{
-  position:absolute;
-  bottom:0x;
-  left:0;
   color:#fff;
   background-color:#ffb453;
   letter-spacing: 3px;
+  margin:90px 0 20px 0; 
 }
 .user-links{
   width: 100%;
   height: 15vw;
-  padding:30px 0;
-  font-size:12px;
+  padding:40px 0 30px 0;
+  font-size:14px;
   text-align:center;
+  color:#474747;
 }
 .van-icon {
   display: block;
   font-size: 24px;
-  margin-bottom:5px;
+  margin-bottom:10px;
 }
-
+.van-icon.icon-style{
+  font-size:30px;
+  color:#7e7e7e;
+}
 img{
   width:100%;
 }
 .user-poster{
-height:200px;
-filter: blur(20px);
+height:150px;
+filter: blur(10px);
 /* border-bottom-left-radius: 300px; */
 /* border-bottom-right-radius: 100px; */
 }
@@ -108,27 +143,41 @@ filter: blur(20px);
   top:0;
   left:0;
   width:100%;
-  background-color: rgba(0,0,0,.05);
-  filter: blur(1px);
+  background-color: rgba(255,255,255,.2);
+  /* filter: blur(50px); */
 }
 .user-img{
   position:absolute;
-  top:60px;
+  top:90px;
   right:30px;
   border-radius:50%;
   overflow: hidden;
-  border:6px solid rgba(0,0,0,.05);
+  border:4px solid rgba(255,255,255,.8);
 }
 .user-name{
   position:absolute;
   top:90px;
-  left:30px;
-  color:rgb(136, 136, 136);
-  font-size: 20px;
-  letter-spacing: 3px;
+  left:50px;
+  color:rgb(65, 65, 65);
+  font-size: 16px;
+  letter-spacing: 2px;
   font-weight: bold;
 }
 .user-group{
   margin:0px 10px 50px;
+}
+.me-header{
+  overflow: hidden;
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+  position:relative;
+  /* filter: blur(10px); */
+}
+.logout{
+  font-size:12px;
+  position:absolute;
+  top:10px;
+  right:30px;
+  color:rgb(68, 68, 68);
 }
 </style>
