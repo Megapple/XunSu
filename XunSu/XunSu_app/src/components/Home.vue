@@ -3,27 +3,19 @@
 <mt-tab-container v-model="selected" class="mt">
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
- <mt-swipe :auto="2000" class="top_swipe">
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
-       <img :src="require('../assets/img/big7.jpeg')" class="img"/>
-    <!-- </a> -->
+ <mt-swipe :auto="2000" class="top_swipe" >
+  <mt-swipe-item v-for="(item,i) of list" :key="i">
+       <img :src="'http://127.0.0.1:3000/'+item.imgurl" class="img"/>
   </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
+  <!-- <mt-swipe-item >
        <img :src="require('../assets/img/big.jpg')" class="img"/>
-    <!-- </a> -->
   </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
+  <mt-swipe-item >
        <img :src="require('../assets/img/big2.jpeg')" class="img"/>
-    <!-- </a> -->
   </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
+  <mt-swipe-item >
        <img :src="require('../assets/img/lb.jpg')" class="img"/>
-    <!-- </a> -->
-  </mt-swipe-item>
+  </mt-swipe-item> -->
  </mt-swipe>
  <!-- 搜索框 -->
  <div class="searchdiv clearfix">
@@ -47,12 +39,17 @@
         </mt-navbar>
     </div>
     <div>
-    <mt-tab-container v-model="active">
+    <mt-tab-container v-model="active" >
         <mt-tab-container-item id="tab1">
-            <container :img_dali1="require('../assets/img/dlgc.jpg')" 
+            <!-- <container 
+            :img_dali1="require('../assets/img/dlgc.jpg')" 
             :img_dali2="require('../assets/img/dlyc.jpg')" 
             :img_dali3="require('../assets/img/dljz.jpg')"
             :img_dali4="require('../assets/img/dljr.jpg')" 
+            :add="myadd"
+            :cityadd="myadd"
+            ></container> -->
+            <container 
             :add="myadd"
             :cityadd="myadd"
             ></container>
@@ -265,6 +262,7 @@ export default {
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
+           list:[]
        }
    },
    methods:{
@@ -276,7 +274,17 @@ export default {
        },
        search(){
            this.$router.push("./Search")
+       },
+       loadMore(){
+           var url="home";
+           this.axios.get(url).then(result=>{               
+               console.log(result.data)
+               this.list=result.data;
+           })
        }
+   },
+   created(){
+       this.loadMore();
    }
  }
 </script>
@@ -289,9 +297,6 @@ a{text-decoration: none;}
 /* 轮播 */
  .mint-swipe.top_swipe { height: 218px;}
  .img {width: 100%;}
- /* 轮播下标 */
-.mint-swipe-indicator{margin:26px 3px ;}
-.mint-swipe-indicator.is-active{background-color:rgb(245, 156, 26);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
     width:85%;   

@@ -5,15 +5,11 @@ const pool=require("../pool");
 //自己:          "/"
 //完整地址: /index/
 router.get("/",(req,res)=>{
-  var sql=`SELECT * FROM xz_index_product where seq_recommended!=0 ORDER BY seq_recommended`;
+  var sql=`SELECT * FROM leaseroom`;
   pool.query(sql,[],(err,result)=>{
-    if(err){
-      console.log(err);
-      res.send({code:0});
-    }else{
-      res.send(result);
-    }
+    if(err) throw(err);
+      // res.send({code:0});
+        res.send(result);
   })
 })
-
 module.exports=router;

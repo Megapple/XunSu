@@ -240,6 +240,4 @@ router.get('/myhouse', function (req, res) {
 // 			res.send(result);
 // 		});
 // 	})
-
-
 module.exports = router;

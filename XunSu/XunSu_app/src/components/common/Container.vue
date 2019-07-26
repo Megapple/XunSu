@@ -1,27 +1,27 @@
 <template>
 <div>
     <div class="citys">
-        <div class="first">
-        <div class="dali" @click="add">
-            <img :src="img_dali1">
+        <div class="first" >
+        <div class="dali" @click="add" v-for="(item,i) of list" :key="i">
+            <img :src="'http://127.0.0.1:3000/'+item.imgurl">
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
             <i>{{grade}}</i>
             </div>
         </div>
-        <div class="dali">
-            <img :src="img_dali2" >
+        <!-- <div class="dali">
+            <img :src="'http://127.0.0.1:3000/'+item.imgurl">
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
             <i>{{grade}}</i>
             </div>
+        </div>   -->
         </div>  
-        </div>  
-        <div class="first">   
+        <!-- <div class="first">   
         <div class="dali">
-            <img :src="img_dali3" >
+            <img :src="'http://127.0.0.1:3000/'+item.imgurl">
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
@@ -29,14 +29,14 @@
             </div>
         </div>        
         <div class="dali">
-           <img :src="img_dali4" >
+           <img :src="'http://127.0.0.1:3000/'+item.imgurl" >
             <div>
             <span>{{subtitle}}</span>
             <span>{{price}}</span>
             <i>{{grade}}</i>
             </div>
         </div>
-        </div>  
+        </div>   -->
     </div>
     <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
 </div>
@@ -48,6 +48,7 @@ export default {
             subtitle:"花筑·大理古城银月客栈",
             price:"¥304",
             grade:"5.0分",
+            list:[]
         }
     },
     props:{
@@ -57,7 +58,20 @@ export default {
         img_dali4:{default:""},
         add:{type:Function},
         cityadd:{type:Function}
-    }
+    },
+    methods:{
+       loadMore(){
+           var url="home";
+           this.axios.get(url).then(result=>{
+               console.log(result.data)
+               this.list=result.data;
+           })
+
+       }
+    },
+    created() {
+        this.loadMore();
+    },
 }
 </script>
 <style scoped>
@@ -75,6 +89,7 @@ export default {
 .first{
     width:400px;
     display: flex;
+    flex-flow: wrap;
     padding: 8px 10px;
 }
 .dali{
