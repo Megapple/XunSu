@@ -11,6 +11,8 @@ import Orderdetail from "../components/Order/Orderdetail.vue"
 import Add from "../components/Order/Add.vue"
 //引入Orderpay组件
 import Orderpay from "../components/Order/Orderpay.vue"
+//引入contacts组件
+import Contacts from "../components/Order/Contacts.vue"
 // 引入Home及子组件
 import Home from "../components/Home.vue"
 import Home2 from "../components/Home2.vue"
@@ -65,6 +67,7 @@ export default new Router({
     {path:'/Search',component:Search},
     {path:'/Add',component:Add},
     {path:'/Orderpay',component:Orderpay},
+    {path:'/Contacts',component:Contacts},
     {path:'/Usermsg',component:UserMsg},
     {path:'/Userimage',component:UserImage},
     {path:'/Houstingmsg',component:Houstingmsg},
