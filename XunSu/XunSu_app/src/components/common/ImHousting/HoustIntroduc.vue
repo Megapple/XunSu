@@ -23,6 +23,20 @@
         <van-field
           v-model="describe"
           type="textarea"
+          placeholder="请简单描述下您出租的房源的特点，可以让客户快速了解您的房源"
+          rows="5"
+          autosize
+          maxlength="500" 
+          onchange="this.value=this.value.substring(0, 500)" 
+          onkeydown="this.value=this.value.substring(0, 500)" 
+          onkeyup="this.value=this.value.substring(0, 500)"
+        />
+      </van-cell-group>
+      <h4>房源</h4>
+      <van-cell-group class="detail">
+        <van-field
+          v-model="detail"
+          type="textarea"
           placeholder="请详细介绍下您出租的房源，您可以详细介绍下房源位置，装修，周边风景，便利设置，使用方式等"
           rows="10"
           autosize
@@ -47,16 +61,18 @@ export default {
     return {
     title:"",
     describe:"",
-    selected:""
+    selected:"",
+    detail:""
     }
   },
   methods:{
     tonext(){
       var title=this.title;
       var describe=this.describe;
+      var detail=this.detail;
       var url="house/title";
       var lid=this.$route.query.lid;
-      var obj={title,describe,lid};
+      var obj={title,describe,detail,lid};
       this.axios.get(url,{params:obj}).then(result=>{
           if(result.data.code>0){  
              this.$toast("上传成功",1000);
@@ -99,7 +115,7 @@ export default {
  div.van-cell-group{
    border-radius:10px;
    border:0;
-   height:100px;
+   height:50px;
    overflow: hidden;
  }
  .van-hairline--top-bottom::after{
@@ -107,7 +123,11 @@ export default {
  }
  div.van-cell-group.msg{
   margin-bottom:30px;
-  height:300px;
+  height:150px;
+ }
+ div.van-cell-group.detail{
+   margin-bottom:40px;
+   height:400px;
  }
  .mint-button.nex{
    width:60%;

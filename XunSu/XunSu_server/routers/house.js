@@ -65,9 +65,9 @@ router.get('/facility', function (req, res) {
   })
 })
 router.get('/title', function (req, res) {
-  var str = "UPDATE leaseroom SET `title`=?,`describe`=? WHERE `lid`=?";
+  var str = "UPDATE leaseroom SET `title`=?,`describe`=? ,`detail`=? WHERE `lid`=?";
   console.log(req.query)
-  pool.query(str, [req.query.title, req.query.describe, req.query.lid], function (err, result) {
+  pool.query(str, [req.query.title, req.query.describe, req.query.detail,req.query.lid], function (err, result) {
     if (err) throw err;
     if (result.affectedRows > 0) {
       res.send({ code: 200, msg: 'true' });

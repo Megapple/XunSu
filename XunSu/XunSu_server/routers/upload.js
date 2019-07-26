@@ -64,6 +64,7 @@ var multer=require("multer");
             if (err) throw err;
             if (result.affectedRows>0)
             {
+              
               res.send({code:200,msg:'插入成功'});
               return;
             }else{
