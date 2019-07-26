@@ -196,7 +196,8 @@ router.get('/myhouse', function (req, res) {
     var sql1 = `select * from users where uid=?`;
     pool.query(sql1, [uid], (err, result) => {
       if (err) console.log(err);
-      user = result[0];
+      output.user = result[0];
+      console.log(output.user);
       var sql2 = `select * from leaseroom where uid=?`;
       pool.query(sql2, [uid], (err, result) => {
         if (err) console.log(err);
