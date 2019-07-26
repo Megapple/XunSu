@@ -12,7 +12,7 @@ const bodyParser=require('body-parser');
 const index=require("./routers/index");
 const user=require("./routers/user");
 const house=require("./routers/house");
-const add=require("./routers/add");
+const home=require("./routers/home");
 
  //跨域
  var server = express();
@@ -40,7 +40,7 @@ server.use(bodyParser.json())
 server.use("/index",index)
 server.use("/user",user)
 server.use("/house",house)
-server.use("/add",add)
+server.use("/home",home)
 // //图片保存
 const upload=require('./routers/upload');
 server.use('/upload',upload);

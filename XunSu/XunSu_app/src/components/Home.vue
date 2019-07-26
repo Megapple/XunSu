@@ -3,26 +3,9 @@
 <mt-tab-container v-model="selected" class="mt">
     <mt-tab-container-item id="hotel">
     <!-- 顶部轮播 -->
- <mt-swipe :auto="2000" class="top_swipe">
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
-       <img :src="require('../assets/img/big7.jpeg')" class="img"/>
-    <!-- </a> -->
-  </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
-       <img :src="require('../assets/img/big.jpg')" class="img"/>
-    <!-- </a> -->
-  </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
-       <img :src="require('../assets/img/big2.jpeg')" class="img"/>
-    <!-- </a> -->
-  </mt-swipe-item>
-  <mt-swipe-item ><!--v-for="(item,i) of items" :key="i"-->
-    <!-- <a :href="item.href" rel="external nofollow"> -->
-       <img :src="require('../assets/img/lb.jpg')" class="img"/>
-    <!-- </a> -->
+ <mt-swipe :auto="2000" class="top_swipe" >
+  <mt-swipe-item v-for="(item,i) of list.slice(0,4)"  :key="i">
+       <img :src="'http://127.0.0.1:3000/'+item.img" class="img"/>
   </mt-swipe-item>
  </mt-swipe>
  <!-- 搜索框 -->
@@ -43,37 +26,22 @@
             <mt-tab-item id="tab1">大理</mt-tab-item>
             <mt-tab-item id="tab2">杭州</mt-tab-item>
             <mt-tab-item id="tab3">成都</mt-tab-item>
-            <mt-tab-item id="tab4">桂林</mt-tab-item>
+            <mt-tab-item id="tab4">厦门</mt-tab-item>
         </mt-navbar>
     </div>
     <div>
-    <mt-tab-container v-model="active">
+    <mt-tab-container v-model="active" >
         <mt-tab-container-item id="tab1">
-            <container :img_dali1="require('../assets/img/dlgc.jpg')" 
-            :img_dali2="require('../assets/img/dlyc.jpg')" 
-            :img_dali3="require('../assets/img/dljz.jpg')"
-            :img_dali4="require('../assets/img/dljr.jpg')" 
-            :add="myadd"
-            :cityadd="myadd"
-            ></container>
+            <container :add="myadd" :cityadd="myadds"></container>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
-            <container2 :img_hz1="require('../assets/img/hzbj.jpg')" 
-            :img_hz2="require('../assets/img/hzmj.jpg')"
-            :img_hz3="require('../assets/img/hzys.jpg')"
-            :img_hz4="require('../assets/img/hzxh.jpg')"></container2>
+            <container2 :add="myadd" :cityadd="myadds"></container2>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab3">
-            <container3 :img_cd1="require('../assets/img/cdqs2.jpg')" 
-            :img_cd2="require('../assets/img/cdsx1.jpg')"
-            :img_cd3="require('../assets/img/cdsx2.jpg')"
-            :img_cd4="require('../assets/img/cdcz.jpg')"></container3>
+            <container3 :add="myadd" :cityadd="myadds"></container3>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab4">
-            <container4 :img_gl1="require('../assets/img/yszj.jpg')" 
-            :img_gl2="require('../assets/img/ysgs.jpg')"
-            :img_gl3="require('../assets/img/yswb.jpg')"
-            :img_gl4="require('../assets/img/ysxs.jpg')"></container4>
+            <container4 :add="myadd" :cityadd="myadds"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
     </div>
@@ -88,16 +56,14 @@
             <h3>主题酒店大搜索</h3>
             <p>一店一生活,发现最独特的入住体验</p>
         </div>
-        <div class="theme_second">
-            <div class="theme1">
+        <div class="theme_second" >
+            <div class="theme1" >
                 <div class="theme1_one" @click="myadd">
-                    <img src="../assets/img/big7.jpeg" alt="">
-                    <div class="theme_p">
-                    <p>旅拍圣地</p>
-                    </div>
+                    <img src="../assets/img/big4.jpeg" alt="">
+                    <div class="theme_p"><p>旅行圣地</p></div>
                 </div>
                 <div class="theme1_two"  @click="myadd">
-                    <img src="../assets/img/big9.jpg" alt="">
+                    <img src="../assets/img/big4.jpeg" alt="">
                     <div class="theme_p">
                     <p>逛吃天堂</p>
                     </div>
@@ -151,42 +117,22 @@
         </div>
         <mt-tab-container v-model="active2">
             <mt-tab-container-item id="odd1">
-                <odds :img_dali1="require('../assets/img/dlgc.jpg')" 
-                :img_dali2="require('../assets/img/dlyc.jpg')" 
-                :img_dali3="require('../assets/img/dljz.jpg')"
-                :img_dali4="require('../assets/img/dljr.jpg')"
-                :add="myadd"
-                ></odds>
+                <odds :add="myadd"></odds>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd2">
-                <odds2 :img_hz1="require('../assets/img/hzbj.jpg')" 
-                :img_hz2="require('../assets/img/hzmj.jpg')"
-                :img_hz3="require('../assets/img/hzys.jpg')"
-                :img_hz4="require('../assets/img/hzxh.jpg')"></odds2>
+                <odds2 :add="myadd"></odds2>
             </mt-tab-container-item>
             <mt-tab-container-item id="odd3">
-                <odds3 :img_gl1="require('../assets/img/yszj.jpg')" 
-                :img_gl2="require('../assets/img/ysgs.jpg')"
-                :img_gl3="require('../assets/img/yswb.jpg')"
-                :img_gl4="require('../assets/img/ysxs.jpg')"></odds3>
+                <odds3 :add="myadd"></odds3>
             </mt-tab-container-item>
         </mt-tab-container>
-        <mt-button class="oddsbom" @click="myadd">查看更多超值特惠酒店</mt-button>
+        <mt-button class="oddsbom" @click="myadds">查看更多超值特惠酒店</mt-button>
     </div>
     <div class="story_bottom ">
         <h3>我们の故事</h3>
-        <mt-swipe :auto="2000" class="story_swipe">
-            <mt-swipe-item>
-                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <a href="#"><img src="../assets/img/big9.jpg" alt=""></a>
+        <mt-swipe :auto="2000">
+            <mt-swipe-item v-for="(item,i) of list.slice(0,4)" :key="i">
+                <img :src="'http://127.0.0.1:3000/'+item.img" alt="">
             </mt-swipe-item>
         </mt-swipe>
         <a href="#"> ღ 快戳我</a>
@@ -265,20 +211,34 @@ export default {
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
+           list:[]
        }
    },
    methods:{
        myadd(){
            this.$router.push("./Detail?lid=2")
        },
+       myadds(){
+           this.$router.push("./Home2")
+       },
        location(){
            this.$router.push("./Home2")
        },
        search(){
            this.$router.push("./Search")
+       },
+       loadMore(){
+           var url="home";
+           this.axios.get(url).then(result=>{               
+               console.log(result.data)
+               this.list=result.data;
+           })
        }
    },
-}
+   created(){
+       this.loadMore();
+   }
+ }
 </script>
 <style scoped>
 *{margin:0;padding:0px;}
@@ -289,9 +249,6 @@ a{text-decoration: none;}
 /* 轮播 */
  .mint-swipe.top_swipe { height: 218px;}
  .img {width: 100%;}
- /* 轮播下标 */
-.mint-swipe-indicator{margin:26px 3px ;}
-.mint-swipe-indicator.is-active{background-color:rgb(245, 156, 26);opacity:0.6;}
 /* 搜索框 */
 .searchdiv{
     width:85%;   
@@ -348,7 +305,7 @@ a{text-decoration: none;}
 }
 .city{margin:0 25px;}
 .mint-navbar.city_navbar .mint-tab-item{
-    height:18px;
+    height:12px;
     margin:-2px 10px;
     padding:6px 10px;
     border-radius: 10px;
@@ -356,11 +313,11 @@ a{text-decoration: none;}
     color:rgb(129, 128, 128);
     background-color:#f5f5f5;
 }
+
 .mint-navbar.city_navbar .mint-tab-item.is-selected{
     background-color:rgb(252, 157, 128);
     color:#f5f5f5;
 }
-/* .citybtn {background-color:rgb(252, 157, 128); color:#f5f5f5; } */
 /* 中间过渡 */
 .middle{width:340px;height:80px;margin:30px auto;box-shadow: 0 0 20px #b8bbbf;}
 .middle img{width:100%;height:80px;}
@@ -372,15 +329,15 @@ a{text-decoration: none;}
 .theme_first p{font-size:13px;color:#979696;margin:5px 0;}
 .theme_second{
     display:flex;
-    flex-flow: column;
+    flex-flow: column;  
     margin-top:12px;
 }
 .theme1{
-    display:flex;
+    display:flex;    
     padding:5px 8px;
 }
 .theme1_one,.theme1_two,.theme2_one{
-    width:250px;height:200px;
+    width:200px;height:200px;
     position: relative;
     padding:0 5px;
 }
@@ -399,6 +356,7 @@ a{text-decoration: none;}
     border-bottom-right-radius: 8px;
     padding:0 5px;
     background:linear-gradient(to right,rgb(255, 166, 0) 0%,rgb(252, 205, 78) 100%);
+    overflow: hidden;
 }
 .theme1 .theme2_one:first-child .theme_p,.theme1 .theme2_one:nth-child(3) .theme_p{
     background:linear-gradient(to right,rgb(248, 155, 139) 0%,rgb(245, 115, 76) 100%);}

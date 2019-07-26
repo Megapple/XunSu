@@ -94,14 +94,14 @@
     <!-- 中间内容 -->
     <div class="content">
         <div class="tent">
-                <div class="tent_info">
-                    <img class="tent_img" src="../assets/img/big9.jpg" alt="">
+                <div class="tent_info" v-for="(item,i) of list" :key='i'>
+                    <img class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
                     <i class="iconfont icon-shoucang5" @click="tent_collect" id="icon"></i>
                     <div class="tent_detail">
-                        <span>【海迪王国】 美式清新大床房·免费接送地铁/接机·独卫 住2~3人·1.8米大床...</span>
-                        <span>整套·1居室·可住2~3人·小寨</span>
+                        <span >{{item.title}}</span>
+                        <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
                         <div>
-                        <span>¥238</span>
+                        <span>{{"¥"+item.price}}</span>
                         <span>新人首单优惠</span>
                         </div>
                         <i class="iconfont icon-shoucang2"></i>
@@ -164,6 +164,7 @@ export default {
             facilities:["wifi","空调","电视","电梯","冰箱","停车位","洗浴","洗衣机","热水壶"],
             active1:"rent1",
             result:[],
+            list:[],
         }
     },
     methods: {
@@ -208,8 +209,12 @@ export default {
         },
         // 房源信息加载
         loadMore(){
-           var url="select";
-           
+           var url="home";
+           this.axios.get(url).then(result=>{
+               console.log(result.data)
+               var rows=this.list.concat(result.data);
+               this.list=rows;
+           })       
         }
     },
     created(){
@@ -283,7 +288,7 @@ export default {
    height:100%;
 }
 .tent{
-    width:98%;height: 320px;
+    width:98%;
     background-color: #faf9f9;
     padding:5px 5px;
     overflow: hidden;

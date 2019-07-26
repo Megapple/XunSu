@@ -1,61 +1,45 @@
 <template>
 <div>
     <div class="citys">
-        <div class="first">
-        <div class="hz">
-            <img :src="img_hz1">
+        <div class="first" >
+        <div class="dali" @click="add" v-for="(item,i) of list.slice(0,4)" :key="i">
+            <img :src="'http://127.0.0.1:3000/'+item.img">
             <div>
-            <span>{{subtitle}}</span>
-            <span>{{price}}</span>
-            <i>{{grade}}</i>
-            </div>
-        </div>
-        <div class="hz">
-            <img :src="img_hz2" >
-            <div>
-            <span>{{subtitle}}</span>
-            <span>{{price}}</span>
-            <i>{{grade}}</i>
-            </div>
-        </div>  
-        </div>  
-        <div class="first">   
-        <div class="hz">
-            <img :src="img_hz3" >
-            <div>
-            <span>{{subtitle}}</span>
-            <span>{{price}}</span>
-            <i>{{grade}}</i>
-            </div>
-        </div>        
-        <div class="hz">
-            <img :src="img_hz4" >
-            <div>
-            <span>{{subtitle}}</span>
-            <span>{{price}}</span>
-            <i>{{grade}}</i>
+            <span>{{item.title}}</span>
+            <span>{{"¥"+item.price}}</span>
+             <i >{{grade[i]}}</i>
             </div>
         </div>
         </div>  
     </div>
-    <mt-button>查看更多杭州酒店 ></mt-button>
+    <mt-button @click="cityadd">查看更多杭州酒店 ></mt-button>
 </div>
 </template>
 <script>
 export default {
     data(){
         return{
-            subtitle:"花筑·杭州毕竟西湖民宿",
-            price:"¥459",
-            grade:"5.0分",
+            grade:["5.0分","4.8分","4.9分","4.7分"],
+            list:[]
         }
     },
     props:{
-        img_hz4:{default:""},
-        img_hz3:{default:""},
-        img_hz2:{default:""},
-        img_hz1:{default:""},
-    }
+        add:{type:Function},
+        cityadd:{type:Function}
+    },
+    methods:{
+       loadMore(){
+           var url="home";
+           this.axios.get(url).then(result=>{
+               console.log(result.data)
+               this.list=result.data;
+           })
+
+       }
+    },
+    created() {
+        this.loadMore();
+    },
 }
 </script>
 <style scoped>
@@ -73,9 +57,10 @@ export default {
 .first{
     width:400px;
     display: flex;
+    flex-flow: wrap;
     padding: 8px 10px;
 }
-.hz{
+.dali{
     width:160px;height:170px;
     display: flex;
     flex-flow: column;
@@ -83,27 +68,39 @@ export default {
     box-shadow: 0 0 10px #b8bbbf;
     border-radius: 10px;
     margin:3px 9px;
+    position: relative;
 }
-.hz>div span:first-child{
+.dali>div span:first-child{
     font-size:13px;
     color:#5f5e5ec2;
 }
-.hz>div span:nth-child(2){
+.dali>div span:nth-child(2),.dali i{
     color:rgb(255, 145, 0);
-    float:left; 
-    margin-top: 15px;
-    margin-left:9px;
+    position: absolute;
+    top:38px;left:15px;
 }
-.hz i{font-size:10px;color:rgb(255, 145, 0);float:right; margin-top: 15px;margin-right:9px;}
-.hz>div{ 
+.dali i{
+    font-size:10px;
+    position: absolute;
+    top:38px;
+    left:120px;
+}
+.dali>div{ 
+    width:100%;
+    text-align: left;
     margin-top:5px;
     padding:5px 10px;
-}  
+    position: absolute;
+    top:60%;
+}
 .mint-button--normal{
     margin:10px 110px;
-    height:25px; 
+    padding:4px 15px;
+    height:25px;
+    width:150px;
     border-radius: 50px;
     background-color:rgba(221, 221, 221, 0.534);
+    font-size: 13px;
 }
-.mint-button-text{font-size:14px;text-decoration: none;color:#707274;}
 </style>
+
