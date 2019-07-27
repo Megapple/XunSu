@@ -27,8 +27,8 @@
                 <p class="iconfont icon-return" slot="right" v-text="title_Pname"></p>
             </div>
             <div class="backDetail">
-                <p>莫干山风景区  |  莫干山</p>
-                <p>德清县筏头乡瑶坞村35-37号</p>
+                <p>北京市  |  海淀区</p>
+                <p>王府井</p>
             </div>
             <div class="statPeople">
                 <p>入住人:&nbsp; <span v-text="uname"></span></p>
@@ -98,6 +98,7 @@
 export default {
     data(){
         return{
+            lid:"",
             time:"14分42秒",
             title:"慧然大床房(双早)共一间",
             date:"2019-07-14至2019-07-15",
@@ -133,7 +134,7 @@ export default {
                         
                         iconClass: 'icon icon-tanhao'  
                      });                      
-                      this.$router.push('/Order')   
+                      this.$router.push({path:'/Order',query:{lid:this.lid}})  
                 }
             }
           
@@ -160,7 +161,26 @@ export default {
         },
         canOrd(){
             console.log(123);
-        }
+        },
+        //axios请求(这步很关键)
+        init(){
+          var url="house/select";
+          this.axios.get(url,{
+            params:{lid:this.lid}
+          })
+          .then(result=>{
+            console.log(result.data);
+            //填充标题
+            this.title=result.data.leaseroom.title;
+            this.title_Pname=result.data.leaseroom.title;
+            this.price=result.data.leaseroom.price;
+          })
+        },
+    },
+    created(){
+            this.lid=this.$route.query.lid;
+            console.log(this.lid);
+            this.init();
     }
 
 }

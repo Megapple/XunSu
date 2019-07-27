@@ -232,11 +232,12 @@ export default {
         },
         // 房源信息加载
         loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{
-               var rows=this.list.concat(result.data.msg.leaseroom);
+               var rows=this.list.concat(result.data);
                this.list=rows;
-               this.user=result.data.msg.user;
+               console.log(this.list);
+               this.user=result.data;
                console.log(this.user);
            })       
         },

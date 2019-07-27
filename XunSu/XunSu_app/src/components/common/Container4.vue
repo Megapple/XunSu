@@ -21,7 +21,7 @@ export default {
         return{
             grade:["5.0分","4.8分","4.9分","4.7分"],
             list:[]
-        }
+        }   
     },
     props:{
         add:{type:Function},
@@ -29,7 +29,7 @@ export default {
     },
     methods:{
        loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{
                console.log(result.data)
                this.list=result.data;

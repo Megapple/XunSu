@@ -27,7 +27,7 @@ export default {
     },
     methods:{
        loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{
                this.list=result.data;
            })

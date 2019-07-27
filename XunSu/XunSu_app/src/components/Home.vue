@@ -5,7 +5,7 @@
     <!-- 顶部轮播 -->
  <mt-swipe :auto="2000" class="top_swipe" >
   <mt-swipe-item v-for="(item,i) of list.slice(0,4)"  :key="i">
-       <img :src="'http://127.0.0.1:3000/'+item.img" class="img"/>
+       <img :src="'http://127.0.0.1:3000'+item.img" class="img"/>
   </mt-swipe-item>
  </mt-swipe>
  <!-- 搜索框 -->
@@ -132,7 +132,7 @@
         <h3>我们の故事</h3>
         <mt-swipe :auto="2000">
             <mt-swipe-item v-for="(item,i) of list.slice(0,4)" :key="i">
-                <img :src="'http://127.0.0.1:3000/'+item.img" alt="">
+                <img :src="'http://127.0.0.1:3000'+item.img" alt="">
             </mt-swipe-item>
         </mt-swipe>
         <a href="#"> ღ 快戳我</a>
@@ -228,12 +228,10 @@ export default {
            this.$router.push("./Search")
        },
        loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{               
                console.log(result.data)
-               this.list=result.data.msg.leaseroom
-               ;
-               console.log(result.data.msg)
+               this.list=result.data;
            })
        }
    },

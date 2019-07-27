@@ -45,7 +45,7 @@ export default {
                 this.list=result.data.msg;
                 this.show=false;
             }else{
-                console.l0g(333)
+                console.log(333)
                 this.show=true;
             } 
          });

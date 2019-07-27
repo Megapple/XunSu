@@ -391,7 +391,16 @@ INSERT INTO `needknow` (`nid`, `fid`, `checkTime`, `minimumDay`, `pets`, `cookin
 
 -- --------------------------------------------------------
 
+--
+-- 表的结构 `roomitem`
+--
 
+CREATE TABLE `roomitem` (
+  `riid` int(11) NOT NULL,
+  `riuid` int(11) DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
+  `isChecked` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -500,7 +509,9 @@ ALTER TABLE `needknow`
 --
 -- Indexes for table `roomitem`
 --
-
+ALTER TABLE `roomitem`
+  ADD PRIMARY KEY (`riid`),
+  ADD KEY `riuid` (`riuid`);
 
 --
 -- Indexes for table `roomorder`

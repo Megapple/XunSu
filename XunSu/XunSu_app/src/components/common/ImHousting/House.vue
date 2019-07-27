@@ -53,9 +53,9 @@ export default {
       this.$router.push('./login')
    }else{
      console.log(this.list)
-     if(this.list.length==0){
-       this.$messagebox("提示","您还未发布房源");
-     }
+    //  if(this.list.length==0){
+    //    this.$messagebox("提示","您还未发布房源");
+    //  }
     var obj = { uid };
     var url = "house/myhouse";
     this.axios.get(url, { params: obj }).then(result => {
