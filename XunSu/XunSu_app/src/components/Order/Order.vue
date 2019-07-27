@@ -1,7 +1,7 @@
 <template>
     <div class="order-container">
         <mt-header title="订单">
-            <router-link to="Detail" slot="left">
+            <router-link to="/" slot="left">
                 <mt-button icon="back" >返回</mt-button>
             </router-link>
                 <mt-button icon="more" slot="right"></mt-button>
@@ -13,13 +13,13 @@
                     <p>已完成</p>
                 </div>
                 <div class="content">
-                    <p>酒店名称:希尔顿酒店</p>
-                    <p>预定房型:大床房 共1间</p>
+                    <p v-text="title">酒店名称:希尔顿酒店</p>
+                    <p v-text="bed">预定房型:大床房 共1间</p>
                     <p>入离日期:07.14至07.15 共1晚</p>
                 </div>
                 <div class="foot">
                     <p>支付金额</p>
-                    <p>$496.00</p>
+                    <p v-text="price"></p>
                 </div>
                 <p style="text-align:right;">
                     <mt-button @click="againReserve" type="primary">再次预定</mt-button>
@@ -39,7 +39,10 @@
 export default {
     data(){
         return{
-            lid:2
+            lid:0,
+            title:"",
+            bed:"",
+            price:""
         }//return 结束
     },//data 结束
     methods:{
@@ -52,8 +55,25 @@ export default {
            },
            againReserve(){
                this.$router.push('/Orderdetail');
-           }
-           
+           },
+            init(){
+              var url="house/select";
+              this.axios.get(url,{
+                params:{lid:this.lid}
+              })
+              .then(result=>{
+                console.log(result.data);
+                //填充标题
+                this.title=result.data.leaseroom.title;
+                this.price="¥"+result.data.leaseroom.price;
+                this.bed=result.data.leaseroom.bedSize;
+              })
+            },         
+        },
+    created(){
+            this.lid=this.$route.query.lid;
+            console.log(this.lid);
+            this.init();
         }
 
     

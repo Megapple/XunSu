@@ -110,12 +110,12 @@
 export default {
     data() {
         return {
-             houseType:"修水大床房"   ,
+             houseType:""   ,
              houseData:"07-11-07-12 共1晚",
              uname:"",
              phone:"",
              card:"",
-             price:"1000",
+             price:"",
              value:"",
              sbumitPay:"",
              lid:""
@@ -153,17 +153,32 @@ export default {
                 this.$toast("入住人联系方式不能为空");
                  
             }else{
-                this.$router.push('/Orderpay')
+                this.$router.push({path:'/Orderpay',query:{lid:this.lid}})
             }
           },
         
             go(){
                 this.$router.push('/Add');
-            }
+            },
+        
+            //axios请求(这步很关键)
+            init(){
+              var url="house/select";
+              this.axios.get(url,{
+                params:{lid:this.lid}
+              })
+              .then(result=>{
+                console.log(result.data);
+                //填充标题
+                this.houseType=result.data.leaseroom.title;
+                this.price=result.data.leaseroom.price;
+              })
+            },
         },
         created(){
-            this.lid=this.$router.query.lid;
+            this.lid=this.$route.query.lid;
             console.log(this.lid);
+            this.init();
         }
 }
 </script>

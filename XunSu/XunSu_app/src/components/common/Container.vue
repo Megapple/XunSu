@@ -29,12 +29,12 @@ export default {
     },
     methods:{
        loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{
                console.log(result.data)
                this.list=result.data;
            })
-       }
+       },
     },
     created() {
         this.loadMore();

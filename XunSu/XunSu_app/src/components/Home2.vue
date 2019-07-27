@@ -95,8 +95,8 @@
     <div class="content">
         <div class="tent">
                 <div class="tent_info" v-for="(item,i) of list" :key='i'>
-                    <img class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect($event,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)" id="icon"></i>
+                    <img @click="tent_img" class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
+                    <i class="iconfont icon-shoucang5" @click="tent_collect($event,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)"></i>
                     <div class="tent_detail">
                         <span >{{item.title}}</span>
                         <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
@@ -171,7 +171,7 @@ export default {
             active1:"rent1",
             result:[],
             list:[],
-            user:[]
+            user:[],
         }
     },
     methods: {
@@ -206,7 +206,6 @@ export default {
         // },
         // 点击进入收藏
         tent_collect(e,lid,title,img,htType,tenant,bedroom){
-            // var i=document.getElementById("icon")
             var i=e.target;
             var uid=sessionStorage.getItem("uid");
             if(i.className=="iconfont icon-shoucang5"){
@@ -232,14 +231,16 @@ export default {
         },
         // 房源信息加载
         loadMore(){
-           var url="home";
+           var url="index";
            this.axios.get(url).then(result=>{
-               var rows=this.list.concat(result.data.msg.leaseroom);
+               var rows=this.list.concat(result.data);
                this.list=rows;
-               this.user=result.data.msg.user;
+               console.log(this.list);
+               this.user=result.data;
                console.log(this.user);
            })       
         },
+        //头像显示
         geturl(uid){
         var url="";
             var index=this.user;
@@ -254,6 +255,18 @@ export default {
         }
         return url;
         },
+        tent_img(){
+            var url="index";
+            this.axios.get(url).then(
+                result=>{
+                    console.log(result.data)
+                    this.list=result.data;
+                    for(var item of this.list){
+                        this.$router.push({path:"/Detail",query:{lid:item.lid}})
+                    }                                    
+            })
+            .catch(err=>{console.log(err)})
+        }
      },
     created(){
         this.loadMore();

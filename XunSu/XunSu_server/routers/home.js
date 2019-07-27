@@ -28,7 +28,7 @@ const pool=require("../pool");
 //           res.send(result);
 //     })
 // })
-router.get('/', function (req, res) {
+router.get('/home', function (req, res) {
   var output = {
     user: [],
     leaseroom: [],
