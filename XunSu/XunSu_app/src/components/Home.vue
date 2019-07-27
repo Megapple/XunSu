@@ -231,7 +231,9 @@ export default {
            var url="home";
            this.axios.get(url).then(result=>{               
                console.log(result.data)
-               this.list=result.data;
+               this.list=result.data.msg.leaseroom
+               ;
+               console.log(result.data.msg)
            })
        }
    },
