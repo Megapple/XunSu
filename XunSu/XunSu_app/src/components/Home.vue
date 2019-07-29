@@ -216,7 +216,16 @@ export default {
    },
    methods:{
        myadd(){
-           this.$router.push({path:"./Detail",query:{lid:2}})
+            var url="index";
+            this.axios.get(url).then(
+                result=>{
+                    console.log(result.data)
+                    var a=result.data;
+                    for(var item of a){
+                        this.$router.push({path:"/Detail",query:{lid:item.lid}})
+                    }                                    
+            })
+            .catch(err=>{console.log(err)})
        },
        myadds(){
            this.$router.push("./Home2")
