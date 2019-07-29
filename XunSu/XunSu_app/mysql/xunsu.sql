@@ -119,7 +119,7 @@ CREATE TABLE `collected`(
   `couid` INT(11),      #用户编号
   `colid` INT(11),      #房间编号
   `ctitle` VARCHAR(50), #标题
-  `cimg` VARCHAR(50),   #图片
+  `cimg` VARCHAR(100),   #图片
   `chtType` VARCHAR(50), #房源类型
   `ctenant` INT,         #可住人数
   `cbedroom` INT          #卧室个数

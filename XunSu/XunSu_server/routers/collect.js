@@ -7,8 +7,7 @@ router.get("/insert",(req,res)=>{
         pool.query(sql,[obj.uid,obj.lid,obj.title,obj.img,obj.htType,obj.tenant,obj.bedroom],(err,result)=>{
           if(err) throw(err);
             // res.send({code:0});
-            console.log(1)
-              res.send({code:200,msg:"result"});
+              res.send({code:200,msg:result});
         })
  })
  router.get("/select",(req,res)=>{
@@ -17,6 +16,7 @@ router.get("/insert",(req,res)=>{
         pool.query(sql,[obj.uid],(err,result)=>{
           if(err) throw(err);
           if(result.length>0){
+            console.log(result);
             res.send({code:200,msg:result});
           }else{
               res.send({code:300,msg:"没有找到"})

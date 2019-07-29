@@ -16,7 +16,7 @@
             width="13rem"
             height="8rem"
             fit="cover"
-            :src="'http://127.0.0.1:3000/'+item.cimg"
+            :src="'http://127.0.0.1:3000'+item.cimg"
             class="img-style"/>
             <div class="msg">
                 <span>{{item.cbedroom}}间卧室</span>
@@ -39,13 +39,11 @@ export default {
        var uid=sessionStorage.getItem("uid");
        var obj={uid:uid};
        this.axios.get("collect/select", { params: obj }).then(result => {
+           console.log(1)
             if (result.data.code == 200) {
-                this.$toast("找到了",1000);
-                console.log(result.data)
                 this.list=result.data.msg;
                 this.show=false;
             }else{
-                console.log(333)
                 this.show=true;
             } 
          });
