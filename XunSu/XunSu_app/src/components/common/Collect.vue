@@ -39,7 +39,6 @@ export default {
        var uid=sessionStorage.getItem("uid");
        var obj={uid:uid};
        this.axios.get("collect/select", { params: obj }).then(result => {
-           console.log(1)
             if (result.data.code == 200) {
                 this.list=result.data.msg;
                 this.show=false;

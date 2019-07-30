@@ -60,7 +60,6 @@ const pool=require("../pool");
       pool.query(sql,[
         obj.user_name,
         obj.ID_number,
-        obj.uid
         ],function(err,result){
         if (err) throw err;
         if (result.affectedRows>0)
@@ -85,7 +84,6 @@ const pool=require("../pool");
     }else{
        res.send({code:301,msg:'detai err'})
     }
-    
     });
   })
   // //5.设置用户列表

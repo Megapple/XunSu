@@ -247,7 +247,7 @@ export default {
             var index=this.user;
             for(var i of index){
                 if(i.uid==uid){
-                    if(!i.avatar || i.avatar==null){    
+                     if(!i.avatar || i.avatar==null){    
                     url="http://127.0.0.1:3000/images/avatar/1564045657591.jpeg";
                 }else{
                 url="http://127.0.0.1:3000"+i.avatar;
