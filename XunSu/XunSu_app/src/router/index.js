@@ -56,7 +56,9 @@ export default new Router({
     {path:'/Houstlocation',component:HoustLocation},
     {path:'/Home',component:Home},
     {path:'/Home2',component:Home2},
-    {path:'/Collect',component:Collect},
+    {path:'/Collect',component:Collect,meta: {
+      needLogin: true //需要加校检判断的路由
+    },},
     {path:'/Container',component:Container},
     {path:'/Container2',component:Container2},
     {path:'/Container3',component:Container3},

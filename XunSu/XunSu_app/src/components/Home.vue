@@ -32,16 +32,16 @@
     <div>
     <mt-tab-container v-model="active" >
         <mt-tab-container-item id="tab1">
-            <container :add="myadd" :cityadd="myadds"></container>
+            <container :cityadd="myadds"></container>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
-            <container2 :add="myadd" :cityadd="myadds"></container2>
+            <container2 :cityadd="myadds"></container2>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab3">
-            <container3 :add="myadd" :cityadd="myadds"></container3>
+            <container3 :cityadd="myadds"></container3>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab4">
-            <container4 :add="myadd" :cityadd="myadds"></container4>
+            <container4 :cityadd="myadds"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
     </div>
@@ -221,6 +221,7 @@ export default {
                 result=>{
                     console.log(result.data)
                     var a=result.data;
+                    console.log(a)
                     for(var item of a){
                         this.$router.push({path:"/Detail",query:{lid:item.lid}})
                     }                                    

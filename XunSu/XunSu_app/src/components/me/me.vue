@@ -38,12 +38,19 @@
       :style="{ height: '100%' }"
        get-container="body"
     >
-    <div class="userheader">
+      <mt-header title="编辑个人资料">
+        <router-link to="/" slot="left">
+          <!-- <mt-button icon="cross"></mt-button> -->
+          <mt-button  @click="closePop">×</mt-button>
+        </router-link>
+        <mt-button slot="right">保存</mt-button>
+      </mt-header>
+    <!-- <div class="userheader">
       <van-icon name="cross" />
       <h4>编辑个人资料</h4>
       <span>保存</span>
 
-    </div>
+    </div> -->
     </van-popup>
     <mt-button @click="imhouster" size="large" class="imhouster">我是房东</mt-button>
   </div>
@@ -68,7 +75,7 @@ export default {
       var uid = sessionStorage.getItem("uid");
       if (!uid) {
         this.title = "未登录";
-        this.$messagebox("提示", "您还未登录，请登录");
+        // this.$messagebox("提示", "您还未登录，请登录");
         this.showlogout = false;
         this.showlogin = true;
         // this.$router.push('./home')
@@ -93,7 +100,14 @@ export default {
       }
     },
     showPopup() {
-      this.show = true;
+      if(this.title=="未登录"){
+         this.$messagebox("提示", "您还未登录，请登录");
+      }else{
+        this.show=true;
+      }
+    },
+    closePop(){
+      this.how=false;
     },
     imhouster() {
       this.$router.push("./housting");

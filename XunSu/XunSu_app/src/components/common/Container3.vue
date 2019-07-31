@@ -2,7 +2,7 @@
 <div>
     <div class="citys">
         <div class="first" >
-        <div class="dali" @click="add" v-for="(item,i) of list.slice(0,4)" :key="i">
+        <div class="dali" @click="add(item.lid)" v-for="(item,i) of list.slice(0,4)" :key="i">
             <img :src="'http://127.0.0.1:3000/'+item.img">
             <div>
             <span>{{item.title}}</span>
@@ -24,10 +24,13 @@ export default {
         }
     },
     props:{
-        add:{type:Function},
+        // add:{type:Function},
         cityadd:{type:Function}
     },
     methods:{
+        add(lid){
+            this.$router.push({path:"/Detail",query:{lid:lid}})
+       },
        loadMore(){
            var url="index";
            this.axios.get(url).then(result=>{
