@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import Index from "../components/index.vue"
 // import HelloWorld from '@/components/HelloWorld'
 import Detail from '../components/detail/Detail.vue'
 import DetailMap from '../components/detail/DetailMap.vue'
@@ -41,24 +43,24 @@ import Me from "../components/me/me.vue"
 import House from "../components/common/ImHousting/House"
 
 
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {path: '/',name: 'Home',component: Home},
+    {path:'/index',component:Index},
     {path:'/Order',component:Order},
     {path: '/Detail',name: 'Detail',component: Detail},
     {path: '/DetailMap',name: 'DetailMap',component: DetailMap},
     {path:'/Orderdetail',component:Orderdetail},
     {path:'/Signin',component:Signin},
-    {path:'/Login',component:Login},
+    {path:'/Login',name:"login",component:Login},
     {path:'/Housting',component:Housting},
     {path:'/Houstlocation',component:HoustLocation},
     {path:'/Home',component:Home},
     {path:'/Home2',component:Home2},
-    {path:'/Collect',component:Collect,meta: {
-      needLogin: true //需要加校检判断的路由
-    },},
+    {path:'/Collect',component:Collect},
     {path:'/Container',component:Container},
     {path:'/Container2',component:Container2},
     {path:'/Container3',component:Container3},

@@ -59,21 +59,4 @@ new Vue({
   template: '<App/>',
 })
 //判断是否需要登录权限
-router.beforeEach(function(to, from, next) {
-  if (to.meta.needLogin) {
-    //页面是否登录
-    if (localStorage.getItem("session")) {
-      //本地存储中是否有token(uid)数据
-      next(); //表示已经登录
-    } else {
-      //next可以传递一个路由对象作为参数 表示需要跳转到的页面
-      next({
-        name: "login"
-      });
-    }
-  } else {
-    //表示不需要登录
-    next(); //继续往后走
-  }
-});
 

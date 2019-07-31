@@ -1,48 +1,61 @@
 <template>
     <div class="order-container">
         <mt-header title="订单">
-            <router-link to="/" slot="left">
+            <!-- <router-link to="/" slot="left">
                 <mt-button icon="back" >返回</mt-button>
             </router-link>
-                <mt-button icon="more" slot="right"></mt-button>
+                <mt-button icon="more" slot="right"></mt-button> -->
         </mt-header>
-        <div class="order-box">
-            <div class="order-detail" v-if="lid">
-                <div class="title">
-                    <p>酒店住宿</p>
-                    <p>已完成</p>
+        <div v-if="login">
+            <div class="order-box">
+                <div class="order-detail" v-if="lid">
+                    <div class="title">
+                        <p>酒店住宿</p>
+                        <p>已完成</p>
+                    </div>
+                    <div class="content">
+                        <p v-text="title">酒店名称:希尔顿酒店</p>
+                        <p v-text="bed">预定房型:大床房 共1间</p>
+                        <p>入离日期:07.14至07.15 共1晚</p>
+                    </div>
+                    <div class="foot">
+                        <p>支付金额</p>
+                        <p v-text="price"></p>
+                    </div>
+                    <p style="text-align:right;">
+                        <mt-button @click="againReserve" type="primary">再次预定</mt-button>
+                    </p>
                 </div>
-                <div class="content">
-                    <p v-text="title">酒店名称:希尔顿酒店</p>
-                    <p v-text="bed">预定房型:大床房 共1间</p>
-                    <p>入离日期:07.14至07.15 共1晚</p>
+                <div class="order1" v-else>
+                    <img src="../../assets/Orderimage/order_background_image.jpg" alt="">
+                    <h4 style="color:gray">您还没有订单哦!!</h4>
+                    <mt-button size="large" @click="go">客官这边请</mt-button>
                 </div>
-                <div class="foot">
-                    <p>支付金额</p>
-                    <p v-text="price"></p>
-                </div>
-                <p style="text-align:right;">
-                    <mt-button @click="againReserve" type="primary">再次预定</mt-button>
-                </p>
-            </div>
-            <div class="order1" v-else>
-                <img src="../../assets/Orderimage/order_background_image.jpg" alt="">
-                <h4 style="color:gray">您还没有订单哦!!</h4>
-                <mt-button size="large" @click="go">客官这边请</mt-button>
             </div>
         </div>
-        
+        <div v-if="!login" class="login">
+            <img src="../../assets/img/341315072.png" alt="" class="loginimg"> 
+            <p>登录后才能查看订单</p> 
+            <mt-button @click="gologin">登 录</mt-button>
+        </div>
+    <Tabbar :selected="selected"></Tabbar>
     
     </div>
 </template>
 <script>
+import Tabbar from "../tabbar";
 export default {
+    components:{
+        Tabbar
+    },
     data(){
         return{
             lid:0,
             title:"",
+            login:"",
             bed:"",
-            price:""
+            price:"",
+            selected:"order"
         }//return 结束
     },//data 结束
     methods:{
@@ -52,6 +65,9 @@ export default {
            go() {
                this.$router.push('/Home');
 
+           },
+           gologin(){
+               this.$router.push('/login');
            },
            againReserve(){
                this.$router.push('/Orderdetail');
@@ -71,9 +87,31 @@ export default {
             },         
         },
     created(){
-            this.lid=this.$route.query.lid;
-            console.log(this.lid);
-            this.init();
+         console.log(124234234)
+        console.log(sessionStorage.getItem("uid"))
+        if (sessionStorage.getItem("uid")) {
+        //本地存储中是否有token(uid)数据
+        this.login=true;
+        // var uid = sessionStorage.getItem("uid");
+        // var obj = { uid: uid };
+        // this.axios.get("collect/select", { params: obj }).then(result => {
+        //     if (result.data.code == 200) {
+        //     this.list = result.data.msg;
+        //     this.show = false;
+        //     } else {
+        //     this.show = true;
+        //     }
+        console.log(1)
+        // });
+        } else {
+        //next可以传递一个路由对象作为参数 表示需要跳转到的页面
+        this.login=false;
+        // router.push('/login');
+        console.log(2)
+        }
+            // this.lid=this.$route.query.lid;
+            // console.log(this.lid);
+            // this.init();
         }
 
     
@@ -131,6 +169,21 @@ export default {
     background-color: rgb(245, 156, 26);
     height: 32px;
     width: 202px;
+}
+.login{
+    text-align:center;
+    margin-top:50px;
+    color:rgb(148, 148, 148);
+    letter-spacing: 1px;
+}
+.loginimg{
+    width:100%;
+}
+.login .mint-button{
+    background-color:rgb(245, 156, 26);
+    color:#fff;
+    padding:0px 50px;
+    border-radius:10px;
 }
 </style>
 

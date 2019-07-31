@@ -53,13 +53,16 @@
     </div> -->
     </van-popup>
     <mt-button @click="imhouster" size="large" class="imhouster">我是房东</mt-button>
+    <Tabbar :selected="selected"></Tabbar>
   </div>
 </template>
 <script>
 import { Row, Col } from "vant";
+import Tabbar from "../tabbar";
 export default {
   data() {
     return {
+      selected:"me",
       imgurl: "",
       title: "",
       showlogout: true,
@@ -84,9 +87,10 @@ export default {
         this.showlogin = false;
         var obj = { uid };
         var url = "house/myhouse";
-        this.axios.get(url, { params: obj }).then(result => {
+        this.axios.get(url,{params:obj}).then(result => {
+          console.log(124234234);
           if (result.data.code == 200) {
-            console.log(result.data.msg.user);
+            console.log(result.data.msg);
             if (result.data.msg.user.uname == null) {
               this.title = "未设置用户名";
             } else {
@@ -102,7 +106,7 @@ export default {
     showPopup() {
       if(this.title=="未登录"){
          this.$messagebox("提示", "您还未登录，请登录");
-      }else{
+      }else{ 
         this.show=true;
       }
     },
@@ -110,7 +114,11 @@ export default {
       this.how=false;
     },
     imhouster() {
-      this.$router.push("./housting");
+      if(sessionStorage.getItem("uid")){
+        this.$router.push("./housting"); 
+      }else{
+        this.$messagebox("提示", "您还未登录，请登录");
+      } 
     },
     geturl() {
       var url = "";
@@ -140,7 +148,8 @@ export default {
   },
   components: {
     [Row.name]: Row,
-    [Col.name]: Col
+    [Col.name]: Col,
+    Tabbar
   }
 };
 </script>
@@ -152,7 +161,7 @@ h4{
   color: #fff;
   background-color: #ffb453;
   letter-spacing: 3px;
-  margin: 90px 0 20px 0;
+  margin: 90px 0 60px 0;
 }
 .user-links {
   width: 100%;

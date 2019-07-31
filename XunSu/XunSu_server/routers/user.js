@@ -56,10 +56,11 @@ const pool=require("../pool");
   //3.用户更改
   router.get('/update',function(req,res){
       var obj=req.query;
-      var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE users . uid= ?";
+      var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
       pool.query(sql,[
         obj.user_name,
         obj.ID_number,
+        obj.uid
         ],function(err,result){
         if (err) throw err;
         if (result.affectedRows>0)

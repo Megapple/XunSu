@@ -6,7 +6,7 @@ USE XUNSU;
 /**用户**/
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `uid` INT(11) PRIMARY KEY NOT NULL auto_increment,
+  `uid` INT(20) PRIMARY KEY NOT NULL auto_increment,
   `uname` VARCHAR(20) default NULL,          #用户名
   `upwd` VARCHAR(20) NOT NULL,               #密码
   `phone` VARCHAR(20) NOT NULL,              #手机

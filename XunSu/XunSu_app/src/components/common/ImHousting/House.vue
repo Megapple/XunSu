@@ -8,25 +8,28 @@
         <span>发布的房源</span>
       </div>
     <div class="content">
-      <div v-if="this.list.length==0">
+      <div v-if="show">
           <img src="../../../assets/img/4188bb0b93fc3d2d58af022818ad15ff.png" alt="" class="img-style">
       </div>
-      <div class="house-item"  v-for="(item,index) in list" :key="index">
-        <van-image
-          width="10rem"
-          height="7rem"
-          fit="cover"
-           :src="geturl(index)"
-        />
-        <div class="right-msg">
-          <p>{{item.title}}</p>
-          <p class="adreess">
-            地址：
-            <span>{{item.province}} {{item.city}}</span>
-          </p>
-          <p class="isload">已发布房源</p>
+      <div v-if="!show">
+        <div class="house-item"  v-for="(item,index) in list" :key="index" >
+          <van-image
+            width="10rem"
+            height="7rem"
+            fit="cover"
+            :src="geturl(index)"
+          />
+          <div class="right-msg">
+            <p>{{item.title}}</p>
+            <p class="adreess">
+              地址：
+              <span>{{item.province}} {{item.city}}</span>
+            </p>
+            <p class="isload">已发布房源</p>
+          </div>
         </div>
       </div>
+      
     </div>
     <mt-button type="primary" size="large" class="buttonPosition" @click="issue">{{house}}</mt-button>
   </div>
@@ -39,7 +42,8 @@ export default {
       list:[],
       imgurl:[],
       uid:"",
-      house:"发布房源"
+      house:"发布房源",
+      show:""
     };
   },
   components: {
@@ -47,12 +51,6 @@ export default {
   },
   created: function() {
     var uid = sessionStorage.getItem("uid");
-    this.uid=uid;
-    if(!uid){
-      this.$messagebox("提示","您还未登录，请登录");
-      this.$router.push('./login')
-   }else{
-     console.log(this.list)
     //  if(this.list.length==0){
     //    this.$messagebox("提示","您还未发布房源");
     //  } 
@@ -61,13 +59,18 @@ export default {
     this.axios.get(url, { params: obj }).then(result => {
       if (result.data.code == 200) {
         this.list=result.data.msg.leaseroom;
+        console.log(this.list);
         this.imgurl=result.data.msg.homePic;
         var length=this.imgurl.length-1;
+        if(this.list.length==0){
+          this.show=true;
+        }else{
+          this.show=false;
+        }
       } else {
         console.log("错误");
       }
-    });
-   } 
+    }); 
   },
   methods: {
     issue() {
@@ -83,17 +86,18 @@ export default {
       return url;
     },
     tohome(){
-      var length=this.imgurl.length-1;
-      var obj={lid:this.list[length].lid,imgurl:this.imgurl[length].imgurl}
-      var url="house/img";
-      console.log(obj)
-       this.axios.get(url, { params: obj }).then(result => {
-      if (result.data.code == 200) {
-        this.$router.push('./home');
-      } else {
-        console.log("错误");
-      }
-    });
+      this.$router.push('./home')
+    //   var length=this.imgurl.length-1;
+    //   var obj={lid:this.list[length].lid,imgurl:this.imgurl[length].imgurl}
+    //   var url="house/img";
+    //   console.log(obj)
+    //    this.axios.get(url, { params: obj }).then(result => {
+    //   if (result.data.code == 200) {
+    //     this.$router.push('./home');
+    //   } else {
+    //     console.log("错误");
+    //   }
+    // });
     }
   }
 };
@@ -166,14 +170,14 @@ p {
   bottom:10px;
 }
 .buttonPosition {
-  position: fixed;
-  bottom: 0;
   height: 50px;
   border-radius: 0;
   letter-spacing: 2px;
   font-size: 16px;
   font-weight: 600;
   background-color: #ff9c1a;
+  position:absolute;
+  bottom:0;
 }
 .tohome{
   float:left;
@@ -182,7 +186,7 @@ p {
   left:20px;
 }
 .img-style{
-  width:100%;position:absolute;
-  top:20%;
+  width:100%;
+  margin-top:100px;
 }
 </style>
