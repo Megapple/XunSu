@@ -94,6 +94,7 @@
 import { Row, Col } from "vant";
 import Tabbar from "../tabbar";
 export default {
+  name:'me',
   data() {
     return {
       selected:"me",
@@ -131,12 +132,14 @@ export default {
         var obj = { uid };
         var url = "house/myhouse";
         this.axios.get(url,{params:obj}).then(result => {
-          console.log(124234234);
           if (result.data.code == 200) {
-            console.log(result.data.msg);
             if (result.data.msg.user.uname == null) {
               this.title = "未设置用户名";
-              this.list=result.data.msg.user;
+            } else {
+              this.title = result.data.msg.user.uname;
+            }
+            this.list=result.data.msg.user;
+              console.log(this.list)
               var phone=this.list.phone;
               this.phone=phone.slice(0,3)+"****"+phone.slice(-4);
               this.email=this.list.email;
@@ -146,10 +149,6 @@ export default {
               }else{
                 this.radio=2;
               }
-              
-            } else {
-              this.title = result.data.msg.user.uname;
-            }
           } else {
             console.log("错误");
           }
@@ -226,32 +225,32 @@ export default {
       var email=this.email;
       var gender;
       var remark=this.message;
-      var file=-this.file;
+      var file=this.file.file;
       if(this.radio==1){
         gender=1;
       }else{
         gender=0;
       }
-      formData.append("test",file,file.name);
-      formData.append("test",0);
-      // formData.append("uname",uname);
-      // formData.append("email",email);
-      // formData.append("gender",gender);
-      // formData.append("remark",remark);
+      formData.append('test',file);
+      formData.append('test',this.uid);
+      formData.append('test',uname);
+      formData.append('test',email);
+      formData.append('test',gender);
+      formData.append('test',remark);
       let config = {
           header:{'Content-Type':'multipart/form-data'}
         }
-      console.log(formData.getAll("file"))
        const instance=this.axios.create({
           withCredentials: true
          }) 
       instance.post("http://127.0.0.1:3000/user/updateuser",formData,config).then((result)=>{
-        console.log(result.data);
-        // if(result.data.code==200){
-        //   this.$toast("修改成功",1000);
-        // }else{
-        //   this.$toast("修改失败",1000);
-        // }
+        if(result.data.code==200){
+          this.$toast("修改成功",1000);
+          // window.reload();
+          this.$router.push('/kong');
+        }else{
+          this.$toast("修改失败",1000);
+        }
       })
     }
   },
