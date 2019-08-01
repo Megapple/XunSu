@@ -66,7 +66,7 @@ export default {
 }
 </script>
 <style scoped>
-.mt{margin-bottom: 35px;}
+.mt{margin-bottom: 30px;}
 .bar{
     height:55px;
     display:flex;
