@@ -23,7 +23,7 @@
           <div class="msg">
             <span>{{item.cbedroom}}间卧室</span>
             <span class="lef">可住{{item.ctenant}}人</span>
-            <span class="rig">{{item.chtType}}</span>
+            <van-tag color="#f2826a">{{item.chtType}}</van-tag>
           </div>
         </div>
       </div>
@@ -102,6 +102,7 @@ export default {
   padding-top: 20px;
   /* width:90%;  */
   margin: auto;
+  width:90%;
 }
 .content {
   background-color: #eee;
@@ -110,26 +111,18 @@ export default {
   position: relative;
   margin-bottom: 10px;
   height: 200px;
+  border-radius:20px;
+  font-size:14px;
 }
-.rig {
-  /* right:20px; */
-  border-radius: 10px;
-  border: 1px solid rgb(253, 131, 131);
-  padding: 1px 10px;
-  color: rgb(255, 131, 131);
-}
-.lef {
-  /* position:absolute;
-    top:50px;
-    right:10px; */
-}
+
 .msg {
   position: absolute;
   right: 20px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 130px;
+  padding-top:20px;
+  height:100px;
 }
 .van-image {
   border-radius: 10px;

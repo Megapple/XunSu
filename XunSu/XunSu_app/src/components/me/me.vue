@@ -10,7 +10,7 @@
       <span class="logout" v-if="showlogout" @click="logout">退出登录</span>
       <span class="logout" v-show="showlogin" @click="logout">登录</span>
     </div>
-    <div class="content">
+    <div>
       <van-image round width="5rem" height="5rem" :src="geturl()" class="user-img" />
       <van-row class="user-links">
         <van-col span="8">
@@ -39,19 +39,53 @@
        get-container="body"
     >
       <mt-header title="编辑个人资料">
-        <router-link to="/" slot="left">
-          <!-- <mt-button icon="cross"></mt-button> -->
+        <router-link to="" slot="left">
           <mt-button  @click="closePop">×</mt-button>
         </router-link>
         <mt-button slot="right">保存</mt-button>
       </mt-header>
-    <!-- <div class="userheader">
-      <van-icon name="cross" />
-      <h4>编辑个人资料</h4>
-      <span>保存</span>
+      <div class="content">
+        <div class="pictureimg">
+          <van-image round width="6rem" height="6rem" :src="imgurl" class="user-update" ref="goodsImg" fit="cover">
+         </van-image>
+          <van-uploader :after-read="afterRead" accept="image/*">
+           <van-button icon="photo" class="picture"></van-button>
+          </van-uploader>
+           <!-- <img class="compileIcon bianji" src="../../assets/img/编辑.png" /> -->
+         
+        </div>
+          <div>
+              <van-cell-group class="uname-update">
+                <van-field v-model="uname" right-icon="edit" placeholder="用户名长度3~9位" maxlength="9" clearable/>
+              </van-cell-group>
+              <van-cell-group>
+                <van-cell title="手机号" :value="this.phone"/>
+                <van-cell title="邮箱地址" value="内容">
+                    <van-field v-model="email" placeholder="填写正确的邮箱地址" class="email" :value="this.email" :error-message="this.errormsg" @input="emailchange"></van-field>
+                </van-cell>
+                <van-cell title="性别">
+                  <van-radio-group v-model="radio">
+                    <van-radio name="1" checked-color="#ff9c1a" class="float-r">男</van-radio>
+                    <van-radio name="2" checked-color="#ff9c1a" class="float-r">女</van-radio>
+                  </van-radio-group>
+                </van-cell>
+                <van-cell title="个人简介">
+                  <van-field
+                      v-model="message"
+                      type="textarea"
+                      placeholder="请输入您的个人简介"
+                      rows="2"
+                      autosize
+                      maxlength="50" 
+                      class="email" 
+                  />
+                </van-cell>
+              </van-cell-group>
+          </div>
 
-    </div> -->
+      </div>
     </van-popup>
+  
     <mt-button @click="imhouster" size="large" class="imhouster">我是房东</mt-button>
     <Tabbar :selected="selected"></Tabbar>
   </div>
@@ -63,11 +97,18 @@ export default {
   data() {
     return {
       selected:"me",
-      imgurl: "",
       title: "",
       showlogout: true,
       showlogin: false,
-      show:false
+      show:false,
+      uname:"",
+      list:[],
+      phone:"",
+      radio:"",
+      email:"",
+      message:"",
+      errormsg:"",
+      imgurl:"",
     };
   },
   created: function() {
@@ -78,10 +119,8 @@ export default {
       var uid = sessionStorage.getItem("uid");
       if (!uid) {
         this.title = "未登录";
-        // this.$messagebox("提示", "您还未登录，请登录");
         this.showlogout = false;
         this.showlogin = true;
-        // this.$router.push('./home')
       } else {
         this.showlogout = true;
         this.showlogin = false;
@@ -93,10 +132,20 @@ export default {
             console.log(result.data.msg);
             if (result.data.msg.user.uname == null) {
               this.title = "未设置用户名";
+              this.list=result.data.msg.user;
+              var phone=this.list.phone;
+              this.phone=phone.slice(0,3)+"****"+phone.slice(-4);
+              this.email=this.list.email;
+              this.message=this.list.remark;
+              if(this.list.gender=='1'){
+                this.radio=1;
+              }else{
+                this.radio=2;
+              }
+              
             } else {
               this.title = result.data.msg.user.uname;
             }
-            this.imgurl = result.data.msg.user.avatar;
           } else {
             console.log("错误");
           }
@@ -108,10 +157,13 @@ export default {
          this.$messagebox("提示", "您还未登录，请登录");
       }else{ 
         this.show=true;
+        this.uname=this.title;
       }
     },
     closePop(){
-      this.how=false;
+      this.$messagebox .confirm( "您还未保存，确定要退出吗", "提示").then(action => {
+       this.show=false;
+     }).catch(err=>{console.log(err)});
     },
     imhouster() {
       if(sessionStorage.getItem("uid")){
@@ -122,12 +174,19 @@ export default {
     },
     geturl() {
       var url = "";
-      if (!this.imgurl || this.imgurl == null) {
+      if (!this.list.avatar || this.list.avatar == null) {
         url = "http://127.0.0.1:3000/images/avatar/1564045657591.jpeg";
       } else {
-        url = "http://127.0.0.1:3000" + this.imgurl;
+        url = "http://127.0.0.1:3000" + this.list.avatar;
       }
+      this.imgurl=url;
       return url;
+    },
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      this.imgurl=file.content;
+      
+      // this.$refs.goodsImg.src=this.imgurl;
     },
     logout() {
       if (this.showlogin == false) {
@@ -143,6 +202,15 @@ export default {
           });
       } else {
         this.$router.push("./login");
+      }
+    },
+    emailchange(){
+      var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+      if(!regex.test(this.email) && !this.email==""){
+        this.errormsg="邮箱格式不正确";
+        // console.log(this.radio)
+      }else{
+        this.errormsg=""
       }
     }
   },
@@ -241,5 +309,59 @@ img {
   display:flex;
   justify-content: space-around;
   align-items: baseline;
+}
+.mint-header{
+  background-color:#ffb453;
+}
+.content{
+  width:90%;
+  margin:auto;
+  position: relative;
+}
+.user-update{
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius:50%;
+  overflow:hidden;
+}
+.pictureimg{
+  color:#aaa;
+  width:96px;
+  margin:auto;
+  margin-top:30px;
+}
+.picture{
+  display:block;
+  margin:auto;
+}
+.van-hairline--top-bottom::after {
+    border-width:0;
+}
+.uname-update{
+  width:45%;
+  margin:auto;
+  /* padding-left:2Z0px; */
+}
+.float-r{
+  float:right;
+  margin:0 10px;
+}
+.van-cell.email{
+  padding:0;
+}
+.compileIcon.bianji{
+  margin-top:-60px;
+  margin-left:90px;
+}
+.van-uploader{
+  position:absolute;
+  top:70px;
+  right:110px;
+
+}
+.picture.van-button{
+  background-color:rgba(0,0,0,0);
+  border:0;
+  padding:0 -5px;
+  color:rgb(63, 63, 63);
 }
 </style>

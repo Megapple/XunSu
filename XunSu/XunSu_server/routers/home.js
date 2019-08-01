@@ -43,14 +43,13 @@ router.get('/', function (req, res) {
         if (err) console.log(err);
         output.leaseroom = result;
           var sql3 = `select imgurl from homePic`;
-          pool.query(sql3, (err, result) => {
-            if (err) console.log(err);
-            output.homePic=result;
-            res.send({ code: 200, msg: output });
-          })
+        pool.query(sql3, (err, result) => {
+          if (err) console.log(err);
+          output.homePic=result;
+          res.send({ code: 200, msg: output });
+        })
       })
     })
-
 });
 
 module.exports=router;

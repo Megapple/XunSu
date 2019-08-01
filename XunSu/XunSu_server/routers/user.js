@@ -71,6 +71,24 @@ const pool=require("../pool");
           }
         })
   })
+  //个人资料修改
+  router.get('/msg',function(req,res){
+    var obj=req.query;
+    var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
+    pool.query(sql,[
+      obj.user_name,
+      obj.ID_number,
+      obj.uid
+      ],function(err,result){
+      if (err) throw err;
+      if (result.affectedRows>0)
+      {
+        res.send({code:200,msg:'更改成功'});
+      }else{
+        res.send({code:301,msg:'更改失败'});
+        }
+      })
+})
   //插入省市县
 
   //4.用户检索

@@ -2,8 +2,8 @@
 <div>
     <div class="header">
         <mt-header>
-            <router-link to="/Home" slot="left">
-               <mt-button icon="back"></mt-button>
+            <router-link slot="left" to="">
+               <mt-button icon="back" @click.native="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
         <div class="search">
