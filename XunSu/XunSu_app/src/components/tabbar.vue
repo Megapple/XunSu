@@ -66,15 +66,14 @@ export default {
 }
 </script>
 <style scoped>
-.mt{margin-bottom: 30px;}
 .bar{
     height:55px;
     display:flex;
     flex-flow:column;
     align-items: center;
     padding:5px 0; 
-    /* margin-top:-8px; */
-    margin-bottom:-17px;   
+    margin-top:-8px;
+    margin-bottom:-25px;   
 }
 .bar span{font-size:10px;margin-top:5px;margin-bottom:-11px; }
   .icon-fangzi,.icon-shoucang5,.icon-huiyuan-1,.icon-dingdan{font-size:23px;}

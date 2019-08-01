@@ -135,7 +135,6 @@
                 <img :src="'http://127.0.0.1:3000'+item.img" alt="">
             </mt-swipe-item>
         </mt-swipe>
-        <a href="#"> ღ 快戳我</a>
     </div>
   </div>
   <!-- </mt-tab-container-item>

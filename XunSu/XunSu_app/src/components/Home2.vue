@@ -115,6 +115,7 @@
                 </div>
         </div>
     </div>
+    <van-button @click="loadMore()" size="large" type="warning">加载更多</van-button>
 </div>
 </template>
 <script>
@@ -172,6 +173,7 @@ export default {
             result:[],
             list:[],
             user:[],
+            count:1,
         }
     },
     methods: {
@@ -233,12 +235,11 @@ export default {
         // 房源信息加载
         loadMore(){
            var url="home";
-           this.axios.get(url).then(result=>{
-            //    var rows=this.list.concat(result.data.msg.leaseroom);
-               this.list=result.data.msg.leaseroom;
-               console.log(this.list);
-               this.user=result.data.msg.user;
-               console.log(this.user);
+           var obj={start:this.list.length,count:this.count}
+           this.axios.get(url,{params:obj}).then(result=>{
+            console.log(result.data)
+            this.list=this.list.concat(result.data.msg.leaseroom);
+            this.user=this.user.concat(result.data.msg.user);
            })       
         },
         //头像显示
