@@ -1,6 +1,9 @@
 const express=require("express")
 const router=express.Router();
 const pool=require("../pool");
+const fs=require('fs');
+const path=require('path');
+var multer=require("multer");
 
   //登录
   router.get('/login',function(req,res){
@@ -72,22 +75,24 @@ const pool=require("../pool");
         })
   })
   //个人资料修改
-  router.get('/msg',function(req,res){
-    var obj=req.query;
-    var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
-    pool.query(sql,[
-      obj.user_name,
-      obj.ID_number,
-      obj.uid
-      ],function(err,result){
-      if (err) throw err;
-      if (result.affectedRows>0)
-      {
-        res.send({code:200,msg:'更改成功'});
-      }else{
-        res.send({code:301,msg:'更改失败'});
-        }
-      })
+  var images=multer({dest:'../public/images/avatar'})
+  router.post('/updateuser',function(req,res){
+    var obj=req.body;
+    console.log(obj);
+    // var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
+    // pool.query(sql,[
+    //   obj.user_name,
+    //   obj.ID_number,
+    //   obj.uid
+    //   ],function(err,result){
+    //   if (err) throw err;
+    //   if (result.affectedRows>0)
+    //   {
+    //     res.send({code:200,msg:'更改成功'});
+    //   }else{
+    //     res.send({code:301,msg:'更改失败'});
+    //     }
+    //   })
 })
   //插入省市县
 

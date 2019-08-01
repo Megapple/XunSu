@@ -42,11 +42,11 @@
         <router-link to="" slot="left">
           <mt-button  @click="closePop">×</mt-button>
         </router-link>
-        <mt-button slot="right">保存</mt-button>
+        <mt-button slot="right" @click="save">保存</mt-button>
       </mt-header>
       <div class="content">
         <div class="pictureimg">
-          <van-image round width="6rem" height="6rem" :src="imgurl" class="user-update" ref="goodsImg" fit="cover">
+          <van-image round width="6rem" height="6rem" :src="img" class="user-update" ref="goodsImg" fit="cover">
          </van-image>
           <van-uploader :after-read="afterRead" accept="image/*">
            <van-button icon="photo" class="picture"></van-button>
@@ -109,6 +109,9 @@ export default {
       message:"",
       errormsg:"",
       imgurl:"",
+      img:"",
+      uid:"",
+      file:[]
     };
   },
   created: function() {
@@ -117,6 +120,7 @@ export default {
   methods: {
     islogin() {
       var uid = sessionStorage.getItem("uid");
+      this.uid=uid;
       if (!uid) {
         this.title = "未登录";
         this.showlogout = false;
@@ -158,6 +162,7 @@ export default {
       }else{ 
         this.show=true;
         this.uname=this.title;
+        this.img=this.imgurl;
       }
     },
     closePop(){
@@ -184,9 +189,9 @@ export default {
     },
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
-      this.imgurl=file.content;
-      
+      this.img=file.content; 
       // this.$refs.goodsImg.src=this.imgurl;
+      this.file=file;
     },
     logout() {
       if (this.showlogin == false) {
@@ -212,6 +217,42 @@ export default {
       }else{
         this.errormsg=""
       }
+    },
+    save(){
+      var url="user/updateuser";
+      let formData = new FormData();
+      var uid=this.uid;
+      var uname=this.uname;
+      var email=this.email;
+      var gender;
+      var remark=this.message;
+      var file=-this.file;
+      if(this.radio==1){
+        gender=1;
+      }else{
+        gender=0;
+      }
+      formData.append("test",file,file.name);
+      formData.append("test",0);
+      // formData.append("uname",uname);
+      // formData.append("email",email);
+      // formData.append("gender",gender);
+      // formData.append("remark",remark);
+      let config = {
+          header:{'Content-Type':'multipart/form-data'}
+        }
+      console.log(formData.getAll("file"))
+       const instance=this.axios.create({
+          withCredentials: true
+         }) 
+      instance.post("http://127.0.0.1:3000/user/updateuser",formData,config).then((result)=>{
+        console.log(result.data);
+        // if(result.data.code==200){
+        //   this.$toast("修改成功",1000);
+        // }else{
+        //   this.$toast("修改失败",1000);
+        // }
+      })
     }
   },
   components: {
@@ -337,7 +378,7 @@ img {
     border-width:0;
 }
 .uname-update{
-  width:45%;
+  width:50%;
   margin:auto;
   /* padding-left:2Z0px; */
 }
