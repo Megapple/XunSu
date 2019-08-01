@@ -61,7 +61,7 @@
           if(result.data.code>0){  
             sessionStorage.setItem("uid",result.data.msg[0].uid);
           var uid = sessionStorage.getItem("uid");
-           this.$router.push("./home");s
+           this.$router.push("./home");
           }else{
              this.$messagebox("提示","手机号或密码有误");
            }

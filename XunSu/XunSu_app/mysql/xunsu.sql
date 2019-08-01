@@ -7,15 +7,15 @@ USE XUNSU;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `uid` INT(20) PRIMARY KEY NOT NULL auto_increment,
-  `uname` VARCHAR(20) default NULL,          #用户名
-  `upwd` VARCHAR(20) NOT NULL,               #密码
-  `phone` VARCHAR(20) NOT NULL,              #手机
-  `email` VARCHAR(30) default NULL,          #邮箱
-  `user_name` VARCHAR(32) default NULL,      #用户姓名，如王小明
-  `avatar` VARCHAR(128) default NULL,        #头像图片路径
-  `gender` INT default NULL,                 #性别  0-女  1-男
+  `uname` VARCHAR(20) default NULL,           #用户名
+  `upwd` VARCHAR(20) NOT NULL,                #密码
+  `phone` VARCHAR(20) NOT NULL,               #手机
+  `email` VARCHAR(30) default NULL,           #邮箱
+  `user_name` VARCHAR(32) default NULL,       #用户姓名，如王小明
+  `avatar` VARCHAR(128) default NULL,         #头像图片路径
+  `gender` INT default NULL,                  #性别  0-女  1-男
   `remark` VARCHAR(100) default NULL,         #介绍
-  `ID_number` VARCHAR(20) default NULL       #证件号
+  `ID_number` VARCHAR(20) default NULL        #证件号
 );
 
 /**插入数据**/

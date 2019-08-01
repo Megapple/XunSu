@@ -29,7 +29,11 @@ import { Picker } from 'vant';
 import { Field } from 'vant';
 import { Uploader } from 'vant';
 import { Image } from 'vant';
+import { Tag } from 'vant';
+import { Row, Col } from 'vant';
 
+Vue.use(Row).use(Col);
+Vue.use(Tag);
 Vue.use(Image);
 Vue.use(Uploader);
 Vue.use(Field);
