@@ -6,7 +6,7 @@ USE XUNSU;
 /**用户**/
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `uid` INT(11) PRIMARY KEY NOT NULL auto_increment,
+  `uid` INT(20) PRIMARY KEY NOT NULL auto_increment,
   `uname` VARCHAR(20) default NULL,          #用户名
   `upwd` VARCHAR(20) NOT NULL,               #密码
   `phone` VARCHAR(20) NOT NULL,              #手机
@@ -119,7 +119,7 @@ CREATE TABLE `collected`(
   `couid` INT(11),      #用户编号
   `colid` INT(11),      #房间编号
   `ctitle` VARCHAR(50), #标题
-  `cimg` VARCHAR(50),   #图片
+  `cimg` VARCHAR(100),   #图片
   `chtType` VARCHAR(50), #房源类型
   `ctenant` INT,         #可住人数
   `cbedroom` INT          #卧室个数

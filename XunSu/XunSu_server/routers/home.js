@@ -28,7 +28,7 @@ const pool=require("../pool");
 //           res.send(result);
 //     })
 // })
-router.get('/home', function (req, res) {
+router.get('/', function (req, res) {
   var output = {
     user: [],
     leaseroom: [],
@@ -38,7 +38,6 @@ router.get('/home', function (req, res) {
     pool.query(sql1, (err, result) => {
       if (err) console.log(err);
       output.user = result;
-      console.log(output.user);
       var sql2 = `select * from leaseroom`;
       pool.query(sql2, (err, result) => {
         if (err) console.log(err);

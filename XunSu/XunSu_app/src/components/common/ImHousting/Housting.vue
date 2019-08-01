@@ -1,8 +1,8 @@
 <template>
   <div class="body">
     <mt-header title="请完善个人信息">
-      <router-link to="/login" slot="left">
-        <mt-button icon="back"></mt-button>
+      <router-link to="" slot="left">
+        <mt-button icon="back" @click.native="$router.back(-1)"></mt-button>
       </router-link>
     </mt-header>
     <div>
@@ -53,12 +53,6 @@ export default {
       istogo:"上传图像"
 
     } 
-  },
-  created:function(){
-   if(!sessionStorage.getItem("uid")){
-      this.$messagebox("提示","您还未登录，请登录");
-      this.$router.push('./login')
-   }
   },
   methods:{
     details:function(){

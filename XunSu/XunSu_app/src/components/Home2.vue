@@ -215,6 +215,7 @@ export default {
                     if (result.data.code == 200) {
                          this.$toast("收藏成功",1000);
                          console.log("chenggogn ")
+                         
                     } 
                 });
             }else{
@@ -231,12 +232,12 @@ export default {
         },
         // 房源信息加载
         loadMore(){
-           var url="index";
+           var url="home";
            this.axios.get(url).then(result=>{
-               var rows=this.list.concat(result.data);
-               this.list=rows;
+            //    var rows=this.list.concat(result.data.msg.leaseroom);
+               this.list=result.data.msg.leaseroom;
                console.log(this.list);
-               this.user=result.data;
+               this.user=result.data.msg.user;
                console.log(this.user);
            })       
         },
@@ -246,7 +247,7 @@ export default {
             var index=this.user;
             for(var i of index){
                 if(i.uid==uid){
-                    if(!i.avatar || i.avatar==null){    
+                     if(!i.avatar || i.avatar==null){    
                     url="http://127.0.0.1:3000/images/avatar/1564045657591.jpeg";
                 }else{
                 url="http://127.0.0.1:3000"+i.avatar;
@@ -256,7 +257,7 @@ export default {
         return url;
         },
         tent_img(){
-            var url="index";
+            var url="home";
             this.axios.get(url).then(
                 result=>{
                     console.log(result.data)

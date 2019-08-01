@@ -197,23 +197,31 @@ router.get('/myhouse', function (req, res) {
     pool.query(sql1, [uid], (err, result) => {
       if (err) console.log(err);
       output.user = result[0];
-      console.log(output.user);
       var sql2 = `select * from leaseroom where uid=?`;
       pool.query(sql2, [uid], (err, result) => {
         if (err) console.log(err);
-        var obj = output.leaseroom = result;
-        var i = 0;
-        for (var key of obj) {
-          var sql3 = `select imgurl from homePic where homeid= ?`;
-          var m = key.lid;
-          pool.query(sql3, [m], (err, result) => {
-            if (err) console.log(err);
-            output.homePic.push(result[0]);
-            i++;
-            if (i == obj.length) {
+        if(result.length==0){
+          res.send({code:200,msg:output})
+          console.log(output)
+        }else{
+          var obj = output.leaseroom = result;
+          var i = 0;
+          for (var key of obj) {
+            if(key.lid){
+              var sql3 = `select imgurl from homePic where homeid= ?`;
+              var m = key.lid;
+              pool.query(sql3, [m], (err, result) => {
+                if (err) console.log(err);
+                output.homePic.push(result[0]);
+                i++;
+                if (i == obj.length) {
+                  res.send({ code: 200, msg: output });
+                }
+              })
+            }else{
               res.send({ code: 200, msg: output });
             }
-          })
+          }
         }
       })
     })

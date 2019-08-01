@@ -58,4 +58,5 @@ new Vue({
   components: { App},
   template: '<App/>',
 })
+//判断是否需要登录权限
 

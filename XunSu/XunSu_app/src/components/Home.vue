@@ -32,16 +32,16 @@
     <div>
     <mt-tab-container v-model="active" >
         <mt-tab-container-item id="tab1">
-            <container :add="myadd" :cityadd="myadds"></container>
+            <container :cityadd="myadds"></container>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab2">
-            <container2 :add="myadd" :cityadd="myadds"></container2>
+            <container2 :cityadd="myadds"></container2>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab3">
-            <container3 :add="myadd" :cityadd="myadds"></container3>
+            <container3 :cityadd="myadds"></container3>
         </mt-tab-container-item>        
         <mt-tab-container-item id="tab4">
-            <container4 :add="myadd" :cityadd="myadds"></container4>
+            <container4 :cityadd="myadds"></container4>
         </mt-tab-container-item>
     </mt-tab-container>
     </div>
@@ -138,7 +138,7 @@
         <a href="#"> ღ 快戳我</a>
     </div>
   </div>
-  </mt-tab-container-item>
+  <!-- </mt-tab-container-item>
   <mt-tab-container-item id="collect">
       <collect></collect>
   </mt-tab-container-item>
@@ -147,10 +147,12 @@
   </mt-tab-container-item>
   <mt-tab-container-item id="me">
       <me></me>
-  </mt-tab-container-item>
+  </mt-tab-container-item>-->
+   </mt-tab-container-item>
 </mt-tab-container>
+<Tabbar :selected="selected"></Tabbar>
  <!--底部导航栏-->
- <mt-tabbar v-model="selected" fixed>
+ <!-- <mt-tabbar v-model="selected" fixed>
      <mt-tab-item id="hotel">
         <div class="bar">
         <i class="iconfont icon-fangzi"></i>
@@ -175,10 +177,11 @@
         <span>我的</span> 
         </div>
      </mt-tab-item>
- </mt-tabbar>
+ </mt-tabbar> -->
 </div>
 </template>
 <script>
+import Tabbar from "./tabbar";
 // 导入城市子组件
 import Container from "./common/Container.vue"
 import Container2 from "./common/Container2.vue"
@@ -193,6 +196,7 @@ import Order from "./Order/Order.vue"
 import me from "./me/me.vue"
 // 引入底部导航栏图标
 import "../font/font_tabbar/iconfont.css"
+
 export default {
    components: {
        "container":Container,
@@ -205,13 +209,15 @@ export default {
        "odds":Odds,
        "odds2":Odds2,
        "odds3":Odds3,
+       Tabbar
    },
    data(){
        return{
            active:"tab1",
            active2:"odd1",
            selected:"hotel",
-           list:[]
+           list:[],
+         selected:"hotel"
        }
    },
    methods:{
@@ -221,6 +227,7 @@ export default {
                 result=>{
                     console.log(result.data)
                     var a=result.data;
+                    console.log(a)
                     for(var item of a){
                         this.$router.push({path:"/Detail",query:{lid:item.lid}})
                     }                                    
@@ -246,7 +253,26 @@ export default {
    },
    created(){
        this.loadMore();
-   }
+   },
+    // watch: {
+    //     selected: function(val, oldVal) {
+    //     // 这里就可以通过 val 的值变更来确定去向
+    //         switch (val) {
+    //             case "hotel":
+    //             this.$router.push("/home");
+    //             break;
+    //             case "collect":
+    //             this.$router.push("/collect");
+    //             break;
+    //             case "order":
+    //             this.$router.push("/order");
+    //             break;
+    //             case "me":
+    //             this.$router.push("/me");
+    //             break;
+    //         }
+    //     }
+    // }
  }
 </script>
 <style scoped>
@@ -423,25 +449,4 @@ a{text-decoration: none;}
     box-shadow: 0 0 10px #ccc;
 }
 .story_bottom a{margin-top:-10px;z-index: 10; color:#656b79;}
-/* 底部导航栏 */
-.mt{margin-bottom: 35px;}
-.bar{
-    height:55px;
-    display:flex;
-    flex-flow:column;
-    align-items: center;
-    padding:5px 0; 
-    /* margin-top:-8px; */
-    margin-bottom:-17px;   
-}
-.bar span{font-size:10px;margin-top:5px;margin-bottom:-11px; }
-.icon-fangzi,.icon-shoucang5,.icon-huiyuan-1,.icon-dingdan{font-size:23px;}
-/* 修改tabbar 默认文字颜色 */
-.mint-tabbar>.mint-tab-item{color:#ccc;}
-/* 修改tabbar 选中时图标颜色及背景 */
-.mint-tabbar>.mint-tab-item.is-selected{
-    background-color:#fafafa;
-    color:rgb(245, 156, 26);
-}
-.mint-tabbar>.mint-tab-item.is-selected span{color:rgb(245, 156, 26);}
 </style>

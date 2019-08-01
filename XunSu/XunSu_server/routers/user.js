@@ -56,7 +56,7 @@ const pool=require("../pool");
   //3.用户更改
   router.get('/update',function(req,res){
       var obj=req.query;
-      var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE users . uid= ?";
+      var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
       pool.query(sql,[
         obj.user_name,
         obj.ID_number,
@@ -85,7 +85,6 @@ const pool=require("../pool");
     }else{
        res.send({code:301,msg:'detai err'})
     }
-    
     });
   })
   // //5.设置用户列表
