@@ -334,6 +334,7 @@ a{text-decoration: none;}
 }
 /* 城市 */ 
 .index{
+    width:90%;
     margin-top:40px;
     margin-bottom: 70px;
 }
