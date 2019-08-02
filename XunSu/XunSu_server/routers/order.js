@@ -8,7 +8,6 @@ router.get("/insert",(req,res)=>{
         pool.query(sql,[obj.uid,obj.lid,obj.title,obj.img,obj.htType,obj.tenant,obj.bedroom],(err,result)=>{
           if(err) throw(err);
             // res.send({code:0});
-            console.log(1)
               res.send(result);
         })
  })

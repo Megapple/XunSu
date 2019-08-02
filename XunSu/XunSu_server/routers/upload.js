@@ -45,7 +45,6 @@ var multer=require("multer");
     // console.log(req.file.path);
     // console.log(req.body.test[0]);
     var lid=req.body.lid;
-    console.log(req.file);
     fs.readFile(req.file.path,(err,data)=>{
       if(err) {return res.send({code:0,msg:'上传失败'});}
       //声明图片名字为时间戳和随机数拼接成的，尽量保持唯一性
@@ -63,8 +62,7 @@ var multer=require("multer");
             if (err) throw err;
             if (result.affectedRows>0)
             {
-              console.log(result);
-              res.send({code:200,msg:'插入成功'});
+              res.send({code:200,msg:data});
               return;
             }else{
               res.send({code:301,msg:'插入失败'});
@@ -72,6 +70,21 @@ var multer=require("multer");
             })
       })
     })
+  })
+
+  //缩略图
+  router.get('/thumbnail',(req,res)=>{
+    var sql="UPDATE leaseroom SET img= ? WHERE lid= ?";
+    var obj=req.query;
+    pool.query(sql,[obj.imgurl,obj.lid],function(err,result){
+      if(err) throw err;
+      if (result.affectedRows>0)
+            {
+              res.send({code:200,msg:'插入成功'});
+            }else{
+              res.send({code:301,msg:'插入失败'});
+              }
+      })
   })
   module.exports=router;
 

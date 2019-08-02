@@ -66,7 +66,6 @@ router.get('/facility', function (req, res) {
 })
 router.get('/title', function (req, res) {
   var str = "UPDATE leaseroom SET `title`=?,`describe`=? ,`detail`=? WHERE `lid`=?";
-  console.log(req.query)
   pool.query(str, [req.query.title, req.query.describe, req.query.detail,req.query.lid], function (err, result) {
     if (err) throw err;
     if (result.affectedRows > 0) {
@@ -147,7 +146,6 @@ router.get('/needKnow', function (req, res) {
 //查找房源信息
 router.get('/select', function (req, res) {
   var lid = req.query.lid;
-  console.log(lid);
   var output = {
     leaseroom: {},
     facility: [],
@@ -185,7 +183,6 @@ router.get('/select', function (req, res) {
 });
 //检索uid里面的Lid
 router.get('/myhouse', function (req, res) {
-  console.log(req.query)
   var uid = req.query.uid;
   var output = {
     user: {},
@@ -202,7 +199,6 @@ router.get('/myhouse', function (req, res) {
         if (err) console.log(err);
         if(result.length==0){
           res.send({code:200,msg:output})
-          console.log(output)
         }else{
           var obj = output.leaseroom = result;
           var i = 0;
@@ -252,14 +248,11 @@ router.get('/myhouse', function (req, res) {
 router.get("/img",(req,res)=>{
   var obj=req.query;
       var sql="Update leaseroom Set img=? Where lid=?";
-      console.log(1)
       pool.query(sql,[obj.imgurl,obj.lid],(err,result)=>{
         if(err) throw(err);
-        console.log(result);
           if (result.affectedRows>0)
           {
             res.send({code:200,msg:'更改成功'});
-            console.log(122222);
           }else{
             res.send({code:301,msg:'更改失败'});
             }

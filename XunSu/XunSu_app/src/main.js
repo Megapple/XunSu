@@ -31,7 +31,9 @@ import { Uploader } from 'vant';
 import { Image } from 'vant';
 import { Tag } from 'vant';
 import { Row, Col } from 'vant';
+import { Search } from 'vant';
 
+Vue.use(Search);
 Vue.use(Row).use(Col);
 Vue.use(Tag);
 Vue.use(Image);

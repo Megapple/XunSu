@@ -19,6 +19,7 @@ import Contacts from "../components/Order/Contacts.vue"
 import Home from "../components/Home.vue"
 import Home2 from "../components/Home2.vue"
 import Collect from "../components/common/Collect.vue"
+import Collect2 from "../components/common/Collect2.vue"
 import Container from "../components/common/Container.vue"
 import Container2 from "../components/common/Container2.vue"
 import Container3 from "../components/common/Container3.vue"
@@ -62,6 +63,7 @@ export default new Router({
     {path:'/Home',component:Home},
     {path:'/Home2',component:Home2},
     {path:'/Collect',component:Collect},
+    {path:'/Collect2',component:Collect2},
     {path:'/Container',component:Container},
     {path:'/Container2',component:Container2},
     {path:'/Container3',component:Container3},

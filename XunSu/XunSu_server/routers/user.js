@@ -98,11 +98,12 @@ var multer=require("multer");
     }else{
       pool.query("SELECT * FROM users WHERE uid=?",[obj.test[0]],(err,result)=>{
         if(err) throw err;
+        console.log(result)
         var url="public"+result[0].avatar;
-        if(url){
+        if(result[0].avatar){
+          console.log(1)
           fs.unlink(url,(err) => {
             if (err) throw err;
-            console.log('文件已删除');
           });
         }
         fs.readFile(req.file.path,(err,data)=>{
