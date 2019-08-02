@@ -1,6 +1,9 @@
 const express=require("express")
 const router=express.Router();
 const pool=require("../pool");
+const fs=require('fs');
+const path=require('path');
+var multer=require("multer");
 
   //登录
   router.get('/login',function(req,res){
@@ -72,22 +75,66 @@ const pool=require("../pool");
         })
   })
   //个人资料修改
-  router.get('/msg',function(req,res){
-    var obj=req.query;
-    var sql="UPDATE users SET user_name= ?,ID_number= ? WHERE uid= ?";
-    pool.query(sql,[
-      obj.user_name,
-      obj.ID_number,
-      obj.uid
-      ],function(err,result){
-      if (err) throw err;
-      if (result.affectedRows>0)
-      {
-        res.send({code:200,msg:'更改成功'});
-      }else{
-        res.send({code:301,msg:'更改失败'});
+  var images=multer({dest:'../public/images/avatar'})
+  router.post('/updateuser',images.single('test'),function(req,res){
+    var obj=req.body;
+    if(req.file==undefined){
+      var sql="UPDATE users SET uname= ?,email= ? ,gender=?,remark=? WHERE uid= ?";
+            pool.query(sql,[
+              obj.test[2],
+              obj.test[3],
+              obj.test[4],
+              obj.test[5],
+              obj.test[1]
+              ],function(err,result){
+              if (err) throw err;
+              if (result.affectedRows>0)
+              {
+                res.send({code:200,msg:'更改成功'});
+              }else{
+                res.send({code:301,msg:'更改失败'});
+                }
+              })
+    }else{
+      pool.query("SELECT * FROM users WHERE uid=?",[obj.test[0]],(err,result)=>{
+        if(err) throw err;
+        var url="public"+result[0].avatar;
+        if(url){
+          fs.unlink(url,(err) => {
+            if (err) throw err;
+            console.log('文件已删除');
+          });
         }
+        fs.readFile(req.file.path,(err,data)=>{
+          if(err) {return res.send({code:0,msg:'上传失败'})}
+          let time=Date.now()+parseInt(Math.random()*999)+parseInt(Math.random()*2222);
+          let extname=req.file.mimetype.split('/')[1];
+          let keepname=time+"."+extname;
+          fs.writeFile(path.join(__dirname,'../public/images/avatar/'+keepname),data,(err)=>{
+            if(err){return res.send({code:300,msg:'写入失败'})}
+            var data='/images/avatar/'+keepname;
+            var sql="UPDATE users SET uname= ?,email= ? ,avatar=?,gender=?,remark=? WHERE uid= ?";
+            var arr=[obj.uname,obj.email,data,obj.gender,obj.remark]
+            pool.query(sql,[
+              obj.test[1],
+              obj.test[2],
+              data,
+              obj.test[3],
+              obj.test[4],
+              obj.test[0]
+              ],function(err,result){
+              if (err) throw err;
+              if (result.affectedRows>0)
+              {
+                res.send({code:200,msg:'更改成功'});
+              }else{
+                res.send({code:301,msg:'更改失败'});
+                }
+              })
+          })
+        })
       })
+    }
 })
   //插入省市县
 

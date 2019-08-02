@@ -40,6 +40,7 @@ import HoustIntroduc from "../components/common/ImHousting/HoustIntroduc.vue"
 import HoustingPrice from "../components/common/ImHousting/HoustingPrice.vue"
 import HoustingImage from "../components/common/ImHousting/HoustingImage"
 import Me from "../components/me/me.vue"
+import Kong from "../components/me/kong.vue"
 import House from "../components/common/ImHousting/House"
 
 
@@ -77,6 +78,7 @@ export default new Router({
     {path:'/Houstingmsg',component:Houstingmsg},
     {path:'/HoustingFacility',component:HoustingFacility},
     {path:'/Me',component:Me},
+    {path:'/Kong',component:Kong},
     {path:'/HoustIntroduce',component:HoustIntroduc},
     {path:'/HoustingPrice',component:HoustingPrice},
     {path:'/HoustingImage',component:HoustingImage},

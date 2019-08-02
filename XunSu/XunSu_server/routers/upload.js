@@ -13,7 +13,6 @@ var multer=require("multer");
     // console.log(req.file.path);
     // console.log(req.body.test[0]);
     var uid=req.body.test;
-    console.log(req.body.test);
     fs.readFile(req.file.path,(err,data)=>{
       if(err) {return res.send({code:0,msg:'上传失败'})}
       //声明图片名字为时间戳和随机数拼接成的，尽量保持唯一性
@@ -23,7 +22,7 @@ var multer=require("multer");
       //拼接成图片名
       let keepname=time+"."+extname;
       fs.writeFile(path.join(__dirname,'../public/images/avatar/'+keepname),data,(err)=>{
-        if(err){return res.send('写入失败')}
+        if(err){return res.send({code:300,msg:'写入失败'})}
         // res.send({code:1,err:0,msg:'上传ok',data:'/images/avatar/'+keepname})
         var data='/images/avatar/'+keepname;
         var sql="UPDATE users SET avatar= ? WHERE users . uid= ?";
