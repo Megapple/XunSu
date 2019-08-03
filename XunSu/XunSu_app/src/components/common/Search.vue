@@ -39,10 +39,10 @@
     </div>
     <div v-if="value!=''" class="searchlist">
         <ul class="list">
-            <li>
+            <li v-for="(item,index) in newlist.slice(0,10)" :key="index" @click="tonext(item.lid)">
                 <img src="../../assets/img/38.png" alt="" class="imgstyle">
-                <span class="left">niahog agagha ;gklah ;gwarferwerwerewrewr</span> 
-                <span class="right">北京|阳光城</span>   
+                <span class="left">{{item.title}}</span> 
+                <span class="right">{{item.city}}|{{item.houseDistrict}}</span>   
             </li>
         </ul>
     </div>
@@ -56,21 +56,62 @@ export default {
             pinpai:["梵谷","一木一宿","南舍","拾柒","步止","设计师民宿","理想国","inhome在家"],
             history:["小寨"],
             value:"",
-            list:[]
+            list:[],
+            user:[],
+            uid:[]
+            // leaseroomlist:[]
         }   
+    },
+    created:function(){
+        this.axios.get('/home').then(result=>{
+            // console.log(result.data)
+            this.list=result.data.msg.leaseroom;
+            this.user=result.data.msg.user;
+        })
+        .catch(err=>{console.log(err)})
     },
     methods:{
         onSearch(){
-
+            var that=this;
+            that.newlist.forEach(function(value,key,arr){
+                that.user.forEach(function(value1){
+                    if(value.uid==value1.uid){
+                        that.uid=that.uid.concat(value1);
+                    }
+                })
+            })
+            console.log(this.uid);
+            this.$router.push({path:'/Home2',query:{list:this.newlist,uid:this.uid}})
         },
         onclear(){
             this.value="";
+            for(var key of this.list){
+                if (key.province==this.value){
+                    this.leaseroomlist=this.leaseroomlist.concat(key);
+                    // console.log(this.leaseroomlist)
+                };
+            }
+        },
+        tonext(lid){
+            this.$router.push({path:'/Detail',query:{lid:lid}})
         }
     },
-    watch:{
-        value(){
-            console.log(this.value);
-        }
+    computed:{
+        newlist:function(){
+            var value=this.value;
+            if(value){
+                return this.list.filter(
+                    function(lists){
+                        return Object.keys(lists).some(
+                            function(key){
+                                return String(lists[key]).toLowerCase().indexOf(value)>-1;
+                                    }
+                            )
+                    }
+                )
+            }
+        },
+       
     }
 }
 </script>
@@ -146,11 +187,17 @@ export default {
     text-overflow:ellipsis;  
 }
 .list li .right{
-    float:right;
+    /* float:right; */
     margin-right:20px;
     color:#ff9c1a;
+    display: inline-block;
+    white-space:nowrap;
     font-size:12px;
     letter-spacing: 1px;
+    width:90px;   
+    position: absolute;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 .van-cell{
     color:#ff9c1a;

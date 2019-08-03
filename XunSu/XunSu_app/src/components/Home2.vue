@@ -209,26 +209,32 @@ export default {
         // },
         // 点击进入收藏
         tent_collect(e,lid,title,img,htType,tenant,bedroom){
-            var i=e.target;
-            var uid=this.uid;
-            if(i.className=="iconfont icon-shoucang5"){
-                i.className="iconfont icon-shoucang5 is-select";
-                var obj={uid:uid,lid:lid,title:title,img:img,htType:htType,tenant:tenant,bedroom:bedroom};
-                this.axios.get("collect/insert", { params: obj }).then(result => {
-                    if (result.data.code == 200) {
-                         this.$toast("收藏成功",1000);
-                         
-                    } 
-                });
+            var thisuid=sessionStorage.getItem("uid");
+            if(thisuid){
+                var i=e.target;
+                var uid=this.uid;
+                if(i.className=="iconfont icon-shoucang5"){
+                    i.className="iconfont icon-shoucang5 is-select";
+                    var obj={uid:uid,lid:lid,title:title,img:img,htType:htType,tenant:tenant,bedroom:bedroom};
+                    this.axios.get("collect/insert", { params: obj }).then(result => {
+                        if (result.data.code == 200) {
+                            this.$toast("收藏成功",1000);
+                            
+                        } 
+                    });
+                }else{
+                    i.className="iconfont icon-shoucang5";
+                    var obj={lid:lid};
+                    this.axios.get("collect/delete", { params: obj }).then(result => {
+                        if (result.data.code == 200) {
+                            this.$toast("取消收藏",1000);
+                        } 
+                    });
+                }
             }else{
-                i.className="iconfont icon-shoucang5";
-                var obj={lid:lid};
-                this.axios.get("collect/delete", { params: obj }).then(result => {
-                    if (result.data.code == 200) {
-                         this.$toast("取消收藏",1000);
-                    } 
-                });
+                this.$toast("你还未登录，登录后再来收藏吧");
             }
+            
             // this.$router.push("./Collect")
         },
         // 房源信息加载
@@ -238,7 +244,7 @@ export default {
            var obj={start:this.list.length,count:this.count}
            this.axios.get(url,{params:obj}).then(result=>{
             var lists=result.data.msg.leaseroom;
-            this.user=this.user.concat(result.data.msg.user);
+            this.user=result.data.msg.user;
             if(this.uid){
                 var url2="collect/iscollect";
                 var obj={uid:this.uid};
@@ -255,14 +261,14 @@ export default {
                                 }
                             }
                         }
-                         this.list=this.list.concat(lists);
+                         this.list=lists;
                     }else{
                         console.log(22)
-                        this.list=this.list.concat(lists);
+                        this.list=lists;
                     }
                 })
             }else{
-              this.list=this.list.concat(lists);  
+              this.list=lists;  
             }   
            })    
         },
@@ -270,6 +276,7 @@ export default {
         geturl(uid){
         var url="";
             var index=this.user;
+            console.log(this.user)
             for(var i of index){
                 if(i.uid==uid){
                      if(!i.avatar || i.avatar==null){    
@@ -292,7 +299,17 @@ export default {
         }
      },
     created(){
-        this.loadMore();
+        var arr=Object.keys(this.$route.query);
+        console.log(arr)
+            if(arr.length==0){
+                this.loadMore();
+                console.log(1)
+            }else{
+                this.list=this.$route.query.list;
+                this.user=this.$route.query.uid;
+                console.log(2)
+            }
+            // this.list=this.$route.query.list;
     }
 }
 </script>
