@@ -95,8 +95,8 @@
     <div class="content">
         <div class="tent">
                 <div class="tent_info" v-for="(item,i) of list" :key='i'>
-                    <img @click="tent_img" class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
-                    <i class="iconfont icon-shoucang5" @click="tent_collect($event,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)"></i>
+                    <img @click="tent_img(item.lid)" class="tent_img" :src="'http://127.0.0.1:3000/'+item.img" alt="">
+                    <i :class="[item.heart=='1'?'iconfont icon-shoucang5 is-select':'iconfont icon-shoucang5']" @click="tent_collect($event,item.lid,item.title,item.img,item.htType,item.tenant,item.bedroom)"></i>
                     <div class="tent_detail">
                         <span >{{item.title}}</span>
                         <span>{{item.htType}} · {{item.toilet}} · {{item.bedSize}} · {{item.houseDistrict}}</span>
@@ -174,6 +174,8 @@ export default {
             list:[],
             user:[],
             count:1,
+            collected:[],
+            uid:""
         }
     },
     methods: {
@@ -186,7 +188,6 @@ export default {
             this.stay=date.getMonth()+1+"."+date.getDate();
             this.leave=date.getMonth()+1+"."+date.getDate();
             // this.stay=getDate(data)
-            console.log(this.stay,this.leave);
         },
         onConfirm(e){
             this.$refs.item.toggle();    
@@ -208,45 +209,74 @@ export default {
         // },
         // 点击进入收藏
         tent_collect(e,lid,title,img,htType,tenant,bedroom){
-            var i=e.target;
-            var uid=sessionStorage.getItem("uid");
-            if(i.className=="iconfont icon-shoucang5"){
-                i.className="iconfont icon-shoucang5 is-select";
-                var obj={uid:uid,lid:lid,title:title,img:img,htType:htType,tenant:tenant,bedroom:bedroom};
-                this.axios.get("collect/insert", { params: obj }).then(result => {
-                    if (result.data.code == 200) {
-                         this.$toast("收藏成功",1000);
-                         console.log("chenggogn ")
-                         
-                    } 
-                });
+            var thisuid=sessionStorage.getItem("uid");
+            if(thisuid){
+                var i=e.target;
+                var uid=this.uid;
+                if(i.className=="iconfont icon-shoucang5"){
+                    i.className="iconfont icon-shoucang5 is-select";
+                    var obj={uid:uid,lid:lid,title:title,img:img,htType:htType,tenant:tenant,bedroom:bedroom};
+                    this.axios.get("collect/insert", { params: obj }).then(result => {
+                        if (result.data.code == 200) {
+                            this.$toast("收藏成功",1000);
+                            
+                        } 
+                    });
+                }else{
+                    i.className="iconfont icon-shoucang5";
+                    var obj={lid:lid};
+                    this.axios.get("collect/delete", { params: obj }).then(result => {
+                        if (result.data.code == 200) {
+                            this.$toast("取消收藏",1000);
+                        } 
+                    });
+                }
             }else{
-                i.className="iconfont icon-shoucang5";
-                var obj={lid:lid};
-                this.axios.get("collect/delete", { params: obj }).then(result => {
-                    if (result.data.code == 200) {
-                         this.$toast("取消收藏",1000);
-                         console.log("取消 ")
-                    } 
-                });
+                this.$toast("你还未登录，登录后再来收藏吧");
             }
+            
             // this.$router.push("./Collect")
         },
         // 房源信息加载
         loadMore(){
            var url="home";
-           this.count++;
+           this.uid=sessionStorage.getItem("uid");
            var obj={start:this.list.length,count:this.count}
            this.axios.get(url,{params:obj}).then(result=>{
-            console.log(result.data)
-            this.list=this.list.concat(result.data.msg.leaseroom);
-            this.user=this.user.concat(result.data.msg.user);
-           })       
+            var lists=result.data.msg.leaseroom;
+            this.user=result.data.msg.user;
+            if(this.uid){
+                var url2="collect/iscollect";
+                var obj={uid:this.uid};
+                this.axios.get(url2,{params:obj}).then(result=>{
+                    if(result.data.code==200){
+                        var count=result.data.msg;
+                        for(var index of count){
+                            // console.log(list)
+                            for(var index2 in lists){
+                                if(index.colid==lists[index2].lid){
+                                    // console.log(index.colid)
+                                    lists[index2].heart='1';
+                                    // i.className="iconfont icon-shoucang5 is-select";
+                                }
+                            }
+                        }
+                         this.list=lists;
+                    }else{
+                        console.log(22)
+                        this.list=lists;
+                    }
+                })
+            }else{
+              this.list=lists;  
+            }   
+           })    
         },
         //头像显示
         geturl(uid){
         var url="";
             var index=this.user;
+            console.log(this.user)
             for(var i of index){
                 if(i.uid==uid){
                      if(!i.avatar || i.avatar==null){    
@@ -258,21 +288,28 @@ export default {
         }
         return url;
         },
-        tent_img(){
+        tent_img(lid){
             var url="home";
             this.axios.get(url).then(
                 result=>{
-                    console.log(result.data)
-                    this.list=result.data;
-                    for(var item of this.list){
-                        this.$router.push({path:"/Detail",query:{lid:item.lid}})
-                    }                                    
+                    this.$router.push({path:"/Detail",query:{lid:lid}})
+                                  
             })
             .catch(err=>{console.log(err)})
         }
      },
     created(){
-        this.loadMore();
+        var arr=Object.keys(this.$route.query);
+        console.log(arr)
+            if(arr.length==0){
+                this.loadMore();
+                console.log(1)
+            }else{
+                this.list=this.$route.query.list;
+                this.user=this.$route.query.uid;
+                console.log(2)
+            }
+            // this.list=this.$route.query.list;
     }
 }
 </script>

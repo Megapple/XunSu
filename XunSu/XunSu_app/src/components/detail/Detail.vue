@@ -2,8 +2,8 @@
   <div id="container">
     <!-- mintui Header栏start -->
     <mt-header id="header" class="opa-light" fixed>
-      <router-link to="/Home" slot="left">
-        <mt-button class="iconfont icon-fanhuijiantou"></mt-button>
+      <router-link to="" slot="left">
+        <mt-button @click.native="$router.back(-1)" class="iconfont icon-fanhuijiantou"></mt-button>
       </router-link>
       <!-- text-hidden:属性默认文本隐藏 cool:属性控制显示/隐藏 -->
       <mt-button class="iconfont text-hidden cool" slot="left" @click="house">房型</mt-button>

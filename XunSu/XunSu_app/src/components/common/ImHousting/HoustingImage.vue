@@ -30,21 +30,32 @@ export default {
             var fileList=this.fileList;
             // var file=fileList[0].file;
             var lid=this.$route.query.lid;
-            fileList.forEach((file)=>{
+            fileList.forEach((file,index)=>{
                 var formData = new FormData();
-                formData.append('files', file.file, file.file.name);
-                console.log(file);
                 formData.append("lid",lid);
-                return this.axios.post("http://127.0.0.1:3000/upload/imgs",formData,{header:{"content-type":"multipart/form-data"}}).then((result)=>{
-                if(result.data.code==200){
-                    this.$toast("房源发布成功",1000);
-                    console.log(11);
-                    this.$router.push(`/House?lid=${lid}`);
-                    // this.details();
-                }else{
-                    this.$toast("房源发布失败",1000);
-                }
-                })  
+                    formData.append('files', file.file, file.file.name);
+                    // console.log(file);
+                    return this.axios.post("http://127.0.0.1:3000/upload/imgs",formData,{header:{"content-type":"multipart/form-data"}}).then((result)=>{
+                    if(result.data.code==200){
+                        this.$toast("房源发布成功",1000);
+                        // console.log(11);
+                        if(index==0){
+                            console.log(11)
+                            console.log(result.data.msg)
+                            var url="upload/thumbnail";
+                            var imgurl=result.data.msg;
+                            var obj={imgurl:imgurl,lid:lid};
+                            this.axios.get(url,{params:obj}).then(result=>{
+                                // console.log(result.data)
+                            })
+                        }
+                        this.$router.push(`/House?lid=${lid}`);
+                        // this.details();
+                    }else{
+                        this.$toast("房源发布失败",1000);
+                    }
+                    })  
+
             })
              
         },

@@ -59,9 +59,9 @@
                 <van-field v-model="uname" right-icon="edit" placeholder="用户名长度3~9位" maxlength="9" clearable/>
               </van-cell-group>
               <van-cell-group>
-                <van-cell title="手机号" :value="this.phone"/>
+                <van-cell title="手机号" :value="phone"/>
                 <van-cell title="邮箱地址" value="内容">
-                    <van-field v-model="email" placeholder="填写正确的邮箱地址" class="email" :value="this.email" :error-message="this.errormsg" @input="emailchange"></van-field>
+                    <van-field v-model="email" placeholder="填写正确的邮箱地址" class="email" :value="email" :error-message="errormsg" @input="emailchange"></van-field>
                 </van-cell>
                 <van-cell title="性别">
                   <van-radio-group v-model="radio">
@@ -93,6 +93,7 @@
 <script>
 import { Row, Col } from "vant";
 import Tabbar from "../tabbar";
+import { Dialog } from 'vant';
 export default {
   name:'me',
   data() {
@@ -165,9 +166,13 @@ export default {
       }
     },
     closePop(){
-      this.$messagebox .confirm( "您还未保存，确定要退出吗", "提示").then(action => {
-       this.show=false;
-     }).catch(err=>{console.log(err)});
+      Dialog.confirm({
+        title: '提示',
+        message: '您还未保存，确定要退出吗'
+      }).then(() => {
+        this.show=false;
+      }).catch(() => {
+      });
     },
     imhouster() {
       if(sessionStorage.getItem("uid")){
@@ -218,46 +223,56 @@ export default {
       }
     },
     save(){
-      var url="user/updateuser";
-      let formData = new FormData();
-      var uid=this.uid;
-      var uname=this.uname;
-      var email=this.email;
-      var gender;
-      var remark=this.message;
-      var file=this.file.file;
-      if(this.radio==1){
-        gender=1;
-      }else{
-        gender=0;
-      }
-      formData.append('test',file);
-      formData.append('test',this.uid);
-      formData.append('test',uname);
-      formData.append('test',email);
-      formData.append('test',gender);
-      formData.append('test',remark);
-      let config = {
-          header:{'Content-Type':'multipart/form-data'}
-        }
-       const instance=this.axios.create({
-          withCredentials: true
-         }) 
-      instance.post("http://127.0.0.1:3000/user/updateuser",formData,config).then((result)=>{
-        if(result.data.code==200){
-          this.$toast("修改成功",1000);
-          // window.reload();
-          this.$router.push('/kong');
+      console.log(this.errormsg)
+      if(this.errormsg==""){
+        var url="user/updateuser";
+        let formData = new FormData();
+        var uid=this.uid;
+        var uname=this.uname;
+        var email=this.email;
+        var gender;
+        var remark=this.message;
+        var file=this.file.file;
+        if(this.radio==1){
+          gender=1;
         }else{
-          this.$toast("修改失败",1000);
+          gender=0;
         }
-      })
+        formData.append('test',file);
+        formData.append('test',this.uid);
+        formData.append('test',uname);
+        formData.append('test',email);
+        formData.append('test',gender);
+        formData.append('test',remark);
+        let config = {
+            header:{'Content-Type':'multipart/form-data'}
+          }
+        const instance=this.axios.create({
+            withCredentials: true
+          }) 
+        instance.post("http://127.0.0.1:3000/user/updateuser",formData,config).then((result)=>{
+          if(result.data.code==200){
+            this.$toast("修改成功",1000);
+            // window.reload();
+            this.$router.push('/kong');
+          }else{
+            this.$toast("修改失败",1000);
+          }
+        })
+      }else{
+        Dialog.alert({
+          message: '您的邮箱格式不正确'
+        }).then(() => {
+          // on close
+        });
+      } 
     }
   },
   components: {
     [Row.name]: Row,
     [Col.name]: Col,
-    Tabbar
+    Tabbar,
+    [Dialog.Component.name]: Dialog.Component
   }
 };
 </script>

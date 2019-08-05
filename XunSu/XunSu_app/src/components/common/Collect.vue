@@ -20,6 +20,7 @@
             :src="'http://127.0.0.1:3000'+item.cimg"
             class="img-style"
           />
+          <van-icon name="like" class="delete" @click="coldelete(item.colid)"/>
           <div class="msg">
             <span>{{item.cbedroom}}间卧室</span>
             <span class="lef">可住{{item.ctenant}}人</span>
@@ -38,9 +39,11 @@
 </template>
 <script>
 import Tabbar from "../tabbar";
+import { Dialog } from 'vant'
 export default {
   components: {
-    Tabbar
+    Tabbar,
+    [Dialog.Component.name]: Dialog.Component
   },
   data() {
     return {
@@ -73,6 +76,23 @@ export default {
   methods: {
     collect() {
       this.$router.push("./login");
+    },
+    coldelete(colid){
+      Dialog.confirm({
+        title: '提示',
+        message: '确定要取消收藏吗'
+      }).then(() => {
+        // on confirm
+          var obj={lid:colid};
+          this.axios.get("collect/delete", { params: obj }).then(result => {
+            if (result.data.code == 200) {
+              this.$toast("取消收藏",1000);
+            } 
+        });
+        this.$router.push('/Collect2');
+      }).catch(() => {
+        // on cancel
+      });
     }
   }
 };
@@ -151,5 +171,12 @@ export default {
     color:#fff;
     padding:0px 50px;
     border-radius:10px;
+}
+.delete.van-icon{
+  position: absolute;
+  right:20px;
+  top:20px;
+  font-size:22px;
+  color:rgb(255, 168, 53);
 }
 </style>

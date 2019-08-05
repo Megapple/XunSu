@@ -16,7 +16,6 @@ router.get("/insert",(req,res)=>{
         pool.query(sql,[obj.uid],(err,result)=>{
           if(err) throw(err);
           if(result.length>0){
-            console.log(result);
             res.send({code:200,msg:result});
           }else{
               res.send({code:300,msg:"没有找到"})
@@ -27,7 +26,6 @@ router.get("/insert",(req,res)=>{
  })
  router.get("/delete",(req,res)=>{
     var obj=req.query;
-    console.log(obj.lid)
         var sql="DELETE FROM collected WHERE colid=?";
         pool.query(sql,[obj.lid],(err,result)=>{
           if(err) throw(err);
@@ -39,4 +37,18 @@ router.get("/insert",(req,res)=>{
               }
         })
  })
+ router.get("/iscollect",(req,res)=>{
+  var obj=req.query;
+      var sql="SELECT * FROM collected WHERE couid=?";
+      pool.query(sql,[obj.uid],(err,result)=>{
+        if(err) throw(err);
+          if (result.length>0)
+          {
+            res.send({code:200,msg:result});
+            console.log(result)
+          }else{
+            res.send({code:301,msg:'没有收藏'});
+          }
+      })
+})
 module.exports=router;

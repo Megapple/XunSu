@@ -176,7 +176,7 @@ p {
   font-size: 16px;
   font-weight: 600;
   background-color: #ff9c1a;
-  position:absolute;
+  position: fixed;
   bottom:0;
 }
 .tohome{
