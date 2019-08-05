@@ -40,7 +40,7 @@
     <!-- 下拉列表 -->
     <div class="pull_down">
         <van-dropdown-menu>
-            <van-dropdown-item title="人数" ref="item" :options="option1" v-model="value1"></van-dropdown-item>
+            <van-dropdown-item title="人数" ref="item" :options="option1" v-model="value1" @change="peopolenum"></van-dropdown-item>
             <van-dropdown-item title="位置" ref="item">
                 <van-tree-select 
                 :items="items" :main-active-index="mainActiveIndex" :active-id="activeId" 
@@ -175,7 +175,9 @@ export default {
             user:[],
             count:1,
             collected:[],
-            uid:""
+            uid:"",
+            ourlist:"",
+            person:[]
         }
     },
     methods: {
@@ -238,10 +240,41 @@ export default {
             // this.$router.push("./Collect")
         },
         recommend(){
+            console.log(this.value2);
+            console.log(this.ourlist);
+            if(this.value2==0){
+                this.list=this.ourlist;
+            }
             if(this.value2==2){
                 this.list=this.mylist;
-            }else{
-                this.list=this.list;
+            }
+        },
+        //人数筛选
+        peopolenum(){
+            // this.person=this.list;
+            // this.list=this.peoplelist;
+            // this.list=this.peoplelist;
+            this.list = this.ourlist;
+            if(this.value1==0){
+                this.list=this.list.filter(temp=>{
+                    return ((temp.tenant>=1)&&(temp.tenant<=2));
+                })
+                console.log(this.list)
+            }
+            if(this.value1==1){
+                this.list=this.list.filter(temp=>{
+                    return ((temp['tenant']>=3)&&(temp['tenant']<=4));
+                })
+            }
+            if(this.value1==2){
+                this.list=this.list.filter(temp=>{
+                    return ((temp['tenant']>=5)&&(temp['tenant']<=6));
+                })
+            }
+            if(this.value1==3){
+                this.list=this.list.filter(temp=>{
+                    return (temp['tenant']>=6);
+                })
             }
         },
         // 房源信息加载
@@ -275,11 +308,12 @@ export default {
                 })
             }else{
               this.list=lists;  
-            }   
+            }
+            this.ourlist=this.list;
            })    
         },
         //头像显示
-        geturl(uid){
+        geturl(uid){ 
         var url="";
             var index=this.user;
             for(var i of index){
@@ -311,7 +345,18 @@ export default {
              return y-x;
             })
             return ary;
-            console.log(ary);   
+        },
+        tenantnum:function(num1,num2){
+            var arr=[];
+            var that=this;
+            // console.log(that.list)
+            for(var item of that.list){
+                console.log(item)
+                if(item.tenant>=num1 && item.tenant<=num2){
+                    arr.push(item);
+                }
+            }
+            return arr; 
         }
      },
     created(){
@@ -321,7 +366,9 @@ export default {
             }else{
                 this.list=this.$route.query.list;
                 this.user=this.$route.query.uid;
+                this.ourlist=this.list;
             }
+            
             // this.list=this.$route.query.list;
     },
     computed:{
@@ -334,10 +381,25 @@ export default {
                     arr.push(item);
                 }
             }
-            console.log(arr);
             return that.sortByKey(arr,'price');
+        },
+        peoplelist:function(){
+            var ary=[];
+            console.log(this.value1)
+            console.log(this.tenantnum(5,6));
+            if(this.value1==0){
+               ary=this.tenantnum(1,2);
+            }else if(this.value1==1){
+                ary=this.tenantnum(3,4);
+            }else if(this.value1==2){
+                ary=this.tenantnum(5,6);
+            }else{
+                ary=this.tenantnum(7,20);
+            }
+            return ary;
+   
         }
-    }
+    },
 }
 </script>
 <style scoped>
@@ -423,7 +485,7 @@ export default {
 .iconfont.icon-shoucang5{
     font-size:25px;
     position: absolute;
-    top:10px;left:310px;
+    top:10px;right:20px;
     color: #faf9f9;;
 }
 .iconfont.icon-shoucang5.is-select{color:rgb(245, 156, 26);}

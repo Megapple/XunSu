@@ -404,6 +404,7 @@ a{text-decoration: none;}
     align-items: center;
     margin-bottom:-20px;  
     margin-top:-10px;
+    margin:auto;
     }
 .mint-navbar.odd_navbar .mint-tab-item .oddbtn{
     width:90px;

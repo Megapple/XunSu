@@ -73,15 +73,19 @@ export default {
     methods:{
         onSearch(){
             var that=this;
-            that.newlist.forEach(function(value,key,arr){
+            if (this.value==""){
+                this.$router.push('/Home2'); 
+            }else{
+                    that.newlist.forEach(function(value,key,arr){
                 that.user.forEach(function(value1){
                     if(value.uid==value1.uid){
                         that.uid=that.uid.concat(value1);
                     }
                 })
             })
-            console.log(this.uid);
             this.$router.push({path:'/Home2',query:{list:this.newlist,uid:this.uid}})
+            }
+        
         },
         onclear(){
             this.value="";
