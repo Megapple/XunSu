@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
     <div class="citys">
         <div class="first" >
         <div class="dali" @click="add(item.lid)" v-for="(item,i) of list.slice(0,4)" :key="i">
@@ -44,6 +44,9 @@ export default {
 }
 </script>
 <style scoped>
+.container{
+    width:98%;
+}
 .citys{
     width:100%;
     display: flex;
@@ -51,12 +54,12 @@ export default {
     margin-top:10px;
 }  
 .citys img{
-    width:100%;height:100px;
+    width:100%;height:100px; 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 .first{
-    width:400px;
+    width:100%;
     display: flex;
     flex-flow: wrap;
     padding: 8px 10px;

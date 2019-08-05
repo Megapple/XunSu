@@ -334,11 +334,11 @@ a{text-decoration: none;}
 }
 /* 城市 */ 
 .index{
-    width:90%;
+    width:98%;
     margin-top:40px;
     margin-bottom: 70px;
 }
-.city{margin:0 25px;}
+.city{margin:0 auto;}
 .mint-navbar.city_navbar .mint-tab-item{
     height:12px;
     margin:-2px 10px;

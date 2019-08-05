@@ -235,6 +235,7 @@ export default {
         // 房源信息加载
         loadMore(){
            var url="home";
+           this.count++;
            var obj={start:this.list.length,count:this.count}
            this.axios.get(url,{params:obj}).then(result=>{
             console.log(result.data)
