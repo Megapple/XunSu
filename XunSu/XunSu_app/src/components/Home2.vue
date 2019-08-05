@@ -88,7 +88,7 @@
                 </div>
                 <van-button block type="warning" @click="onConfirm">确认</van-button>
             </van-dropdown-item>
-            <van-dropdown-item v-model="value2" :options="option2" title="推荐"></van-dropdown-item>
+            <van-dropdown-item v-model="value2" :options="option2" title="推荐" @change="recommend"></van-dropdown-item>
         </van-dropdown-menu>
     </div>
     <!-- 中间内容 -->
@@ -237,6 +237,13 @@ export default {
             
             // this.$router.push("./Collect")
         },
+        recommend(){
+            if(this.value2==2){
+                this.list=this.mylist;
+            }else{
+                this.list=this.list;
+            }
+        },
         // 房源信息加载
         loadMore(){
            var url="home";
@@ -263,7 +270,6 @@ export default {
                         }
                          this.list=lists;
                     }else{
-                        console.log(22)
                         this.list=lists;
                     }
                 })
@@ -276,7 +282,6 @@ export default {
         geturl(uid){
         var url="";
             var index=this.user;
-            console.log(this.user)
             for(var i of index){
                 if(i.uid==uid){
                      if(!i.avatar || i.avatar==null){    
@@ -296,20 +301,42 @@ export default {
                                   
             })
             .catch(err=>{console.log(err)})
+        },
+        //数组对象排序
+        sortByKey:function(ary,key){
+            ary.sort(function(a,b){
+            // console.log(arr.price);
+            let x=a[key];
+            let y=b[key];
+             return y-x;
+            })
+            return ary;
+            console.log(ary);   
         }
      },
     created(){
         var arr=Object.keys(this.$route.query);
-        console.log(arr)
             if(arr.length==0){
                 this.loadMore();
-                console.log(1)
             }else{
                 this.list=this.$route.query.list;
                 this.user=this.$route.query.uid;
-                console.log(2)
             }
             // this.list=this.$route.query.list;
+    },
+    computed:{
+        mylist:function(){
+            var that=this;
+            var arr=[];
+            for(var item of that.list){
+                // console.log(item)
+                if(item.price!=""){
+                    arr.push(item);
+                }
+            }
+            console.log(arr);
+            return that.sortByKey(arr,'price');
+        }
     }
 }
 </script>
