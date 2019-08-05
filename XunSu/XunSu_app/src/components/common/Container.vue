@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
     <div class="citys">
         <div class="first" >
         <div class="dali" @click="add(item.lid)" v-for="(item,i) of list.slice(0,4)" :key="i">
@@ -11,8 +11,8 @@
             </div>
         </div>
         </div>  
+        <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
     </div>
-    <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
 </div>
 </template>
 <script>
@@ -44,19 +44,21 @@ export default {
 }
 </script>
 <style scoped>
+.container{
+    width:98%;
+}
 .citys{
-    width:100%;
     display: flex;
     flex-flow: column;
     margin-top:10px;
 }  
 .citys img{
-    width:100%;height:100px;
+    width:100%;height:100px; 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 .first{
-    width:400px;
+    width:100%;
     display: flex;
     flex-flow: wrap;
     padding: 8px 10px;
@@ -95,7 +97,8 @@ export default {
     top:60%;
 }
 .mint-button--normal{
-    margin:10px 110px;
+    /* margin:10px 110px; */
+    margin:auto;
     padding:4px 15px;
     height:25px;
     width:150px;
