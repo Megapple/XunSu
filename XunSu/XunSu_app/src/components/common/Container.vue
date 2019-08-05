@@ -11,8 +11,8 @@
             </div>
         </div>
         </div>  
+        <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
     </div>
-    <mt-button @click="cityadd">查看更多大理酒店 ></mt-button>
 </div>
 </template>
 <script>
@@ -48,7 +48,6 @@ export default {
     width:98%;
 }
 .citys{
-    width:100%;
     display: flex;
     flex-flow: column;
     margin-top:10px;
@@ -98,7 +97,8 @@ export default {
     top:60%;
 }
 .mint-button--normal{
-    margin:10px 110px;
+    /* margin:10px 110px; */
+    margin:auto;
     padding:4px 15px;
     height:25px;
     width:150px;

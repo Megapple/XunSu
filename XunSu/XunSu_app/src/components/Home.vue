@@ -357,7 +357,7 @@ a{text-decoration: none;}
 .middle{width:340px;height:80px;margin:30px auto;box-shadow: 0 0 20px #b8bbbf;}
 .middle img{width:100%;height:80px;}
 /* 二楼 */
-.theme{margin-top:50px;}
+.theme{margin-top:50px;width:90%;}
 .theme_first{
     margin-left:15px;
 }
@@ -397,10 +397,13 @@ a{text-decoration: none;}
     background:linear-gradient(to right,rgb(248, 155, 139) 0%,rgb(245, 115, 76) 100%);}
 .theme1 .theme2_one:nth-child(2) .theme_p{
     background:linear-gradient(to right,rgb(136, 230, 217) 0%,rgb(105, 192, 243) 100%);}
+
 .odd_first{margin-left:20px;margin-top:25px;}
 .odd_first p{font-size:13px;color:#979696;margin:5px 0;}
 .oddbtns{
-    width:375px;height:120px;
+    /* width:375px; */
+    width:90%;
+    height:120px;
     display:flex;
     align-items: center;
     margin-bottom:-20px;  

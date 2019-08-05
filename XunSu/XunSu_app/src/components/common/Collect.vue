@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     collect() {
-      this.$router.push("./login");
+      this.$router.push("/Home2");
     },
     coldelete(colid){
       Dialog.confirm({
@@ -119,10 +119,10 @@ export default {
   text-align: center;
 }
 .collect {
-  padding-top: 20px;
-  /* width:90%;  */
+  padding-top: 10px;
   margin: auto;
   width:90%;
+  margin-bottom:65px;
 }
 .content {
   background-color: #eee;
@@ -136,6 +136,7 @@ export default {
 }
 
 .msg {
+  overflow:auto;
   position: absolute;
   right: 20px;
   display: flex;

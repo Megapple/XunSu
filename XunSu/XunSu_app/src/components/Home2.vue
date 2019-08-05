@@ -175,7 +175,7 @@ export default {
             user:[],
             count:1,
             collected:[],
-            uid:""
+            uid:"",
         }
     },
     methods: {
