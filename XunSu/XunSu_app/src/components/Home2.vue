@@ -288,6 +288,7 @@ export default {
         }
         return url;
         },
+        //跳转详情
         tent_img(lid){
             var url="home";
             this.axios.get(url).then(
